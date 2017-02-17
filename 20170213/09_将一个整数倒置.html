@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //通常遇到一个较复杂的问题，先想办法简化；
+    //假设我们只有一个两位数
+    function rev(a) { //148
+      var b = 0;
+      //b = 8 //b = 84 //b = 841
+      while(a) { // 0 "" null undefined false
+        console.log("a = " + a, "b = " + b);
+        //相当于十位的数 + 个数的位
+        b = b * 10 + a % 10; //b自己乘以10然后加上a的末位数字
+        //a不变的除以10，舍个位
+        a = parseInt(a / 10); //a自己变短一位数，去掉末位
+      }
+      return b;
+    }
+    console.log(rev(320));
+  </script>
+</head>
+<body>
+
+</body>
+</html>

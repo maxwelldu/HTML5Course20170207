@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    img{
+      position: absolute;
+      top:100px;
+      left:100px;
+    }
+  </style>
+</head>
+<body>
+<img src="images/timg.jpg" width="200" alt="" id="tutu">
+<table>
+  <tr>
+    <td><input type="button" id="btn1" value="↖"></td>
+    <td><input type="button" id="btn2" value="↑"></td>
+    <td><input type="button" id="btn3" value="↗"></td>
+  </tr>
+  <tr>
+    <td><input type="button" id="btn4" value="←"></td>
+    <td></td>
+    <td><input type="button" id="btn5" value="→"></td>
+  </tr>
+  <tr>
+    <td><input type="button" id="btn6" value="↙"></td>
+    <td><input type="button" id="btn7" value="↓"></td>
+    <td><input type="button" id="btn8" value="↘"></td>
+  </tr>
+</table>
+<script>
+  var oTutu = document.getElementById("tutu");
+  var oBtn1 = document.getElementById("btn1");
+  var oBtn2 = document.getElementById("btn2");
+  var oBtn3 = document.getElementById("btn3");
+  var oBtn4 = document.getElementById("btn4");
+  var oBtn5 = document.getElementById("btn5");
+  var oBtn6 = document.getElementById("btn6");
+  var oBtn7 = document.getElementById("btn7");
+  var oBtn8 = document.getElementById("btn8");
+
+  //全局的变量，可以称为“信号量”
+  var nowleft = 100;
+  var nowtop = 100;
+
+  oBtn1.onclick = function(){
+    nowleft -= 10;
+    nowtop -= 10;
+    move();
+  };
+  oBtn2.onclick = function(){
+    nowtop -= 10;
+    move();
+  };
+  oBtn3.onclick = function(){
+    nowleft += 10;
+    nowtop -= 10;
+    move();
+  };
+  oBtn4.onclick = function(){
+    nowleft -= 10;
+    move();
+  };
+  oBtn5.onclick = function(){
+    nowleft += 10;
+    move();
+  };
+  oBtn6.onclick = function(){
+    nowleft -= 10;
+    nowtop += 10;
+    move();
+  };
+  oBtn7.onclick = function(){
+    nowtop += 10;
+    move();
+  };
+  oBtn8.onclick = function(){
+    nowleft += 10;
+    nowtop += 10;
+    move();
+  };
+  function move() {
+    oTutu.style.top = nowtop + "px";
+    oTutu.style.left = nowleft + "px";
+  }
+</script>
+
+</body>
+</html>

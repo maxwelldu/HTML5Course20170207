@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    a = 100;
+    var a;//这行定义会被自动提升
+    console.log(a);
+
+    console.log(b); //提升只能提升定义, 而不是提升赋初值。输出undefined
+    var b = 100; //提升定义，不能提升赋初值
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

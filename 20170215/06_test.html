@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    var reg = /hello/;
+    var reg = /ucai/;
+    var str = "hello ucai";
+    //判断str字符串是否匹配我们写的reg规则
+    console.log(reg.test(str));
+
+    //输入空格是非法行为，我们返回false
+    var demo = prompt("不准输入空格");
+    console.log(!/\s/.test(demo)); //如果没有输入空格则返回真
+    // /\s/    ! 取反
+  </script>
+</head>
+<body>
+
+</body>
+</html>

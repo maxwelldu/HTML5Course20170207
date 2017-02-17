@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //匹配制表符, 在字符串里面只有空格，没有制表符
+    var str = 'a         b';
+    var reg = /\t/; // 使用\s可以匹配到空格, \t匹配不到结果
+    console.log(reg.test(str));
+
+    //匹配回车符
+    var str2 = 'a\nb';
+    var reg2 = /\n/;
+    console.log(str2);
+    console.log(reg2.test(str2));
+
+    //匹配数字
+//    var str3 = "18518381892";
+    var str3 = "hello world!";
+    var reg3 = /\d/;
+    console.log(reg3.test(str3));
+  </script>
+</head>
+<body>
+
+</body>
+</html>

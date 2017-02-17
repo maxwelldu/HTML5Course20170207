@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    window.onload = function(){
+      console.log("页面已经加载完成");
+    };
+    console.log("页面正在加载中");
+
+    window.onload = function() {
+      var oBox = document.getElementById("box");
+      console.log(oBox);
+      oBox.onmouseover = function () {
+        this.style.fontSize = "60px";
+      }
+      oBox.onmouseout = function () {
+        this.style.fontSize = "12px";
+      }
+    }
+  </script>
+</head>
+<body>
+<div id="box">1234</div>
+</body>
+</html>

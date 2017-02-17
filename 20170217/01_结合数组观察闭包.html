@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    var arr = [];
+//    往数组里面放三个函数，这三个函数都是匿名的
+//    arr.push(function(){
+//      console.log("Hi");
+//    });
+//    arr.push(function(){
+//      console.log("Hello");
+//    });
+//    arr.push(function(){
+//      console.log("good");
+//    });
+//    arr.push(function(a,b){
+//      console.log(a+b);
+//    });
+//    console.log(arr);
+    //arr[2]就是其中的函数，加上()就能运行
+//    arr[2]();
+//    arr[3](5, 6);
+
+/*
+    //==================
+    var arr = []; //空数组
+
+    //用循环语句去填充数组里面的每个项
+    for (var i = 0 ; i < 10; i++) {
+      arr[i] = function(){
+        console.log('hi');
+      }
+    }
+    //循环语句执行完毕，arr里面有10个函数，都是输出hi
+    arr[6]();
+    arr[8]();
+    arr[9]();
+    */
+
+/*
+    //==================
+    //经典问题
+    var arr = []; //空数组
+
+    //用循环语句去填充数组里面的每个项
+    for (var i = 0 ; i < 10; i++) {
+      arr[i] = function(){
+        console.log(i); //我们在这里，试图每个函数都输出自己的序号
+      }
+    }
+    //循环语句执行完毕，arr里面有10个函数，都是输出hi
+    arr[6]();
+    arr[8]();
+    arr[9]();
+    */
+
+    //了解函数传参，基本数据类型，只是把传的参数复制到形式参数
+    var a = 10; //全局的变量a
+    c(a); //调用函数c, 将变量a传递过来，实际上是把a的值10复制给形式参数b了
+    function c(b) { //b的值是传进来的10，这个时候 b 和 a 就没有关系了
+      console.log(b);
+      console.log(a);
+      b = 20;
+      console.log(b);
+      console.log(a);
+    }
+
+    //===========================
+    var arr = [];
+    for(var i = 0; i < 10 ; i ++) {
+      (function(m){
+        arr[m] = function(){
+          console.log(m);
+        }
+      })(i);
+    }
+    arr[3]();
+    arr[6]();
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

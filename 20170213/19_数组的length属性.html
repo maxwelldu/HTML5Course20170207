@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var arr = [34, 563, 4576, 334, 46, 443];
+    console.log(arr);
+    console.log(arr.length); //6
+    console.log(arr[arr.length - 1]); //数组最后一项
+    console.log(arr[100]); //undefined 数组没有这么多项
+
+    arr[66] = 888; //跳跃设置
+    console.log(arr.length);//输出67， 我们设置了下标为66的项，强制“拉伸”了数组
+
+    arr.length = 4;
+    console.log(arr);//
+  </script>
+</head>
+<body>
+
+</body>
+</html>

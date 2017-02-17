@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var str = 'www.ucai.cn';
+//    console.log(str.replace(/ucai\.cn/, 'ucai.com'));
+//    console.log(str.replace(/ucai\.cn/, function(){
+//      return "ucai.com";
+//    }));
+    //相当于下面这种写法，上面这种是简化的写法
+    function a() {
+      return "ucai.com";
+    }
+    console.log(str.replace(/ucai\.cn/, a));
+
+    var name = 'aaa bbb ccc';
+    var uw=name.replace(/\b\w+\b/g, function(word){
+      console.log(word);
+      return word.substring(0,1).toUpperCase()
+          + word.substring(1);
+    });
+    console.log(uw);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

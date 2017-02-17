@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    var arr = [45, 33, 12, 8, 56, 64];
+//    console.log(arr.sort());
+//    console.log(arr.sort(function(a,b){
+//      return a - b;
+//    }));
+
+    //冒泡排序
+    var arr = [64, 45, 33, 12, 8, 56];
+    console.log(arr);
+
+    for (var i = 0; i < arr.length - 1; i ++) {
+      //i = 0 j = 5  5 - 0
+      //i = 1 j = 4  5 - 1
+      //i = 2 j = 3  5 - 2
+      for (var j = 0; j < arr.length-1-i; j++) {
+        //如果前面的数字大于后面的数字，交换数字位置
+        if (arr[j] > arr[j+1]) {
+          //交换两个数字的位置
+          var temp = arr[j];
+          arr[j] = arr[j+1];
+          arr[j+1] = temp;
+        }
+      }
+    }
+    console.log(arr, count);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

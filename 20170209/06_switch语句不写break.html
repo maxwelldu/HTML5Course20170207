@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //小测试, 连着类型一起比，本质就是 ===
+    var a = "5";
+    switch (a) {
+      case 5:
+        console.log("Yes");
+        break;
+    }
+
+    //不写break的情况：
+    var a = 5;
+    switch (a) {
+      case 4:
+        console.log("4");
+      case 5:
+        console.log("5");
+      case 6:
+        console.log("6");
+        break;
+      case 7:
+        console.log("7");
+        break;
+      default:
+        console.log("默认");
+        break;
+    }
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

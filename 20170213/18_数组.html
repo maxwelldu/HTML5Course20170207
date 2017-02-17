@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    var arr = [16, 33, 23, 12, 53];
+//    console.log(arr[2]); //读取下标为2的项
+//
+//    console.log(arr);
+//    arr[3] = 88; //设置数组的某一项
+//    console.log(arr);
+
+    //**********
+    //数组中并不规定保存相同类型的项
+//    var arr = [1, "哈哈", true, undefined, null];
+//    console.log(arr);
+
+    //甚至可以把函数放在数组里面
+    function fn() {
+      console.log("Hi");
+    }
+    var arr = [3, 4, fn, "嘻嘻", 12];
+    arr[2](); //数组下标为2的项，是一个函数， 是函数就能执行
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .xiao {
+      width: 200px;
+      height: 200px;
+      background-color: yellowgreen;
+    }
+    .da {
+      width: 500px;
+      height: 500px;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="xiao" id="box"></div>
+  <script>
+    var oDiv = document.getElementById("box");
+    oDiv.className = "da";
+
+    console.log(oDiv.className);
+    console.log(oDiv.getAttribute("class"));
+
+  </script>
+
+</body>
+</html>

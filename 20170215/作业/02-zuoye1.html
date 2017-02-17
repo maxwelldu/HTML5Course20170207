@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+
+	// function repeat(char,n){
+
+	// 	// 定义变量记录字符串
+	// 	var str = '';
+
+	// 	// 使用for循环，拼接n个char
+	// 	for(var i = 1; i <= n;i++){
+
+	// 		// 拼接char
+	// 		str += char;
+	// 	}
+	// 	return str;
+	// }
+
+
+	repeat("*", 10);
+	function repeat(char,n){
+		var str = '';
+
+		while(true){
+
+			if (n % 2 == 1){// 此时n为奇数,奇变偶不变
+
+				str = str + char;
+
+			}
+			// n==1 循环结束，n==0 循环0次，直接退出
+			if (n == 1 || n == 0)break;
+
+			// 把n除以2取整
+			n = parseInt(n/2);
+
+			// char 自己拼接自己
+			char = char + char;
+		}
+
+		return str;
+	}
+
+
+	</script>
+	
+</body>
+</html>

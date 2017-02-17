@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var str = 'a      b    c';
+    console.log(str.split(""));//使用空字符串分割，会分割出所有的字符
+//    var str="How   are you doing today?";
+    console.log(str.split(" "));//使用空格字符串分割, 只有第一个空格被当成分割符，后面的会当成普通字符串, 所以我们需要使用正则表达式的方式去进行分割
+    console.log(str.split(/\s+/));
+
+    var str2 = 'bbaacaaaaddaeeeeeaaf';
+    console.log(str2.split(/a+/));
+  </script>
+</head>
+<body>
+
+</body>
+</html>

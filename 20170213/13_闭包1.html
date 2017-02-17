@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    function outer() {
+//      var a = 8888;
+//      function inner() {
+//        console.log(a);
+//      }
+//    }
+//    在全局变量调用inner，但是全局没有inner的定义，所以会报错
+//    inner();
+
+    //*******************
+    //非常经典的闭包
+    function outer() {
+      var a = 333;
+      function inner() {
+        console.log(a);
+      }
+      return inner; //outer返回了inner的引用
+    }
+    console.log(typeof outer());
+    var inn = outer(); //inn就是inner函数了
+    console.log(typeof inn);
+    inn();  //执行inn, 全局变量域下没有a的定义
+            //但是函数闭包，能够把定义函数的时候的作用域一块记忆住
+            //能够输出333
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

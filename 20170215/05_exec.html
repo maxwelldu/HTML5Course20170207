@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //匹配abc字符串的正则
+    var reg = /abc/g;
+    var str = 'aaaabccccbacabc';
+    //使用exec这个方法一次只能匹配一个结果,
+    // 如果需要找到目标字符串里面所有的结果，需要执行多次
+    console.log('lastindex = ' + reg.lastIndex);
+    console.log(reg.exec(str)); // [abc]
+    console.log('lastindex = ' + reg.lastIndex);
+    console.log(reg.exec(str)); // [abc]
+    console.log('lastindex = ' + reg.lastIndex);
+    console.log(reg.exec(str)); // null 当返回null的时候
+    console.log('lastindex = ' + reg.lastIndex);
+
+    //***************
+    var str = "W3School Vi W3School sit W3School";
+    var patt = /W3School/g;
+    var result;
+//    while ((result = patt.exec(str)) != null)  {
+//      console.log(result);
+//      console.log('lastindex = ' + patt.lastIndex);
+//    }
+    //可以调试下面的代码，看一下执行的情况
+    while (patt.exec(str) != null)  {
+      console.log(patt.exec(str));
+      console.log('lastindex = ' + patt.lastIndex);
+    }
+
+//    console.log(reg.exec('abcd')); // [abc]
+  </script>
+</head>
+<body>
+
+</body>
+</html>

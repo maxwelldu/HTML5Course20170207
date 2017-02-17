@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    // 步长
+//    for (var i = 3; i < 11; i+=4) {
+//      console.log(i);
+//    }
+//    3 7
+
+    // 结束的符号
+//    for (var i = 4; i <= 16; i+=4) {
+//      console.log(i);
+//    }
+    //4 8 12 16
+
+    // 不一定是 < 或 <=
+//    for (var i = 4; i != 10; i +=2) {
+//      console.log(i);
+//    }
+    //4 6 8
+
+    //第一也会进行一下i<4的判定
+//    for (var i = 6; i < 4; i ++) {
+//      console.log(i);
+//    }
+    //
+
+    //循环条件不合理，导致死循环
+//    for (var i = 1; i > 0 ; i++) {
+//      console.log(i);
+//    }
+
+//    for (var i = 2; i < 12; i +=3 ) {
+//      i += 4;
+//      console.log(i);
+//    }
+    //6 13
+
+//    for (var i = 1; i < 10; i++) {
+//    }
+//    console.log(i);
+    //10
+
+    //找出30以内能被5整除的数
+//    for (var i = 1; i < 30; i++) {
+//      if (i % 5 == 0) {
+//        console.log(i);
+//      }
+//    }
+
+    //方法2
+//    for (var i = 1; i * 5 <= 30; i++) {
+//      console.log(5 * i);
+//    }
+
+    //寻找1到100以内所有能被5整除或者能被6整除的数字
+//    for (var i = 1; i <= 100; i++) {
+//      if (i % 5 == 0 || i % 6 == 0) {
+//        console.log(i);
+//      }
+//    }
+
+    for (var i = 2; i <= 26; i++) {
+      if (i % 2 == 0) {
+        i += 3;
+      } else {
+        i += 2;
+      }
+      console.log(i);
+    }
+    //5 9 13 17 21 25 29
+
+
+
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

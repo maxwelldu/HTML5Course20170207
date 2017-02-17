@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var year = parseInt(prompt("请输入你工作了几年，不足1年为0， 工作两年半写2"));
+    var salary = parseInt(prompt("请输入月薪"));
+    //系数，因为我们发现年终奖就是系数*月薪，月薪是用户输入的，系数是我们判断出来的
+    var xishu;
+    //盖楼，这个楼计算出系数
+    if (year == 0) {
+      // 工作0年的
+      if (salary > 8000) {
+        xishu = 1.2;
+      } else {
+        xishu = 1.0;
+      }
+    } else if (year == 1) {
+      // 工作1年的
+      if (salary > 10000) {
+        xishu = 1.7;
+      } else {
+        xishu = 1.5;
+      }
+    } else {
+      //工作满2年的
+      if (salary > 12000) {
+        xishu = 3.2;
+      } else {
+        xishu = 3;
+      }
+    }
+    console.log("你的年终奖是：" + salary * xishu);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

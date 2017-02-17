@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+		方法1：思路就是把str2的所有子串都遍历，然后看看是否是str1的一部分
+		如果是就比较长度，把长度最大的返回。这里仰赖js提供的一个indexOf()可以
+		快速检测一个字符串是不是另一个字符串的一部分。
+		*/
+		console.log(check("abc", "ab"));
+		function check(str1,str2){
+			var s;
+
+			var maxlength = 0;	//最大子串的长度
+			var maxchar = "";	//存放最大子串
+
+			//遍历str2的所有子字符串
+			for(var start = 0 ; start <= str2.length ; start++){
+				for(var end = start + 1; end <= str2.length; end++){
+					//变量s就是当前遍历的子字符串
+					s = str2.substring(start,end);
+					//就要看s是不是在str1中
+					if(str1.indexOf(s) != -1 && s.length > maxlength){
+						//在源字符串中有，所以当前的最大子串长度就是s的长度
+						maxlength = s.length;
+						//当前的最大子串就是你遍历这个
+						maxchar = s;
+					}
+				}
+			}
+			return maxchar;
+		}
+
+		//方法2：是更经典的4指针法，为什么经典，因为就js中有indexOf函数。
+		//c语言中，没有indexOf这个东西，我们不能立即判断一个字符串是不是另一个字符串的子函数
+		//c语言中，就有一个经典的4指针法。
+		
+		// function check(str1,str2){
+		// 	//四个指针
+		// 	var a = 0;
+		// 	var b = 1;
+		// 	var c = 0; 
+		// 	var d = 1;
+
+		// 	var maxlength = 0;
+		// 	var maxchar = "";
+			
+		// 	while(true){
+		// 		if(str1.charAt(a) != str2.charAt(c)){
+		// 			//如果a、c指针不一样，那么c、d右移
+		// 			c++;
+		// 			d++;
+		// 		}else{
+		// 			//a、c一样
+		// 			while(true){
+		// 				if(str1.charAt(b) == str2.charAt(d)){
+		// 					b++;
+		// 					d++;
+		// 					if(b - a > maxlength){
+		// 						maxlength = b - a;
+		// 						maxchar = str1.substring(a,b);
+		// 					}
+		// 				}else{
+		// 					c = 0;
+		// 					d = 1;
+		// 					a++;
+		// 					b = a + 1;
+		// 					break;
+		// 				}
+		// 				//验收
+		// 				if(b >= str1.length || d >= str2.length){
+		// 					//如果c、d到头了，那么c、d归位，a右移
+		// 					break;
+		// 				}
+		// 			}
+		// 		}
+
+		// 		//验收，c、d发生了增长，防止cd超标
+		// 		if(c >= str2.length || d >= str2.length){
+		// 			//如果c、d到头了，那么c、d归位，a右移
+		// 			c = 0;
+		// 			d = 1;
+		// 			a++;
+		// 			b = a + 1;
+		// 		}
+
+		// 		//验收
+		// 		if(a >= str1.length){
+		// 			break;
+		// 		}
+		// 	}
+
+		// 	return maxchar;
+		// }
+	
+	</script>
+</body>
+</html>

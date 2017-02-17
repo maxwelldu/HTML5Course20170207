@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    function fun(a) {
+      console.log("我第" + a + "次说爱你");
+    }
+//    fun(1);
+//    fun(2);
+//    fun(3);
+
+    //例如之前所学习
+    alert("早上好");
+    prompt("请输入姓名", "张三");
+
+    //有多少形式参数都可以，都逻列出来
+    function sum(a, b) {
+      console.log(a + b);
+    }
+    sum(3, 5); //8
+    sum(8, 11); //19
+    sum("5", 12); //512
+    sum(10); //输出 NaN, 因为计算的就是10 + undefined = NaN
+    sum(10, 20, 32, 23, 22, 2, 4); //30，后面的参数无视
+
+    //封装一个函数，函数计算 m + .... + n的和
+    // 比如m是4， n是15， 4+5+6+....+15
+    function sum(m, n) {
+      var s = 0;
+      for (var i = m; i <= n; i++) {
+        s = s + i;
+      }
+      console.log(s);
+    }
+    sum(1, 100);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    for (var i = 1; i <= 100; i++) {
+//      console.log(i);
+//      if (i == 5) {
+//        break;//找到了一个，就立即终止循环
+//      }
+//    }
+
+//break 只中断了最内层循环，外层循环还在继续
+//    for (var i = 1; i <= 10; i++) {
+//      for (var j = 1; j <= 10; j++) {
+//        console.log(i, j);
+//        if (j == 5) {
+//          break;
+//        }
+//      }
+//    }
+
+//break只能终止内层循环，但是我们想要终止外层循环
+//就要给外层循环加label:
+    waiceng: for (var i = 1; i <= 10; i++) {
+      for (var j = 1; j <= 10; j++) {
+        console.log(i, j);
+        if (j == 5) {
+          break waiceng; // break label 的语法
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

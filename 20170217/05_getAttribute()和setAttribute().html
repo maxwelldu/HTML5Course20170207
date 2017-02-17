@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<img src="images/10.jpg" id="tutu" alt="">
+
+<script>
+  var oImg = document.getElementById("tutu");
+  oImg.setAttribute("src", "images/11.jpg");
+  //相当于
+//  oImg.src = "images/11.jpg";
+</script>
+
+<div furong="付荣" id="box"></div>
+<script>
+ var oFurong = document.getElementById("box");
+ //自定义属性，不是w3c的属性，都不能用点语法
+ console.log(oFurong.furong); //undefined
+ console.log(oFurong.getAttribute("furong"));
+</script>
+
+</body>
+</html>

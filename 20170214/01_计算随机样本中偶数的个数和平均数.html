@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //样本
+    var arr = [519, 950, 646, 662, 895, 90, 175, 661, 232, 987];
+
+    //计算偶数的个数
+    //计算平均数, 平均数就是总和/个数
+    var sum = 0; //总和
+    var count = 0; //偶数个数
+    for (var i = 0; i < arr.length; i++) {
+      sum += arr[i]; //计算所有项的总和
+      if (arr[i] % 2 == 0) {
+        count++;
+      }
+    }
+
+    console.log("偶数的个数是：" + count);
+    console.log("平均数是：" + (sum / arr.length));
+  </script>
+</head>
+<body>
+
+</body>
+</html>

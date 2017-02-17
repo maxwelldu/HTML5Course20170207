@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    // splice() 向数组中添加或删除项，然后返回被删除的项，改变数组长度
+    var a = [1, 2, 3, 4, 5, 6];
+    //添加项
+    a.splice(3, 0, "9", "6"); //3为所需要数字添加地址（数组下标），0为删除在当前下标后面0个项
+    console.log(a); //[1,2,3,"9", 4, 5, 6]
+    //删除1项
+    a.splice(4, 1); //[1,2,3,"9",5,6]
+    console.log(a);
+    //修改一个项
+    a.splice(3, 1, 9); //[1,2,3,9,5,6]
+    console.log(a);
+
+    a.splice(-3); //从-3这个位置开始删除到结束
+    console.log(a);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

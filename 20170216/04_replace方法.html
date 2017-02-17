@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //replace 就是替换
+    //换一个，寻找到第一个匹配的，就不再往后匹配了
+//    var str = "付荣同学学会了正则，付荣同学好厉害";
+//    console.log(str);
+//    str = str.replace("付荣", "梦婷");
+//    console.log(str);
+
+    //================
+    //replace第一个参数可以是正则表达式， g就是全局替换
+//    var str = "付荣同学学会了正则，付荣同学好厉害";
+//    str = str.replace(/付荣/g, "梦婷");
+//    console.log(str);
+//
+    //================
+//    var str = "付荣同学学会了正则，付荣同学好厉害";
+    //如果replace函数的第二个参数是一个函数，那么每次匹配到正则的时候
+    //就会调用一次这个函数，这个函数天生有参数
+    // return的值就是要替换的值
+//    console.log(str);
+//    str = str.replace(/付荣/g, function(a,b,c){//a,b,c只是形参，随便命名；也可以只写一个或两个参数
+//      a 参数就是匹配上的字符串
+//      b 参数是匹配上的字符串的下标
+//      c 参数就是源字符串
+//      console.log(a, b, c);
+//      return "梦婷";
+//    });
+//    console.log(str);
+
+    //replace 的哲学，就能动态替换
+//    var str = "我每天挣200元，吃饭花40元";
+//    console.log(str);
+//    str = str.replace(/\d+元/g, function(a){
+//      console.log(a);
+//      return "$" + Math.round((parseInt(a) / 6) * 100) / 100;
+//    });
+//    console.log(str);
+
+    //=======================
+    //replace分组，直接在替代字符串中使用$1, $2来表示捕获的东西
+//    var str = "Kobe Bryant";
+//    str = str.replace(/(\w+)\s(\w+)/, "$2 $1");
+//    console.log(str);
+
+    //=================
+//    var str = "Kobe Bryant";
+//    str = str.replace(/(\w+)\s(\w+)/, function(match, $1, $2, index, str){
+//      console.log("match = " + match);
+//      console.log("match.type = " + typeof(match));
+//      console.log("$1 = " + $1);
+//      console.log("$2 = " + $2);
+//      console.log("index = " + index);
+//      console.log("str = " + str);
+//    });
+
+    //==============================
+    //快速学习一下对象
+    //属性和值,  多个键值对的集合
+//    var obj = {
+//      a : 1 ,
+//      b : 2 ,
+//      c : 3
+//    };
+//    console.log(obj.a); //访问对象的属性的一种方式
+//    console.log(obj['a']); //访问对象的属性
+//    console.log(obj[a]); //这里的 a是一个变量，会报没定义
+
+    //======================
+    var dictionary = {
+      xingming : "maxwell",
+      nianling : "18",
+      xingbie : "男"
+    };
+    var str = "大家好，我叫*xingming*, 我今年*nianling*岁了";
+    str = str.replace(/\*(\w+)\*/g, function(match, $1){
+      console.log('match = ' + match);
+      console.log("$1 = " + $1);
+      console.log(typeof $1);
+      return dictionary[$1];
+    });
+    console.log(str);
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

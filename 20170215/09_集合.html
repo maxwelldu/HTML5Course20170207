@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //简单类 nba 三个字母组成的简单集合
+//    var reg = /[nba]/;
+//    console.log(reg.test('xyzn'));
+
+    //范围类 A-Z 大写字母集合
+    //相当于ABCDEFGHIJKLNMPRTXYZ
+//    var reg = /[A-Z]/;
+//    console.log(reg.test('a'));
+//    console.log(reg.test('B'));
+
+    //负向类 不包含, 排除集合中的字符
+    //^ 在正则的开始表示分界，在集合中表示不包含
+//    var reg = /[^9]/;
+//    console.log(reg.test('9'));
+
+    //组合类  匹配0-9的数字 或者  a-z 的小写字母
+    var reg = /[0-9a-z]/;
+    console.log(reg.test('9a'));
+    console.log(reg.test('ADFASFDSA'));
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

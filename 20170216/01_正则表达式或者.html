@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var reg = /^\w{1,10}@\w{1,5}\.com|cn/;
+    var reg = /^\w{1,10}@\w{1,5}\.(com|cn)/; //com|cn 是一个单元
+    //如果不加括号，则在正则当前去分割前后的所有正则
+//    var str = "dcj@abc.com";
+    var str = "cn";
+    console.log(reg.test(str));
+
+    var reg = /^a[abc][jk]abc|nba|gg[abc]/;
+    var str = "nba";
+    var str = "ggb";
+    var str = "ackabc";
+    console.log(reg.test(str));
+
+    var reg = /^a[abc][jk](abc|nba|gg)[abc]/;
+    var str = "abjgc";
+    console.log(reg.test(str));
+  </script>
+</head>
+<body>
+
+</body>
+</html>

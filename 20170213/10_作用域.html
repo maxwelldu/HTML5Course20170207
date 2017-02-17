@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    function fn() {
+//      var a = 1; //定义在一个函数里面的变量，我们称之为局部变量，只有在函数里面定义
+//      console.log("我是函数里面的变量 a " + a);
+//    }
+//    fn();
+//    console.log("我是函数里面的变量 a " + a);
+
+    // *********************
+//    var a = 1; //定义在全局范围内的一个变量，全局变量，在程序任何的一个地方都有定义
+//
+//    function fn() {
+//      console.log("global a " + a);
+//    }
+//    fn();
+//    console.log("global outer a " + a);
+
+    //*********************************
+    //变量的作用域，就是它var的时候最内层的function
+
+//    function outer() {
+//      var a = 1; //a的作用域就是outer
+//      inner();
+//      function inner() {
+//        var b = 2; //b的作用域就是inner
+//        console.log(a);//能够正常输出1
+//        console.log(b);// 能够正常输出2
+//      }
+//    }
+//    outer();
+//    console.log(a); //报错，因为a的作用域是outer
+
+    //***************************8
+//    var a = 1; //全局变量
+//    function fn() {
+//      var a = 5; //局部变量
+//      console.log(a); //输出5，变量在当前作用域寻找，找到了a的定义值为5
+//    }
+//    fn();
+//    console.log(a);//输出1，变量在当前作用域寻找，找到了a的定义值为1
+
+    //************************
+//    var a = 1; //全局变量
+//    var b = 2; //全局变量
+//    function outer() {
+//      var a = 3; //遮蔽了外层的a，a局部变量
+//      function inner() {
+//        var b = 4; //遮蔽了外层的b，b局部变量
+//        console.log(a); //3, a现在在当前层找不到定义，所以就上一层查找
+//        console.log(b); //4
+//      }
+//      inner(); //调用函数
+//      console.log(a); //3
+//      console.log(b); //2 b现在在当前层找不到定义的，所以就上一层寻找
+//    }
+//    outer();
+//    console.log(a); //1
+//    console.log(b); //2
+
+    //********************
+    //一个变量在声明的时候，如果不写var， 也能默认定义成功，但是就是全局变量
+    function fn() {
+      a = 1; //这个a第一次赋值的时候，并没有var过
+      //所以就自动的在全局的范围帮你var了一次
+    }
+    fn();
+    console.log(a);
+
+
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

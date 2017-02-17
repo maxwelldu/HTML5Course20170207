@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    var a = 1;
+//    var b = a; //b得到的值，是a的副本。a把自己的值复制了一份，给了b
+//    b = 3; //更改b的值，a是不受影响
+//    console.log(a);
+
+    //定义一个变量a, 引用了一个function
+    //这个a变量存储的是这个匿名函数的内存地址
+    var a = function() {
+      console.log("I am a function");
+    };
+    console.log(a.haha);
+    //就是把匿名函数的地址给了b
+    var b = a;
+    //给b添加一个属性
+    b.haha = 1;
+    console.log(a.haha);
+    //b的haha属性和a的同步更改的，因为都是指向的同一个对象
+    b.haha++;
+    b.haha++;
+    b.haha++;
+    b.haha++;
+    console.log(a.haha);
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+	// 有10个学生的成绩存在数组中，请统计大于等于平均成绩的人数。
+
+	var arr = [80,67,12,90,99,70,49,96,98,78];
+
+	// 定义平均数，和
+	var average = 0;
+	var sum = 0;
+
+	for(var i = 0 ; i < arr.length;i++){
+		sum += arr[i];
+	}
+
+	// 求平均数
+	average = sum/arr.length;
+	console.log(average);
+
+	// 大于等于平均数的个数
+	var count = 0;
+	for(var i = 0;i < arr.length;i++){
+		if(arr[i] >= average){
+			count++;
+		}
+	}
+
+	console.log(count);
+
+	</script>
+	
+</body>
+</html>

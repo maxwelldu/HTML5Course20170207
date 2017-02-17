@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //JS中没有函数的重载，也就是说函数的名字一样，即使形式参数不一样
+    //也视为同一个函数，后写的会覆盖先写的
+//    function fun(a,b,c) {
+//      console.log('hi');
+//    }
+//    function fun(a,b) {
+//      console.log('haha');
+//    }
+//    fun(1,2,3); //输出haha
+
+    //=============================
+    //arguments参数，是每个函数天生就有，调用的时候 会填充里面的数值
+//    function fun(a,b) {
+//      console.log(arguments); //[45, 637, 457, 34, 23]
+//      console.log(arguments[3]); //34
+//    }
+//    fun(45, 637, 457, 34, 23);
+
+    //================================
+    //模拟函数重载
+    //现在有一个sum函数，如果只传一个参数，返回加1
+    //如果有两个参数，返回两个数字的和
+    function sum(a,b) {
+      console.log(arguments);
+      console.log(arguments.length);
+      //如果实际参数的长度为1，说白了，你只传进来一个参数
+//      switch(arguments.length) {
+//        case 1:
+//          return ++a;
+//          break;
+//        case 2:
+//          return a + b;
+//          break;
+//      }
+      //相当于
+      if (arguments.length == 1) {
+        return ++a;
+      } else if (arguments.length == 2) {
+        return a + b;
+      }
+    }
+    console.log(sum(10));
+    console.log(sum(10,20));
+
+    //设计一个无限参数的函数, 去求和
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

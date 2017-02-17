@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //星座，弹出今日运势
+    //用户输入
+    var xingzuo = prompt("请输入你的星座");
+    switch (xingzuo) {
+      case "白羊座":
+        console.log("今天要注意调整自己的状态，有些人的睡眠质量比较差");
+        break;
+      case "金牛座":
+        console.log("今天会在感情方面遇到一些小小的问题");
+        break;
+      case "双子座":
+        console.log("今天出门买彩票，可能会中一蓝球");
+        break;
+      case "巨蟹座":
+        console.log("工作上要打起十二分的精神，要不然很大可能 会经常要返工哦");
+        break;
+      case "狮子座":
+        console.log("恋爱中的人今天的心有点摇摆不定，有人可能会精神上的出轨");
+        break;
+      default:
+        console.log("对不起，我们没有收录你的星座运势");
+        break;
+    }
+    console.log("播报完毕，给钱！");
+
+    //完全等价于
+    if (xingzuo == "白羊座") {
+      console.log("今天要注意调整自己的状态，有些人的睡眠质量比较差");
+    } else if(xingzuo == "金牛座") {
+      console.log("今天会在感情方面遇到一些小小的问题");
+    } else {
+      console.log("对不起，我们没有收录你的星座运势");
+    }
+    console.log("播报完毕，给钱！");
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

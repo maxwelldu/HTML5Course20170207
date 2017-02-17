@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //验证手机号
+    /**
+     * 用户输入一个手机号，判断是否是合法的手机号
+     * 11位 {11}
+     * 第一位是 1 ^1
+     * 第二位是 [34578]
+     * 后面的都是数字 \d
+     *
+     * 写正则的方法：先找一个示例放在这儿，然后参考着写
+     */
+    // 18518518555
+    var reg = /^1[34578]\d{9}$/;
+    var str = prompt("请输入手机号");
+    if (reg.test(str)) {
+      console.log("success");
+    } else {
+      console.log("failed");
+    }
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var a = [1, 2, 3, 4];
+    console.log(typeof a); //object
+
+//    var b = a;
+//    b[0] = 88; //修改的是数组b下标为0的项
+//    console.log(a);
+
+    //**************
+//    var b = a; //这个时候是把a的引用赋给了b
+//    b = [6, 7, 8, 9]; //b现在指向了新的数组
+//    console.log(a); //a不变
+
+    //**********************
+//    var b = a;
+//    b = 1; //b现在指向了新的数字
+//    console.log(a); //a不变
+
+    //*****************
+    //不能判相等
+    var a = [1, 2, 3];
+    var b = [1, 2, 3];
+    console.log(a == b);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

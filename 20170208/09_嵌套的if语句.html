@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var sex = prompt("请输入你的性别");
+    var age = parseInt(prompt("请输入你的年龄"));
+
+    if (sex == "男") {
+      //男
+      if (age >= 22) {
+        console.log("男同志你好，可以结婚");
+      } else {
+        console.log("你还是个小正太，不能结婚");
+      }
+    } else if (sex == "女") {
+      if (age >= 20) {
+        console.log("女同志你好，可以结婚");
+      } else {
+        console.log("你还是个小萝莉，不能结婚");
+      }
+    } else {
+      console.log("你输入的不是正确的性别！");
+    }
+
+    //方法2
+    if (sex == "男" && age >= 22) {
+      console.log("男同志你好，可以结婚");
+    } else if (sex == "男" && age < 22) {
+      console.log("你还是个小正太，不能结婚");
+    } else if (sex == "女" && age >= 20) {
+      console.log("女同志你好，可以结婚");
+    } else if (sex == "女" && age < 20) {
+      console.log("你还是个小萝莉，不能结婚");
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

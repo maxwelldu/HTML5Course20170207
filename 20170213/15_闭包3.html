@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    function outer(x) {
+      function inner(y) {
+        console.log(x + y);
+      }
+      return inner;
+    }
+    //拿到inner函数，inn就是inner函数
+    var inn = outer(3);
+    inn(5);
+    inn(7);
+    inn(11);
+    inn(12);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

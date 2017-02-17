@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var year = parseInt(prompt("请输入你工作了几年，不足1年为0， 工作两年半写2"));
+    var salary = parseInt(prompt("请输入月薪"));
+    var xishu;
+    if (year == 0) {
+      xishu = salary > 8000 ? 1.2 : 1;
+    } else if (year == 1) {
+      xishu = salary > 10000 ? 1.7 : 1.5;
+    } else {
+      xishu = salary > 12000 ? 3.2 : 3;
+    }
+    console.log("你的年终奖是：" + salary * xishu);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

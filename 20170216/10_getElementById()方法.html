@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div { width: 200px; height: 200px; background-color: yellowgreen; }
+  </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+  //通过ID得到页面中的元素，保存到oBox中，习惯将对象类型添加一个类型标签的名称
+  //匈牙利命名法 字母o表示这个变量的类型是 Object
+  //表示这个变量是个对象
+  var oBox = document.getElementById("box");
+  //用JS把盒子变色红色
+  oBox.style.backgroundColor = "red";
+</script>
+
+<input type="text" name="haha">
+<script>
+  //IE7及较低版本还有这样一个怪癖，表单元素name属性也会被当做 id.
+  //为了避免这个问题，所以页面上的name最好也不要和任何id相同
+  var oInput = document.getElementById("haha");
+  oInput.style.backgroundColor = "red";
+</script>
+
+</body>
+</html>

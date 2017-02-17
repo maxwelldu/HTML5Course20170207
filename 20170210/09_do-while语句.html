@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    for (var i = 1; i<10; i++) {
+//      console.log(i);
+//    }
+
+    //循环三要素：循环变量初始化，改变循环变量，
+    // 正确书写循环终止条件
+//    var i = 1;
+//    do {
+//      console.log(i);
+//      i++;
+//    } while(i <= 10);
+
+    //这是一个后置验证的语句, 也就是说会输出一次，肯定会至少输出一次
+//    do {
+//      console.log("哈哈");
+//    } while(false);
+
+//死循环
+//    do {
+//      console.log("哈哈");
+//    } while(true);
+
+//登录程序, 当输入密码正确则退出循环，不正确一直尝试
+    do {
+      var a = prompt("请输入密码？");
+      if (a == "123456") {
+        console.log("您已经登录成功，可以取钱了");
+        break;
+      } else {
+        console.log("密码错误，请重新输入");
+      }
+    } while(true);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

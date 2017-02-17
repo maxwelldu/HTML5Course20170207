@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //小括号表示一个分组, 对分组的引用使用\, 序号从1开始
+//    var reg = /ab(cd)\1e/; //abcdcde   \1表示第一个分组
+//    console.log(reg.test('abcdcde'));
+
+//    var reg = /a(bcd)(233)\2\1/; //abcd233233bcd
+//    console.log(reg.test('abcd233233bcd'));
+
+    //<div>lkjfds</div>
+//    var reg = /<([a-z]+)>.*<\/\1>/;
+//    console.log(reg.test("<div>abc</div>"));
+//    console.log(reg.test("<span>abc</span>"));
+
+//    var result = 'abcde'.replace(/ab(cd)e/, 'ab$1$1e');
+//    console.log(result); //abcdcde
+
+    var result = 'abcde'.replace(/ab(cd)e/, function(match, $1) {
+      console.log('match = ' + match);
+      console.log('$1 = ' + $1);
+      return 'ab' + $1 + $1 + 'e';
+    });
+    console.log(result);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

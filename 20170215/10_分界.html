@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //只要字符串中间有abc这个字符串则返回true
+//    var reg = /abc/;
+//    console.log(reg.test('aabcdef'));
+
+    // 判断字符串是否是以abc开头
+//    var reg = /^abc/;
+//    console.log(reg.test('aabcdef'));
+//    console.log(reg.test('abcdef'));
+
+    //判断字符串是否是以xyz结尾的, $表示结尾的分界
+//    var reg = /xyz$/;
+//    console.log(reg.test('uvwxyz'));
+//    console.log(reg.test('helloyz'));
+
+    //精确匹配
+    var reg = /^abc$/; //^是开头 $是结尾的分界，只能匹配abc
+    console.log(reg.test("abcabc"));
+    console.log(reg.test("abc"));
+
+    //单词的边界是 \b, \b能够匹配空格，或者特殊字符
+    // 'how old are you' 切割成单词
+    var str = 'How old are  you|abc$def';
+    //大小写字母表示： [a-zA-Z]+
+    console.log(str.match(/\b[a-zA-Z]+\b/g));
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    /*
+    //先调用
+    fun();//可以正常执行，因为函数有函数声明头提升的特性
+    //然后定义
+    function fun() {
+      console.log("I am a function");
+    }
+    */
+
+    // **************************************
+    /*
+    //函数表达式不会有提升的
+    fun();
+    var fun = function(){
+      console.log("I am a new function");
+    };
+    */
+
+    // **************************
+    //函数优先
+    aaa(); //函数优先，遇见同名的标识符，预解析阶段一定会这个标识符给函数
+    var aaa = 5; //定义了一个变量，是5
+    function aaa() {
+      console.log("我是aaa函数");
+    }
+
+    // ************************
+    foo(); //函数优先
+    var foo;
+    function foo() {
+      console.log(1);
+    }
+    foo = function(){
+      console.log(2);
+    }
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

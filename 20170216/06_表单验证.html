@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="a.php" id="biaodan">
+  <p>
+    请输入姓名：<input type="text" id="xingming">
+  </p>
+  <p>
+    请输入年龄：<input type="text" id="nianling">
+  </p>
+  <p>
+    请输入手机号码：<input type="text" id="shoujihao">
+  </p>
+ <p>
+   请输入邮箱：<input type="text" id="youxiang">
+ </p>
+  <p>
+    <input type="submit">
+  </p>
+</form>
+<script>
+  //得到表单
+  var biaodan = document.getElementById("biaodan");
+  var xingming = document.getElementById("xingming");
+  var nianling = document.getElementById("nianling");
+  var shoujihao = document.getElementById("shoujihao");
+  var youxiang = document.getElementById("youxiang");
+
+  //表单试图提交的时候，触发onsubmit事件
+  //这个函数返回了false, 表单不会提交
+  biaodan.onsubmit = function(){
+    //验证各种内容
+    //验证姓名
+    if (!/^[\u4e00-\u9fa5]{2,4}$/.test(xingming.value)) {
+      alert("姓名格式错误");
+      return false;
+    }
+    //验证年龄
+    if (!/^\d{1,3}$/.test(nianling.value)) {
+      alert("年龄错误");
+      return false;
+    }
+    if (parseInt(nianling.value) < 10 || parseInt(nianling.value) > 104) {
+      alert("年龄不在范围！");
+      return false;
+    }
+    if (!/^1[3578]\d{9}$/.test(shoujihao.value)) {
+      alert("错误的手机号");
+      return false;
+    }
+    return true;
+  };
+</script>
+</body>
+</html>

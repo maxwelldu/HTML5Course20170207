@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //返回的是符合正则表达式的第一个位置
+    var str = "ABCDEFG12222345555567abcdefg";
+    var reg = /(\w)\1+/g;
+    console.log(str.search(reg));
+
+    //search就是能用正则表达式的 indexOf
+    //search 和 indexOf 效果一样，只不过search里面可以是字符串或者正则
+    var str = "ABCDEFG12222345555567abcdefg";
+    console.log(str.indexOf("FG"));
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

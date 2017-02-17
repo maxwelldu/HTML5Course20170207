@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //用户输入自己的性别，然后输入自己的年龄，判断能否结婚
+    var sex = prompt("请输入性别");
+    var age = parseInt(prompt("请输入年龄"));
+
+    //现在可以计算年龄的下限
+    var zuidi = sex == "男" ? 22 : 20;
+    if (age > zuidi) {
+      console.log("能结婚");
+    } else {
+      console.log("不能结婚");
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

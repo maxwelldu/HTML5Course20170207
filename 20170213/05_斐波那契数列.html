@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //1、1、2、3、5、8、13、21、34......
+    //只需要一个函数，就可以搞定全部问题
+    //fib(n) 就能得到第n位的数字
+    function fib(n) {
+      if (n == 1 || n == 2) {
+        return 1;
+      } else {
+        return fib(n-1) + fib(n-2);
+      }
+    }
+    console.log(fib(3));
+  </script>
+</head>
+<body>
+
+</body>
+</html>

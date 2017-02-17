@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //验证邮箱
+    /**
+     * 要有@   @不需要转义
+     * .在@后面  .需要转义
+     * @前面字符串至少一位
+     * @前面不能有特殊符号
+     * 只能有1个@
+     * 就不能有空格
+     * 以字母或数字开头
+     * 以字母结尾
+     * @与.之间有字符
+     *
+     * 1413161683@qq.com
+     */
+        //     /1413161683@qq.com/     123432@jlkfds.com.cn
+    var reg = /^\w+@\w+\.[a-z]{2,3}$/; //这个正则也不是完全没问题
+    var str = prompt('请输入邮箱');
+    if (reg.test(str)) {
+      console.log("你的邮箱没问题");
+    } else {
+      console.log("你的邮箱格式不正确，请重新输入");
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

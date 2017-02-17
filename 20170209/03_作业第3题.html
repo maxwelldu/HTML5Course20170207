@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //接受用户输入一个年份
+    var year = parseInt(prompt("请输入一个年份"));
+    if (year % 100 == 0) {
+      if (year % 400 == 0) {
+        console.log("是闰年");
+      } else {
+        console.log("不是闰年");
+      }
+    } else {
+      //不是100的整数倍
+      if (year % 4 == 0) {
+        console.log("是闰年");
+      } else {
+        console.log("不是闰年");
+      }
+    }
+
+    //方法2
+//    if (是100的整数倍且能被400整除 || 不是100的整数倍且能被4整除)
+    if ((year % 100 == 0 && year % 400 == 0) || (year % 100 != 0 && year % 4 == 0)) {
+      console.log("是闰年");
+    } else {
+      console.log("不是闰年");
+    }
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

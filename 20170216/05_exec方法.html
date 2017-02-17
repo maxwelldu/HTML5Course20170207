@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //exec 执行
+    //每次执行结果按顺序输出，不管结果有几个，一次只输出一个
+//    var str = "ABCDEFG1234567abcdefg";
+//    var reg = /[a-z]/g;
+    //遍历所有的结果：
+//    var a;
+//    while( (a = reg.exec(str)) != null) {
+//      console.log(a);
+//    }
+
+    //exec和match不一样，exec每次只返回一个，match是返回所有的匹配项
+    //使用exec的时候，我们是将所有的结果通过 while() 迭代输出
+
+    var str = "AABBCCCCDDDDDEEEEFFFFFFFFFFFFFF";
+    var reg = /(\w)\1+/g;
+
+    var maxl = 0;
+    var maxc = "";
+
+    var a;
+    while( (a = reg.exec(str)) != null) {
+      if (a[0].length > maxl) {
+        maxl = a[0].length;
+        maxc = a[0];
+      }
+    }
+    console.log(maxc);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

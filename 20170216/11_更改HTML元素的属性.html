@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+
+<img src="images/10.jpg" id="tutu" alt="">
+<a href="http://www.sohu.com" id="lianjie">test</a>
+<input type="text" value="哈哈哈哈" id="input" />
+<script>
+  //得到这个图片
+  var oTutu = document.getElementById("tutu");
+  //要改变的是src属性，所以直接打点调用 src属性
+  oTutu.src = "images/11.jpg";
+
+  //得到a标签
+  var oLianjie = document.getElementById("lianjie");
+  //改变a标签的超级链接
+  oLianjie.href = "http://www.163.com";
+
+  var oInput = document.getElementById("input");
+  oInput.value = "嘻嘻嘻嘻";
+</script>
+</body>
+</html>

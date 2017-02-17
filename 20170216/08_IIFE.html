@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //IIFE
+    (function fun(a) {
+      console.log(a);
+    })("哈哈");
+
+//    fun("嘻嘻"); //不能被调用了，因为那个就是表达式了
+
+    //标准的IIFE
+    (function(){
+      console.log("哈哈");
+    })();
+
+    !function(){
+      console.log("Hi");
+    }();
+    +function(){
+     console.log("Hello");
+    }();
+
+    //设计一个函数，这个函数接受三个参数，比如: sum(4,7,9) //返回的是前两个数字大的那个数字，与第三个数字的和。
+    //方法1：标准写法
+//    function sum(a,b,c) {
+//      var max = a >= b ? a : b;
+//      return max + c;
+//    }
+//    console.log(sum(4, 7, 9));
+
+    //求两个数当中最大的数
+    var result = (function(x,y){
+      return x > y ? x : y;
+    })(2,3);
+    console.log(result);
+    //相当于下面的这种写法
+    function max(a,b) {
+      return a > b ? a : b;
+    }
+    console.log(max(2,3));
+    //方法2：奇淫技巧
+    function sum(a,b,c) {
+      return (function(x,y){
+          return x >= y ? x : y;
+      })(a, b) + c;
+    }
+    console.log(sum(4, 7, 9));
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

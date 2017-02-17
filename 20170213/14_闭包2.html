@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var inner; //inner天生就全局的
+    function outer() {
+      var a = 250;
+      var b = 430;
+      //全局变量inner此时改变为了一个函数
+      //这个函数此时将立即生成闭包。记住此时所处的环境，a是250, b是430
+      inner = function() {
+        console.log(a);
+        console.log(b);
+      }
+    }
+    outer();
+    var a = 300;
+    var b = 100;
+    inner(); //一个函数在执行的时候，找闭包里面的变量，不会理会当前作用域
+  </script>
+</head>
+<body>
+
+</body>
+</html>

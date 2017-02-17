@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="box" style="width: 200px;height: 200px;background-color: red; border: 10px solid blue; border-top-style:dashed; font-size:50px"></div>
+  <script>
+    var oBox = document.getElementById("box");
+    console.log(oBox.style.backgroundColor);
+    console.log(oBox.style.borderTopStyle);
+    console.log(oBox.style.fontSize);
+  </script>
+  <p id="pp">pp</p>
+  <script>
+    var oP = document.getElementById("pp");
+    oP.style.backgroundColor = "skyblue";
+    oP.style.fontSize = "100px";
+    oP.style.border = "10px solid red";
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<img src="images/10.jpg" id="tutu" alt="">
+<p>哈哈</p>
+<p>哈哈</p>
+<p>哈哈</p>
+<p>哈哈</p>
+
+<script>
+  var tutu = document.getElementById("tutu");
+  tutu.src = "images/11.jpg";
+
+  //所有的p标签
+  var ps = document.getElementsByTagName("p");
+  ps[1].innerHTML = "嘻嘻";
+</script>
+
+
+
+
+
+<span id="sp">content</span>
+<script>
+  var sp = document.getElementById("sp");
+  console.log(sp);
+  console.log(typeof sp);
+
+  console.log(document.title);
+  console.log(document.URL);
+  console.log(document.width);
+  console.log(document.height);
+</script>
+
+</body>
+</html>

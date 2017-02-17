@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    var a = prompt("请输入姓名");
+    console.log(a);
+
+    /*
+    function sum(a, b) {
+//      console.log(a + b);
+      return a + b; //现在这个函数的返回值就是a+b的和
+    }
+    var s = sum(3, 8);
+    console.log(s);
+    console.log(sum(3, sum(4, 5)));
+    */
+
+    function fun(){
+      console.log(1);
+      console.log(2);
+      return;//返回一个空值，undefined
+      console.log(3);//这行语句不执行，因为函数已经return了
+    }
+    console.log(fun());
+  </script>
+</head>
+<body>
+
+</body>
+</html>

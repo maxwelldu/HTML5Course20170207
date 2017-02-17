@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+//编写函数maxr(char) 返回字符串char中最长的连续重复字母 mmmiijjjjkkkkkkssptr 指针法
+
+	//双指针法，返回字符串char中最长的连续重复字母
+var count = 0;
+		function maxr(char){
+			//两个指针
+			var a = 0;
+			var b = 1;	//b的初始位置就是a的右边1位
+			var maxLength = 0; 	//重复的最大的数量
+			var maxletter = "";  //重复数量最多的字母
+
+
+			//循环一直做一直做，直到a指针指向了最后字母
+			while(a != char.length - 1){
+			  count++;
+				//判断，两个指针指向的字母是否一样
+        //mmmmi
+				//当b下标的内容和a下标的内容一样，我们只需要移动b的指针
+				if(char.charAt(b) == char.charAt(a)){
+					//两个指针指向的字母是相同的，那么b指针右移
+					b++;
+				}else{
+					//两个指针指向的字母不同
+					//和当前最大的进行比较
+					if(b - a >= maxLength){
+						//两个指针之间的距离比最大的还大，现在的b-a就是最大的距离
+						maxLength = b - a;
+						maxletter = char.charAt(a);	//a指针指向的就是这个字母
+					}
+
+					//让a指针右移
+					//b指针也要跟着复位，就是a+1的位置
+//					a++;
+					a = b; //优化一下
+					b = a + 1;
+				}
+			}
+			return maxletter;
+		}
+
+		console.log(maxr('mmmiijjjjkkkkkkssptr'));
+		console.log(count);
+
+</script>
+	
+</body>
+</html>

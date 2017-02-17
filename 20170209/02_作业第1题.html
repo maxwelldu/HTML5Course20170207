@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script>
+    //接受用户输入一个数
+    var a = parseInt(prompt("请输入一个整数"));
+    //第二步，判断, 没有太多的逻辑推理，是最直接的写法
+//    if (a % 5 == 0 && a % 6 == 0) {
+//      console.log("这个数字能同时被5、6整除");
+//    } else if(a % 5 != 0 && a % 6 == 0) {
+//      console.log("这个数字能被6整除, 但不能被5整除");
+//    } else if(a % 5 == 0 && a % 6 != 0) {
+//      console.log("这个数字能被5整除, 但不能被6整除");
+//    } else if(a % 5 != 0 && a % 6 != 0) {
+//      console.log("这个数字不能被5、6整除");
+//    }
+
+    //第二种方法, 排队法, 看两个条件的其中一个
+//    if (a % 5 == 0 && a % 6 == 0) {
+//      console.log("这个数字能同时被5、6整除");
+//    } else if(a % 5 == 0) {
+//      console.log("这个数字能被5整除, 但不能被6整除");
+//    } else if(a % 6 == 0) {
+//      console.log("这个数字能被6整除, 但不能被5整除");
+//    } else {
+//      console.log("这个数字不能被5、6整除");
+//    }
+
+    //第三种方法, 这种是使用纯if语句的写法，没有多分支
+    (a % 5 == 0 && a % 6 == 0) && console.log("5,6");
+    //相当于
+    if (a % 5 == 0 && a % 6 == 0) {
+      console.log("5,6");
+    }
+
+    (a % 5 == 0 && a % 6 != 0) && console.log("5");
+    (a % 5 != 0 && a % 6 == 0) && console.log("6");
+    (a % 5 != 0 && a % 6 != 0) && console.log("不能被5,6整除");
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

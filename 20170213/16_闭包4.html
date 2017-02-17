@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    function fun1(m,n) {
+      function fun2(m) {//内部的m遮蔽了fun1里面的m
+        console.log(m + n);
+      }
+      return fun2;
+    }
+    var f = fun1(3, 4);
+    f(6);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+      width: 200px;
+      height: 200px;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+  var oDiv = document.getElementById("box");
+  //事件
+  oDiv.onclick = function(){
+    console.log("你好");
+  }
+  oDiv.onmouseover = function () {
+    //我自己的样式改变，写this这个词
+    //这里的this相当于oDiv
+    this.style.backgroundColor = "skyblue";
+  }
+  oDiv.onmouseout = function(){
+    oDiv.style.backgroundColor = "yellowgreen";
+  }
+
+</script>
+
+</body>
+</html>

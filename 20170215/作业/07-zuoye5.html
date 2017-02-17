@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+
+	// 编写函数rightchange(char,n) 实现字符串char循环右移n位。比如rightchange("abcdefg",2) 返回"fgabcde"
+
+	/*
+	// 第一种方法，字符串-->数组-->数组右移-->字符串
+	function rightMove(char,n){
+
+		// 把字符串转成数组
+		var arr = char.split('');
+
+		// 把n转一下，看n相对于char的length来说实际移动几位
+		n = n % char.length;
+
+		// for循环实现右移n位
+		for(var i = 0; i < n;i++){
+			arr.unshift(arr.pop());
+		}
+		return arr.join('');
+	}*/
+
+	function rightMove(char,n){
+
+		// 把n转一下，看n相对于char的length来说实际移动几位
+		n = n % char.length;
+
+		// 如果移动0位，就是char本身
+		if(n==0)return char;
+		// abc
+		// cab
+		return char.substr(-n) + char.substring(0,char.length-n);
+	}
+
+	</script>
+	
+</body>
+</html>

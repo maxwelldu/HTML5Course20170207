@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+//    var arr = ['G', 'A', 'C', 'B', 'I', 'H', 'G', 'I', 'B'];
+//    arr.sort();
+//    console.log(arr);
+
+    //sort函数默认是按照字符顺序排的，隐式将数字转为string
+    //比字符编码顺序
+//    var arr = [23, 435, 456, 23, 2, 345, 2, 32, 11, 324, 32, 43, 65, 66];
+//    arr.sort();
+//    console.log(arr);
+
+    //背诵里面的函数参数
+    var arr = [23, 435, 456, 23, 2, 345, 2, 32, 11, 324, 32, 43, 65, 66];
+    arr.sort(function(a, b) {
+      //如果a要放在b前面，那么返回负数
+      //如果a要放在b后面，那么返回正数
+      //如果a和b不区分大小，那么返回0
+//      if (a < b) {
+//        return 1;
+//      } else if(a > b) {
+//        return -1;
+//      } else if(a ==b){
+//        return 0;
+//      }
+      return b - a;
+    });
+    console.log(arr);
+
+    //按照五角星的个数倒序排序
+    var arr = ["★★★", "★★★★★", "★★", "★★★", "★", "★★★★★★★★", "★★★"];
+    arr.sort(); //正序
+    console.log(arr);
+    //倒序
+
+    arr.sort(function(a,b){
+      return b.length - a.length;
+    })
+    console.log(arr);
+
+    //*********************************
+    //这个涉及到对象，不用研究，了解即可
+    var arr = [
+      {"xuehao": 34},
+      {"xuehao": 6},
+      {"xuehao": 67}
+    ];
+    arr.sort();
+    console.log(arr);
+    arr.sort(function(a, b){
+      return a.xuehao - b.xuehao;
+    });
+    console.log(arr);
+
+
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

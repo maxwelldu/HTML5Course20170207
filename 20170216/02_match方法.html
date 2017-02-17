@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    //match的哲学，说白了就是我们最正统的正则
+    //在字符串中拿 到我们想要的东西，拿到所有的数字
+    var str = "今年是2017年我涨工资了，工资变为2000元了，房贷还有-4.5万，我又长了1岁。现在3岁了";
+    //-可能有可能没有
+    //数字一个或多个
+    //可能有点，也有可能没有
+    //数字一个或多个
+//    var reg = /-?\d+\.?\d*/g;
+//    var array = str.match(reg);
+//    console.log(array);
+
+    //正则表达式没有g修饰符，match和exec结果完全一样。都是类数组对象
+//    var str = "ABCDEFG1234567abcdefg";
+//    var reg = /[A-Z]/;
+//    var array1 = str.match(reg);
+//    var array2 = reg.exec(str);
+//    console.log(array1);
+//    console.log(array2);
+
+    //正则表达式有g修饰符，match会罗列出所有结果，返回纯数组
+//    var str = "ABCDEFG1234567abcdefg";
+//    var reg = /[A-Z]/g;
+//    console.log(str.match(reg));
+
+    //match能不能分组捕获？能
+    //()捕获一个三位数，\1就表示这第一个捕获到的结果
+//    var str = "188-564-133-653-653-986-534";
+//    var reg = /(\d{3})\-\1+/g;
+//    console.log(str.match(reg));
+
+    //寻找连续相同子串
+    var str = "ABCCCDDDDEEEEFFFFFFFFFFFFGGGHHIIII";
+    var reg = /(\w)\1+/g;
+    var array = str.match(reg);
+    console.log(array);
+
+    var maxLength = 0;
+    var maxchar = "";
+    for (var i = 0; i < array.length; i++) {
+      if (array[i].length > maxLength) {
+        maxLength = array[i].length;
+        maxchar = array[i];
+      }
+    }
+    console.log(maxchar);
+
+
+
+
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>
