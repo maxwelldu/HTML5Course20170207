@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ width: 80px; height: 80px;
+      background-color: skyblue;
+      position: absolute; left:100px;
+      top: 100px; }
+  </style>
+</head>
+<body>
+<div id="box">box</div>
+<script>
+  var oDiv = document.getElementById("box");
+  var target = {"top":300, "left":300};
+  var current = {"top":100, "left":100};
+  var time = 3000;
+ animate(oDiv, current, target, time);
+ //current代表当前的状态，也表示信号量
+ function animate(obj, current, target, time) {
+   var interval = 50;//每次运动的时间间隔
+   var maxcount = time / interval;//执行总次数
+   var count = 0; //记录当前执行了多少次
+   var step = {}; //步长对象，里面包括top的步长和left的步长
+   for (var k in target) {
+     step[k] = (target[k] - current[k]) / maxcount;
+   }
+   var timer = setInterval(function () {
+     for(var k in current) {
+       current[k] += step[k];
+       obj.style[k] = current[k] + "px";
+     }
+     count++;
+     if (count == maxcount) {
+       clearInterval(timer);
+     }
+   }, interval);
+
+ }
+</script>
+</body>
+</html>

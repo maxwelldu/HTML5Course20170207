@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    div{ width: 80px; height: 80px; background-color: gold;
+      position: absolute; top: 111px; left: 111px;}
+  </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+  //得到元素
+  var oDiv = document.getElementById("box");
+  //信号量
+  var nowleft = 111;
+  var nowtop = 111;
+  var nowwidth = 80;
+  //定时器
+  setInterval(function () {
+    //这个函数，就是每20毫秒调用一次
+    //更改信号量
+    nowleft += 10;
+    nowtop += 2;
+    nowwidth += 10;
+    //执行具体的业务
+    oDiv.style.left = nowleft + "px";
+    oDiv.style.top = nowtop + "px";
+    oDiv.style.width = nowwidth + "px";
+  }, 20);
+
+</script>
+</body>
+</html>

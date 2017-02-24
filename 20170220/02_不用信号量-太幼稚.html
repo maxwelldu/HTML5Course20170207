@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      top:100px;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+<input type="button" id="btn1" value="左移">
+<input type="button" id="btn2" value="右移">
+
+<div id="box" style="left:138px"></div>
+
+<script>
+  var oBtn1 = document.getElementById("btn1");
+  var oBtn2 = document.getElementById("btn2");
+  var oBox = document.getElementById("box");
+
+  oBtn1.onclick = function () {
+    //得到现在的位置
+    var a = parseInt(oBox.style.left);
+    //现在的位置减10
+    a -= 10;
+    //设置一个新的位置
+    oBox.style.left = a + "px";
+  };
+  oBtn2.onclick = function () {
+    //得到现在的位置
+    var a = parseInt(oBox.style.left);
+    //现在的位置减10
+    a += 10;
+    //设置一个新的位置
+    oBox.style.left = a + "px";
+  };
+
+</script>
+
+</body>
+</html>

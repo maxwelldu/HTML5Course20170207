@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var obj1 = {
+    "name": "付荣"
+  }
+  var obj2 = {
+    "name": "梦婷"
+  }
+  function showName(){
+    alert(this.name);
+  }
+  //下面这个call语句的含义有两层：
+//  1.showName函数将被调用
+//  2.同时这个函数内部的this就是obj1
+  showName.call(obj1);
+  showName.call(obj2);
+</script>
+</body>
+</html>

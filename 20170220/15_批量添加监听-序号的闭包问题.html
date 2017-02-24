@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    p{
+      width: 60px;
+      height: 60px;
+      float: left;
+      margin-right:20px;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<script>
+  var ps = document.getElementsByTagName("p");
+  //第一种，IIFE
+  for (var i = 0; i < ps.length; i++) {
+    (function(m) {
+      ps[m].onclick = function () {
+        console.log("我排老" + m);
+      };
+    })(i);
+    //IIFE, 第二个括号是表示调用,
+    // 括号里面的i表示调用函数时传入的参数
+//    (function(m){
+//    })(i);
+    //经典的闭包
+//    function(m){
+//      function (){//将内部的函数存到一个全局变量
+//      }
+//    }
+  }
+
+  /*
+  //第二种，也是非常巧妙的，比第一种简单
+  for (var i = 0; i < ps.length; i++) {
+    ps[i].index = i; //先编号，大家约定俗成的叫index, 实际上叫什么都行
+
+    //然后设置监听
+    ps[i].onclick = function () {
+        console.log("i = " + i +  " 我排老" + this.index);
+    }
+  }
+  */
+
+</script>
+
+</body>
+</html>

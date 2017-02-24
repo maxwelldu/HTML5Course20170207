@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div {
+      width: 600px;
+      height: 100px;
+      border:1px solid gray;
+    }
+    p {
+      float: left;
+      width: 60px;
+      height: 60px;
+      background-color: #ccc;
+      margin-right:10px;
+    }
+  </style>
+</head>
+<body>
+<div id="box1">
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+</div>
+<div id="box2">
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+</div>
+
+<script>
+  //点击第一排的p, 第二排对应的p变红
+  var box1ps = document.getElementById("box1")
+      .getElementsByTagName("p");
+  var box2ps = document.getElementById("box2")
+      .getElementsByTagName("p");
+
+  //方法1，编号法
+  /*
+  for (var i = 0; i < box1ps.length; i++) {
+    //编号
+    box1ps[i].index = i;
+    box1ps[i].onclick = function () {
+      box2ps[this.index].style.backgroundColor = "red";
+    }
+  }
+  */
+
+  //方法2， IIFE
+  for (var i = 0; i < box1ps.length; i++) {
+    (function(i) {
+      box1ps[i].onclick = function () {
+        box2ps[i].style.backgroundColor = "red";
+      };
+    })(i);
+  }
+</script>
+</body>
+</html>

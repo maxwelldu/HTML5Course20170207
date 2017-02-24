@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ width: 80px; height: 80px;
+      background-color: yellowgreen;
+      position: absolute; left: 100px; top: 100px; }
+  </style>
+</head>
+<body>
+<div></div>
+<script src="animate2.0.js"></script>
+<script>
+  /**
+   * 修改了JS文件之后，可能会有缓存
+   */
+  var oDiv = document.getElementsByTagName("div")[0];
+m();
+function m(){
+  animate(oDiv, {"left":600}, 300, function(){
+    animate(this, {"top":300}, 300, function(){
+      animate(this, {"left":100}, 300, function(){
+        animate(this, {"top":100}, 300, function(){
+          m();
+        })
+      })
+    })
+  });
+}
+</script>
+</body>
+</html>

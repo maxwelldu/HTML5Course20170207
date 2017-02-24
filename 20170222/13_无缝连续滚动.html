@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{ margin: 0; padding: 0;}
+    .rolling{ width: 800px; height: 130px;
+      border:10px solid #ccc; margin: 100px auto;
+      position: relative;
+      overflow: hidden; }
+    .rolling .m_unit{ width:5000px; position: absolute; top: 0;
+      left: 0; }
+    .rolling ul { list-style: none; }
+    .rolling ul li{ float: left; margin-right: 10px;}
+  </style>
+</head>
+<body>
+<!--div#rolling.rolling>div#m_unit.m_unit>ul>li*8>a>img-->
+<div id="rolling" class="rolling">
+  <div id="m_unit" class="m_unit"> <ul>
+      <li><a href=""><img src="images/shuzi/0.png" alt=""></a></li>
+      <li><a href=""><img src="images/shuzi/1.png" alt=""></a></li>
+      <li><a href=""><img src="images/shuzi/2.png" alt=""></a></li>
+      <li><a href=""><img src="images/shuzi/3.png" alt=""></a></li>
+      <li><a href=""><img src="images/shuzi/4.png" alt=""></a></li>
+      <li><a href=""><img src="images/shuzi/5.png" alt=""></a></li>
+      <li><a href=""><img src="images/shuzi/6.png" alt=""></a></li>
+      <li><a href=""><img src="images/shuzi/7.png" alt=""></a></li>
+    </ul> </div> </div>
+<script>
+  var rolling = document.getElementById("rolling");
+  var m_unit = document.getElementById("m_unit");
+  var listul = m_unit.getElementsByTagName("ul")[0];
+  //得到图片的数量，计算折返点用的，折返点就是 210 * 图片数量
+  var lislength = listul.getElementsByTagName("li").length;
+  //复制一倍的li
+  listul.innerHTML = listul.innerHTML + listul.innerHTML;
+  //信号量
+  var nowleft = 0; var timer; move();
+  //鼠标进入
+  rolling.onmouseover = function(){clearInterval(timer)};
+  //鼠标离开
+  rolling.onmouseout = function(){move()};
+  function move(){
+    clearInterval(timer);
+    //运动
+    timer = setInterval(function () {
+      nowleft -= 3;
+      if (nowleft < -210 * lislength) {
+        nowleft = 0;
+      }
+      m_unit.style.left = nowleft + "px";
+    }, 1);
+  }
+</script>
+
+</body>
+</html>

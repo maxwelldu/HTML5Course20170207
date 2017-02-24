@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ position: absolute; top: 0; left: 0;
+      width: 100px; height: 100px;
+      background-color: skyblue;}
+  </style>
+</head>
+<body>
+<div></div>
+<script>
+  var oDiv = document.getElementsByTagName("div")[0];
+  document.onmousemove = function(event){
+    oDiv.style.left = event.clientX + "px";
+    oDiv.style.top = event.clientY + "px";
+  }
+</script>
+</body>
+</html>

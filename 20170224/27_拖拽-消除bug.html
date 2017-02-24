@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ position: absolute; top: 0; left: 0;
+      width: 100px; height: 100px;
+      background-color: skyblue;}
+  </style>
+</head>
+<body>
+<div></div>
+<script>
+  var oDiv = document.getElementsByTagName("div")[0];
+  //监听里面放监听。JS的奇淫技巧
+  //当oDiv触发了onmousedown事件的情况下，document才有onmousemove事件
+  oDiv.onmousedown = function() {
+    //鼠标按下去的时候，就要记录鼠标在盒子中的位置，这个位置实际上是有误差
+    var deltaX = event.clientX - oDiv.offsetLeft;
+    var deltaY = event.clientY - oDiv.offsetTop;
+    document.onmousemove = function (event) {
+      oDiv.style.left = event.clientX - deltaX + "px";
+      oDiv.style.top = event.clientY - deltaY + "px";
+    }
+  };
+
+  //鼠标抬起
+  document.onmouseup = function(){
+    document.onmousemove = null;
+  }
+</script>
+</body>
+</html>

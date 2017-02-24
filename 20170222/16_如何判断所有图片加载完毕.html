@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    img{
+      border:1px solid red;
+    }
+  </style>
+</head>
+<body>
+<div id="box">
+  <img src="images/shuzi/1.png" alt="" >
+  <img src="images/shuzi/1.png" alt="" >
+  <img src="images/shuzi/1.png" alt="" >
+</div>
+<script>
+  var imgs = document.getElementsByTagName("img");
+  //如果判断所有图片加载完毕，就是计数器。一个图片加载完毕之后，
+  //立即让计数器++
+  //判断计数器是否和总数相同，如果是，就是所有图片加载完毕
+  var count = 0;
+  for (var i = 0; i < imgs.length; i++) {
+    imgs[i].onload = function () {
+      count++;
+      if (count == imgs.length) {
+        alert("所有图片加载完毕");
+      }
+    };
+  }
+</script>
+
+</body>
+</html>

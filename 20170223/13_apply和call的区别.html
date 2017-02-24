@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var obj1 = {
+    "name": "付荣"
+  }
+//  function showInfo(a,b,c) {
+//    console.log(this.name);
+//    console.log(a + b + c);
+//  }
+//  showInfo.call(obj1, 2, 3, 4);
+//  showInfo.apply(obj1, [2, 3, 4]);
+
+  function showInfo(n) {
+    for (var i = 0; i < n; i++) {
+      console.log(this.name);
+    }
+  }
+  showInfo.call(obj1, 10);
+  showInfo.apply(obj1, [10]);
+
+</script>
+</body>
+</html>

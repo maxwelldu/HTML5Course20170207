@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ width: 180px; height: 180px;
+      background-color: skyblue; position: absolute;
+      left: 186px; top: 107px; border:1px solid red;
+      opacity:0.2; }
+  </style>
+</head>
+<body>
+<div id="box1">你好</div>
+<div id="box2">你好</div>
+<div id="box3">你好</div>
+<script>
+  var oBox1 = document.getElementById("box1");
+  var oBox2 = document.getElementById("box2");
+  var oBox3 = document.getElementById("box3");
+
+  //调用函数
+  animate(oBox1,{"left":500,"top":200,"opacity":1}, 1600);
+  animate(oBox2,{"left":200,"top":800,"opacity":1}, 2600);
+  animate(oBox3,{"left":500,"top":300,"opacity":1}, 3600);
+
+  /**
+   * 动画
+   * @param obj 要操作的元素对象
+   * @param target 元素对象动画结束时的属性集合
+   * @param time 动画需要执行的时间
+   */
+//  animate(oBox1,{"left":500,"top":200,"opacity":1}, 1600);
+  function animate(obj, target, time) {
+//    计算时间间隔，由于浏览器的最小时间是不一样的
+    var interval = window.navigator.userAgent.indexOf("MSIE") == -1 ? 5 : 50;
+//    计算动画总次数
+    var maxcount = time / interval;
+
+//    当前执行次数的信号量
+    var count = 0;
+//    给信号量对象赋值, 需要得到我们要改变的属性当前的计算后的值,要改变到left为500
+    //是不是需要知道现在的left值是多少
+    var semaphore = {};
+    for (var k in target) {
+      semaphore[k] = parseFloat(fetchComputedStyle(obj, k));
+    }
+
+//    计算步长对象, 值为 (目标对象属性的值 - 当前计算后属性的值) / 动画次数
+    var step = {};
+    for (var k in target) {
+      target[k] = parseFloat(target[k]);
+      step[k] = (target[k] - semaphore[k]) / maxcount;
+    }
+
+    var timer = setInterval(function () {
+//      改变信号量对象的值
+      for (var k in semaphore) {
+        semaphore[k] += step[k];
+//        让元素动起来，设置 style属性的值
+        obj.style[k] = semaphore[k] + "px";
+      }
+//      执行次数信号量递增
+      count++;
+      if (count == maxcount) {
+        clearInterval(timer);
+      }
+//      if (执行次数 == 最大执行次数){
+//        强制让元素跑到目标位置
+//        停止计时器
+//      }
+    }, interval);
+  }
+
+    function fetchComputedStyle(obj, property) {
+      if (window.getComputedStyle) {
+        property = property.replace(/([A-Z])/g, function (match, $1) {
+          return "-" + $1.toLowerCase();
+        });
+        return window.getComputedStyle(obj)[property];
+      } else {
+        property = property.replace(/-([a-z])/g, function (match, $1) {
+          return $1.toUpperCase();
+        });
+        return obj.currentStyle[property];
+      }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ width: 80px; height: 80px; background-color: gold;
+      position: absolute; top: 111px; left: 111px; }
+  </style>
+</head>
+<body>
+<input type="button" value="开始">
+<input type="button" value="停止">
+<div id="box"></div>
+<script>
+  var oDiv = document.getElementById("box");
+  var startBtn = document.getElementsByTagName("input")[0];
+  var stopBtn = document.getElementsByTagName("input")[1];
+  var nowleft = 111;
+  var timer; //存放定时器的引用
+  //监听开始按钮
+  startBtn.onclick = function () {
+    //设表先关
+    clearInterval(timer);
+    //设置定时器
+      timer = setInterval(function () {
+        nowleft += 2;
+        oDiv.style.left = nowleft + "px";
+      }, 20);
+  };
+  //监听停止按钮
+  stopBtn.onclick = function () { clearInterval(timer); }
+
+</script>
+
+</body>
+</html>

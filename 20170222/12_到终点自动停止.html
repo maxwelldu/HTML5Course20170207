@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ width: 80px; height: 80px; background-color: gold;
+      position: absolute; left: 100px; top: 100px;}
+  </style> </head> <body>
+<div id="box"></div>
+<script>
+  var odiv = document.getElementById("box");
+  var nowleft = 100;
+  var timer = setInterval(function () {
+    nowleft += 7;
+    if (nowleft > 900) {
+      nowleft = 900;
+      clearInterval(timer);
+    }
+    odiv.style.left = nowleft + "px";
+    console.log(nowleft);
+  }, 20);
+</script>
+</body>
+</html>

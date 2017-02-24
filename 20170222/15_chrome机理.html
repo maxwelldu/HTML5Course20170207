@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{float:left; border:10px solid red;}
+  </style>
+</head>
+<body>
+<div id="box"><img src="images/shuzi/pangzi.png" alt="" id="tu"></div>
+<script>
+  var oBox = document.getElementById("box");
+  var tu = document.getElementById("tu");
+  alert(oBox.offsetWidth);//20
+  tu.onload = function(){
+    alert(oBox.offsetWidth); //523
+  }
+</script>
+</body>
+</html>

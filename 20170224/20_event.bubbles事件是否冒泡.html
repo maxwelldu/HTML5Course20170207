@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ width: 200px; height: 200px;
+      background-color: yellowgreen;}
+  </style>
+</head>
+<body>
+<div></div>
+<script>
+  var oDiv = document.getElementsByTagName("div")[0];
+//  oDiv.onmouseover = function (event) {
+//    console.log(event.bubbles);//true 冒泡
+//  };
+  oDiv.onmouseenter = function(event){
+    console.log(event.bubbles);//false 不冒泡
+  }
+</script>
+</body>
+</html>

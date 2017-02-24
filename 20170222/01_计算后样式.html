@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+      width: 200px;
+      background-color: yellowgreen;
+      padding: 10px 20px 30px;
+      border:10px solid red;
+    }
+  </style>
+</head>
+<body>
+<div>
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+  测试内容
+</div>
+
+<script>
+  var oDiv = document.getElementsByTagName("div")[0];
+//  console.log(oDiv.style.width);
+//  console.log(window.getComputedStyle(oDiv).getPropertyValue("width"));
+//    console.log(getComputedStyle(oDiv).getPropertyValue("height"));
+//  console.log(window.getComputedStyle(oDiv).getPropertyValue("padding-left"));
+  //注意引号里面的东西不是驼峰
+//  console.log(window.getComputedStyle(oDiv).getPropertyValue("paddingLeft"));
+
+//  alert("hi");
+//  window.alert("hi");
+
+//  console.log(getComputedStyle(oDiv)["padding-left"]);
+//  console.log(getComputedStyle(oDiv)["paddingLeft"]);
+
+  //上面写的IE6,7,8全部视为错误
+  //==============================
+//  alert(oDiv.currentStyle.width); //200px
+//  alert(oDiv.currentStyle.height); //auto
+//  alert(oDiv.currentStyle.paddingLeft); //20px
+  //在IE浏览器里面获取对应计算后的样式，只能用驼峰
+    alert(oDiv.currentStyle["paddingLeft"]); //20px
+
+</script>
+</body>
+</html>

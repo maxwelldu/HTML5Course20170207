@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+<input type="button" value="上一张" id="leftBtn"/>
+<img src="images/lunbo/1.jpeg" alt="" id="pic"/>
+<input type="button" value="下一张" id="rightBtn"/>
+
+<p>
+  <input type="text" id="numText" value="1">
+  <input type="button" value="go" id="goBtn">
+</p>
+
+<script type="text/javascript">
+  //用字符串拼接法
+  //得到所有的元素
+  var leftBtn = document.getElementById("leftBtn");
+  var rightBtn = document.getElementById("rightBtn");
+  var oImgPic = document.getElementById("pic");
+  var oGoBtn = document.getElementById("goBtn");
+  var oNumText = document.getElementById("numText");
+
+  //信号量
+  var index = 1; //图片编号，合理值 1-5
+
+  //事件监听
+  leftBtn.onclick = function(){
+    //先改变信号量
+    index--;
+    if (index < 1) {
+      index = 5;
+    }
+    //调用业务函数
+    change();
+  };
+  //事件监听，右按钮
+  rightBtn.onclick = function(){
+    //先改变信号量
+    index++;
+    if (index > 5) {
+      index = 1;
+    }
+    //调用业务函数
+    change();
+  };
+
+  //事件监听
+  oGoBtn.onclick = function(){
+    //先改变信号量
+    index = oNumText.value;
+
+    //逆向思维，判断非法情况，然后截断，不再继续执行
+    //中间的过滤和拦截
+//    if (index < 1 || index > 5) {
+    if (!/^[1-5]$/.test(index)) {
+       alert("不合法的数值");
+       return; //return后的代码不再执行，并且会返回undefined
+    }
+
+    //调用业务函数
+    change();
+  }
+
+  //切换图片的函数
+  function change(){
+    oImgPic.src = "lunbo/" + index + ".jpeg";
+  }
+
+
+</script>
+</body>
+</html>

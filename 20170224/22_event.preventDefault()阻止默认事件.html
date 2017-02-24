@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>body{height:5555px}
+  div{ width: 200px; height: 200px;
+ background-color: yellowgreen;}</style>
+</head>
+<body>
+<div></div>
+<script>
+  //当鼠标滚轮滚动的时候
+  document.getElementsByTagName("div")[0]
+      .onmousewheel = function(event){
+    event.preventDefault();
+    console.log(1);
+  }
+
+  document.body.oncontextmenu = function(event){
+    console.log(2);
+    event.preventDefault();
+  }
+</script>
+</body>
+</html>

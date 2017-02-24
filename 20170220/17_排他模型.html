@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+      width: 600px;
+      height: 100px;
+      border:1px solid gray;
+    }
+    p {
+      float: left;
+      width: 60px;
+      height: 60px;
+      background-color: #cccccc;
+      margin-right:10px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+<h1 id="title">0</h1>
+<div id="box1">
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+</div>
+
+<script>
+  //碰到每个p的时候，就自己变红，别人都是灰色。离开p的时候，保持红色 。
+  var ps = document.getElementById("box1")
+      .getElementsByTagName("p");
+  var title = document.getElementById("title");
+
+  for (var i = 0; i < ps.length; i++) {
+    ps[i].index = i;
+    ps[i].onmouseover = function () {
+      //方法1
+      /*
+      for (var j = 0; j < ps.length; j++) {
+        if(ps[this.index].index == j) {
+          ps[j].style.backgroundColor = "red";
+        } else {
+          ps[j].style.backgroundColor = "gray";
+        }
+      }
+      */
+      //方法2，先让所有的元素变灰，再让自己变红
+      for (var j = 0; j < ps.length; j++) {
+        ps[j].style.backgroundColor = "gray";
+      }
+      //让自己变红
+      this.style.backgroundColor = "red";
+    }
+
+  }
+
+</script>
+</body>
+</html>

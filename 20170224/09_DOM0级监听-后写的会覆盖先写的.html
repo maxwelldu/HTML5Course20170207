@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ width: 100px; height: 100px; background-color: skyblue;
+      margin:10px;
+    }
+  </style>
+</head>
+<body>
+<div id="box1"></div>
+<script>
+  var box1 = document.getElementById("box1");
+  box1.onclick = function(){
+    console.log("Hi");
+  }
+  box1.onclick = function(){
+    console.log("Hello");
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body { height:8000px; }
+    div { width: 200px; height: 200px;
+      background-color: yellowgreen; }
+    p{ width: 100px; height: 100px;
+      background-color: orange; }
+  </style> </head> <body>
+<!--div#box>ul>li>ul>li>p-->
+<div id="box"> <ul> <li> <ul> <li> <p></p> </li> </ul> </li> </ul> </div>
+<script>
+  /**
+   * 鼠标点击事件，鼠标移入，移出，加载完成事件
+   */
+  document.body.onclick = function(){ 
+    console.log("我是页面");
+  };
+  document.getElementById("box").onclick = function(){
+    console.log("我是box");
+  };
+  
+  
+</script>
+</body>
+</html>

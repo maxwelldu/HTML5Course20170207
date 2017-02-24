@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      background-color: rgb(111, 222, 123);
+    }
+  </style>
+</head>
+<body>
+
+<p>
+  r:
+  <input type="button" value="-" id="btnRM">
+  <input type="text" id="textR" value="111">
+  <input type="button" value="+" id="btnRP">
+</p>
+<p>
+  g:
+  <input type="button" value="-" id="btnGM">
+  <input type="text" id="textG" value="222">
+  <input type="button" value="+" id="btnGP">
+</p>
+  <p>
+    b:
+    <input type="button" value="-" id="btnBM">
+    <input type="text" id="textB" value="111">
+    <input type="button" value="+" id="btnBP">
+  </p>
+<p>
+  <input type="button" value="go" id="btnGo">
+</p>
+
+<script>
+  var textR = document.getElementById("textR");
+  var textG = document.getElementById("textG");
+  var textB = document.getElementById("textB");
+
+  var btnGo = document.getElementById("btnGo");
+  var btnRM = document.getElementById("btnRM");
+  var btnGM = document.getElementById("btnGM");
+  var btnBM = document.getElementById("btnBM");
+  var btnRP = document.getElementById("btnRP");
+  var btnGP = document.getElementById("btnGP");
+  var btnBP = document.getElementById("btnBP");
+
+  //信号量
+  var r = 111;
+  var g = 222;
+  var b = 123;
+
+  btnRM.onclick = function(){
+    r -= 20;
+    changeColor();
+  };
+  btnRP.onclick = function(){
+    r += 20;
+    changeColor();
+  };
+  btnGM.onclick = function(){
+    g -= 20;
+    changeColor();
+  };
+  btnGP.onclick = function(){
+    g += 20;
+    changeColor();
+  };
+  btnBM.onclick = function(){
+    b -= 20;
+    changeColor();
+  };
+  btnBP.onclick = function(){
+    b += 20;
+    changeColor();
+  };
+
+  btnGo.onclick = function(){
+    //如果三个框的内容不是数字，则弹出错误并return
+    if (!/^\d+$/.test(textR.value) ||
+    !/^\d+$/.test(textG.value) ||
+    !/^\d+$/.test(textB.value)) {
+      alert("错误的输入, 您输入的内容必须是数字，并且范围在0-255");
+      return;
+    }
+
+    r = textR.value;
+    g = textG.value;
+    b = textB.value;
+    changeColor();
+  };
+
+  //业务
+  function changeColor(){
+    if (r > 255) r = 255;
+    if (g > 255) g = 255;
+    if (b > 255) b = 255;
+    if (r < 0) r = 0;
+    if (g < 0) g = 0;
+    if (b < 0) b = 0;
+
+    //让框里面的数字变小
+    textR.value = r;
+    textG.value = g;
+    textB.value = b;
+
+    //顺便把背景色改变
+    document.body.style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+  }
+
+</script>
+</body>
+</html>

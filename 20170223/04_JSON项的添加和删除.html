@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var obj = {
+    "name": "梦婷",
+    "age": 20,
+    "sex": "女",
+    "height": 168
+  };
+  console.log(obj);
+
+  obj.age++; //改变属性
+  obj.height = 169;
+  obj.hobby = "找男朋友,读书,eat";//添加属性
+
+  console.log(obj);
+  console.log(obj.hobby);
+  console.log(obj.age);
+
+  delete obj.age; //删除对象中的属性
+  console.log(obj);
+
+
+</script>
+</body>
+</html>

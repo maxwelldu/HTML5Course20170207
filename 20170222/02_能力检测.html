@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ padding: 10px 20px 30px; }
+  </style>
+</head>
+<body>
+<div></div>
+<script>
+//  alert(window.getComputedStyle);
+//  if (window.getComputedStyle) { //如果window.getComputedStyle返回的是正性的值
+//    alert("Yes, I can");
+//  } else {
+//    alert("No, I can't");
+//  }
+
+  var oDiv = document.getElementsByTagName("div")[0];
+  if (window.getComputedStyle) {
+    alert(getComputedStyle(oDiv)["padding-left"]);
+  } else {
+    alert(oDiv.currentStyle.paddingLeft);
+  }
+</script>
+</body>
+</html>

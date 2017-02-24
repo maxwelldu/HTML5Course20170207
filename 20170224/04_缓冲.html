@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ width: 60px; height: 60px;
+      background: orange;
+      position: absolute; top: 100px;
+      left: 100px; }
+    .no1 { top:0px; }
+    .no2 { top:100px; }
+  </style>
+</head>
+<body>
+<div class="no1"></div>
+<div class="no2"></div>
+<script>
+  var oDivs = document.getElementsByTagName("div");
+
+  //第一个参数t表示当前的帧数
+  //第二个参数b表示起始位置
+  //第三个参数c表示变化量
+  //第四个参数d表示总帧数
+  //我们现在盒子的初始位置是100,
+  // 我们想让这个盒子用3000毫秒的时间，移动700
+  //间隔时间是20毫秒。所以总帧数是150帧
+  //这个函数，就能帮我们算出这个盒子，在每一帧的状态
+  //700-100 = 600px
+  //1 / 150
+  //起始位置是100
+  function linear(t,b,c,d) {
+    return c*t/d + b;
+  }
+  function taotiao(t,b,c,d){
+    if ((t/=d) < (1/2.75)) {
+      return c*(7.5625*t*t) + b;
+    } else if (t < (2/2.75)) {
+      return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+    } else if (t < (2.5/2.75)) {
+      return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+    } else {
+      return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+    }
+  }
+  //实验一下
+  var frameNumber = 0;
+  var timer = setInterval(function(){
+    frameNumber++;
+    if (frameNumber==150) {
+      clearInterval(timer);
+    }
+    oDivs[0].style.left =
+        linear(frameNumber, 100, 600, 150) + "px";
+    oDivs[1].style.left =
+        taotiao(frameNumber, 100, 600, 150) + "px";
+  }, 20);
+
+</script>
+</body>
+</html>
