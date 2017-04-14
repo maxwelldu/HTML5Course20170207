@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  fun();//会报错，因为函数声明的提升，
+  // 不能跨<script>标签的
+</script>
+
+<script>
+  function fun() {
+    console.log(123);
+  }
+</script>
+</body>
+</html>

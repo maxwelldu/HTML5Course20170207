@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			overflow: hidden;
+		}
+		div{
+			border:1px solid red;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			width: 1200px;
+			height: 300px;
+			margin-left: -600px;
+		}
+		div ul{
+			list-style: none;
+		}
+		div ul li{
+			float: left;
+			width: 160px;
+			margin-right: 10px;
+			position: relative;
+			transition:all 0.1s linear 0s;
+		}
+		div ul li img{
+			width:100%;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<ul>
+			<li><img src="images/jianguo/1.png" alt="" /></li>
+			<li><img src="images/jianguo/2.png" alt="" /></li>
+			<li><img src="images/jianguo/3.png" alt="" /></li>
+			<li><img src="images/jianguo/4.png" alt="" /></li>
+			<li><img src="images/jianguo/5.png" alt="" /></li>
+			<li><img src="images/jianguo/6.png" alt="" /></li>
+			<li><img src="images/jianguo/7.png" alt="" /></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+	<script type="text/javascript">
+		var $lis = $("li");
+		//起始位置
+		var originPosition = [100,150,0,50,80,90,0];
+
+//		$lis.eq(0).css("top", 100);
+//    $lis.eq(1).css("top", 150);
+//    $lis.eq(2).css("top", 0);
+//    $lis.each(function(i){
+//      $(this).css("top", originPosition[i]);
+//		});
+
+		//复位
+		function goOrigin(){
+			$lis.each(function(i){
+ 				$(this).css("top",originPosition[i]);
+			});
+		}
+		goOrigin();
+
+		//先得到每个li的自己中线的位置
+		var positionArr = [];
+		$("li").each(function(){
+			positionArr.push($(this).offset().left + $(this).width() / 2);
+		});
+		console.log(positionArr);
+
+		//鼠标移动的事件监听
+		$("div").mousemove(function(event){
+			//让每个li都有自己的top值
+			$lis.each(function(i){
+ 				$(this).css("top",Math.abs(event.clientX - positionArr[i]) / 4);
+			});
+		});
+
+
+		//鼠标离开之后
+		$("div").mouseleave(goOrigin);
+	</script>
+</body>
+</html>

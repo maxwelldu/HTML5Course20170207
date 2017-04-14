@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body{ height:5000px; }
+    div{ position: absolute; top: 0;
+      left: 0; width: 100px; height: 300px;
+      background-color: gold; }
+  </style>
+</head>
+<body>
+<div id="box"></div>
+<script src="js/animate.js"></script>
+<script>
+  var box = document.getElementById("box");
+  var A = box.offsetHeight;
+
+  move();
+  window.onscroll = move; //页面卷动的时候触发
+  window.onresize = move;// 页面尺寸更改的时候触发
+  //让广告动画居中
+  function move() {
+    var B = document.documentElement.clientHeight; // 窗口高度
+    var C = document.body.scrollTop
+        || document.documentElement.scrollTop;
+    var target = C + (B-A) / 2;
+//    animate(box, {"top":target}, 600);
+    box.style.top = target + "px";
+  }
+
+</script>
+</body>
+</html>

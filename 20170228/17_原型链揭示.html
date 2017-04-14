@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function Dog(){}
+  Dog.prototype = {}
+  var xiaobai = new Dog();
+  console.log(xiaobai);
+  console.log(xiaobai.__proto__);
+  console.log(xiaobai.__proto__.__proto__);
+  console.log(xiaobai.__proto__.__proto__.constructor);//Object函数
+
+  //Object.prototype是所有对象的原型链的终点，所以我们直接给Object.prototype增加一个方法，那么所有的对象都能调用这个方法
+  Object.prototype.haha = function(){
+    alert("哈哈");
+  }
+  xiaobai.haha();
+
+  var arr = [1,2,3];
+  arr.haha();
+
+</script>
+</body>
+</html>

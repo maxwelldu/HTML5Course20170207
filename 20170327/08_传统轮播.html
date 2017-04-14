@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * { margin: 0; padding: 0;}
+    .carousel { width: 790px; height: 340px;
+      margin: 50px auto; position: relative; }
+    .carousel ul { list-style: none; }
+    .carousel ul li { display: none; }
+    .carousel ul li.current { display: block; }
+    .carousel span{ position: absolute; width: 55px;
+      height: 55px; top: 130px; cursor: pointer; }
+    .carousel .leftBtn{ left:10px;
+      background: url(images/jd/slide-btnL.png); }
+    .carousel .rightBtn{ right:10px;
+      background: url(images/jd/slide-btnR.png); }
+    .carousel .circles { position: absolute;
+      bottom:20px; width:250px; height: 17px; left:50%;
+      margin-left: -90px;
+      background: #cccccc; border-radius: 5px; padding:5px}
+    .carousel .circles ol{ list-style: none; }
+    .carousel .circles ol li { float: left; width: 17px;
+      height: 17px; margin-right: 13px; background: gold;
+      border-radius: 50%; cursor: pointer; }
+    .carousel .circles ol li.current {
+      background: purple;
+    }
+  </style>
+</head>
+<body>
+
+<!--div#carousel.carousel>div#imagesList.imagesList>ul>li*8>a>img-->
+<!--div.btns>span*2-->
+<!--div#circles.circles>ol>li*8-->
+<div id="carousel" class="carousel">
+  <div id="imagesList" class="imagesList">
+    <ul>
+      <li class="current"><a href=""><img src="images/jd/aaa.jpg" alt=""></a></li>
+      <li><a href=""><img src="images/jd/bbb.jpg" alt=""></a></li>
+      <li><a href=""><img src="images/jd/ccc.jpg" alt=""></a></li>
+      <li><a href=""><img src="images/jd/ddd.jpg" alt=""></a></li>
+      <li><a href=""><img src="images/jd/eee.jpg" alt=""></a></li>
+      <li><a href=""><img src="images/jd/fff.jpg" alt=""></a></li>
+      <li><a href=""><img src="images/jd/ggg.jpg" alt=""></a></li>
+      <li><a href=""><img src="images/jd/hhh.jpg" alt=""></a></li>
+    </ul>
+  </div>
+  <!--div.btns>span*2-->
+  <div class="btns">
+    <span class="leftBtn" id="carousel_leftBtn"></span>
+    <span class="rightBtn" id="carousel_rightBtn"></span>
+  </div>
+  <!--div#circles.circles>ol>li*8-->
+  <div id="circles" class="circles">
+    <ol>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ol>
+  </div>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script>
+  //信号量
+  var idx = 0;
+  //右按钮添加监听
+  $('.rightBtn').click(function(){
+    idx++;
+    if (idx > $(".imagesList ul li").length-1) {
+      idx = 0;
+    }
+    $(".imagesList ul li:eq("+idx+")")
+        .addClass("current").siblings()
+        .removeClass("current");
+  });
+</script>
+
+</body>
+</html>

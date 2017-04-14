@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<form id="biaodan">
+  <p>请输入姓名：<input type="text" name="username"></p>
+  <p>请选择性别：
+    <input type="radio" name="sex" value="男">男
+    <input type="radio" name="sex" value="女">女
+    <input type="radio" name="sex" value="保密">保密
+  </p>
+  <p> 请选择你的爱好：
+    <input type="checkbox" name="hobby" value="休息">休息
+    <input type="checkbox" name="hobby" value="睡觉">睡觉
+    <input type="checkbox" name="hobby" value="敲代码">敲代码
+    <input type="checkbox" name="hobby" value="滑雪">滑雪
+  </p>
+  <p> 选择你的省份：
+    <select name="hometown" >
+      <option value="北京">北京</option>
+      <option value="杭州">杭州</option>
+    </select> </p>
+  <p>密码：<input type="password" name="password"></p>
+  <p>留言：<textarea name="message" cols="30" rows="10"></textarea></p>
+  <p><input type="button" value="点击提交" id="btn"></p>
+</form>
+
+<script>
+  var oBiaodan = document.getElementById("biaodan");
+  var oBtn = document.getElementById("btn");
+
+  oBtn.onclick = function(){
+    //得到表单中所有的控件
+    var queryString = formSerialize(oBiaodan);
+    console.log(queryString);
+  }
+
+  var formSerialize = function(form){
+    var elems = form.elements;
+    var arr = [];
+    for (var i = 0; i < elems.length; i++) {
+      var e = elems[i];
+      switch (e.type) {
+        case "button":
+        case "submit":
+        case "reset":
+          break;
+        case "text":
+        case "password":
+        case "textarea":
+          arr.push(e.name + "=" + encodeURIComponent(e.value));
+          break;
+        case "radio":
+        case "checkbox":
+          e.checked
+          && arr.push(e.name + "=" + encodeURIComponent(e.value));
+          break;
+        case "select-one":
+          var options = e.getElementsByTagName("option");
+          for (var j = 0; j < options.length; j++) {
+            var obj = options[j];
+            if (obj.selected) {
+              arr.push(e.name + "=" + encodeURIComponent(obj.value));
+            }
+          }
+          break;
+      }
+    }
+    return arr.join("&");
+  }
+</script>
+</body>
+</html>

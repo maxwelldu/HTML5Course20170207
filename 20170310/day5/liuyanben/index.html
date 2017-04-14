@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>小小留言本</h1>
+<a href="write.html">添加留言</a>
+<table>
+    <tr>
+        <td>id</td>
+        <td>用户名</td>
+        <td>邮箱</td>
+        <td>内容</td>
+        <td></td>
+    </tr>
+</table>
+<script src="js/myajax.js"></script>
+<script>
+    /**
+     * 1.ajax获取留言本的所有内容
+     * 2.获取到了之后组建DOM（tr,td)
+     * 3.将DOM追加到表格后面
+     * 4.获取所有的删除按钮
+     * 5.批量绑定删除事件
+     * 6.在删除事件里面执行ajax的get请求删除留言
+     * 7.删除成功则将dom移除，否则提示删除失败
+     */
+    var table = document.getElementsByTagName("table")[0];
+    myajax.get("http://duchengjiu.top//ucai_classmates/6qi/duchengjiu/liuyanben/api/read.php", {"order":0}, function(err,data){
+      if (err) return;
+      var obj = eval("("+data+")");
+//      var obj = new Function("return " + data);
+//      var obj = JSON.parse(data);
+      console.log(obj);
+      for (var i = 0; i < obj.result.length; i++) {
+        var o = obj.result[i];
+        table.innerHTML +=
+          "<tr>" +
+          "<td>" + o.id + "</td>" +
+          "<td>" + o.username + "</td>" +
+          "<td>" + o.email + "</td>" +
+          "<td>" + o.content + "</td>" +
+          "<td><a data-id='" + o.id +
+          "' href='javascript:;' class='delete'>删除</a></td>" +
+          "</tr>";
+      }
+
+      var deletes = document.getElementsByClassName("delete");
+      for (var i = 0; i < deletes.length; i++) {
+        deletes[i].onclick = function(){
+          var self = this;
+          myajax.get("http://duchengjiu.top//ucai_classmates/6qi/duchengjiu/liuyanben/api/delete.php",
+              {"id":this.getAttribute("data-id")}, function(err,data){
+            if (data == "ok") {
+              self.parentNode.parentNode.parentNode.removeChild(self.parentNode.parentNode);
+            } else {
+              alert("没有删除成功");
+            }
+          })
+        };
+
+      }
+    });
+</script>
+</body>
+</html>

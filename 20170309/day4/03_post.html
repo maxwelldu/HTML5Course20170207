@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1 id="title"></h1>
+<input type="button" id="btn" value="异步">
+<script>
+    var oTitle = document.getElementById("title");
+    var oBtn = document.getElementById("btn");
+    oBtn.onclick = function(){
+        var xhr = new XMLHttpRequest();
+        console.log(xhr.readyState);
+        xhr.onreadystatechange = function(){
+            console.log("change:"+xhr.readyState);
+            if (xhr.readyState == 4) {
+                oTitle.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.open("POST", "php/do2.php", true);
+        //如果用post发送请求，那么必须写一句话，
+        // 模拟成form表单提交
+        xhr.setRequestHeader("Content-Type",
+        "application/x-www-form-urlencoded");
+        console.log(xhr.readyState);
+        xhr.send("name="+encodeURIComponent("付荣")
+        +"&age=18");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>小小留言本</h1>
+<a href="write.html">添加留言</a>
+<table>
+    <tr>
+        <td>id</td>
+        <td>用户名</td>
+        <td>邮箱</td>
+        <td>内容</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>用户名</td>
+        <td>邮箱</td>
+        <td>内容</td>
+        <td><a data-id="1" href="javascript:;">删除</a></td>
+    </tr>
+</table>
+<script>
+    /**
+     * 1.ajax获取留言本的所有内容
+     * 2.获取到了之后组建DOM（tr,td)
+     * 3.将DOM追加到表格后面
+     * 4.获取所有的删除按钮
+     * 5.批量绑定删除事件
+     * 6.在删除事件里面执行ajax的get请求删除留言
+     * 7.删除成功则将dom移除，否则提示删除失败
+     */
+</script>
+</body>
+</html>

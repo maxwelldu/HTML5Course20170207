@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.stage{
+			width: 258px;
+			height: 258px;
+			margin: 100px;
+			perspective:1500px;
+		}
+		.unit{
+			width: 258px;
+			height: 258px;
+			position: relative;
+		}
+		.unit img{
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.unit img.baby{
+			/*baby就到天花板上去了*/
+			transform:rotateX(90deg) translateZ(129px);
+		}
+		.unit img.xiaoming{
+			transform:translateZ(129px);
+			z-index: 2;
+		}
+		.unit{
+			/*当一个组合体自己要进行旋转的时候，一定要加上这个属性：*/
+			transform-style:preserve-3d;
+			transform:rotateX(0deg);
+			transition:all 1s ease 0s;
+		}
+		.stage:hover .unit{
+			transform:rotateX(-90deg);
+		}
+	</style>
+</head>
+<body>
+	<div class="stage">
+		<div class="unit">
+			<img class="xiaoming" src="images/xiaoming.png" alt="" />
+			<img class="baby" src="images/baby.png" alt="" />
+		</div>
+	</div>
+</body>
+</html>

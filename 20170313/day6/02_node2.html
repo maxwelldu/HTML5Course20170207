@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>p{ width: 30px; height: 30px;
+        background-color: #cccccc;}</style>
+</head>
+<body>
+<!--div#box>p*7-->
+<div id="box">
+    <p></p>
+    <p></p>
+    <p></p>
+    <p>content</p>
+    <p id="xm">小明</p>
+    <p></p>
+</div>
+<script>
+    //返回obj的前面一个兄弟
+    function prevSibling(obj) {
+        var prev = obj;
+        while (prev = prev.previousSibling) {
+            if (prev.nodeType == Node.ELEMENT_NODE) {
+                return prev;
+            }
+        }
+        return null;
+    }
+    var oXm = document.getElementById("xm");
+
+    //返回obj的前面的所有兄弟节点
+    function prevAll(obj) {
+        var arr = [];
+        while(obj = obj.previousSibling) {
+            if (obj.nodeType == 1) {
+                arr.push(obj);
+            }
+        }
+        return arr;
+    }
+
+    prevSibling(oXm).style.backgroundColor = "blue";
+    var array = prevAll(oXm);
+    for (var i = 0; i < array.length; i++) {
+        var obj = array[i];
+        obj.style.backgroundColor = "red";
+    }
+</script>
+</body>
+</html>

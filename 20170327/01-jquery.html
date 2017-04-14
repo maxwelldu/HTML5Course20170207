@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    p {
+      float:left;
+      width:60px;
+      height: 60px;
+      margin-right:10px;
+      background-color: #333;
+    }
+    #box {
+      position:absolute;
+    }
+    .circles ol {
+      list-style:none;
+    }
+    .circles ol li {
+      float: left;
+      width: 20px;
+      height: 20px;
+      background-color: orange;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+<p></p>
+<p></p>
+<div id="box">
+  <ul>
+    <li><span>晓茹</span></li>
+    <li class="web6"><span>邵晨</span></li>
+    <li class="web6"><span>雁龙</span></li>
+    <li></li>
+  </ul>
+</div>
+
+<div class="circles">
+  <ol>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ol>
+</div>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script>
+ //使用jquery将页面上所有的p标签变成红色; 不需要写循环语句
+ //$选择的是所有符合条件的元素；对应的操作全部都是批量
+  $("p").css("background-color","red");
+  $("#box ul li.web6 span").css("background-color", "red");
+  //jquery计算后样式
+  alert($("#box").css('width'));
+  //设置样式，特别注意的是，opacity已经帮我们写了兼容
+  $("#box").css({
+    "width": 700,
+    "height": 300,
+    "opacity": 0.4
+  });
+  //jquery运动
+  $("#box").animate({"left":900,"width":100}, 4000, function(){
+    console.log("finish");
+  });
+  //批量添加监听，以及节点关系的能力
+  $('.circles ol li').mouseenter(function(){
+    //自己变红，自己的兄弟恢复为橙色
+    $(this).css("background-color", "red").siblings()
+        .css("background-color","orange");
+  });
+
+
+</script>
+</body>
+</html>

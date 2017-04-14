@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style> div{ width: 79px; height: 108px;
+    background: url(images/girl.png) no-repeat;
+    background-position: 0px -216px;
+    position: absolute; top:100px; left:0; }
+  </style> </head> <body> <script>
+  function Girl(top, left){
+    //定义小女孩属性
+    this.top = top; this.left = left;
+    this.step = 0; this.timer = null;
+    //定义一个初始化方法
+    this.init = function(){
+      //创建div, 然后添加div
+      this.dom = document.createElement("div");
+      document.body.appendChild(this.dom);
+      //设置样式
+      this.dom.style.left = this.left + "px";
+      this.dom.style.top = this.top + "px";
+    };
+    //设置行走的方法
+    this.walk = function(){
+      //要备份，因为进入 setInterval之后this就是window
+      var self = this;
+      this.timer = setInterval(function () {
+        self.left += 4;
+        self.step++;
+        if (self.step > 7) self.step = 0;
+        if (self.left > 800) self.die();
+
+        self.dom.style.left = self.left + "px";
+        self.dom.style.backgroundPosition = -self.step * 79
+            + "px -216px";
+      }, 40);
+    };
+    this.die = function(){
+      clearInterval(this.timer);
+      document.body.removeChild(this.dom);
+    };
+    //调用初始化方法
+    this.init();
+    //调用行走
+    this.walk();
+  }
+
+  setInterval(function () {
+    new Girl(Math.random() * 400, 100);
+  }, 1000)
+</script>
+</body>
+</html>

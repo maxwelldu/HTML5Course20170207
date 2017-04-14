@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{
+			margin: 100px;
+			width: 258px;
+			height: 258px;
+			border: 1px solid #000;
+			/*你的眼睛到div的距离*/
+			perspective:600px;
+		}
+		img{
+			border: 1px solid #000;
+			transform:rotateY(0deg);
+			transition:all 10s ease 0s;
+			backface-visibility:hidden;
+		}
+		div:hover img{
+			transform:rotateY(360deg);
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<img src="images/baby.png" alt="" />
+	</div>
+</body>
+</html>

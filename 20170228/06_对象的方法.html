@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //变量
+  var name = "小明";
+  //函数
+  var sayHello = function(){
+
+  }
+
+  //把变量放到对象里面，我们叫属性
+  //把函数放到对象里面，我们叫方法
+  var obj = {
+    name: "小明",
+    age: 18,
+    sex:"男",
+    sayHello: function(){
+      console.log("Hello, My name is " + this.name,
+          this.age, this.sex);
+    },
+    grown: function(){
+      this.age++;
+    }
+  }
+  obj.sayHello();
+  obj.grown();
+  obj.grown();
+  obj.sayHello();
+</script>
+</body>
+</html>

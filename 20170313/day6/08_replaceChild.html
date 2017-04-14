@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <p>养龙</p>
+    <p id="fr">付荣</p>
+    <p>亚倩</p>
+</div>
+
+<script>
+    var oDiv = document.getElementsByTagName("div")[0];
+    var oFr = document.getElementById("fr");
+
+    var oP = document.createElement("p");
+    oP.innerHTML = "晓茹";
+
+    oDiv.replaceChild(oP, oFr);
+
+</script>
+</body>
+</html>

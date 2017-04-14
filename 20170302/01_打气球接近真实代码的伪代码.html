@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body{
+      height:100%;
+      overflow: hidden;
+      background: url("images/bg.jpg") no-repeat;
+      background-size:cover;
+    }
+    .left { float: left; }
+    .right{ float: right; }
+    div{
+      color: white;
+      font-size:40px;
+    }
+    .qiqiustyle {
+      width: 81px;
+      height: 119px;
+      background: url("images/ballon.png") no-repeat;
+      position: absolute;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="left">分数：<span id="score">0</span></div>
+<div class="right">倒计时：<span id="time">60</span></div>
+<audio src="images/bgm.mp3" autoplay></audio>
+<script>
+  var zongfen = 0; //游戏的总分
+  var oZongfen = document.getElementById("score");
+  var daojishi = 60;//倒计时
+  var oDaojishi = document.getElementById("time");//倒计时对象
+  /**
+   * 选择面向对象还是面向过程去写
+   * 选择面向对象去写：因为可以将复杂的问题简单化
+   * 之前需要维护页面上所有的气球；采用面向对象之后
+   * 之后可以只维护每一个单独的气球个体
+   *
+   * 气球：
+   * 特征：气球本身，气球速度，分数，气球坐标，
+   * 背景坐标，方向
+   * 行为：出现，消失，移动，爆炸，得分
+   */
+
+  //气球
+  function Qiqiu(left, top, score) {
+//  * 特征：气球本身，气球速度，分数，气球坐标，
+//  * 背景坐标，方向
+    this.div = null; //气球本身
+    this.score = score;//分数
+    this.left = left; //气球left位置
+    this.top = top; //气球top位置
+    this.timer = null; //定时器
+    this.interval = 20; //气球运动间隔
+    this.chuxian();
+    this.move();
+  }
+  //所有的方法都要写到原型上面
+  Qiqiu.prototype = {
+    //出现
+    chuxian : function() {
+      //*  创建气球Div
+      this.div = document.createElement("div");
+//      *  气球的大小，使用类名替换行内样式
+      this.div.className = "qiqiustyle"
+//      *  出现的位置，style.left style.top
+      this.div.style.left = this.left + "px";
+      this.div.style.top = this.top + "px";
+//      *  出现的样式，backgroundPosition, 计算x和y的值
+      //1 => 0 2 => 96 3 => 192 4 => 288
+      //5 => 0 6 => 96 7 => 192 8 => 288
+      var x = -96 * ((this.score - 1) % 4);
+      //1 => 0 2 => 0 3 => 0 4 => 0
+      //5 => 120 6 => 120 7 => 120 8 => 120
+      var y = -120 * parseInt((this.score - 1) / 4);
+      this.div.style.backgroundPosition =
+          x + "px " + y + "px";
+//      *  添加点击事件 = function(){
+//            *    爆炸()
+//            *    得分()
+//            *  }
+//          *  将气球放到页面上
+      //事件里面的this表示事件的触发对象
+      var self = this;
+      this.div.onclick = function(){
+        //这里的this是不是就表示this.div
+        self.bao();
+        self.getscore();
+      }
+
+      document.body.appendChild(this.div);
+    },
+    //移动
+    move : function() {
+//      *     定时器定时的移动 = function(){
+//        *        修改信号量top
+//        *        if (气球 < -100) {
+//        *          爆炸()
+//          *        }
+//        *        改变气球的位置
+//        *     }
+      //定时器里面的this指向的是window
+      var self = this;
+      this.timer = setInterval(function () {
+        self.top -= self.score * 2;
+        if (self.top < -100) {
+          self.bao();
+        }
+        self.div.style.top = self.top + "px";
+      }, this.interval);
+    },
+    //爆炸
+    bao : function() {
+//      *    清除定时器
+      clearInterval(this.timer);
+//      *    把气球从页面在中清除
+      document.body.removeChild(this.div);
+    },
+    //得分
+    getscore : function() {
+//      *     将自己的分数累加到总分
+      zongfen += this.score;
+//      *     更新总分的值
+      oZongfen.innerHTML = zongfen;
+    }
+  };
+
+  /**
+   * 出现 = function(){
+   *  创建气球Div
+   *  气球的大小，使用类名替换行内样式
+   *  出现的位置，style.left style.top
+   *  出现的样式，backgroundPosition, 计算x和y的值
+   *  添加点击事件 = function(){
+   *    爆炸()
+   *    得分()
+   *  }
+   *  将气球放到页面上
+   * }
+   *
+   * 移动 = function(){
+   *     定时器定时的移动 = function(){
+   *        修改信号量
+   *        if (气球 < -100) {
+   *          爆炸()
+   *        }
+   *        改变气球的位置
+   *     }
+   * }
+   * 爆炸 = function() {
+   *    清除定时器
+   *    把气球从页面在中清除
+   * }
+   *
+   * 得分 = function() {
+   *     将自己的分数累加到总分
+   *     更新总分的值
+   * }
+   *
+   *
+   * 整个游戏规则：
+   * 总时间是有限的，背景图片，背景音乐
+   * 定时器每隔1秒随机个数和位置 = function(){
+   *    得到随机的个数：3-5个
+   *    for(var i=0; i<随机个数;i++) {
+   *      气球的随机x值
+   *      创建气球
+   *    }
+   *
+   *    倒计时信号量改变
+   *    倒计时的DOM元素改变
+   *    if (信号量 == 0) {
+   *      提示游戏结束
+   *      清除定时器
+   *      显示得分
+   *    }
+   * }
+   *
+   */
+
+  //游戏规则
+  var timer = setInterval(function () {
+    var count = parseInt(3 + Math.random() * 2);
+    for (var i = 0; i < count; i++) {
+      //随机的x 范围在0 - (页面的宽度-气球的宽度)
+      var left = Math.random() * (document.body.clientWidth - 81);
+      //top的值为页面的高度
+      var top = document.body.clientHeight || document.documentElement.clientHeight;
+      //1-8
+      var score = 1 + parseInt(Math.random() * 7);
+      new Qiqiu(left, top, score);
+    }
+//    *    倒计时信号量改变
+    daojishi--;
+//    *    倒计时的DOM元素改变
+    oDaojishi.innerHTML = daojishi;
+//    *    if (信号量 == 0) {
+    if (daojishi == 0) {
+      alert("游戏结束");
+      clearInterval(timer);
+      alert("您的得分是" + zongfen);
+    }
+//    *      提示游戏结束
+//      *      清除定时器
+//      *      显示得分
+//      *    }
+}, 1000);
+//  * 定时器每隔1秒随机个数和位置 = function(){
+//    *    得到随机的个数：3-5个
+//    *    for(var i=0; i<随机个数;i++) {
+//    *      气球的随机x值
+//      *      创建气球
+//      *    }
+//    *
+//    *    倒计时信号量改变
+//    *    倒计时的DOM元素改变
+//    *    if (信号量 == 0) {
+//    *      提示游戏结束
+//      *      清除定时器
+//      *      显示得分
+//      *    }
+//    * }
+//
+
+</script>
+</body>
+</html>

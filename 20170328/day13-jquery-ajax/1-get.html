@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+  $.get("php/test.php", function(data){
+    console.log(typeof data);
+    console.log(data);
+    alert("Data Loaded: " + data);
+  });
+</script>
+</body>
+</html>

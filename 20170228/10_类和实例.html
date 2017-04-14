@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function Person(name, age, sex) {
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+    this.sayHello = function(){
+      console.log("我的名字是 " + this.name);
+    }
+  }
+  function Dog(name, type, age, sex) {
+    this.name = name;
+    this.type = type;
+    this.age = age;
+    this.sex = sex;
+    this.sayHello = function() {
+      console.log("我是" + type + "类型的Dog, 我的名字叫"
+          + this.name);
+    }
+  }
+
+  var xiaoming = new Person("小明", 11, "男");
+  xiaoming.sayHello();
+
+  var xiaobai = new Dog("小白", "京巴", 2, "公的");
+  xiaobai.sayHello();
+
+</script>
+</body>
+</html>

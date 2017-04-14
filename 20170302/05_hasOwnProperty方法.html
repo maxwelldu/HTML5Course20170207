@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var obj = {
+    a : 1,
+    b : 2,
+    c : 3
+  }
+  obj.__proto__ = {
+    d : 4
+  }
+  console.log(obj.hasOwnProperty("a"));//t
+  console.log(obj.hasOwnProperty("b"));//t
+  console.log(obj.hasOwnProperty("c"));//t
+  console.log(obj.hasOwnProperty("d"));//f
+
+  for (var k in obj) {
+//    if (obj.hasOwnProperty(k)) {
+//      console.log(k);
+//    }
+    obj.hasOwnProperty(k) && console.log(k);
+  }
+
+
+</script>
+</body>
+</html>

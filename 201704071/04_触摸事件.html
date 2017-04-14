@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name=viewport content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+</head>
+<body>
+	<h1 id="biaoti"></h1>
+
+	<script type="text/javascript">
+		var biaoti = document.querySelector("#biaoti");
+		//触摸开始
+		document.addEventListener("touchstart",function(event){
+			biaoti.innerHTML = "你正在用" + event.touches.length + "跟手指触摸页面" ;
+
+			console.log(event.touches[0]);
+		},false);
+
+		//触摸移动
+		document.addEventListener("touchmove",function(event){
+			//阻止默认事件
+			event.preventDefault();
+			biaoti.innerHTML = "";
+			for(var i = 0 ; i < event.touches.length ; i++){
+				biaoti.innerHTML += "第" + i + "跟手指信息 <br />";
+				biaoti.innerHTML +=  event.touches[i].clientX + "<br />" +  event.touches[i].clientY + " <br />";
+			}
+		},false);
+
+
+		document.addEventListener("touchend",function(event){
+			//阻止默认事件
+			event.preventDefault();
+			biaoti.innerHTML = "结束了touch";
+			
+		},false);
+	</script>
+</body>
+</html>

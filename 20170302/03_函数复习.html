@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //1.声明了三个全局变量
+  function checkName(){}
+  function checkPassword() {}
+  function checkEmail() {}
+  checkName();
+
+  //2.函数的另外一种方式
+  var checkName = function(){}
+  var checkPassword = function(){}
+  var checkEmail = function(){}
+
+  //3.把函数放到对象里面
+  var CheckObject = {
+    checkName : function(){},
+    checkPassword : function(){},
+    checkEmail : function(){}
+  }
+  CheckObject.checkName();
+
+  //4.对象的另一种写法
+  var CheckObject = function() {}
+  CheckObject.checkName = function(){}
+  CheckObject.checkPassword = function(){}
+  CheckObject.checkEmail = function(){}
+  CheckObject.checkName();
+
+  //5.真假对象
+  var CheckObject = function() {
+    return {
+      checkName : function(){},
+      checkPassword : function(){},
+      checkEmail : function(){}
+    }
+  }
+  var a = CheckObject();
+  a.checkName();
+
+  //6.类
+//  function CheckObject(){}
+  var CheckObject = function(){
+    this.checkName = function(){}
+    this.checkPassword = function(){}
+    this.checkEmail = function(){}
+  }
+  var a = new CheckObject();
+  a.checkName();
+
+  //7.一个检测类
+  var CheckObject = function(){}
+  CheckObject.prototype.checkName = function(){}
+  CheckObject.prototype.checkPassword = function(){}
+  CheckObject.prototype.checkEmail = function(){}
+  //也可以换一种
+  var CheckObject = function(){}
+  CheckObject.prototype = {
+    checkName : function(){},
+    checkPassword : function(){},
+    checkEmail : function(){}
+  }
+  var a = new CheckObject();
+  a.checkName();
+
+  //8.方法还可以这样用
+  var CheckObject = {
+    checkName : function(){
+      //验证用户名
+      return this;
+    },
+    checkEmail : function() {
+      //验证邮箱
+      return this;
+    },
+    checkPassword : function() {
+      //验证密码
+      return this;
+    }
+  }
+  CheckObject.checkName().checkEmail().checkPassword();
+
+  var CheckObject = function(){};
+  CheckObject.prototype = {
+    checkName : function(){
+      //验证用户名
+      return this;
+    },
+    checkEmail : function() {
+      //验证邮箱
+      return this;
+    },
+    checkPassword : function() {
+      //验证密码
+      return this;
+    }
+  }
+  var a = new CheckObject();
+  a.checkName().checkEmail().checkPassword();
+
+  //9.函数的祖先
+  Function.prototype.checkEmail = function(){ }
+  var f = function(){}// function f(){}
+  f.checkEmail();
+  //
+  var f = new Function();
+  f.checkEmail();
+
+  Function.prototype.addMethod = function(name, fn) {
+    this[name] = fn;
+  }
+//  var methods = function(){}
+  var methods = new Function();
+  methods.addMethod("checkName", function(){
+    //验证用户名
+  })
+  methods.addMethod("checkEmail", function(){
+  })
+  methods.checkName();
+  methods.checkEmail();
+
+  //10.可以链式添加吗
+  Function.prototype.addMethod = function(name, fn) {
+    this[name] = fn;
+    return this;
+  }
+  var methods = function(){}
+  methods.addMethod("checkName", function(){
+    //检查用户名
+    return this;
+  }).addMethod("checkEmail", function(){
+    //检查邮箱
+    return this;
+  });
+  methods.checkName().checkEmail();
+
+  //11.换一种使用方法
+  Function.prototype.addMethod = function(name, fn) {
+    this.prototype[name] = fn;
+    return this;
+  }
+  var Methods = function(){}//Methods是一个构造函数
+  Methods.addMethod("checkName", function(){
+    return this;
+  }).addMethod("checkEmail", function(){
+    return this;
+  });
+  var m = new Methods();
+  m.checkName().checkEmail();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

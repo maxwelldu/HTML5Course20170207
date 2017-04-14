@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    p{
+      width: 60px;
+      height: 60px;
+      background-color: #ccc;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script>
+  alert( $("p:first").css('background-color') );
+  alert( $("p:first").css('color') );
+  alert( $("p:first").css('backgroundColor') );
+
+  $("p:odd").css('backgroundColor', "blue");
+  $("p:lt(4)").css({
+    "width":20,
+    "height":20,
+    "backgroundColor":"red"
+  });
+
+  $("p:lt(4)").css("width", 20);
+  $("p:lt(4)").css("height", 20);
+  $("p:lt(4)").css("backgroundColor", "red");
+
+  $("p:eq(3)").css('width', "+=20px");
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body{
+			overflow: hidden;
+		}
+		.leaf{
+		    width: 90px;
+    		height: 65px;
+		    background: url(images/icon.png);
+		    background-position: 0 -150px;
+		    position: absolute;
+		    top: 100px;
+		    left: 100px;
+		    animation:drop 10s ease 0s infinite;
+		}
+		.sanjiaoxing{
+		    width: 170px;
+    		height: 170px;
+    		background: url(images/icon.png);
+		    background-position: 0 -311px;
+	      	position: absolute;
+		    top: 300px;
+		    left: 100px;
+		    animation:zhuan 2s ease 0s infinite;
+		}
+		.fangxing{
+		    width: 96px;
+    		height: 96px;
+    		background: url(images/icon.png);
+		    background-position: 0 -215px;
+	      	position: absolute;
+		    top: 300px;
+		    left: 100px;
+		    animation:zhuan 2s ease 1s infinite;
+		}
+
+		@-webkit-keyframes drop{
+			0%{transform: rotateZ(-10deg) translateX(0) translateY(0px); opacity: 1; }
+		    100% {transform: rotateZ(30deg) translateX(300px) translateY(450px); opacity: 0;}
+		}
+
+		@-webkit-keyframes zhuan{
+			0%{transform:rotate(0deg);}
+			60%{transform:rotate(360deg);}
+			100%{transform:rotate(360deg);}
+		}
+
+		.deng{
+		    width: 191px;
+		    height: 267px;
+		    background: url(images/icon.png);
+		    background-position: 0 -620px;
+		    position: absolute;
+		    top: 200px;
+		    left: 600px;
+		}
+		.dengdeguang{
+			width: 341px;
+			height: 256px;
+			background: url(images/icon.png);
+			background-position: 0 -887px;
+		 	position: absolute;
+		    top: 200px;
+		    left: 600px;
+		    margin-left: -75px;
+		    margin-top: -80px;
+		    opacity: 0;
+		    animation:faguang 1s ease 0s infinite alternate;
+		}
+
+		@-webkit-keyframes faguang{
+			0%{
+				opacity: 0;
+			}
+			80%{
+				opacity: 1;
+			}
+			100%{
+				opacity: 1;
+			}
+		}
+
+		.huojian{
+			width: 430px; 
+			height: 220px; 
+			background: url(images/icon.png) no-repeat;
+			background-position: -239px 0;
+			position: absolute;
+			top: 150px;
+			left: 900px;
+			animation:chandou 0.3s linear 0s infinite alternate;
+		}
+
+		@-webkit-keyframes chandou{
+			from{
+				transform:none;
+			}
+			to{
+				transform:translate3D(-10px,-10px,0);
+			}
+		}
+
+		.xian1{
+			width: 156px;
+			height: 153px;
+			background: url(images/icon.png) -239px -220px;
+			position: absolute;
+			top: 150px;
+			left: 900px;
+			animation:yidong 2s ease 0s infinite;
+		}
+
+		.xian2{
+			width: 75px;
+			height: 73px;
+			background: url(images/icon.png) -165px -150px;
+			position: absolute;
+			top: 150px;
+			left: 900px;
+			animation:yidong 2s ease 0s infinite;
+		}
+		.xian3{
+			width: 156px;
+			height: 153px;
+			background: url(images/icon.png) -239px -220px;
+			position: absolute;
+			top: 290px;
+			left: 960px;
+			animation:yidong 2s ease 0s infinite;
+		}
+
+		@-webkit-keyframes yidong{
+			from{
+				-webkit-transform:translate3D(1000px,-1000px,0);
+			}
+			to{
+				-webkit-transform:translate3D(-1000px,1000px,0);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="leaf"></div>
+
+	<div class="sanjiaoxing"></div>
+	<div class="fangxing"></div>
+
+
+	<div class="deng"></div>
+	<div class="dengdeguang"></div>
+
+	<div class="huojian"></div>
+
+	<div class="xian1"></div>
+	<div class="xian2"></div>
+	<div class="xian3"></div>
+</body>
+</html>

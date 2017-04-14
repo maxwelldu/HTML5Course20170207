@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			/*自己的亲儿子都是弹性盒模型了*/
+			/*这个div是弹性盒模型的容器*/
+			display: -webkit-box;
+		}
+		p:nth-child(1){
+			/*box-flex属性表示比例*/
+			-webkit-box-flex:1;
+			height: 100px;
+			background: orange;
+		}
+		p:nth-child(2){
+			/*box-flex属性表示比例*/
+			-webkit-box-flex:2;
+			height: 100px;
+			background: skyblue;
+		}
+		p:nth-child(3){
+			/*box-flex属性表示比例*/
+			-webkit-box-flex:3;
+			height: 100px;
+			background: yellowgreen;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<p></p>
+		<p></p>
+		<p></p>
+	</div>
+</body>
+</html>

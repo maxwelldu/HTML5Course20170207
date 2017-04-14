@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //构造函数的全名，通常首字母大写
+  function People() {
+    this.name = "小明";
+    this.age = 18;
+    this.sex = "男";
+    //相当于以下四个步骤
+//    1）隐秘的创建一个新的空对象
+//    2）将这个函数里面的this绑定到刚才创建隐秘新对象上
+//    3）执行函数体里面的语句
+//    4）返回这个新的对象
+//    var obj = new Object();
+//    this = obj;
+//    this.name = "小明"; //obj.name = "小明";
+//    return this; //return obj
+  }
+
+  //使用new关键字来调用函数，那么函数就叫做构造函数。将返回一个对象
+  var xiaoming = new People();
+  console.log(xiaoming, xiaoming.age, typeof xiaoming);
+//  var obj = new Object();
+
+  function Person(name, age, sex) {
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+  }
+  var furong = new Person("付荣", 18, "女");
+  var mengting = new Person("梦婷", 18, "女");
+  console.log(furong, furong.name, mengting, mengting.name);
+  //相当于我们定义了一个 class, 并且定义了构造函数
+//  class Person{
+//    public function Person() {
+//    }
+//    public function __construct() {
+//    }
+//  }
+</script>
+</body>
+</html>

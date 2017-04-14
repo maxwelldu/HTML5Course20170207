@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet/less" type="text/css" href="css/z.less">
+  <link rel="stylesheet/less" type="text/css" href="css/styles.less">
+  <script src="//cdn.bootcss.com/less.js/3.0.0-pre.4/less.min.js"></script>
+</head>
+<body>
+<div id="header">header</div>
+<div id="menu">
+  <a href="#">menu1</a>
+  <a href="">menu2</a><a href="">menu3</a></div>
+
+<div class="post">
+  <a href="#">posts1</a>
+  <a href="#">posts2</a>
+  <a href="#">posts3</a>
+</div>
+
+<a href="#" class="button">button</a>
+
+<pre>
+  var less = require('less');
+
+less.render('.class { width: 1 + 1 }', function (e, css) {
+    console.log(css);
+});
+</pre>
+
+<a href="#" class="class1">class1</a>
+<a href="#" class="class2">class2</a>
+</body>
+</html>

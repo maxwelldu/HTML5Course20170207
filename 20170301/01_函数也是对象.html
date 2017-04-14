@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //字面量的方式创建函数
+//  function fun(){
+//    console.log("我是函数字面量");
+//  }
+//  fun();
+
+  //通过Function构造函数去声明一个函数
+  var fun = new Function("console.log('我是Function构造出来的函数');")
+  fun();
+
+  //创建一个带参数的函数
+  var fun1 = new Function("a", "b", "return a + b");
+  console.log(fun1(1,2));
+  console.log(fun1.apply(null, [2, 3]));
+  console.log(fun1.call(null, 2, 3));
+  fun1.call = new Function("t", "a", "b", "return fun1(a, b)");
+  console.log(fun1.call(null, 2, 3));
+
+  //相当于
+//  function fun1(a,b) {return a + b;}
+
+  var obj = new Object();
+</script>
+</body>
+</html>

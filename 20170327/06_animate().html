@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    p{
+      width: 60px;
+      height: 60px;
+      background-color: orange;
+      position: absolute;
+      top: 100px;
+      left: 100px;}
+    .box2 {
+      top:300px;
+    }
+  </style>
+</head>
+<body>
+<p class="box1"></p>
+<p class="box2"></p>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script>
+//  $("p").animate({"left":1000}, 2000, function(){
+//    $(this).css("background-color", "red");
+//  });
+
+  //动画排队，都是box1在动，所以要排队：
+  //先横后竖
+//  $(".box1").animate({"left":1000}, 2000);
+//  $(".box1").animate({"top":400}, 2000);
+
+//斜着跑
+//  $("p").animate({'left':1000,"top":400}, 2000);
+
+  //
+  $(".box1").animate({"left":800}, 1000);
+  $(".box2").animate({"left":800}, 1000);
+
+
+</script>
+</body>
+</html>

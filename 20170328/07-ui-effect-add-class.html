@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="styles/jquery-ui.min.css">
+  <style>div{ width: 100px; height: 100px; background-color: #ccc;}
+    .changediv{ width: 200px; height: 200px; background-color: yellowgreen; }
+  </style>
+</head>
+<body>
+<div></div>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script>
+  $("div").on('click', function(){
+    $(this).addClass("changediv", 1000, "easeInCirc", function(){
+      console.log("finish");
+    })
+  })
+</script>
+</body>
+</html>

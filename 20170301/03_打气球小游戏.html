@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{ padding: 0; margin: 0;}
+    html{height:100%}
+    body{height:100%; background:url(images/bg.jpg);
+      background-size:cover; overflow: hidden;}
+    h1{color:white; font-size:60px}
+    .ballon{ width: 81px; height: 119px;
+      background: url(images/ballon.png) no-repeat;
+      position: absolute; cursor: crosshair; }
+  </style>
+</head>
+<body>
+<h1 id="score">0</h1>
+<h1 id="time">50</h1>
+<audio src="images/c.wav" id="music"></audio>
+<audio src="images/bgm.mp3" autoplay></audio>
+<script>
+  var oScore = document.getElementById("score");
+  var oTime = document.getElementById("time");
+  var oMusic = document.getElementById("music");
+
+  var score = 0;
+  var time = 50;
+
+  function Ballon(){
+    this.dom = null; this.left = Math.random() * 1200;
+    this.top = 600; this.score = parseInt(Math.random()*7) + 1;
+    this.init();
+    this.fly();
+  }
+  Ballon.prototype.init = function(){
+    this.dom = document.createElement("div");//创建元素
+    this.dom.className = "ballon";//设置类名
+    this.dom.style.left = this.left + "px";//设置left
+    this.dom.style.top = this.top + "px";//设置top
+    var x = -(this.score - 1) % 4 * 96; //计算背景定位的x
+    var y = -parseInt((this.score - 1) / 4) * 120;//计算背景定位的y
+    this.dom.style.backgroundPosition = x + "px " + y + "px";//设置的背景定位
+    document.body.appendChild(this.dom);//将元素添加到页面上
+    var self = this;//将this备份
+    this.dom.onclick = function(){//给添加的元素添加点击事件
+      self.bomb(); //让气球爆炸
+      score += self.score; //总分累加，加上当前气球的分数
+      oScore.innerHTML = score;//改变页面上分数
+
+      oMusic.load();//加载音乐
+      oMusic.play();//播放爆炸的音乐
+    }
+  };
+  Ballon.prototype.fly = function(){ //飞行的方法
+    var self = this;//备份this
+    this.timer = setInterval(function () {
+      self.top -= 2 * self.score; //让气球的top值每次递减，小小的算法，每次减少分数的两倍
+      if (self.top < -100) self.bomb(); //如果超出了屏幕100px, 则自动爆炸，不累加分数
+      self.dom.style.top = self.top + "px";//设置气球的定位
+    }, 20);//每20毫秒一个动画
+  };
+  Ballon.prototype.bomb = function(){
+    clearInterval(this.timer);//将气球身上的定时器清除
+    document.body.removeChild(this.dom);//将气球从页面移除
+  };
+
+  var frameCount = 0;//当前是第几帧
+  var timer = setInterval(function () {
+    frameCount ++;//每次让帧数+1
+    if (frameCount % 2 == 0) {//只有当帧数是2的倍数的时候，倒计时才开始递减
+      time-=1; //让倒计时递减
+      oTime.innerHTML = time;//改变页面上倒计时的文字
+    }
+    if (time == 0) {//如果倒计时为0
+      clearInterval(timer);//清除定时器
+      alert("GAME OVER! Your Score is:" + score);//提示游戏结束
+    }
+
+    new Ballon();//创建新的气球
+  }, 500);//每半秒钟执行一次
+  /**
+   * 气球对象
+   * 属性：dom, left, top, score, timer
+   * 方法：init, bomb, fly
+   * dom绑定点击事件
+   * init(){
+   *  创建一个div元素
+   *  把ballon给创建的div元素
+   *  把div元素追加到body里面
+   *  设置div元素的left值和top值
+   *  给div元素添加点击事件 = function(){
+   *    气球爆炸
+   *    加分，改变分数所在的h1标签的内容
+   *    音效
+   *    特效，自己加
+   *  }
+   * }
+   * fly(){
+   *  timer = setInterval(function(){
+   *    修改top的信号量
+   *    if (top < -100){
+   *      self.bomb();
+   *    }
+   *    self.dom.style.top = self.top + "px";
+   *  });
+   * }
+   * bomb() {
+   *  移除div气球
+   *  清除点中的计时器
+   * }
+   *
+   * var timer = setInterval(function(){
+   *  new Ballon();
+   * });
+   */
+
+
+
+</script>
+</body>
+</html>

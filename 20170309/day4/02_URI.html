@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <h1 id="title">===============</h1>
+  <input type="button" id="btn" value="异步读取">
+
+  <script>
+    var oTitle = document.getElementById("title");
+    var oBtn = document.getElementById("btn");
+    oBtn.onclick = function () {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          oTitle.innerHTML = xhr.responseText;
+        }
+      }
+      var str = "付荣";
+      xhr.open("GET", "php/do.php?wenben="
+          + encodeURIComponent(str), true);
+      xhr.send(null);
+    }
+  </script>
+</body>
+</html>

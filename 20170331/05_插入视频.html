@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>欢迎看我的视频</h1>
+	<embed src="http://player.youku.com/player.php/Type/Folder/Fid/27214302/Ob/1/sid/XMTU2MzA5ODIwMA==/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
+
+	<video autoplay controls width="500" height="300" id="pian">
+		<source src="video/1.mp4"/>
+		<source src="video/2.mp4"/>
+	</video>
+	<input type="button" id="pauseBtn" value="暂停" />
+	<script type="text/javascript">
+		var pian = document.getElementById("pian");
+		var pauseBtn = document.getElementById("pauseBtn");
+		pian.onpause = function(){
+			alert("视频暂停了")
+		}
+		pauseBtn.onclick = function(){
+			pian.pause();
+		}
+	</script>
+
+	<meter value="3" max="100" min="0"></meter>
+	<embed src="../../mp3/一次就好.mp3"></embed>
+	<object data="../../mp3/一次就好.mp3" type=""></object>
+	<audio class="audioPlayer">
+		<source src="../../mp3/一次就好.mp3">
+	</audio>
+
+	<button id="play">播放</button>
+	<button id="muted">静音</button>
+	<input type="number" id="volume" value="100" min="0" max="100">
+	<script>
+		var audioPlayer = document.querySelector(".audioPlayer");
+		var playButton = document.getElementById("play");
+		var mutedButton = document.getElementById("muted");
+		var volumeButton = document.getElementById("volume");
+
+
+		playButton.onclick = function () {
+			if (this.innerText == "播放"){
+				this.innerText = "暂停";
+				audioPlayer.play();
+				console.log(audioPlayer.buffered);
+			}else {
+				this.innerText = "播放";
+				audioPlayer.pause();
+				console.log(audioPlayer.currentTime);
+			}
+		};
+
+		mutedButton.onclick = function () {
+			audioPlayer.muted = !audioPlayer.muted;
+		};
+
+		volumeButton.onchange = function () {
+			audioPlayer.volume = parseInt(this.value)/100;
+		};
+
+		audioPlayer.addEventListener("canplay",function (event) {
+			console.log(event,audioPlayer.duration);
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+请输入 JS语句
+<input type="text" id="txt" value="alert(1+2+3)">
+<input type="button" id="btn" value="执行这条语句">
+<script>
+    var oTxt = document.getElementById("txt");
+    var oBtn = document.getElementById("btn");
+    oBtn.onclick = function(){
+        eval(oTxt.value);
+    }
+</script>
+</body>
+</html>

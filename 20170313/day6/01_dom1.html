@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        p{ width: 60px; height: 60px;
+            background-color: #c4c4c4; } </style>
+</head>
+<body>
+<div id="box">
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+</div>
+<script>
+    var oDiv = document.getElementById("box");
+//    alert(oDiv.childNodes.length);
+
+    /**
+     * 封装children函数，这个函数返回obj的所有子节点
+     * @param obj 需要查找子节点的对象
+     * @param num 查找到子节点对象中的第几个
+     */
+    function children(obj, num) {
+        var arr = [];//空盘子存储所有子节点
+        for (var i = 0; i < obj.childNodes.length; i++) {
+            var o = obj.childNodes[i];
+            //寻找真正的HTML节点，不要考虑文本：
+            if (o.nodeType == Node.ELEMENT_NODE){
+//            if (o.nodeType == 1) {//1 表示 幻数,最好少用
+                arr.push(o);
+            }
+        }
+        //如果 num 有值，那返回对应索引的节点
+        //否则返回所有节点
+        return num ? arr[num] : arr;
+    }
+    //数组去重,面试准备，自己瞅瞅
+    console.log(children(oDiv));
+    children(oDiv)[2].style.backgroundColor = 'red';
+    children(oDiv, 3).style.backgroundColor = "green";
+
+</script>
+</body>
+</html>

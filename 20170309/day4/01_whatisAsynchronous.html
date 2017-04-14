@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<input type="button" id="btn" value="异步读取" >
+<script>
+  var oBtn = document.getElementById("btn");
+  oBtn.onclick = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+      if (xhr.readyState == 4) {
+        console.log(xhr.responseText);
+        console.log(1);
+      }
+    }
+    xhr.open("GET", "php/a.txt", true);
+    xhr.send(null);
+
+    console.log(2);
+  }
+</script>
+</body>
+</html>

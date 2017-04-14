@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="js/jquery.js"></script>
+<script src="js/jquery-change-pic.js"></script>
+<script>
+  $(function(){
+    $.changepic($("#changepic"), [
+        "lunbo/1.jpeg",
+        "lunbo/2.jpeg",
+        "lunbo/3.jpeg",
+        "lunbo/4.jpeg",
+        "lunbo/5.jpeg"
+    ]);
+  });
+</script>
+<img id="changepic" src="lunbo/1.jpeg" alt="">
+</body>
+</html>

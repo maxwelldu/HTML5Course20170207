@@ -1,0 +1,109 @@
+body{
+			font-size: 14px;
+			font-family: "Arail","Microsoft YaHei","SimSun";
+		}
+	  
+		.inner_c{
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.header{
+			background-color:#191D3A;
+			overflow: hidden;
+			_zoom:1;
+		}
+		.logo{
+			float: left;
+			padding-top:10px;
+			padding-left: 20px;
+		}
+		.logo h1{
+			width: 158px;
+			height: 35px;
+			background: url(../images/icons.png) no-repeat 0 0;
+			text-indent: -999em;
+			overflow: hidden;
+		}
+		.logo h1 a{
+			display: block;
+			height: 35px;
+		}
+		.header .nav{
+			float: left;
+			margin-left: 47px;
+		}
+		.header .nav ul{
+			list-style: none;
+		}
+		.header .nav ul li{
+			float: left;
+			width: 85px;
+			height: 58px;
+			border-right: 1px solid #252947;
+		}
+		.header .nav ul li.first{
+			border-left:1px solid #252947;
+		}
+		.header .nav ul li a{
+			display: block;
+			height: 58px;
+			text-align: center;
+			line-height: 58px;
+			text-decoration: none;
+			color:#818496;
+		}
+		.header .nav ul li.current a{
+			background-color: #252947;
+			color:#fff;
+		}
+		.header .nav ul li a:hover{
+			color:#fff;
+		}
+		.joinus{
+			float: left;
+			padding-left:52px;
+			padding-top: 12px;
+		}
+		.joinus a{
+			display: block;
+			width: 100px;
+			height: 34px;
+			background: url(../images/icons.png) no-repeat 0 -35px;
+			text-indent: -999em;
+			overflow: hidden;
+		}
+		.joinus a:hover{
+			background-position: 0 -69px;
+		}
+
+
+
+		.footer{
+			height: 91px;
+			line-height: 91px;
+			background-color: #191D3A;
+			color:#6c6e7e;
+		}
+		.footer .inner_c{
+			position: relative;
+		}
+		.footer .links{
+			float: left;
+			font-size: 12px;
+		}
+		.footer a{
+			padding: 0 5px;
+			color:#6c6e7e;
+			text-decoration: none;
+		}
+		.footer .copyright{
+			float: right;
+			font-size: 12px;
+			padding-right: 70px;
+		}
+		.footer .govicon{
+			width: 40px;
+			position: absolute;
+			right: 10px;
+			top: 10px;
+		}

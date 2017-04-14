@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" id="txt">
+<input type="button" id="btn" value="Click me">
+<ul>
+    <li>AAAA</li>
+    <li>AAAA</li>
+    <li>AAAA</li>
+</ul>
+<script>
+    var oBtn = document.getElementById("btn");
+    var oTxt = document.getElementById("txt");
+    var oUl = document.getElementsByTagName("ul")[0];
+    var lis = oUl.getElementsByTagName("li");
+    oBtn.onclick = function(){
+        var txt = oTxt.value;
+        var oLi = document.createElement("li");
+        oLi.innerHTML = txt;
+        //在lis[0]元素的前面插入oLi
+        oUl.insertBefore(oLi, lis[0]);
+    }
+</script>
+</body>
+</html>

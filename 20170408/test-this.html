@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>div{ width: 200px; height: 200px; background-color: yellowgreen;}</style>
+</head>
+<body>
+<div></div>
+<script>
+  var oDiv = document.getElementsByTagName("div")[0];
+  oDiv.onclick = function(){
+    console.log(this);
+  }
+  //oDiv.onclick();
+
+  var name = "The window";
+  var object = {
+    name: "My Object",
+    getNameFunc : function(){
+      console.log(this);
+      return function(){
+        return this.name;
+      }
+    }
+  }
+  console.log(object.getNameFunc());
+  console.log(object.getNameFunc()());
+
+  function test(){}
+  test();
+
+  /*
+  var name = "The window";
+  var object = {
+    name: "The object",
+    getNameFunc: function(){
+      var that = this;
+      return function(){
+        return that.name;
+      }
+    }
+  };
+  console.log(object.getNameFunc()());
+  */
+
+</script>
+</body>
+</html>
