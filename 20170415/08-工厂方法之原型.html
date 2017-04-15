@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+		function CreatePerson(name){
+			this.name = name;
+		}
+		CreatePerson.prototype.showName = function(){
+			return this.name;
+		}
+		var p1 = new CreatePerson();
+	</script>
+</body>
+</html>

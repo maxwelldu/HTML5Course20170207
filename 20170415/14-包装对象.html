@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//toString(); //系统对象下面都是自带的，自己写的对象都是通过原型链找object的
+
+		var arr = [];
+		alert(arr.toString === Object.prototype.toString); //false
+
+		function Aaa(){}
+		var a1 = new Aaa();
+		alert(a1.toString == Object.prototype.toString);//true
+
+		//toString(); 把对象转换成字符串
+
+		var arr = [1,2,3];
+		// alert(arr.toString());
+		Array.prototype.toString = function(){
+			var sum = 0;
+			for(var i = 0; i < this.length; i++) {
+				sum += this[i];
+			}
+			return sum;
+		}	
+		alert(arr.toString());
+
+		arr.toString = function(){
+			var sum = 0;
+			for(var i = 0; i < this.length; i++) {
+				sum += this[i];
+			}
+			return sum + 10;
+		}
+		alert(arr.toString());
+
+		var num = 255;
+		alert(num.toString()); //255
+		alert(num.toString(16)); //ff
+		
+
+	</script>
+</body>
+</html>
