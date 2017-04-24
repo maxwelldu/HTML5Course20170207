@@ -1,0 +1,156 @@
+git init
+touch index.html
+git add index.html
+git status
+git commit index.html
+git log
+git log --oneline
+echo "<h1>Hello Git</h1>" >> index.html
+cat index.html
+git status
+git commit index.html
+git status
+echo edit1 >> index.html
+cat index.html
+git add index.html
+git status
+echo edit2 >> index.html
+git status
+git commit -m "only commit edit1"
+git status
+git diff HEAD
+git add index.html
+git status
+git commit -m "commit edit2"
+git status
+git diff HEAD
+git log --oneline
+echo "bug" >> index.html
+git status
+git checkout index.html
+git status
+git branch
+echo "bug" >> index.html
+git add index.html
+git status
+git reset HEAD index.html
+git status
+git checkout -- index.html
+git status
+rm index.html
+git status
+git checkout -- index.html
+git status
+ls
+rm index.html
+git status
+git add index.html
+git status
+git commit index.html
+git status
+git rm index.html
+git reset --hard HEAD^
+git status
+git rm index.html
+git status
+git commit -m "delete index.html"
+git checkout -b dev
+git branch
+git branch furong
+git branch
+git checkout furong
+git branch
+git checkout dev
+git branch
+echo devbranch >> index.html
+git status
+git add index.html
+git commit -m "add dev"
+cat index.html
+git checkout master
+cat index.html
+git branch --help
+git log --help
+git log --graph
+git branch
+git checkout master
+git merge dev
+cat index.html
+git branch
+git branch -d furong
+git branch
+git log
+git log --oneline
+git branch
+git merge --abort
+git merge --help
+git checkout -b feature
+echo conflict >> index.html
+git add index.html
+git commit -m "add conflict"
+git checkout master
+echo master_conflict >> index.html
+git add index.html
+git commit -m "master conflict"
+git branch
+git merge feature
+git status
+vim index.html
+git status
+git commit
+git merge feature
+cat index.html
+vim index.html
+git log --graph --oneline
+git branch
+git branch -d feature
+git log --graph --oneline
+git branch
+git branch -d dev
+git branch
+git checkout -b dev
+echo no-ff >> index.html
+cat index.html
+git add .
+git commit -m "add no-ff"
+git checkout master
+git merge --no-ff -m "merge with no-ff" dev
+git log --graph --oneline
+echo programing > programming.txt
+cat programming.txt
+git status
+git add programming.txt
+git status
+echo programming >> programming.txt
+cat programming.txt
+git status
+git stash
+git status
+git branch
+git checkout -b issue
+git branch
+echo fixbug >> index.html
+git add .
+git commit -m "fixbug"
+git checkout master
+git merge --no-ff -m "merge issue" issue
+git branch -d issue
+git branch
+git stash list
+git stash apply
+git status
+git stash list
+git stash drop
+git stash list
+git status
+git stash
+git stash list
+git status
+git stash pop
+git stash list
+git commit -m "fix"
+git commit --help
+git log --oneline
+git commit --amend
+git log --oneline
+

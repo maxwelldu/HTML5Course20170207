@@ -1,0 +1,43 @@
+git config --global user.name "maxwelldu"
+git config --global user.email "dcj3sjt@126.com"
+git config --list
+ls -la
+git init
+git add index.html
+git status
+git rm --cached index.html
+git status
+git add .
+git status
+git commit . -m "init project"
+git status
+git commit .
+git status
+git checkout index.html
+git status
+git status -s
+git diff
+git diff index.html
+git diff index.js
+git diff index.css
+git log
+git status
+git diff
+git add .
+git status
+git diff
+git diff --cached
+git diff HEAD
+git log
+git status
+git commit
+git log
+git log --oneline
+git log --graph
+git reset --hard HEAD^
+git reflog
+git reset --hard 1b8b6b6
+git log --oneline --grep="project"
+git reset --mixed HEAD^
+git status
+ls | grep *.js
