@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function Counter(start) {
+    var count = start;
+    return {
+      increment: function() {
+        count++;
+      },
+
+      get: function() {
+        return count;
+      }
+    }
+  }
+
+  var foo = Counter(4);
+  foo.increment();
+  foo.get(); // 5
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  function Foo() {
+    this.value = 42;
+  }
+  Foo.prototype = {
+    method: function() {}
+  };
+
+  function Bar() {}
+
+  // 设置Bar的prototype属性为Foo的实例对象
+  Bar.prototype = new Foo();
+  Bar.prototype.foo = 'Hello World';
+
+  // 修正Bar.prototype.constructor为Bar本身
+  Bar.prototype.constructor = Bar;
+
+  var test = new Bar(); // 创建Bar的一个新实例
+  test.__proto__.value = 1;
+//  test.value = 2;
+  console.log(test);
+  var t1 = new Bar();
+  console.log(t1);
+
+</script>
+</body>
+</html>

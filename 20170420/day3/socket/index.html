@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>我是index页面，我引用了秘密script文件</h1>
+	<input type="button" value="发送消息给全班" id="btn"/>
+
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		var socket = io();
+		//点击按钮之后，发出提问
+		document.getElementById("btn").onclick = function(){
+			socket.emit("tiwen","吃了么？");
+		}
+
+
+		socket.on("huida",function(msg){
+			console.log("服务器说：" + msg);
+		});
+	</script>
+</body>
+</html>

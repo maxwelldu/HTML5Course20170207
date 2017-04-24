@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 全局作用域
+  var items = [/* 数组 */];
+  for(var i = 0; i < 10; i++) {
+    subLoop();
+  }
+
+  function subLoop() {
+    // subLoop 函数作用域
+    for(i = 0; i < 10; i++) { // 没有使用 var 声明变量
+      // 干活
+      console.log(i);
+    }
+  }
+</script>
+</body>
+</html>

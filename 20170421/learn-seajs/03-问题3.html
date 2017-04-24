@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  你写的: test.js --> test()
+
+  你的同事：
+  <script src="a.js"></script>
+  <script src="test.js"></script>
+  test(); //出现问题，你的test.js需要依赖于a.js, 你的同事问这个文件出问题了，是否需要依赖某个文件
+
+  产品发生了变化, 你的同事（疯掉了，或者很不爽）
+  <script src="a.js"></script>
+  <script src="b.js"></script>
+  <script src="test.js"></script>
+  test(); //可能需要依赖b.js
+
+  需求改变，有内容不需要了，去掉a.js, test不依赖于a.js了，但是test2.js依赖于a.js, 你不得不把a.js放回来
+  <script src="a.js"></script>
+  <script src="b.js"></script>
+  <script src="test.js"></script>
+  <script src="test2.js"></script>
+  test();
+
+  依赖问题，大部分时间都在修改BUG，加班在所难免
+</body>
+</html>

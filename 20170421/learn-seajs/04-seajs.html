@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="./node_modules/seajs/dist/sea.js"></script>
+<script>
+  seajs.use('./module/demo.js', function(){
+    console.log(this);
+    console.log(arguments);
+  });
+
+  seajs.use('./module/a.js', function(ucai){
+    console.log(arguments);
+    console.log(ucai);
+  }).use('./module/b.js', function(obj){
+    console.log(obj);
+  });
+
+  seajs.use('./module/c.js', function(obj){
+    console.log(arguments);
+    console.log(obj.color);
+  })
+
+  seajs.use('./module/e.js', function(){
+    console.log(arguments);
+  });
+
+</script>
+</body>
+</html>

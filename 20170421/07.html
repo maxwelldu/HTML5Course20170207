@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+function f(a) {
+  //"use strict";
+  a = 42;
+  return [a, arguments[0]];
+}
+var pair = f(17);
+console.assert(pair[0] === 42);
+console.assert(pair[1] === 17);
+</body>
+</html>

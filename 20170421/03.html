@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var baz = "hello";
+  var foo = {
+    bar: function() { return this.baz; },
+    baz: 1
+  };
+  (function(){
+    console.log( typeof arguments[0]() );
+  })(foo.bar);
+</script>
+</body>
+</html>
