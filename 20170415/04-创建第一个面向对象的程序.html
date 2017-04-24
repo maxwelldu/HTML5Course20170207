@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// var obj = {};
+		var obj = new Object(); //创建了一个空对象
+		obj.name = "苗焱";
+		obj.showName = function(){
+			alert(this.name);
+		};
+
+		obj.showName();
+
+		var obj2 = new Object();
+		obj2.name = "邵晨";
+		obj2.showName = function(){
+			alert(this.name);
+		};
+
+		obj2.showName();
+
+
+	</script>
+</body>
+</html>

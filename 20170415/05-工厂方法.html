@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//工厂方法：封装函数
+
+		function createPerson(name) {
+			//1.原料
+			var obj = new Object(); 
+			//2.加工
+			obj.name = name;
+			obj.showName = function(){
+				alert(this.name);
+			};
+			//3.出厂
+			return obj;
+		}
+
+		var p1 = createPerson("小苗苗");
+		p1.showName();
+
+		var p2 = createPerson("邵晨");
+		p2.showName();
+	</script>
+</body>
+</html>

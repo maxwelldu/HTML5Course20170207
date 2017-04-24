@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="apple">apple</div>
+	<ul>
+		<li>a</li>
+		<li>b</li>
+	</ul>
+	<script src="jquery-mini.js"></script>
+	<script>
+	// $("ul");
+		$("#apple");
+		$("#apple")[0];
+		// $("li");
+		// $("li")[0];
+		// $("li").css(); //css方法里面的this是指jq.fn.init
+		// window.a();// a方法里面的this是指window
+		$("li").each(function(m,n){
+			//m 分别表示li的下标
+			//n 代表每一个li的dom对象
+			//this 代表每一个li的dom对象
+			this.style.backgroundColor = "blue";
+			n.style.color = "red";
+		});
+	</script>
+</body>
+</html>

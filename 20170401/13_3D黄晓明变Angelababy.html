@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{
+			width: 258px;
+			height: 258px;
+			margin: 30px;
+			perspective:500px;
+			position: relative;
+			float: left;
+		}
+		img{
+			border-radius: 50%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			transition:all 1s ease 0s;
+		}
+		div:nth-child(1) img{
+			transform-origin:0% 0%;
+		}
+		div:nth-child(1):hover .xiaoming{
+			transform:rotateX(180deg);
+		}
+
+		div:nth-child(2) img{
+			transform-origin:0% 100%;
+		}
+		div:nth-child(2):hover .xiaoming{
+			transform:rotateX(-180deg);
+		}
+
+		div:nth-child(3) img{
+			transform-origin:0% 100%;
+		}
+		div:nth-child(3):hover .xiaoming{
+			transform:rotateY(-180deg);
+		}
+
+		div:nth-child(4) img{
+			transform-origin:100% 100%;
+		}
+		div:nth-child(4):hover .xiaoming{
+			transform:rotateY(180deg);
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<img class="baby" src="images/baby.png" alt="" />
+		<img class="xiaoming" src="images/xiaoming.png" alt="" />
+	</div>
+
+	<div>
+		<img class="baby" src="images/baby.png" alt="" />
+		<img class="xiaoming" src="images/xiaoming.png" alt="" />
+	</div>
+
+	<div>
+		<img class="baby" src="images/baby.png" alt="" />
+		<img class="xiaoming" src="images/xiaoming.png" alt="" />
+	</div>
+
+	<div>
+		<img class="baby" src="images/baby.png" alt="" />
+		<img class="xiaoming" src="images/xiaoming.png" alt="" />
+	</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{ margin: 0; padding:0;}
+    .smallPic{
+      width: 350px;
+      height: 350px;border:1px solid #ccc; margin:100px;
+      position: relative;}
+    .smallPic .zoom{ position: absolute; top: 100px;
+      left: 100px; width: 175px; height: 175px;
+      background-color: #FEDE4F; opacity:0.5;
+      border:1px solid #aaa;
+      display: none;}
+    .bigPic { width: 400px; height: 400px;
+      background: url(images/da.jpg) no-repeat;
+      position: absolute; top: 100px; left: 500px;
+      display: none; border:1px solid #000; }
+  </style>
+</head>
+<body>
+<!--(div#smallPic.smallPic>img+div#zoom.zoom)+div#bigPic.bigPic-->
+<div id="smallPic" class="smallPic">
+  <img src="images/xiao.jpg" alt="">
+  <div id="zoom" class="zoom"></div>
+</div>
+<div id="bigPic" class="bigPic"></div>
+<script>
+  var smallPic = document.getElementById("smallPic");
+  var zoom = document.getElementById("zoom");
+  var bigPic = document.getElementById("bigPic");
+
+  //比例怎么算？大图是800*800, 大图盒子400*400
+  //小图盒子350*350 放大镜175*175
+  //所以放大镜总行程175， 大图的总行程400
+  var rate = 400 / 175;
+
+  smallPic.onmouseover = function(){
+    zoom.style.display = "block";
+    bigPic.style.display = "block";
+  };
+  smallPic.onmouseout = function(){
+    zoom.style.display = "none";
+    bigPic.style.display = "none";
+  };
+
+  //监听
+  smallPic.onmousemove = function(e) {
+    e = e || window.event;
+
+    var scrollTop = document.documentElement.scrollTop
+        || document.body.scrollTop;
+    var x = e.clientX - (getAllLeft(smallPic)) - 87;
+    var y = e.clientY - (getAllTop(smallPic) - scrollTop) - 87;
+    if (x < 0) x = 0;
+    if (x > 175) x = 175;
+    if (y < 0) y = 0;
+    if (y > 175) y = 175;
+    //放大镜的移动
+    zoom.style.top = y + "px";
+    zoom.style.left = x + "px";
+    //
+    bigPic.style.backgroundPosition = -x * rate + "px "
+        + -y*rate +"px";
+  }
+  function getAllLeft(obj) {
+    var allLeft = obj.offsetLeft;
+    var currentObj = obj;
+    while(currentObj = currentObj.offsetParent) {
+      allLeft += currentObj.offsetLeft;
+    }
+    return allLeft;
+  }
+  function getAllTop(obj) {
+    var allTop = obj.offsetTop;
+    var currentObj = obj;
+    while(currentObj = currentObj.offsetParent) {
+      allTop += currentObj.offsetTop;
+    }
+    return allTop;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    p{
+      width: 60px;
+      height: 60px;
+      background-color: #ccc;}
+  </style>
+</head>
+<body>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script>
+  //所有的P标签背景颜色变红
+  $("p").css('background-color', 'red');
+  //第一个P标签元素变绿
+  $("p:first").css('background-color', 'green');
+  //最后一个P标签元素变橙
+  $("p:last").css('background-color', 'orange');
+  //第三个P标签变蓝
+  $("p:eq(3)").css('background-color', 'blue');
+  //第三个P标签之前的元素执行1秒钟的动画，宽度变为400
+//  $("p:lt(3)").animate({"width":400}, 1000);
+  //第三个P标签后面的元素执行1秒钟的动画，宽度变为400
+//  $("p:gt(3)").animate({"width":400}, 1000);
+  //P标签的奇数对象执行1秒钟的动画，宽度变为400
+//  $("p:odd").animate({"width":400}, 1000);
+  //P标签的偶数对象执行1秒钟的动画，宽度变为400
+  $("p:even").animate({"width":400}, 1000);
+</script>
+</body>
+</html>

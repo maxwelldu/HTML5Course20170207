@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="js/myajax.js"></script>
+<script>
+    myajax.get('php/do.php', {"wenben":"max","age":18},
+    function(error, data) {
+        if (error) {
+            //throw error; //抛出错误
+            alert("非常抱歉，服务器故障，请稍后再试");
+            return;
+        }
+        alert(data);
+    });
+    myajax.post('php/do2.php', {"name":"max", "age":18},
+            function(error, data) {
+                if (error) {
+                    alert("非常抱歉，服务器故障，请稍后再试");
+                    return;
+                }
+                alert(data);
+    });
+</script>
+</body>
+</html>

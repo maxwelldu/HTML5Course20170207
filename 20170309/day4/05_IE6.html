@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1 id="title"></h1>
+<input type="button" id="btn" value="异步读取">
+<script>
+    var oTitle = document.getElementById("title");
+    var oBtn = document.getElementById("btn");
+    oBtn.onclick = function(){
+        //IE6兼容
+        if (window.XMLHttpRequest) {
+            var xhr = new XMLHttpRequest();
+        } else {
+            var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4) {
+                if (xhr.status >= 200 && xhr.status < 300
+                || xhr.status == 304) {
+                    oTitle.innerHTML = xhr.responseText;
+                } else {
+                    oTitle.innerHTML = "服务器错误，请稍后再试";
+                }
+            }
+        }
+        xhr.open("GET", "php/a.txt?s="+Math.random(), true);
+        xhr.send(null);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #box1 { width: 400px; height: 400px;
+      background-color: yellowgreen;}
+    #box2 { width: 300px; height: 300px;
+      background-color: pink;}
+    #box3 { width: 200px; height: 200px;
+      background-color: gold;}
+  </style>
+</head>
+<body>
+<!--div#box1>div#box2>div#box3-->
+<div id="box1"> <div id="box2"> <div id="box3">
+  <span id="span">测试</span> </div> </div> </div>
+<script>
+  var box1 = document.getElementById("box1");
+  var box2 = document.getElementById("box2");
+  var box3 = document.getElementById("box3");
+
+  box1.onclick = function (event) {
+    event = event || window.event;
+    alert('I am box1');
+    var targetElem = event.target || event.srcElement;
+    alert(targetElem.id);
+  };
+  box2.onclick = function (event) {
+    event = event || window.event;
+    alert('I am box2');
+    var targetElem = event.target || event.srcElement;
+    alert(targetElem.id);
+  };
+  box3.onclick = function (event) {
+    event = event || window.event;
+    alert('I am box3');
+    var targetElem = event.target || event.srcElement;
+    alert(targetElem.id);
+  }
+</script>
+</body>
+</html>

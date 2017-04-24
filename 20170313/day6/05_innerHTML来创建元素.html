@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<select name="" id="year">
+    <!--<option value="1">1</option>-->
+</select>
+<script>
+    var oYear = document.getElementById("year");
+//    for (var i = 1996; i < 2026; i++) {
+//        创建节点
+//        var op = document.createElement("option");
+//        op.value = i;
+//        op.innerHTML = i + '年';
+//        oYear.appendChild(op);
+//    }
+    for (var i = 1996; i < 2026; i++) {
+        oYear.innerHTML +=
+                '<option value="'+i+'">'+i+'</option>';
+    }
+</script>
+
+</body>
+</html>

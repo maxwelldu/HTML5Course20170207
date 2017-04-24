@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="styles/jquery-ui.min.css">
+  <style>
+    .ui-menu:after {
+      content:".";
+      display:block;
+      clear:both;
+      visibility: hidden;
+      line-height:0;
+      height:0;
+    }
+    .ui-menu .ui-menu-item{
+      display: inline-block;
+      float: left;
+      margin: 0;
+      padding:10px;
+      width:auto;
+    }
+  </style>
+</head>
+<body>
+<ul id="menu">
+  <li>
+    <a href="#">Java</a>
+    <ul>
+      <li><a href="#">Java SE</a></li>
+      <li><a href="#">Java EE</a></li>
+    </ul>
+  </li>
+  <li>C</li>
+  <li>JavaScript</li>
+  <li>Bootstrap</li>
+</ul>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script>
+  $("#menu").menu({position:{at:"left bottom"}});
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>#box1{
+    width: 500px;
+    height: 500px;
+    background-color: yellowgreen;
+    padding-top:300px; position:relative}
+    #box2 {
+      width: 300px; background-color: skyblue;
+      padding-top:100px;margin-top:100px;
+      position:relative; }
+    #box3 { width: 60px; height: 60px;
+      background-color: gold; position:relative;
+      top:20px;} </style>
+</head> <body>
+<!--div#box1>div#box2>p+div#box3-->
+<div id="box1"> <div id="box2"> <p>文字内容</p> <div id="box3"></div> </div> </div>
+<script>
+  var box1 = document.getElementById("box1");
+  var box2 = document.getElementById("box2");
+  var box3 = document.getElementById("box3");
+  alert(getAllTop(box1));
+  alert(getAllTop(box2));
+  alert(getAllTop(box3));
+  //返回这个元素在页面在中的净位置
+  function getAllTop(obj) {
+    //累加器
+    var allTop = obj.offsetTop;
+    var currentObj = obj;
+    while(currentObj = currentObj.offsetParent) {
+      allTop += currentObj.offsetTop;
+    }
+    return allTop;
+  }
+</script>
+</body>
+</html>

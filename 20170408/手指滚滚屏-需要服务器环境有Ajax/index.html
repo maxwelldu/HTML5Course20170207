@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>手指滚滚屏</title>
+	<meta name=viewport content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body,html{
+			height: 100%;
+			overflow: hidden;
+			background-color: #333;
+		}
+		.page{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			perspective:500px;
+		}
+		.no0{background: url(images/bg/0.jpg); background-size: cover;}
+		.no1{background: url(images/bg/1.jpg); background-size: cover;}
+		.no2{background: url(images/bg/2.jpg); background-size: cover;}
+		.no3{background: url(images/bg/3.jpg); background-size: cover;}
+		.no4{background: url(images/bg/4.jpg); background-size: cover;}
+		.no5{background: url(images/bg/0.jpg); background-size: cover;}
+
+		.no1 img{
+			width: 90%;
+			position: absolute;
+			margin-top: -200px;
+			margin-left: -200px;
+		}
+		.no1 img.page1_1{
+			top: 50%;
+			left: 50%;
+			-webkit-transform:translateX(-500px) rotateX(180deg);
+		}
+		.no1 img.page1_2{
+			top: 70%;
+			left: 60%;
+			-webkit-transform:translateX(-500px) rotateX(180deg);
+		}
+
+		.jixu{
+			position: absolute;
+			bottom: 10px;
+			left: 50%;
+			width: 40px;
+			height: 40px;
+			margin-left: -20px;
+			background-color: orange;
+			-webkit-animation:dong 0.5s linear 0s infinite alternate;
+			display: none;
+		}
+
+		@-webkit-keyframes dong{
+			from{
+				-webkit-transform:translateY(-10px);
+			}
+			to{
+				-webkit-transform:translateY(10px);
+			}
+		}
+
+		.waiting{
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			background-color:rgba(0,0,0,0.5);
+			color:white;
+			z-index: 1000;
+			text-align: center;
+			line-height: 300px;
+		}
+	</style>
+</head>
+<body>
+	<div class="waiting" id="waiting">正在加载资源，请稍后</div>
+
+	<div class="page no0">
+		
+	</div>
+	<div class="page no1">
+		<h1>宋仲基我爱你</h1>
+		<img src="images/page0_1.jpg" class="page1_1">
+		<img src="images/page0_2.jpg" class="page1_2">
+
+		<span class="jixu">滑动继续</span>
+	</div>
+	<div class="page no2"><h1>2</h1></div>
+	<div class="page no3"><h1>3</h1></div>
+	<div class="page no4"><h1>4</h1></div>
+	<div class="page no5"><h1>5</h1></div>
+	
+
+	<script type="text/javascript" src="js/zeptoWithFx.js"></script>
+	<script type="text/javascript" src="js/animations.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

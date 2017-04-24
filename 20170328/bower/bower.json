@@ -1,0 +1,22 @@
+{
+  "name": "bower",
+  "homepage": "https://github.com/maxwelldu/HTML5Course20170207",
+  "authors": [
+    "maxwelldu <dcj3sjt@126.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery-mobile": "^1.4.5",
+    "swiper": "^3.4.2"
+  }
+}

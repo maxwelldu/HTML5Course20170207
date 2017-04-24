@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<script src="../day13-jquery-ajax/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+  $(function(){
+    $("h2").css("color", "red");
+    //给jquery对象丰富
+    $.fn.abc = function(){
+      console.log("abc");
+    };
+    $.fn.extend({
+      aaa:function(){
+        console.log('aaa');
+      },
+      bbb:function(){
+        console.log('bbb');
+      }
+    });
+    $("h2").abc();
+    $("h2").aaa();
+    $("h2").bbb();
+
+    //直接给$扩展
+    $.hello = function(){
+      console.log("hello");
+    };
+    $.extend({
+      f1:function(){
+        console.log('f1');
+      },
+      f2:function(){
+        console.log('f2');
+      }
+    });
+    $.hello();
+    $.f1();
+    $.f2();
+  })
+</script>
+<h2>插件开发</h2>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var obj = {
+    a : 1,
+    b : 2,
+    c : false
+  }
+  obj.__proto__ = {
+    d : 4
+  }
+  Object.prototype.e = 5;
+  console.log("a" in obj);//t
+  console.log("b" in obj);//t
+  console.log("c" in obj);//t
+  console.log("d" in obj);//t
+  console.log("e" in obj);//t
+
+  for( var k in obj) {
+    console.log(k);
+  }
+
+
+</script>
+</body>
+</html>

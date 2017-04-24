@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{
+			width: 258px;
+			height: 258px;
+			border: 1px solid #000;
+			perspective:400px;
+		}
+		img{
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="按我"/>
+
+	<div>
+		<img src="images/baby.png" alt="" />
+	</div>
+
+	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+	<script type="text/javascript" src="js/velocity.min.js"></script>
+	<script type="text/javascript">
+		$("input").click(function(){
+//			$("img").velocity({"rotateZ":"40deg"},10000);
+//			 $("img").velocity({"rotateY":"40deg"},1000);
+//			 $("img").velocity({"translateZ":"-400px"},1000);
+//			$("body").velocity({"backgroundColor":"#123"},10000);
+//			/*
+			 $("img").velocity({
+			 "rotateX":"40deg",
+			 "rotateY":"40deg",
+			 "translateZ":"-400px"
+			 },10000,function(){
+			 //回调函数
+			 	$(this).fadeOut();
+			 });
+		})
+	</script>
+</body>
+</html>

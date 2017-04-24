@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //构造函数里，负责定义一些属性，随着构造函数的执行
+  //这些属性将绑定到new出来的对象身上
+  function Person(name,age){
+    this.name = name;
+    this.age = age;
+//    this.sayHello = function(){
+//      console.log("你好，我是 "+this.name + " 我今年"
+//          + this.age + "岁了");
+//    }
+  }
+  Person.prototype.sayHello = function(){
+    console.log("你好，我是 "+this.name + " 我今年"
+    + this.age + "岁了");
+  }
+
+  var xiaoming = new Person("小明", 12);
+  var xiaohong = new Person("小红", 11);
+
+  xiaoming.sayHello();
+  xiaohong.sayHello();
+  console.log(xiaoming.sayHello === xiaohong.sayHello);
+</script>
+</body>
+</html>

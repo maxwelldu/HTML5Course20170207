@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="styles/jquery-ui.min.css">
+  <style>
+    .box{
+      width: 100px;
+      height: 100px;
+      background-color: #ccc;}
+  </style>
+</head>
+<body>
+<button>button</button>
+<button class="btn">button</button>
+
+<div class="box"></div>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script>
+  $(".btn").button();
+  $(".box").draggable();
+</script>
+</body>
+</html>

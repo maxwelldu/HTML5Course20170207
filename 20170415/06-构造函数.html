@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	function CreatePerson(name){
+		this.name = name;
+		this.showName = function(){
+			alert(this.name);
+		}
+	}
+	var p1 = new CreatePerson('苗苗');
+	p1.showName();
+
+	var p2 = new CreatePerson('付荣');
+	p2.showName();
+
+
+	alert(p1.showName == p2.showName); //false
+
+	</script>
+
+</body>
+</html>

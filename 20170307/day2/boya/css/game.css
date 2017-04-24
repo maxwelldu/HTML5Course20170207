@@ -1,0 +1,191 @@
+@font-face {
+    font-family: 'shaoshanhuan';
+    src:    url('../fonts/icomoon.eot?izpax1');
+    src:    url('../fonts/icomoon.eot?izpax1#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?izpax1') format('truetype'),
+        url('../fonts/icomoon.woff?izpax1') format('woff'),
+        url('../fonts/icomoon.svg?izpax1#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.header .nav ul li{
+	width: 100px;
+}
+
+.banner{
+	position: relative;
+	height: 254px;
+	overflow: hidden;
+}
+.banner img{
+	position: absolute;
+	left: 50%;
+	margin-left: -840px;
+}
+.content {
+	overflow: hidden;
+}
+.content .content_hd{
+	height: 69px;
+	border-bottom: 1px solid #C7D6E5;
+	overflow: hidden;
+}
+.content .content_hd h3{
+	float: left;
+	line-height: 80px;
+    padding-left: 30px;
+    background: url(../images/icons.png) no-repeat -446px 32px;
+	font-size: 20px;
+	font-weight: bold;	
+	color:#444866;
+}
+.content .breadNav{
+	float: right;
+	padding-top: 30px;
+}
+
+.content .breadNav a{
+	text-decoration: none;
+	font-family: "shaoshanhuan";
+	color:#333;
+}
+.content .breadNav a:hover{
+	color:red;
+}
+.content .breadNav span{
+	padding-left: 17px;
+	background: url(../images/icons.png) no-repeat -455px -115px;
+}
+.content .menu{
+	float: left;
+	width: 195px;
+	padding-top: 40px;
+ 	
+}
+.content .menu li{
+	height: 80px;
+	line-height: 80px;
+	border-bottom:1px solid  #CAD6E1;
+	position: relative;
+}
+.content .menu li a{
+	color:#44487D;
+	padding-left: 50px;
+	text-decoration: none;
+	display: block;
+	height: 80px;
+}
+.content .menu li a:hover{
+	color:#38B774;
+}
+.content .menu li a.current{
+	color:#38B774;
+	background: url(../images/icons.png) no-repeat  187px -124px;
+}
+.content .menu li a b{
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 34px;
+	height: 41px;
+	background:url(../images/tadejingling.png) no-repeat;
+	margin-top: -20px;
+}
+.content .menu li a b.iphone{background-position: 0 0;}
+.content .menu li a b.android{background-position: -4px -97px;}
+.content .menu li a b.ipad {background-position: 0 -199px;}
+.content .menu li a b.pc {background-position: 0 -295px;}
+.content .menu li a b.tv{ background-position: 0 -602px;}
+
+.content .menu li a:hover b.iphone{background-position: -125px 0px;}
+.content .menu li a:hover b.android{background-position: -124px -97px;}
+.content .menu li a:hover b.ipad{background-position: -121px -199px;}
+.content .menu li a:hover b.pc{background-position: -120px -295px;}
+.content .menu li a:hover b.tv{ background-position: -43px -602px;}
+
+.content .menu li a.current b.iphone{background-position: -125px 0px;}
+.content .menu li a.current b.android{background-position: -124px -97px;}
+.content .menu li a.current b.ipad{background-position: -121px -199px;}
+.content .menu li a.current b.pc{background-position: -120px -295px;}
+.content .menu li a.current b.tv{ background-position: -43px -602px;}
+
+
+
+.content .main{
+	float: right;
+	width: 757px;
+	padding-top: 44px;
+ 	overflow: hidden;
+}
+.content .main ul{
+	width: 999px;
+}
+.content .main li{
+	float: left;
+	width: 355px;
+	height: 327px;
+	border: 1px solid #CAD6E1;
+	margin-right: 43px;
+	margin-bottom: 42px;
+	border-radius: 10px;
+	background-color: #F7F7F7;
+}
+.content .main li h4{
+	line-height: 58px;
+	text-align: center;
+	font-size: 16px;
+	font-weight: normal;
+	
+}
+.content .main li h4 span{
+	font-size: 12px;
+	color:green;
+	padding-left: 8px;
+	padding-right: 14px;
+	background: url(../images/arrow.png) no-repeat right center;
+}
+.content .main li .pic{
+	padding: 0 12px;
+}
+.content .main li .btns{
+	padding-top: 20px;
+}
+.content .main li .btns .btn1{
+	float: left;
+	width: 135px;
+	padding-left: 46px;
+	line-height: 34px;
+	height: 34px;
+	border-right: 1px solid #C7D6E5;
+}
+.content .main li .btns a{
+	display: block;
+	padding-left: 35px;
+	height: 34px;
+	text-decoration: none;
+	color:#333;
+	background: url(../images/icons.png) no-repeat -444px -178px;
+}
+.content .main li .btns a:hover{
+	color:green;
+}
+.content .main li .btns .btn2{
+	float: left;
+	width: 147px;
+	height: 34px;
+	padding-left: 26px;
+	line-height: 34px;
+}
+.content .main li .btns .btn2 a{
+	background-position: -442px -250px;
+	padding-left: 40px;
+}
+.shengming{
+    background-color: #252947;
+}
+.shengming .inner_c{
+	 color: #6c6e7e;
+	padding: 24px 0;
+    line-height: 24px;
+    font-size: 12px;
+}

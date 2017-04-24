@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //a.js里面有5个方法, 10k
+  //b.js里面有15个方法，20k
+  //性能问题，引入两个文件，有20个方法，然后我就只使用了2个方法，18个方法被浪费
+  //25K的大小是不需要使用的
+
+  //把相同的提取出来作为一个common.js
+  //tab()
+
+  //common.js -> tab.js, drag.js, tips.js；模块拆分，按需引入，提升性能
+  //新的页面：tab(), tag.js; 新的问题来了，页面当中会引入很多的js文件，假如是互相独立的还好;
+
+</script>
+<script src="a.js"></script>
+<script src="b.js"></script>
+<script src="c.js"></script>
+<script src="d.js"></script>
+</body>
+</html>

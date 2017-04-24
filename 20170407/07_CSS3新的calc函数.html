@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			width: 60%;
+			height: 100px;
+			background: pink;
+			margin: 0 auto;
+		}
+		p{
+			float: left;
+			width: calc(50% - 20px);
+			height: 100px;
+			background: -webkit-linear-gradient(left,red,white);
+			border: 10px solid #000;
+		}
+		p:last-child{
+			width: calc(50% - 10px);
+			border-left: none;
+		}
+ 
+	</style>
+</head>
+<body>
+	<h3>制作两个50%带边框的盒子不会掉</h3>
+	<div>
+		<p>1</p>
+		<p>2</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.rolling{
+			width: 800px;
+			height: 130px;
+			border: 10px solid #ccc;
+			margin: 100px auto;
+			position: relative;
+ 			overflow: hidden;
+		}
+		.rolling .m_unit{
+			/*这是运动的单位*/
+			/*这个宽度足以致命，为了让所有的li能够并排*/
+			/*这个宽度随便取，大一点*/
+			width: 5000px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			animation:move 2s linear 0s infinite;
+		}
+		.rolling:hover .m_unit{
+			animation-play-state:paused;
+		}
+		.rolling ul{
+			list-style: none;
+		}
+		.rolling ul li{
+			float: left;
+			margin-right: 10px;
+		}
+
+		@-webkit-keyframes move{
+			from{
+				left:0;
+			}
+			to{
+				left:-1050px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="rolling" id="rolling">
+		<div class="m_unit" id="m_unit">
+			<ul>
+				<li><a href=""><img src="images/shuzi/0.png" alt="" /></a></li>
+				<li><a href=""><img src="images/shuzi/1.png" alt="" /></a></li>
+				<li><a href=""><img src="images/shuzi/2.png" alt="" /></a></li>
+				<li><a href=""><img src="images/shuzi/3.png" alt="" /></a></li>
+				<li><a href=""><img src="images/shuzi/4.png" alt="" /></a></li>
+				<li><a href=""><img src="images/shuzi/0.png" alt="" /></a></li>
+				<li><a href=""><img src="images/shuzi/1.png" alt="" /></a></li>
+				<li><a href=""><img src="images/shuzi/2.png" alt="" /></a></li>
+				<li><a href=""><img src="images/shuzi/3.png" alt="" /></a></li>
+				<li><a href=""><img src="images/shuzi/4.png" alt="" /></a></li>
+			</ul>
+		</div>
+	</div>
+
+	
+</body>
+</html>

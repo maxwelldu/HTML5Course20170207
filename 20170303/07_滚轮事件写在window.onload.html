@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body{
+      height:1600px;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      window.onmousewheel = function(event){
+        event = event || window.event;
+        if (event.preventDefault) {
+          event.preventDefault();
+        } else {
+          event.defaultPrevented = false;
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

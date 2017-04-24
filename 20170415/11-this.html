@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="div">test</div>
+	<script>
+	var oDiv = document.getElementById("div");
+	/*
+		oDiv.onclick = function (){
+			this; //oDiv
+		}
+		oDiv.onclick = show;
+		function show(){
+			this; //oDiv
+		}
+		*/
+
+		oDiv.onclick = function(){
+			show();
+		}
+		function show(){
+			alert(this);//oDiv, window
+		}
+	</script>
+</body>
+</html>

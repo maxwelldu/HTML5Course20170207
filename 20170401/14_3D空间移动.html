@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{
+			width: 258px;
+			height: 258px;
+			border: 1px solid #000;
+			margin: 100px;
+			perspective:400px;
+		}
+		img{
+			border: 1px solid #000;
+			transition:all 12s ease 0s;
+			transform:none;
+		}
+		div.fei img{
+			/*transform:rotateX(530deg) rotateY(530deg) translateX(500px) translateZ(500px);*/
+			transform:rotateX(730deg) rotateY(360deg) translateX(100px) translateZ(100px);
+		}
+	</style>
+</head>
+<body>
+	<input type="button" id="btn1" value="按我发射黄晓明" />
+
+	<div>
+		<img src="images/xiaoming.png" />
+	</div>
+
+	<script type="text/javascript">
+		var box = document.getElementsByTagName("div")[0];
+		var btn1 = document.getElementById("btn1");
+
+		btn1.onclick = function(){
+			box.className = "fei";
+		}
+	</script>
+</body>
+</html>

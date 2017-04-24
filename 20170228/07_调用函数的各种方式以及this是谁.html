@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{ width: 100px; height: 100px;
+      background-color: yellowgreen;}
+  </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+ function fun(){
+   console.log(this);
+ }
+ //1.直接()调用函数，函数里面的this指的是window对象
+//  fun();
+
+ //2.函数绑定给了一个事件，那么事件发生的时候函数将执行，this就是触发事件的这个HTML对象
+ var box = document.getElementById("box");
+// box.onclick = fun();//这种相当于执行fun()，然后把结果赋给onclick
+ box.onclick = fun; //box.onclick = function(){}
+
+  //3.用定时器来调用函数，函数里面的this是window
+// setInterval(fun, 1000);
+
+ //4.创建一个对象，将这个对象的hi属性，设置为刚才的fun函数。
+ //那么用对象的方法来调用的时候，函数里面的this是这个对象
+  var obj = {
+    name:"付荣",
+    sex:"女",
+    hi: fun
+  }
+//  obj.hi();
+
+  //5.我们调用一个函数，也可以通过apply, call来调用这个函数。
+  // 此时能够人工设置函数里面的this是谁
+  var obj = {
+    name:"付荣",
+    sex:"女"
+  };
+  fun.apply(obj);
+  fun.call(obj);
+
+   function fun(){
+     console.log(this);
+   }
+
+</script>
+</body>
+</html>

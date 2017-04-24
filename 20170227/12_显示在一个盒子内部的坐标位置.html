@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>body{height:5500px;}div { width: 400px; height: 400px;
+    background-color: yellowgreen;
+    margin:500px;
+  }</style>
+</head>
+<body>
+<div></div>
+<script>
+  var oDiv = document.getElementsByTagName("div")[0];
+  oDiv.onmousemove = function(e){
+    e = e || window.event;
+    //offsetX, offsetY直接得到坐标值，曾经不兼容
+//    var x = e.offsetX
+//    var y = e.offsetY
+
+    //周转一下
+    var scrollTop = document.documentElement.scrollTop
+    || document.body.scrollTop;
+    var x = e.clientX - (getAllLeft(oDiv));
+    var y = e.clientY - (getAllTop(oDiv) - scrollTop);
+    oDiv.innerHTML = x + " " + y;
+  }
+
+  function getAllLeft(obj) {
+    var allLeft = obj.offsetLeft;
+    var currentObj = obj;
+    while(currentObj = currentObj.offsetParent) {
+      allLeft += currentObj.offsetLeft;
+    }
+    return allLeft;
+  }
+  function getAllTop(obj) {
+    var allTop = obj.offsetTop;
+    var currentObj = obj;
+    while(currentObj = currentObj.offsetParent) {
+      allTop += currentObj.offsetTop;
+    }
+    return allTop;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="styles/jquery-ui.min.css">
+</head>
+<body>
+<div id="pb"></div>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script>
+//  $("#pb").progressbar({
+//    value: 50
+//  });
+
+  var pb;
+  var max = 100;
+  var current = 0;
+  $(document).ready(function(){
+    pb = $("#pb");
+    pb.progressbar({max:100});
+    setInterval(function(){
+      current+=10;
+      if (current>100) {
+        current = 0;
+      }
+      pb.progressbar({value:current});
+    }, 100);
+  });
+
+</script>
+</body>
+</html>

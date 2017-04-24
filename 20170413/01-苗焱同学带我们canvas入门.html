@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <canvas id="canvas" width="500px" height="500px" style="background-color: #CCC;">
+    ASDGHGH JDSAHGF
+    <script>
+        var canvas=document.getElementById("canvas");
+        var c=canvas.getContext("2d");
+        c.lineWidth=10;
+        c.strokeStyle="red";
+//        c.strokeStyle="red";
+        //        c.fillStyle="yellow";
+        //        c.moveTo(100,100);
+        //        c.lineTo(100,300);
+        //        c.beginPath();
+        //        c.arc(100,100,100,0,Math.PI*2,true);
+        //        c.fill();.getContext("2d");
+        //
+        //        c.stroke();
+        //
+        //        c.beginPath();
+        //        c.lineWidth=5;
+        //        c.fillStyle="blue";
+        //        c.arc(250,250,100,0,Math.PI*2,true);
+        //        c.stroke();
+        //        c.fill();
+
+
+        /*
+      c.arc(250,250,200,0,Math.PI*2);
+      c.stroke();
+      c.translate(250,250);
+      for(var i=0;i<2;i++){
+        c.moveTo(200*Math.sin(Math.PI/6*i),200*Math.cos(Math.PI/6*i));
+        c.lineTo(160*Math.sin(Math.PI/6*i),160*Math.cos(Math.PI/6*i));
+        c.stroke();
+      }
+      */
+
+
+        //c.arc(250,250,150,Math.PI/6,Math.PI/2,true);
+       // c.stroke();
+
+        for(var i=0;i<12;i++){
+          c.arc(250,250,200,Math.PI/6*i,Math.PI/6*(i+1));
+          c.arc(250,250,150,Math.PI/6*(i+1),Math.PI/6*i);
+          c.arc(250,250,200,Math.PI/6*i,Math.PI/6*(i+1));
+        }
+
+      c.stroke();
+      c.beginPath();
+      c.lineWidth=12;
+      c.strokeStyle="#ccc";
+      c.arc(250,250,150,0,Math.PI*2);
+
+      c.stroke();
+
+    </script>
+  </canvas>
+</body>
+</html>

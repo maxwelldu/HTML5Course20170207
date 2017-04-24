@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{
+			width: 560px;
+			height: 300px;
+			border: 1px solid #000;
+			perspective:400px;
+		}
+		img{
+			transition:all 1s ease 0s;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="按钮" />
+
+	<div>
+		<img src="images/0.jpg" alt="" />
+	</div>
+	
+	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+	<script type="text/javascript">
+		$("input").click(function(){
+			$("img").css("transform","rotateX(40deg) rotateY(40deg) translateZ(400px)");
+
+			//模拟一个回调函数
+			setTimeout(function(){
+				$("img").fadeOut();
+			},1000)
+		})
+	</script>
+</body>
+</html>

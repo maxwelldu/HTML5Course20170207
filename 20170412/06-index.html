@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Web SQL</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>Web SQL</h1>
+            </div>
+            <!-- 提交笔记的表单 -->
+            <form class="bs-example" id="note-form">
+              <div class="col-md-9">
+                  <!-- 提交笔记内容的文本区域 -->
+                  <textarea name="note-content" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="col-md-3">
+                  <!-- 提交笔记的按钮 -->
+                  <button value="submit" id="submit-btn" type="submit" class="btn btn-primary btn-lg">提交</button>
+                  <input type="hidden" name="note-id" value="0">
+              </div>
+            </form>
+            
+            <!-- 显示笔记列表 -->
+            <ul class="list-group" id="note-list"></ul>
+
+        </div>
+    </div>
+
+    <script>
+        // 创建数据库
+        var db = openDatabase('noteapp', '1.0', '一个可以记录笔记的应用', 5 * 1024 * 1024);
+
+        // 创建数据表
+        db.transaction(function (tx) {
+            tx.executeSql("CREATE TABLE IF NOT EXISTS note (id INTEGER PRIMARY KEY ASC, note_content TEXT, note_date TEXT)");
+        });
+
+        // 载入并显示笔记内容
+        loadNote();
+
+        // 得到提交笔记表单
+        var noteForm = document.getElementById('note-form');
+
+        // 提交笔记
+        function submitNote(event) {
+            event.preventDefault();
+            // 得到笔记内容
+            var noteContent = noteForm.elements['note-content'].value;
+
+            db.transaction(function (tx) {
+                tx.executeSql("INSERT INTO note (note_content, note_date) VALUES (?, DATETIME('now', 'localtime'))", [noteContent], onSuccess, onError);
+            });
+        }
+
+        // 获得 提交 按钮并监听它的点击事件
+        var submitBtn = document.getElementById('submit-btn');
+        submitBtn.addEventListener('click', submitNote, false);
+
+        // 执行 SQL 成功以后
+        function onSuccess(tx, rs) {
+            console.log('成功');
+        }
+
+        // 执行 SQL 失败以后
+        function onError(tx, e) {
+            console.log('失败 ' + e.message);
+        }
+
+        // 显示数据表里的内容
+        function displayNote(tx, rs) {
+            console.log('找到的结果数量是：' + rs.rows.length);
+            console.log('第 2 个结果是' + '\n' +
+                'id：' + rs.rows.item(1).id + '\n' +
+                '内容：' + rs.rows.item(1).note_content + '\n' +
+                '时间：' + rs.rows.item(1).note_date
+            );
+        }
+
+        // 查询数据表里的内容
+        function loadNote() {
+            db.transaction(function (tx) {
+                tx.executeSql("SELECT * FROM note ORDER BY id DESC", [], displayNote, onError);
+            });
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<label title="this is a label">label</label>
+<label id="label">label</label>
+<label id="label1" hello="world">label</label>
+<script>
+  console.log($("label").eq(0).attr("title"));
+
+  $("#label").attr("title", $("label").eq(0).attr("title"))
+
+  console.log($("#label1").attr("hello"));
+
+  $("#label1").prop("title", $("label:eq(0)").prop("title"));
+  console.log($("#label1").prop("hello"));
+</script>
+</body>
+</html>

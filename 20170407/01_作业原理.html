@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body{
+			overflow: hidden;
+		}
+		div{
+			width: 220px;
+			height: 400px;
+			position: absolute;
+			bottom: 0px;
+			left: 200px;
+			background-color: #3b5;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+
+	<script type="text/javascript">
+		var box = document.getElementsByTagName("div")[0];
+
+		//中线的位置
+		var position = box.offsetLeft + 110;
+
+		document.onmousemove = function(e){
+			e = e || window.event;
+			//Math.abs就是绝对值。 Math.abs(5)的值就是5，Math.abs(-5)的值也是5
+			var distance = Math.abs(e.clientX - position);
+			//设置bottom值，和distance是反比
+			box.style.bottom = -distance / 3 + "px";
+		}
+	</script>
+</body>
+</html>

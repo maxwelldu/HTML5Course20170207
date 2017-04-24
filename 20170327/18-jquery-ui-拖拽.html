@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="styles/jquery-ui.min.css">
+  <style>
+    *{ margin: 0; padding: 0;}
+    .box{
+      width: 600px;
+      height: 600px;
+      background-color: #ccc;
+      position:relative;
+      margin:100px;
+    }
+    p{
+      width: 60px;
+      height: 60px;
+      background-color: skyblue;
+      position:absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <p></p>
+</div>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script>
+  $('p').draggable({
+//    axis: "x"
+    containment: "parent",
+    drag: function(event, ui) {
+      console.log(ui.position.left, ui.position.top);
+    }
+  });
+  $('div').resizable();
+</script>
+</body>
+</html>

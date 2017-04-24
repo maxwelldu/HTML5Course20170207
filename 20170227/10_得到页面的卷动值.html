@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>body{height:5000px;
+    background-color: #cccccc;}
+    h1{ position: fixed; color:red}
+  </style>
+</head>
+<body>
+<h1></h1>
+<script>
+  var h1 = document.getElementsByTagName("h1")[0];
+  //当窗口卷动的时候 的发生这个事件
+  window.onscroll = function(){
+    //高级浏览器认为卷动值是body的属性
+    //IE6,7,8认为卷动值是html标签的属性
+    //如何得到HTML标签，JS中document.documentElement就是html标签
+    h1.innerHTML = document.body.scrollTop
+    || document.documentElement.scrollTop;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var str = 'hello';
+		alert(typeof str);
+
+		str.charAt(0);
+		str.indexOf('e');
+		//js启示录 
+		1..toString();
+		// .1.toString();
+		true.toString();
+
+		for(var k in null) {
+			console.log(k);
+		}
+		for(var k in undefined) {
+			console.log(k);
+		}
+		for (var k in str) {
+			console.log(k, str[k]);
+		}
+
+		//null, undefined
+		// null.toString();
+		// undefined.toString();
+
+		//包装对象：基本数据类型都有自己对应的包装对象：String, Number, Boolean
+		var str = new String('hello');
+		alert(typeof str);
+
+	</script>
+</body>
+</html>

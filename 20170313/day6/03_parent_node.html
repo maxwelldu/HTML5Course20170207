@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .choose{
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+<!--div#box.box>ul>li*3>input-->
+<div id="box" class="box">
+    <ul>
+        <li><input type="checkbox">付荣</li>
+        <li><input type="checkbox">邵晨</li>
+        <li><input type="checkbox">养龙</li>
+    </ul>
+</div>
+<script>
+    /**
+     * 1.得到所有的input元素
+     * 2.批量绑定点击事件
+     * 3.测试节点的checked属性的值是多少
+     * 4.让自己的父节点的类名属性设置为 choose
+     */
+    var inputs = document.getElementById("box").getElementsByTagName("input");
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].onclick = function(){
+            console.log(this.checked);
+            this.parentNode.className = this.checked
+                    ? "choose" : "";
+        }
+    }
+</script>
+
+</body>
+</html>

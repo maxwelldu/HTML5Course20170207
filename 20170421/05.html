@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function fun(a,b){
+    console.log(arguments);
+    console.log(Array.prototype.slice.call(arguments));
+  }
+  fun(1,2);
+</script>
+</body>
+</html>

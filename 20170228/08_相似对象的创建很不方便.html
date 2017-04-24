@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //xiaoming对象和furong对象，都有相同的属性名，方法名
+  //创建起来不方便，那么怎么办？构造函数去解决
+  var furong = {
+    name: "付荣",
+    age: 18,
+    sex:"女",
+    sayHello: function(){
+      console.log("Hello, My name is " + this.name,
+          this.age, this.sex);
+    },
+    grown: function(){
+      this.age++;
+    }
+  }
+  var xiaoming = {
+    name: "小明",
+    age: 18,
+    sex:"男",
+    sayHello: function(){
+      console.log("Hello, My name is " + this.name,
+          this.age, this.sex);
+    },
+    grown: function(){
+      this.age++;
+    }
+  }
+
+  xiaoming.grown();
+  xiaoming.grown();
+  furong.grown();
+  furong.grown();
+
+  xiaoming.sayHello();
+  furong.sayHello();
+</script>
+</body>
+</html>

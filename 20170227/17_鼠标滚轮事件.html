@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body{ height: 60000px;}
+    div{ width: 200px; height: 200px;
+      background-color: yellowgreen;}
+  </style>
+</head>
+<body>
+<div></div>
+<script>
+  var oDiv = document.getElementsByTagName("div")[0];
+  //事件处理函数
+  function mousewhellHandler(e) {
+    e = e || window.event;
+    //阻止默认事件
+    if (e.preventDefault) {
+      e.preventDefault();
+    } else {
+      e.returnValue = false;
+    }
+
+    //Chrome, IE用的是event.wheelDelta;
+    if (e.wheelDelta) {
+      var direction = e.wheelDelta > 0 ? 1 : -1;
+    } else {
+      //火狐浏览器用的是e.detail;
+      var direction = e.detail > 0 ? -1 : 1;
+    }
+
+    oDiv.innerHTML = direction;
+  }
+
+  //这里不用根据不同的浏览器进行判断，因为事件添加了如果浏览器不认识 ;i报错的。
+  //给IE和Chrome添加事件
+  oDiv.onmousewheel = mousewhellHandler;
+  oDiv.addEventListener("DOMMouseScroll",
+      mousewhellHandler, false);
+</script>
+</body>
+</html>

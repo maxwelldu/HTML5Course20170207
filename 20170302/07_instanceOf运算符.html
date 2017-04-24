@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //类，构造函数
+  function Dog(){ }
+  function Cat() { }
+  Cat.prototype = new Dog(); //继承
+  var hellokitty = new Cat();//通过Cat,创建了一个猫的实例
+  console.log(hellokitty.constructor); //Dog
+  console.log(hellokitty instanceof Cat);//true
+  console.log(hellokitty instanceof Dog);//true
+
+</script>
+</body>
+</html>

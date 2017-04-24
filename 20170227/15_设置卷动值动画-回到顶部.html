@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body{ height:5000px; background-color: #ccc;}
+    .backtotop { position: fixed; width: 120px;
+      height: 120px;right:10px; bottom:30px;
+      background-color: yellowgreen; display: none; }
+  </style>
+</head>
+<body>
+<a href="javascript:;" class="backtotop" id="backtotop">回到顶部</a>
+<script src="js/tween.js"></script>
+<script>
+  var backtotop = document.getElementById("backtotop");
+  backtotop.onclick = function(){
+    scrollAnimate(0, 1000);
+  };
+  function scrollAnimate(target, time){
+    var frameNumber = 0;//帧编号
+    var start = document.body.scrollTop
+    || document.documentElement.scrollTop;
+    var distance = target - start;
+    var interval = 10;
+    var maxFrame = time / interval;
+
+    var timer = setInterval(function () {
+      frameNumber++;
+      if (frameNumber == maxFrame) clearInterval(timer);
+      document.body.scrollTop
+          = document.documentElement.scrollTop
+      = Tween.Elastic.easeIn(frameNumber, start, distance, maxFrame);
+    }, interval);
+  }
+  window.onscroll = function(){
+    var st = document.body.scrollTop
+        || document.documentElement.scrollTop;
+    backtotop.style.display = st > 500 ? "block" : "none";
+  }
+</script>
+</body>
+</html>

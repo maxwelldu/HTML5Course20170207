@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    window.onload = function () {
+      //表单难的语句，要写在window.onload里面
+      var form = document.getElementById("form");
+      var oMobile = document.getElementById("mobile");
+
+      //当表单提交的时候
+      form.onsubmit = function(){
+        var mobile = oMobile.value;
+        if (!/^1[\d]{10}$/.test(mobile)) {
+          alert("手机号格式不正确");
+          return false;
+        }
+        return true;
+      }
+    }
+  </script>
+</head>
+<body>
+<form action="" id="form">
+  <p>手机号：<input type="text" id="mobile"></p>
+  <p><input type="submit"></p>
+</form>
+</body>
+</html>

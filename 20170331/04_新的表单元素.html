@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="">
+		<p>
+			请输入你的年龄
+			<input type="number" min="1" max="123" step="1" />
+		</p>
+		<p>
+			请输入你的邮箱
+			<input type="email">
+		</p>
+		<p>
+			请输入你的网址：
+			<input type="url">
+		</p>
+		<p>
+			请输入你的电话
+			<input type="tel" pattern="^[\d]{11}$" />
+		</p>
+		<p>
+			请输入你的搜索词
+			<input type="search" autofocus>
+		</p>
+		<p>
+			请输入你的生日
+			<input type="date">
+		</p>
+		<p>
+			请选择你喜欢的颜色
+			<input type="color" id="color">
+		</p>
+		<p>
+			选择性别
+			<label>
+				<input type="radio" name="sex">男
+			</label>
+			<label>
+				<input type="radio" name="sex">女
+			</label>
+		</p>
+		<p>
+			请输入你的家乡
+			<input type="text" list="tishi">
+
+			<datalist id="tishi">
+				<option value="北京">北京</option>
+				<option value="上海">上海</option>
+				<option value="东莞">东莞</option>
+				<option value="东京">东京</option>
+			</datalist>
+		</p>
+		<p>
+			淘宝搜索：
+			<input type="text" placeholder="手机">
+		</p>
+		<p>
+			<input type="submit">
+		</p>
+	</form>
+
+	<script type="text/javascript">
+		var color = document.getElementById("color");
+		color.onchange = function(){
+			document.body.style.backgroundColor = this.value;
+		}
+
+
+
+	</script>
+
+	<form oninput="result.value=light.value">
+    <input type="range" name="light" min="0" max="1000" step="10">
+    <output name="result"></output>
+</form>
+
+
+</body>
+</html>

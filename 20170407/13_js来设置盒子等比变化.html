@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{
+			float: left;
+			width: 50%;
+			border: 1px solid #000;
+			max-width: 500px;
+			background: url(images/1.jpg) no-repeat;
+			background-size: cover;
+			box-sizing:border-box;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+	<div class="box"></div>
+
+	<script type="text/javascript">
+		//通过选择器得到元素们
+		var boxs = document.querySelectorAll(".box");
+
+		//屏幕尺寸被改变的时候执行 
+		window.onresize = set;
+
+		set();
+
+		function set(){
+			//var windowWidth = document.documentElement.clientWidth;
+			//盒子的计算后的宽度，找到0号盒子当代表，看看此时计算后的宽度是什么
+			var boxWidth = parseInt(getComputedStyle(boxs[0])["width"]);
+			//设置高度
+			boxs[0].style.height = boxWidth  / (560 / 300) + "px";
+			boxs[1].style.height = boxWidth  / (560 / 300) + "px";
+		}
+	</script>
+</body>
+</html>

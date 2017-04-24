@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body{
+      height:4444px;
+    }
+    div{
+      width: 200px;
+      height: 200px;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+<div></div>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script src="js/jquery.mousewheel.min.js"></script>
+<script>
+  $("div").mousewheel(function(event){
+    if (event.preventDefault) {
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+    $("div").html(event.deltaY);
+
+  })
+</script>
+</body>
+</html>

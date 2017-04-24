@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body div{
+			width: 500px;
+			height:300px;
+			background: #ccc;
+			float:left;
+			margin-right:5px;
+			margin-bottom:10px;
+		}
+		body div div {
+			width:500px;
+			height:250px;
+			border:1px solid #000;
+			display:none;
+		}
+		.active {
+			background:red;
+		}
+	</style>
+</head>
+<body>
+<script>
+window.onload = function(){
+	var t1 = new Tab("div1");
+	t1.autoPlay();
+	var t2 = new Tab("div2");
+	t2.autoPlay();
+	var t3 = new Tab("div3");
+	t3.autoPlay();
+	var t4 = new Tab("div4");
+	t4.autoPlay();
+	var t5 = new Tab("div5");
+	t5.autoPlay();
+}
+function Tab(id) {
+	this.oParent = document.getElementById(id);
+	this.aInput = this.oParent.getElementsByTagName("input");
+	this.aDiv = this.oParent.getElementsByTagName("div");
+	this.iNow = 0;
+	this.init();
+}
+Tab.prototype.init = function(){
+	var self = this;
+	for (var i = 0 ; i < this.aInput.length; i ++) {
+		this.aInput[i].index = i;
+		this.aInput[i].onclick = function(){
+			self.change(this);
+		}
+	}
+}
+Tab.prototype.change = function(obj){
+	for (var i = 0; i < this.aInput.length; i++) {
+		this.aInput[i].className = '';
+		this.aDiv[i].style.display = "none";
+	}
+	obj.className = "active";
+	this.aDiv[obj.index].style.display = "block";
+};
+Tab.prototype.autoPlay = function(){
+	var self = this;
+	setInterval(function(){
+		self.iNow++;
+		if (self.iNow>self.aInput.length-1) {
+			self.iNow = 0;
+		}
+		var obj = self.aInput[self.iNow];
+		self.change(obj);
+	}, 1000);
+}
+
+</script>
+	<div id="div1">
+		<input class="active" type="button" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div style="display:block;">1111</div>
+		<div>222</div>
+		<div>3333</div>
+	</div>
+	<div id="div2">
+		<input class="active" type="button" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div style="display:block;">1111</div>
+		<div>222</div>
+		<div>3333</div>
+	</div>
+	<div id="div3">
+		<input class="active" type="button" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div style="display:block;">1111</div>
+		<div>222</div>
+		<div>3333</div>
+	</div>
+	<div id="div4">
+		<input class="active" type="button" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div style="display:block;">1111</div>
+		<div>222</div>
+		<div>3333</div>
+	</div>
+	<div id="div5">
+		<input class="active" type="button" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div style="display:block;">1111</div>
+		<div>222</div>
+		<div>3333</div>
+	</div>
+</body>
+</html>

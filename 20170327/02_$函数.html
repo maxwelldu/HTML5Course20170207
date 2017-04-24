@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+      width: 200px;
+      height: 200px;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+<div id="box">I'm box</div>
+<script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+<script>
+  //jquery对象通过[0]转为原生对象
+//  $("#box")[0].style.backgroundColor = 'red';
+  try {
+    $("#box").style.backgroundColor = 'red';//错误的写法
+    //为了使用try, catch，了解抛出异常和捕获异常
+    throw new Error('抛出一个自定义异常');//
+  } catch(e) {
+    console.log(e);
+  }
+</script>
+</body>
+</html>

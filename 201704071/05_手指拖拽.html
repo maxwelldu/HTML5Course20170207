@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<meta name=viewport content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<style type="text/css">
+		img{
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<img src="images/pic-tmh-02.png" alt="" />
+
+	<script type="text/javascript">
+		//得到图片
+		var img = document.querySelector("img");
+
+		//手指距离图片左上角的误差
+		var deltaX , deltaY;
+		//信号量
+		var nowX = 0;
+		var nowY = 0;
+
+		//开始触摸
+		img.addEventListener("touchstart", function(event){
+			event.preventDefault();
+			deltaX = event.touches[0].clientX - nowX;
+			deltaY = event.touches[0].clientY - nowY;
+		}, false);
+
+		img.addEventListener("touchmove", function(event){
+			event.preventDefault();
+			//改变信号量
+			nowX = event.touches[0].clientX - deltaX;
+			nowY = event.touches[0].clientY  - deltaY;
+
+			img.style.left = nowX + "px";
+			img.style.top =  nowY + "px";
+		}, false);
+
+
+	</script>
+</body>
+</html>

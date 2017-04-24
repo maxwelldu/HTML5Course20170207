@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body{
+			background-color: #333;
+		}
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+			margin: 100px;
+		}
+		ul li{
+			float: left;
+			width: 107px;
+			height: 107px;
+			text-align: center;
+			position: relative;
+			margin-right: 50px;
+		}
+		ul li .yuan{
+			position: absolute;
+			top: 0;
+			left: 0;
+			transition:all 0.5s ease 0s;
+			width: 107px;
+			height: 107px;
+		}
+		ul li.no1 .yuan{background: url(images/a_1.png);}
+		ul li.no2 .yuan{background: url(images/a_2.png);}
+		ul li.no3 .yuan{background: url(images/a_3.png);}
+
+		ul li.no1:hover .yuan{background: url(images/a_1_h1.png);transform:rotate(360deg);}
+		ul li.no2:hover .yuan{background: url(images/a_2_h1.png);transform:rotate(360deg);}
+		ul li.no3:hover .yuan{background: url(images/a_3_h1.png);transform:rotate(360deg);}
+
+		ul li .zi{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 107px;
+			height: 107px;
+			line-height: 157px;
+		}
+		ul li .zi a{
+			display: block;
+			width: 107px;
+			height: 107px;
+			font-size: 14px;
+			color:white;
+			text-decoration: none;
+		}
+		.ico{
+			position: absolute;
+			top: 20px;
+			left: 50%;
+		}
+		.no1 .ico{margin-left: -23px;}
+		.no2 .ico{margin-left: -20px;}
+		.no3 .ico{margin-left: -17px;}
+	</style>
+</head>
+<body>
+	<ul>
+		<li class="no1">
+			<div class="yuan"></div>
+			<div class="zi"><a href="">学车流程</a></div>
+			<img src="images/tb_1.png"  class="ico" alt="" />
+		</li>
+		<li class="no2">
+			<div class="yuan"></div>
+			<div class="zi"><a href="">报名缴费</a></div>
+			<img src="images/tb_2.png"  class="ico" alt="" />
+		</li>
+		<li class="no3">
+			<div class="yuan"></div>
+			<div class="zi"><a href="">班车信息</a></div>
+			<img src="images/tb_3.png"  class="ico" alt="" />
+		</li>
+	</ul>
+</body>
+</html>
