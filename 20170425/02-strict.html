@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      "use strict";
+      var aa = 10, bb = 20;
+      // a = 10;
+
+      function demo(){
+        'use strict';
+        // color = 'red';
+        console.log(this); //undefined
+        // this.color = 'blue';
+      }
+      demo();
+
+      // function test(a,a,a){
+      //   console.log(a,a,a);
+      // }
+      // test(1,2,3);
+
+      var obj = {
+        color: 'red',
+        color: 'blue'
+      }
+      console.log(obj);
+
+
+    </script>
+  </body>
+</html>

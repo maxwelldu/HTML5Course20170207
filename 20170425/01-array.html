@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var arr = [];
+      console.log(Array.isArray(arr));//t
+      console.log(arr instanceof Array);//t
+      console.log(arr.constructor === Array);//t
+      console.log(Object.prototype.toString.call(arr) === "[object Array]");//t
+
+      function demo(){
+        console.log(Array.isArray(arguments));//f
+        console.log(arguments instanceof Array);//f
+        console.log(arguments.constructor === Array);//f
+        console.log(Object.prototype.toString.call(arguments) === '[object Array]');//f
+      }
+      demo();
+
+      var numbers = [1,2,3,4,5];
+      var newNumbers = numbers.map(function(item){
+        return item * 5;
+      });
+      console.log(newNumbers);//5,10,15,20,25
+
+
+    /**
+    * 实现map方法
+     * @arr 	原数组
+     * @fn 		回调函数
+     * return 	新数组
+     **/
+    function map (arr, fn) {
+    	// 将每一次执行的结果保存，并返回
+    	var result = [];	// 返回结果的容器
+    	// 遍历数组并执行每一次循环
+    	for(var i = 0; i < arr.length; i++) {
+    		// 参数：value， index， arr
+    		result.push(fn.call(arr, arr[i], i, arr))
+    		// result[i] = fn(arr[i], i, arr)
+    	}
+    	// 循环执行之后，我们将结果返回
+    	return result;
+    }
+    var num = [1,2,3];
+    console.log(map(num, function(item){
+      return item * 3;
+    }));
+
+
+    function isBigEnough(element, index, array) {
+      return (element >= 10);
+    }
+    var passed = [2, 5, 8, 1, 4].some(isBigEnough);
+    // passed is false
+    passed = [12, 5, 8, 1, 4].some(isBigEnough);
+    // passed is true
+
+  /**
+   * 实现some方法
+   * @arr 	原数组
+   * @fn 		回调函数
+   * return 	布尔值
+   ***/
+  function some (arr, fn) {
+  	// 遍历数组
+  	for (var i = 0; i < arr.length; i++) {
+  		// 根据回调函数执行结果来判断
+  		if (fn(arr[i], i, arr)) {
+  			return true
+  		}
+  	}
+  	// 如果所有成员都不满足
+  	return false;
+  }
+  passed = some([2,5,8,1,4], function(current){
+    return current > 10;
+  });
+  console.log(passed);
+
+
+    </script>
+  </body>
+</html>
