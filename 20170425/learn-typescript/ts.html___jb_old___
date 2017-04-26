@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/typescript">
+      var color:string = 'green';
+      color = 3;
+      console.log(color);
+
+      var num:number = 100;
+      var isRight:boolean = true;
+      var num:any = "green";
+      var arr:number[] = [234,123];
+      var arr:any[] = ['red', 123];
+      console.log(arr);
+
+      enum Color {
+        red,
+        green,
+        blue
+      }
+      console.log(Color[1])
+      console.log(Color['blue'])
+      console.log(Color.red)
+
+      function add(num1: number, num2?: number, num3?: number):number{
+        if(num2) {
+          return num1 + num2;
+        } else {
+          return num1 + 1;
+        }
+      }
+
+      class Book {
+        static color:string;
+        static num:number = 100;
+        title: string;
+        abc: string;
+        say: any;
+        constructor(title:string){
+          this.title = title;
+          this.abc = 'abc';
+          this.say = function say():void{}
+        }
+        getTitle():string{
+          return this.title;
+        }
+        static sayHello():string{
+          return 'hello';
+        }
+      }
+
+      class JsBook extends Book {
+        num:number = 200;
+        price:number;
+        constructor(title:string, price:number) {
+          super(title);
+          this.price = price;
+        }
+        getTitle():string{
+          return 'success';
+        }
+        getColor():string{
+          return 'red';
+        }
+      }
+
+
+      interface Star {
+      names: string;
+      age?: number;
+      }
+
+      interface add {
+      (num1:number, num2?:number):number
+      }
+    </script>
+    <script type="text/javascript" src="js/typescript.min.js"></script>
+    <script type="text/javascript" src="js/typescript.compile.js"></script>
+  </body>
+</html>

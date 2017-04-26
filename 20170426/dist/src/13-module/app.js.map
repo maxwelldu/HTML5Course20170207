@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/13-module/app.js"],"names":["origin","console","log"],"mappings":";;AAGA;;;;;;AACA,IAAIA,SAAS,oBAAU,CAAV,EAAY,CAAZ,CAAb,C,CAJA;;;;AAKAC,QAAQC,GAAR,CAAYF,MAAZ","file":"app.js","sourcesContent":["/**\r\n * Created by sks on 2017/4/26.\r\n */\r\nimport Point from \"./point\";\r\nlet origin = new Point(0,0);\r\nconsole.log(origin);\r\n"]}
