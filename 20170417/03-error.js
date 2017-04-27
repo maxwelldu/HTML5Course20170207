@@ -8,11 +8,12 @@ var http = require("http");
 //创建服务器
 var server = http.createServer(function(req,res){
   // 随机生成一个数字
-  var num = parseInt(Math.random() * 999);
+  var num = parseInt(Math.random() * 9);
+  console.log(num);
   // 如果是666，那么抛出错误
-  if(num == 666){
+  if(num == 6){
     alert("中奖用户" + req.connection.remoteAddress)
-    throw new Errow("错误");
+    throw new Error("错误");
   }
 
   res.writeHead(200, {"content-type":"text/html;charset=UTF-8"});
@@ -21,4 +22,4 @@ var server = http.createServer(function(req,res){
 });
 
 //监听3000端口
-server.listen(3000,"192.168.50.44");
+server.listen(3000,"192.168.50.67");
