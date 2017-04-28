@@ -1,8 +1,6 @@
 var handler = {
   get: function(target, name){
-    return name in target?
-        target[name] :
-        37;
+    return name in target ? target[name] : 37;
   },
   set: function(obj,prop,value){
     // console.log(obj,prop, value);
