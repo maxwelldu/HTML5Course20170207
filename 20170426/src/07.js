@@ -4,7 +4,7 @@
 //类的定义
 class Animal {
   //ES6中新型构造器
-  constructor(name) {
+  constructor(name) { // var a = new Animal('panda')
     this.name = name;
   }
   //实例方法
