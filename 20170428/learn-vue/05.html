@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script>
+  var vm = new Vue({
+    data: {
+      a: 1
+    },
+    created: function () {
+      // `this` 指向 vm 实例
+      console.log('a is: ' + this.a)
+    }
+  })
+  // -> "a is: 1"
+</script>
+</body>
+</html>

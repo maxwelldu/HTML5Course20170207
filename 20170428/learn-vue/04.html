@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script>
+  var data = { a: 1 }
+  var vm = new Vue({
+    el: '#example',
+    data: data,
+    methods: {
+      myMethod(){
+        console.log(1);
+      }
+    }
+  })
+  console.log(vm.$data === data); // -> true
+  console.log(vm.$el === document.getElementById('example')); // -> true
+  // $watch 是一个实例方法
+  vm.$watch('a',newVal => this.myMethod())
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+  {{ msg }}
+  <span v-once>This will never change: {{ msg }}</span>
+
+  {{ rawHtml }}
+  <div v-once>{{ rawHtml }}</div>
+  <div v-html="rawHtml"></div>
+  <!--<script>window.location='http://www.ucai.cn';</script>-->
+</div>
+<script>
+  var rawHtml = '<script>window.location="http://www.ucai.cn";</script>';
+  var app = new Vue({
+    el: "#app",
+    data: {
+      msg: "Hello",
+      rawHtml: rawHtml
+    }
+  })
+</script>
+
+<script>
+  document.body.innerHTML = rawHtml;
+</script>
+</body>
+</html>
