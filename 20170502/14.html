@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div class="main">
+<h1 v-if="ok">Yes</h1>
+<h1 v-else>No</h1>
+
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
+
+<div v-if="Math.random() > 0.5">
+  Now you see me
+</div>
+<div v-else>
+  Now you don't
+</div>
+
+
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else-if="type === 'C'">
+  C
+</div>
+<div v-else>
+  Not A/B/C
+</div>
+
+<template v-if="loginType === 'username'">
+  <label>Username</label>
+  <input placeholder="Enter your username">
+</template>
+<template v-else>
+  <label>Email</label>
+  <input placeholder="Enter your email address">
+</template>
+<input type="button" value="切换登录方式" @click="toggleLogin">
+
+<template v-if="loginType === 'username'">
+  <label>Username</label>
+  <input placeholder="Enter your username" key="username-input">
+</template>
+<template v-else>
+  <label>Email</label>
+  <input placeholder="Enter your email address" key="email-input">
+</template>
+
+<h1 v-show="ok">Hello!</h1>
+
+</div>
+<script>
+  var vm = new Vue({
+    el: ".main",
+    data: {
+      ok: true,
+      type: 'D',
+      loginType: 'username' //email
+    },
+    methods: {
+      toggleLogin(){
+        this.loginType = this.loginType === 'username' ? 'email' : 'username';
+      }
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="vue.js"></script>
+  <style>
+    .main div {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+    }
+    .static{
+      color: blue;
+    }
+    .active {
+      background-color: yellowgreen;
+    }
+    .text-danger {
+      color: red;
+      font-weight:bold;
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+  <div v-bind:class="[activeClass, errorClass]">
+  </div>
+</div>
+<script>
+  var vm = new Vue({
+    el: ".main",
+    data: {
+      activeClass: 'active',
+      errorClass: 'text-danger'
+    },
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="vue.js"></script>
+  <style>
+    .main div {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+    }
+    .static{
+      color: blue;
+    }
+    .active {
+      background-color: yellowgreen;
+    }
+    .text-danger {
+      color: red;
+      font-weight:bold;
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+  <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">
+    test
+  </div>
+  <div v-bind:style="styleObject">test</div>
+  <div v-bind:style="[baseStyles, overridingStyles]">
+    test array styles
+  </div>
+</div>
+<script>
+  var vm = new Vue({
+    el: ".main",
+    data: {
+      activeColor: 'green',
+      fontSize: 18,
+      styleObject: {
+        color: 'red',
+        fontSize: '13px',
+        transform: "rotate(180deg)"
+      },
+      baseStyles: {
+        color: "white",
+        backgroundColor: "black",
+        fontSize: '30px'
+      },
+      overridingStyles:{
+        fontSize: "50px",
+      }
+
+    }
+  });
+</script>
+</body>
+</html>

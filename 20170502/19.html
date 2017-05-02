@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input v-model="message" placeholder="edit me">
+    <p>Message is: {{ message }}</p>
+
+    <span>Multiline message is:</span>
+    <p style="white-space: pre">{{ message }}</p>
+    <br>
+    <textarea v-model="message" placeholder="add multiple lines"></textarea>
+
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames }}</span>
+  </div>
+  <script type="text/javascript">
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: 'test',
+        checked: true,
+        checkedNames: [
+          'John',
+          'Jack'
+        ]
+      }
+    })
+  </script>
+
+
+  <div id="example-4" class="demo">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+  </div>
+<script type="text/javascript">
+new Vue({
+el: '#example-4',
+data: {
+  picked: ''
+}
+})
+</script>
+
+
+<div id="example-5" class="demo">
+  <select v-model="selected">
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <span>Selected: {{ selected }}</span>
+</div>
+<script type="text/javascript">
+new Vue({
+el: '#example-5',
+data: {
+  selected: null
+}
+})
+</script>
+
+<div id="example-6" class="demo">
+  <select v-model="selected" multiple style="width: 50px">
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <br>
+  <span>Selected: {{ selected }}</span>
+</div>
+<script type="text/javascript">
+new Vue({
+el: '#example-6',
+data: {
+  selected: []
+}
+})
+</script>
+
+<div id="example-7">
+  <select v-model="selected">
+    <option v-for="option in options" v-bind:value="option.value">
+      {{ option.text }}
+    </option>
+  </select>
+  <span>Selected: {{ selected }}</span>
+</div>
+<script type="text/javascript">
+new Vue({
+el: '#example-7',
+data: {
+  selected: 'A',
+  options: [
+    { text: 'One', value: 'A' },
+    { text: 'Two', value: 'B' },
+    { text: 'Three', value: 'C' }
+  ]
+}
+})
+</script>
+
+<div id="example-8">
+  <!-- 当选中时，`picked` 为字符串 "a" -->
+  <input type="radio" v-model="picked" value="a">
+  <input type="radio" v-model="picked" value="b">
+  {{ picked }}
+  <!-- `toggle` 为 true 或 false -->
+  <input type="checkbox" v-model="toggle">
+  {{ toggle }}
+  <!-- 当选中时，`selected` 为字符串 "abc" -->
+  <select v-model="selected">
+    <option value="abc">ABC</option>
+    <option value="def">DEF</option>
+    <option value="hij">HIJ</option>
+  </select>
+  {{ selected }}
+
+
+  <input
+  type="checkbox"
+  v-model="toggle"
+  v-bind:true-value="a"
+  v-bind:false-value="b"
+>
+{{ a }}
+{{ b }}
+</div>
+<script type="text/javascript">
+new Vue({
+el: '#example-8',
+data: {
+  a: 1,
+  b: 0,
+  picked: true,
+  toggle: true,
+  selected: true,
+}
+})
+</script>
+</body>
+</html>

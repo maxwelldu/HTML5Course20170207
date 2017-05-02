@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="todo-list-example">
+    <ul>
+      <a
+        is="todo-item"
+        v-for="(todo, index) in todos"
+        v-bind:title="todo"
+        v-if="!todo.isCompleted"
+      ></a>
+    </ul>
+
+    <ul v-if="shouldRenderTodos">
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ul>
+
+    <div v-for="todo in todos" :key="todo.id">
+      <!-- 内容 -->
+      {{ todo.text }}
+    </div>
+  </div>
+<script type="text/javascript">
+Vue.component('todo-item', {
+template: '\
+  <li>\
+    {{ title.text }}\
+  </li>\
+',
+props: ['title']
+})
+var app = new Vue({
+el: '#todo-list-example',
+data: {
+  newTodoText: '',
+  shouldRenderTodos: false,
+  todos: [
+    {text:'Do the dishes', isCompleted:true},
+    {text:'Take out the trash', isCompleted:true},
+    {text:'Mow the law', isCompleted:false}
+  ]
+},
+})
+</script>
+</body>
+</html>

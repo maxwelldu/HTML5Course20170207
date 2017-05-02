@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="vue.js"></script>
+  <style>
+    .main div {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+    }
+    .static{
+      color: blue;
+    }
+    .active {
+      background-color: yellowgreen;
+    }
+    .text-danger {
+      color: red;
+      font-weight:bold;
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+  <my-component class="active static text-danger"></my-component>
+  <my-component v-bind:class="{ active: isActive }"></my-component>
+</div>
+<script>
+  Vue.component('my-component', {
+    template: '<p class="foo bar">Hi</p>'
+  })
+  var vm = new Vue({
+    el: ".main",
+    data: {
+      isActive: true
+    }
+  });
+</script>
+</body>
+</html>
