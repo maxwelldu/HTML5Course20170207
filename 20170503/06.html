@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="vue.js"> </script>
+  </head>
+  <body>
+  <div id="example-2">
+    <child message="hello" world=" web 06"></child>
+  </div>
+  <script type="text/javascript">
+    Vue.component('child', {
+      // 声明 props
+      props: ['message', "world"],
+      // 就像 data 一样，prop 可以用在模板内
+      // 同样也可以在 vm 实例中像 “this.message” 这样使用
+      template: '<span>{{ message }} {{ world }}</span>'
+    })
+    new Vue({
+      el: '#example-2'
+    })
+  </script>
+  </body>
+</html>

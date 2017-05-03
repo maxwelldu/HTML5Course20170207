@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="vue.js"> </script>
+  </head>
+  <body>
+  <div id="example-2">
+    <!-- kebab-case in HTML -->
+    <child my-message="message"></child>
+  </div>
+  <script type="text/javascript">
+  Vue.component('child', {
+    // camelCase in JavaScript
+    props: ['myMessage'],
+    template: '<span>{{ myMessage }}</span>'
+  })
+  new Vue({
+    el: '#example-2'
+  })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="vue.js"> </script>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model.lazy="msg" >
+      {{ msg }}
+      <input v-model="msg2" >
+      {{ msg2 }}
+
+      <input v-model.number="age" type="number">
+      {{ age }}
+      <input v-model="age2" type="number">
+      {{ age2 }}
+
+      <input v-model.trim="username">
+      {{ username }}
+      <input v-model="username2">
+      {{ username2 }}
+    </div>
+    <script type="text/javascript">
+      var app = new Vue({
+        el: "#app",
+        data: {
+          msg: "",
+          msg2: "",
+          age: 0,
+          age2: 0,
+          username: "",
+          username2: ""
+        }
+      })
+    </script>
+  </body>
+</html>

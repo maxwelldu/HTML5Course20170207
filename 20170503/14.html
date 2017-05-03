@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html> <head> <meta charset="utf-8"> <title></title> <script type="text/javascript" src="vue.js"> </script> </head>
+  <body>
+  <div id="counter-event-example">
+    <my-component v-on:click.native="doTheThing"></my-component>
+  </div>
+  <script type="text/javascript">
+    Vue.component('my-component', {
+      template: "<span>span</span>",
+    })
+    new Vue({
+      el: '#counter-event-example',
+      methods: {
+        doTheThing: function(){
+          console.log("do the thing");
+        }
+      }
+    })
+  </script>
+  </body>
+</html>

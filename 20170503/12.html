@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html> <head> <meta charset="utf-8"> <title></title> <script type="text/javascript" src="vue.js"> </script> </head>
+  <body>
+  <div id="counter-event-example">
+    <p>{{ total }}</p>
+    <button-counter v-on:totalincrement="incrementTotal"></button-counter>
+    <button-counter v-on:totalincrement="incrementTotal"></button-counter>
+  </div>
+  <script type="text/javascript">
+    Vue.component('button-counter', {
+      template: '<button v-on:click="counterIncrement">{{ counter }}</button>',
+      data: function () { return { counter: 0 } },
+      methods: {
+        counterIncrement: function () {
+          this.counter += 1
+          this.$emit('totalincrement')
+        }
+      },
+    })
+    new Vue({
+      el: '#counter-event-example',
+      data: { total: 0 },
+      methods: {
+        incrementTotal: function () {
+          this.total += 1
+        }
+      }
+    })
+  </script>
+  </body>
+</html>

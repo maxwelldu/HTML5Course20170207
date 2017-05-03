@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html> <head> <meta charset="utf-8"> <title></title> <script type="text/javascript" src="vue.js"> </script> </head>
+  <body>
+  <div id="counter-event-example">
+    <input v-model="something">
+    {{ something }}
+
+    <input v-bind:value="something" v-on:input="something = $event.target.value">
+    
+  </div>
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#counter-event-example',
+      data: function(){
+        return {something: "some"}
+      }
+    })
+  </script>
+  </body>
+</html>
