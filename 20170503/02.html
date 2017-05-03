@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="vue.js"> </script>
+  </head>
+  <body>
+    <div id="example">
+        <my-component></my-component>
+    </div>
+    <script type="text/javascript">
+    // 注册
+    Vue.component('my-component', {
+      template: '<div>A custom component!</div>'
+    })
+    // 创建根实例
+    new Vue({
+      el: '#example'
+    })
+    </script>
+  </body>
+</html>

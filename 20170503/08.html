@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="vue.js"> </script>
+  </head>
+  <body>
+  <div id="example-2">
+    <div>
+      <input v-model="parentMsg">
+      <br>
+      <child v-bind:my-message="parentMsg"></child>
+      <child :my-message="parentMsg"></child>
+
+      <!-- 传递了一个字符串 "1" -->
+      <comp some-prop="1"></comp>
+      <!-- 传递实际的 number -->
+      <comp v-bind:some-prop="1"></comp>
+    </div>
+  </div>
+  <script type="text/javascript">
+  Vue.component('comp', {
+    props: ['someProp'],
+    template: '<h2>{{ someProp }}</h2>'
+  });
+  Vue.component('child', {
+    // camelCase in JavaScript
+    props: ['myMessage'],
+    template: '<span>{{ myMessage }}</span>'
+  })
+  new Vue({
+    el: '#example-2',
+    data: {
+      parentMsg: 'test'
+    }
+  })
+    </script>
+  </body>
+</html>

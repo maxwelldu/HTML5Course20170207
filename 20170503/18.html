@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html> <head> <meta charset="utf-8"> <title></title>  </head>
+<script src="./currency-validator.js"></script>
+<script type="text/javascript" src="vue.js"> </script>
+<body>
+<div id="app">
+  <foo></foo>
+  <hr />
+  <bar></bar>
+</div>
+<script type="text/javascript">
+//注册一个空的Vue实例，作为“中转站”
+var eventBus = new Vue();
+//foo组件
+var foo = {
+    template: '<div><p>the count of foo is {{ fooCount }} </p>' +
+    '<button @click="addBar">add bar\'s count</button></div>',
+    data: function (){
+      return {
+        fooCount: 0
+      }
+    },
+    methods: {
+      addBar: function(){
+          //触发addBar事件
+          eventBus.$emit('addBar');
+      }
+    },
+    mounted: function(){
+      eventBus.$on('addFoo', function(){
+        this.fooCount ++
+      }.bind(this));
+    }
+};
+var bar = {
+    template: '<div><p>the count of bar is {{ barCount }} </p>' +
+    '<button @click="addFoo">add bar\'s count</button></div>',
+  data: function(){
+    return {
+      barCount: 0
+    }
+  },
+  methods: {
+    addFoo: function(){
+      eventBus.$emit('addFoo');
+    }
+  },
+  //在组件创建的钩子函数中监听事件
+  mounted: function(){
+    eventBus.$on('addBar', function(){
+      this.barCount++;
+    }.bind(this))
+  }
+}
+new Vue({
+  el: '#app',
+  components: {
+    foo, bar
+  }
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿add vue2
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#	modified:   20170428/learn-vue/02-component1.html
+#	modified:   20170428/learn-vue/06.html
+#	new file:   20170502/01.html
+#	new file:   20170502/02.html
+#	new file:   20170502/03.html
+#	new file:   20170502/04.html
+#	new file:   20170502/05.html
+#	new file:   20170502/06.html
+#	new file:   20170502/07.html
+#	new file:   20170502/08.html
+#	new file:   20170502/09.html
+#	new file:   20170502/10.html
+#	new file:   20170502/11.html
+#	new file:   20170502/12.html
+#	new file:   20170502/13.html
+#	new file:   20170502/14.html
+#	new file:   20170502/15.html
+#	new file:   20170502/16.html
+#	new file:   20170502/17.html
+#	new file:   20170502/18.html
+#	new file:   20170502/19.html
+#	new file:   20170502/20.html
+#	new file:   20170502/vue.js
+#	new file:   20170502/vue1/.babelrc
+#	new file:   20170502/vue1/.eslintrc.js
+#	new file:   20170502/vue1/.gitignore
+#	new file:   20170502/vue1/README.md
+#	new file:   20170502/vue1/build/build.js
+#	new file:   20170502/vue1/build/check-versions.js
+#	new file:   20170502/vue1/build/dev-client.js
+#	new file:   20170502/vue1/build/dev-server.js
+#	new file:   20170502/vue1/build/utils.js
+#	new file:   20170502/vue1/build/vue-loader.conf.js
+#	new file:   20170502/vue1/build/webpack.base.conf.js
+#	new file:   20170502/vue1/build/webpack.dev.conf.js
+#	new file:   20170502/vue1/build/webpack.prod.conf.js
+#	new file:   20170502/vue1/build/webpack.test.conf.js
+#	new file:   20170502/vue1/config/dev.env.js
+#	new file:   20170502/vue1/config/index.js
+#	new file:   20170502/vue1/config/prod.env.js
+#	new file:   20170502/vue1/config/test.env.js
+#	new file:   20170502/vue1/index.html
+#	new file:   20170502/vue1/src/App.vue
+#	new file:   20170502/vue1/src/assets/logo.png
+#	new file:   20170502/vue1/src/components/Hello.vue
+#	new file:   20170502/vue1/src/main.js
+#	new file:   20170502/vue1/src/router/index.js
+#	new file:   20170502/vue1/static/.gitkeep
+#	new file:   20170502/vue1/test/e2e/custom-assertions/elementCount.js
+#	new file:   20170502/vue1/test/e2e/nightwatch.conf.js
+#	new file:   20170502/vue1/test/e2e/runner.js
+#	new file:   20170502/vue1/test/e2e/specs/test.js
+#	new file:   20170502/vue1/test/unit/.eslintrc
+#	new file:   20170502/vue1/test/unit/index.js
+#	new file:   20170502/vue1/test/unit/karma.conf.js
+#	new file:   20170502/vue1/test/unit/specs/Hello.spec.js
+#
+

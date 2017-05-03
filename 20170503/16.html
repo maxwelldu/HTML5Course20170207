@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html> <head> <meta charset="utf-8"> <title></title> <script type="text/javascript" src="vue.js"> </script> </head>
+  <body>
+  <div id="counter-event-example">
+    <currency-input value="10" v-model="price"></currency-input>
+  </div>
+  <script type="text/javascript">
+    Vue.component('currency-input', {
+      template: '\
+        <span>\
+          $\
+          <input\
+            ref="input"\
+            v-bind:value="value"\
+            v-on:input="updateValue($event.target.value)"\
+          >\
+        </span>\
+      ',
+      props: ['value'],
+      methods: {
+        // 不是直接更新值，而是使用此方法来对输入值进行格式化和位数限制
+        updateValue: function (value) {
+          var formattedValue = value
+            // 删除两侧的空格符
+            .trim()
+            // 保留 2 小数位
+            .slice(0, value.indexOf('.') + 3)
+          console.log(value, formattedValue);
+          // 如果值不统一，手动覆盖以保持一致
+          if (formattedValue !== value) {
+            this.$refs.input.value = formattedValue
+          }
+          // 通过 input 事件发出数值
+          this.$emit('input', Number(formattedValue))
+        }
+      }
+    })
+    var app = new Vue({
+      el: '#counter-event-example',
+      data: function(){
+        return {price:10.11}
+      }
+    })
+  </script>
+  </body>
+</html>

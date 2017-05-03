@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="vue.js"> </script>
+  </head>
+  <body>
+  <div id="example-2">
+    <example :prop-a="1" prop-b="str" prop-c="abc" :prop-d="300" :prop-f="16"></example>
+  </div>
+  <script type="text/javascript">
+  Vue.component('example', {
+    template: "<div>{{ propA }} {{ propB }} {{ propC }} {{ propD }} {{ propE.message }} {{ propF }}</div>",
+  props: {
+    // 基础类型检测 （`null` 意思是任何类型都可以）
+    propA: Number,
+    // 多种类型
+    propB: [String, Number],
+    // 必传且是字符串
+    propC: {
+      type: String,
+      required: true
+    },
+    // 数字，有默认值
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // 数组／对象的默认值应当由一个工厂函数返回
+    propE: {
+      type: Object,
+      default: function () {
+        return { message: 'hello' }
+      }
+    },
+    // 自定义验证函数
+    propF: {
+      validator: function (value) {
+        return value > 10
+      }
+    }
+  }
+})
+  new Vue({
+    el: '#example-2',
+  })
+    </script>
+  </body>
+</html>

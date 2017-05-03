@@ -13,12 +13,12 @@
       placeholder="Add a todo"
     >
     <ul>
-      <a
+      <li
         is="todo-item"
         v-for="(todo, index) in todos"
         v-bind:title="todo"
         v-on:remove="todos.splice(index, 1)"
-      ></a>
+      ></li>
     </ul>
   </div>
 <script type="text/javascript">

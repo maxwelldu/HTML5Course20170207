@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="vue.js"> </script>
+  </head>
+  <body>
+  <div id="example-2">
+    <child :initial-person="person"></child>
+  </div>
+  <script type="text/javascript">
+  Vue.component('child', {
+    props: ['initialPerson'],
+    template: '<input v-model:value="initialPerson.name" ><span>{{ initialPerson.name }} {{ initialPerson.age }}</span>'
+  })
+  new Vue({
+    el: '#example-2',
+    data: {
+      person: {
+        name: "maxwell",
+        age: 18
+      }
+    }
+  })
+    </script>
+  </body>
+</html>
