@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		this is a vue app
+		{{ message }}
+	</div>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: function(){
+				return {
+					message: "hello"
+				}
+			},
+			beforeCreate: function(){
+				console.log('before create');
+			},
+			created: function(){
+				console.log('created');
+			},
+			beforeMount: function(){
+				console.log('before mount');
+			},
+			mounted: function(){
+				console.log('mounted');
+			},
+			beforeUpdate: function(){
+				console.log('before update');
+			},
+			updated: function(){
+				console.log('updated');
+			},
+			beforeDestroy: function(){
+				console.log('before destroy');
+			},
+			destroyed: function(){
+				console.log('destroyed');
+			},
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <user-profile ref="profile"></user-profile>
+</div>
+  <script>
+    Vue.component('user-profile', {
+      template: '<div> this is a user profile page </div>',
+    });
+    var vm = new Vue({
+      el: '#app',
+    })
+    console.log(vm.$refs.profile);
+  </script>
+</body>
+</html>

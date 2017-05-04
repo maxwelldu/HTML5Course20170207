@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    .red{background:red;}
+    .blue{background:blue;}
+  </style>
+</head>
+<body>
+<div id="app">
+  <async-example></async-example>
+</div>
+  <script>
+    Vue.component('async-example', function (resolve, reject) {
+      setTimeout(function () {
+        // Pass the component definition to the resolve callback
+        var redtemplate = {template:'<div class="red">red component</div>'}
+        var bluetemplate = {template:'<div class="blue">blue component</div>'}
+        var rand = parseInt(Math.random() * 2) + 1;
+        if (rand === 1) {
+          resolve(redtemplate);
+        } else if (rand === 2) {
+          resolve(bluetemplate);
+        } else {
+          reject('渲染错误');
+        }
+      }, 1000)
+    })
+    var vm = new Vue({
+      el: '#app',
+    })
+  </script>
+</body>
+</html>

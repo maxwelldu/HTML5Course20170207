@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    .card{
+      border-radius: 10px;
+      background: #e4e4e4;
+      width:200px;
+      height:300px;
+      text-align:center;
+    }
+    .card img{
+      width:150px;
+      margin-top:10px;
+    }
+    .card p{
+      margin-top: 80px;
+      background: lightgreen;
+      color:white;
+      font-weight: bold;
+      line-height:35px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <my-component
+    :foo="baz"
+    :bar="qux"
+    @event-a="doThis"
+    @event-b="doThat"
+  >
+    <img slot="icon" src="logo.png">
+    <p slot="main-text">Hello!</p>
+  </my-component>
+</div>
+  <script>
+    Vue.component('my-component', {
+      template: '<div class="card">\
+      <span @click="clickicon">icon</span>\
+      <span @click="clicktext">text</span>\
+      <slot name="icon"></slot>\
+      <slot name="main-text"></slot>\
+      </div>',
+      props:['foo', 'bar'],
+      methods: {
+        clickicon: function(){
+          console.log('click icon');
+          this.$emit("event-a");
+        },
+        clicktext: function(){
+          console.log('click text');
+          this.$emit('event-b');
+        }
+      }
+    });
+    var vm = new Vue({
+      el: '#app',
+      data: function(){
+        return {
+          baz: "baz text",
+          qux: "qux text"
+        }
+      },
+      methods:{
+        doThis: function(){
+          console.log('do this');
+        },
+        doThat: function(){
+          console.log('do that');
+        }
+      }
+    })
+  </script>
+</body>
+</html>

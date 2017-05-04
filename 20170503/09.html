@@ -10,21 +10,21 @@
     <child initial-counter="10"></child>
   </div>
   <script type="text/javascript">
-  Vue.component('child', {
-    props: ['initialCounter'],
-    data: function () {
-      return { counter: this.initialCounter }
-    },
-    computed: {
-      normalizedCounter: function () {
-        return this.initialCount
-      }
-    }
-    template: '<span>{{ counter }} {{ normalizedCounter }}</span>'
-  })
-  new Vue({
-    el: '#example-2',
-  })
+      Vue.component('child', {
+        props: ['initialCounter'],
+        data: function () {
+          return { counter: this.initialCounter }
+        },
+        computed: {
+          normalizedCounter: function () {
+            return this.initialCount
+          }
+        }
+        template: '<span>{{ counter }} {{ normalizedCounter }}</span>'
+      })
+      new Vue({
+        el: '#example-2',
+      })
     </script>
   </body>
 </html>
