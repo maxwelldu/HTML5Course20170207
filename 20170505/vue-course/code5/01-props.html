@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h3>父组件中使用了count</h3>
+			<p>{{count}}</p>
+			<custom-component :count="count" @increment-click="countHandle"></custom-component>
+		</div>
+		<script>
+
+		//自定义事件 
+
+			//全局组件
+			Vue.component('custom-component',{
+				props:['count'],
+				data(){
+					return {
+						incrementCount:this.count  //作为局部这个组件的data的初始值
+					}
+				},
+				computed:{
+					incrementCount2(){
+						return this.incrementCount
+					}
+				},
+				template:`
+					<div>
+						<h2>我是一个自定义的组件</h2>
+						<input type="button" value="改变count的值" @click="changeCount" />
+						{{incrementCount2}}
+					</div>
+				`,
+				methods:{
+					changeCount(){
+						this.incrementCount++;
+						//通知父组件 发生了改变
+						this.$emit("increment-click")	
+					}
+				}
+			})
+
+			new Vue({
+				el:"#app",
+				data:{
+					count:0
+				},
+				methods:{
+					countHandle(){
+						//alert("子组件点击了");
+						this.count++;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

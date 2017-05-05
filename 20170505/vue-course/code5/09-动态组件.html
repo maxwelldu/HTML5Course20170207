@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <style>
+            
+        </style>
+        <script src="./vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <input type="button" value="切换到第1个组件" @click="tabComponent(1)" />
+            <input type="button" value="切换到第2个组件" @click="tabComponent(2)"/>
+            <input type="button" value="切换到第3个组件" @click="tabComponent(3)"/>
+            <keep-alive>
+                <component :is="current"></component>
+            </keep-alive>
+            
+        </div>
+        <script>
+            /*动态组件*/
+
+            var custom1 = Vue.component("custom1",{
+                template:`<div @click="changeDivbg">我是第1个组件</div>`,
+                methods:{
+                    changeDivbg(ev){
+                        ev.target.style.background = "red";
+                    }
+                }
+            });
+            var custom2 = Vue.component("custom2",{
+                template:`<div>我是第2个组件</div>`
+            })
+             var custom3  = Vue.component("custom3",{
+                template:`<div>我是第3个组件</div>`
+            })
+
+            new Vue({
+                el:"#app",
+                data:{
+                    current:custom1
+                },
+                methods:{
+                    tabComponent(index){
+                        if(index === 1){
+                            this.current = custom1
+                        }else if(index === 2){
+                            this.current = custom2
+                        }else if(index === 3){
+                            this.current = custom3
+                        }
+                    }
+                }
+            })
+
+        </script>
+    </body>
+</html>

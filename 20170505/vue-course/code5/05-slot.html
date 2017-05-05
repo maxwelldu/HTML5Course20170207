@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>自定义组件</h2>
+			<custom>
+				<!--渲染的数据是父组件中的数据-->
+				{{message}}
+			</custom>
+		</div>
+		<script>
+			//定制模板 div
+			// 父组件模板的内容在父组件作用域内编译；
+           //子组件模板的内容在子组件作用域内编译
+			Vue.component("custom",{
+				data(){
+					return {
+						message:"我是子组件的数据"
+					}
+				},
+				template:`
+					<div>
+						{{message}}
+						<p>我是第1个提醒</p>
+						<slot></slot>
+					</div>
+				`
+			})
+
+			new Vue({
+				el:"#app",
+				data:{
+					message:"我是父组件的数据"
+				}
+			});
+		</script>
+	</body>
+</html>

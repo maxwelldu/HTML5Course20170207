@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+		<script src="./vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>自定义的下拉框</h2>
+			<custom-select></custom-select>
+			<h2>自定义的下拉框2</h2>
+			<custom-select></custom-select>
+		</div>
+		<div id="app1">
+			<custom-select></custom-select>
+		</div>
+		<script>
+
+			//注册组件
+			Vue.component("custom-select",{
+				template:`<section class="warp">
+					<div class="searchIpt clearFix">
+						<div class="clearFix">
+							<input type="text" class="keyWord" value="" />
+							<input type="button" value="查询">
+							<span></span>
+						</div>
+						<ul class="list">
+							<li>html+css</li>
+							<li>html5+css3</li>
+							<li>javascript</li>
+							<li>angular</li>
+							<li>react</li>
+							<li>vue</li>
+							<li>jquery</li>
+							<li>nodejs</li>
+						</ul>
+					</div>
+				</section>`
+			})
+
+			new Vue({
+				el:"#app",
+				components:{
+					
+				}
+			})
+
+			new Vue({
+				el:"#app1"
+			})
+		</script>
+	</body>
+</html>

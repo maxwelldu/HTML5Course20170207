@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>自定义组件</h2>
+			<custom>
+				<!-- 当写在自定义标签之间的内容 要混合子组件中的模板 -->
+				<div slot="one">替换第1给提醒</div>
+
+				<div slot="three">替换第3给提醒</div>
+				
+				<template slot="two">
+					<div>替换第2给提醒</div>
+					<div>替换第2给提醒</div>
+					<div>替换第2给提醒</div>
+					<div>替换第2给提醒</div>
+					<div>替换第2给提醒</div>
+					<div>替换第2给提醒</div>
+				</template>
+
+				<div>替换无名的slot</div>
+				
+
+			</custom>
+		</div>
+		<script>
+			//定制模板 div
+			Vue.component("custom",{
+				template:`
+					<div>
+						<slot name="one"><p>这是第1个提醒</p></slot>
+						<slot name="two"><p>这是第2个提醒</p></slot>
+						<slot name="three"><p>这是第3个提醒</p></slot>
+
+						<slot>无名的slot</slot>	
+						
+					</div>
+				`
+			})
+
+			new Vue({
+				el:"#app"
+			});
+		</script>
+	</body>
+</html>
