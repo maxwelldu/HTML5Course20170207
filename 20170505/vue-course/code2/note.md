@@ -75,3 +75,28 @@
     ...
     computed:{}
     }
+
+#任务项目
+- 显示任务列表
+    - list初始化的任务列表
+    - v-for将任务渲染出来
+- 添加一个任务
+    - input --> vm.todo
+    - @click.enter addToDo事件处理函数
+    - vm.list ({title:"任务名称",isChecked:false})
+    - 添加任务，就是往vm.list里面添加一个对象({title:this.todo, isChecked:false})
+    - vm.todo = ''
+- 删除任务
+    - 点击事件，将todo传递过去
+    - 删除任务，找到这个todo在list中的索引
+    - 从这个索引的位置开始删除一项
+- 编辑任务
+    - 双击任务内容，将当前正在编辑的todo赋值给editTodo
+    - editing样式根据editTodo是否等于当前任务来决定显示与否
+    - 编辑任务
+    - 编辑完按回车修改之前的任务
+- 取消编辑任务
+- 显示有多少个任务还未完成
+
+
+

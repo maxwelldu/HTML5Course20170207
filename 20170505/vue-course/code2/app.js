@@ -1,3 +1,4 @@
+//数据
 var list = [
 	{
 		title:"吃饭打豆豆",
@@ -9,7 +10,8 @@ var list = [
 	}
 ];
 
-new Vue({
+//vm
+var vm = new Vue({
 	el:".main",
 	data:{
 		list:list,

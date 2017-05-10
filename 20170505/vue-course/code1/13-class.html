@@ -4,32 +4,26 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        .red{
-            color: red;
-        }
-        .fontSize{
-            font-size: 50px;
-        }
+        .red{color: red; }
+        .fontSize{font-size: 50px; }
+        .bg{background:black;}
     </style>
     <script src="./vue.js"></script>
-
 </head>
 <body>
     <!--模板-->
     <div id="demo">
-        <span class="fontSize" :class='{red:addClass}'>hello,vue</span>
+        <span class="fontSize" :class='{red:addClass,bg:true}'>hello,vue</span>
     </div>
     <script>
         //数据
         let obj = {
-            addClass:false
+            addClass:true
         };
-
         var vm = new Vue({
             el:"#demo",
             data:obj
         });
-
     </script>
 </body>
 
