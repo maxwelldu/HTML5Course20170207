@@ -1,0 +1,278 @@
+<!-- 更新用户资料 -->
+<div layout="column" layout-align-md id="content" class="container">
+    <input type="hidden" ng-model="user.id" />
+    <div>
+        <md-input-container layout="row" class="btn-float-right">
+            <md-button class="md-raised md-primary pull-right" ng-click="updateUser()">保存修改</md-button>
+            <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+        </md-input-container>
+    </div>
+    <div flex layout-margin>
+        <legend>信息</legend>
+        <div layout-margin>
+            <span ng-if="profile.name" style="margin-right: 15px">
+                绑定时微信昵称：<b>{{profile.name}}</b>
+            </span>
+            <span ng-if="profile.birth_year > 1900" style="margin-right: 15px">
+             生日：<b>{{profile.birth_year}}年<span ng-if="profile.birth_month">{{profile.birth_month}}月</span><span ng-if="profile.birth_day">{{profile.birth_day}}日</b>
+                </span>
+            </span>
+            <span>
+                性别：<b><span ng-if="profile.sex == 1">男</span>
+                    <span ng-if="profile.sex == 2">女</span>
+                    <span ng-if="profile.sex != 1 && profile.sex !=2">未知</span></b> 
+            </span>
+        </div>
+        <div layout-margin>
+            <span ng-if="created_at" style="margin-right: 15px">
+                授权时间：<b>{{created_at}}</b>
+            </span>
+            <span ng-if="last_login_at">
+                最近访问：<b>{{last_login_at}}</b>
+            </span>
+        </div>
+    </div>
+    <div>
+        <div layout-margin>
+            <legend>资料</legend>
+            <div layout='row' >
+                <div flex="30">
+                    <a class="pull-left">
+                    <img width="60" height="60" style="border-radius:30px" ng-src="{{profile.headimgurl}}"></a>
+                    <div ng-file-select="onHeaderSelect($files)" data-multiple="false" title="select file" onclick="this.value = null">
+                        <md-button class="md-raised md-info">设置头像</md-button>
+                    </div>
+                </div>
+                <div flex="30">
+                    <b>会员等级({{user.vip}})</b>
+                    <md-select ng-model="user.vip" ng-change="updateVip(user.id,user.vip)" aria-label="vip">
+                        <md-option ng-repeat="vip in vip_group" value="{{vip}}">
+                            <span class="md-subhead" ng-if="vip == 0">非会员</span>
+                            <span class="md-subhead" ng-if="vip == 10">套餐49</span>
+                            <span class="md-subhead" ng-if="vip == 20">套餐79</span>
+                            <span class="md-subhead" ng-if="vip == 30">套餐89</span>
+                            <span class="md-subhead" ng-if="vip == 40">套餐249</span>
+                            <span class="md-subhead" ng-if="vip == 50">套餐999</span>
+                        </md-option>
+                    </md-select>
+                </div>
+                <div class="md-block" flex="30">
+                <b >用户处于</b>
+                <span >
+                    <md-switch  ng-model="user.black_label" aria-label="Switch 2" ng-true-value="'1'" ng-false-value="'0'" class="md-warn" ng-change="updateBlackLabel(user.id,user.black_label)" flex="20">
+                        <span ng-if="user.black_label == 1">黑名单</span>
+                        <span ng-if="user.black_label == 0">非黑名单</span>
+                    </md-switch>
+                </span>
+                </div>
+            </div>
+            <div layout='row' >
+                <md-input-container flex="55">
+                    <label>用户名</label>
+                    <input type="text" ng-model="user.username" required/>
+                </md-input-container>
+                <md-input-container flex="45">
+                        <label>真实姓名(发起人转账使用)</label>
+                        <input type="text" ng-model="user.real_name"/>
+                </md-input-container>
+            </div>
+            <div layout='row' >
+                <md-input-container flex="30">
+                    <label>手机</label>
+                    <input type="text" ng-model="user.mobile" />
+                </md-input-container>
+                <md-input-container flex="30">
+                    <label>微信</label>
+                    <input type="text" ng-model="user.wechat_id" />
+                </md-input-container>                
+                <md-input-container flex="40">
+                    <label>邮箱</label>
+                    <input type="text" ng-model="user.email" required/>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div  flex layout-margin>
+        <div flex layout-margin>
+            <legend>设置用户身份</legend>
+            <div layout="row">
+                <md-checkbox ng-model="data.cbPMA" aria-label="Checkbox 2" class="md-warn md-align-top-left" flex="10"> <strong>PMA</strong>
+                </md-checkbox>
+                <md-checkbox ng-model="data.cbFounder" aria-label="Checkbox 1" class="md-warn md-align-top-left" flex="10"> <strong>发起人</strong>
+                </md-checkbox>
+                <md-input-container ng-if="data.cbFounder" flex="50">
+                    <label>发起人简介</label>
+                    <textarea type="text" ng-model="user.profile.bio" required/>
+                </md-input-container>
+                <md-input-container ng-if="data.cbFounder" flex="20">
+                    <label>发起人备注</label>
+                    <textarea type="text" ng-model="user.founder_desc" required/>
+                </md-input-container>
+                <div flex="50" style="display: none;">
+                    <md-checkbox ng-model="data.cbSpecial" aria-label="Checkbox 3" class="md-warn md-align-top-left">
+                        <strong>白名单</strong>
+                        <br/>
+                        <span class="ipsum">特殊人群标记。</span>
+                        <br/>
+                    </md-checkbox>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 用户列表 -->
+
+    <div ng-cloak>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="报名活动">
+                <md-content class="md-padding">
+                    <div flex-xs flex-gt-xs="50" flex="40" layout="column">
+                        <md-card ng-repeat="answer in joinActivity.answers">
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-subhead">{{answer.activity.title}}</span>
+                                </md-card-title-text>
+                                <md-card-title-media>
+                                    <div class="md-media-sm card-media">
+                                        <span class="md-subhead">
+                                            {{ answer.activity.start_time * 1000 | date: "MM月dd日 HH:mm:ss" }}
+                                        </span>
+                                    </div>
+                                </md-card-title-media>
+                            </md-card-title>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button>
+                                    <a class="md-primary" href="/#/answer/{{answer.activity.id}}" target="_blank">筛选</a>
+                                </md-button>
+                            </md-card-actions>
+                        </md-card>
+                        <div ng-if="joinActivity.answers == null">没有报名过活动</div>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="{{user.black_label == 1?'黄牌记录(黑名单中)':'黄牌记录'}}">
+                <md-content class="md-padding">
+                    <div flex-xs flex-gt-xs="50" flex="40" layout="column">
+                <md-card ng-repeat="yellowCardList in yellowCardList">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <div layout="row">
+                                <span class="md-subhead">黄牌数量：{{yellowCardList.card_num}}</span>
+                                <md-input-container class="md-block" flex="20">
+                                    <md-select ng-model="yellowCardList.card_category" ng-change="updateCategory(yellowCardList.id,yellowCardList.card_category)">
+                                        <md-option ng-repeat="state in card_category_status" value="{{state}}">
+                                            <!-- // 选择类别（黄牌原因理由）1 迟到 2请假1  3请假2 4爽约 5带人 6骚扰 -->
+                                            <span class="md-subhead" ng-if="state == 0">取消</span>
+                                            <span class="md-subhead" ng-if="state == 1">迟到</span>
+                                            <span class="md-subhead" ng-if="state == 2">请假1</span>
+                                            <span class="md-subhead" ng-if="state == 3">请假2</span>
+                                            <span class="md-subhead" ng-if="state == 4">爽约</span>
+                                            <span class="md-subhead" ng-if="state == 5">带人</span>
+                                            <span class="md-subhead" ng-if="state == 6">骚扰</span>
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <span class="md-subhead">{{yellowCardList.activity_title}}</span>
+                            <div class="md-media-sm card-media">
+                                <span class="md-subhead">{{ yellowCardList.created_at * 1000 | date: "MM月dd日 HH:mm:ss" }}</span>
+                            </div>
+                            <!-- <span class="md-subhead" ng-if="yellowCardList.status == 0">黄牌状态：正常使用</span>
+                            <span class="md-subhead" ng-if="yellowCardList.status == 1">黄牌状态：弃用</span> -->
+                            <span class="md-subhead" ng-if="yellowCardList.appeal_status == 0">申诉状态：未申诉</span>
+                            <span class="md-subhead" style="color: red;" ng-if="yellowCardList.appeal_status == 1">申诉状态：已申诉（等待处理）</span>
+                            <div layout='row' layout-margin ng-if="yellowCardList.appeal_status != 0">
+                                <md-card-content>
+                                    <span class="md-subhead">{{yellowCardList.appeal_reason}}</span>
+                                </md-card-content>
+                            </div>
+                            <span class="md-subhead" ng-if="yellowCardList.appeal_status == 2">申诉状态：处理完成</span>
+                            <span class="md-subhead" ng-if="yellowCardList.appeal_status == 3">申诉状态：驳回</span>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <div layout='row' layout-margin ng-if="yellowCardList.appeal_status == 1">
+                        <md-input-container flex="100">
+                            <label>驳回理由</label>
+                            <input type="text" ng-model="yellowCardList.handle_reply" />
+                        </md-input-container>
+                    </div>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <!-- <md-button class="md-raised md-warn" ng-click="abandonYellowCard(yellowCardList.id,1)">取消黄牌</md-button> -->
+                        <md-button ng-if="yellowCardList.appeal_status == 1" class="md-raised md-warn" ng-click="rejectYellowCard(yellowCardList.id,yellowCardList.handle_reply)">驳回理由</md-button>
+                    </md-card-actions>
+                </md-card>
+                <div ng-if="yellowCardList == null || yellowCardList.length == 0">没有黄牌记录</div>
+            </div>
+                </md-content>
+            </md-tab>
+
+            <md-tab label="PMA管理" ng-if="data.cbPMA">
+                <md-content class="md-padding">
+                    <div flex-xs flex-gt-xs="50" flex="40" layout="column">
+                        <md-card ng-repeat="answer in pmaActivity.answers">
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-subhead">{{answer.title}}</span>
+                                </md-card-title-text>
+                                <md-card-title-media>
+                                    <div class="md-media-sm card-media">
+                                        <span class="md-subhead">{{ answer.start_time * 1000 | date: "MM月dd日 HH:mm:ss" }}</span>
+                                    </div>
+                                </md-card-title-media>
+                                <md-card-title-media>
+                                    <div class="md-media-sm card-media"></div>
+                                </md-card-title-media>
+                            </md-card-title>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button class="md-primary">
+                                    <a href="/#/answer/{{answer.id}}" target="_blank">筛选</a>
+                                </md-button>
+                            </md-card-actions>
+                        </md-card>
+                        <div ng-if="pmaActivity.answers == null || pmaActivity.answers.length == 0">没有管理活动记录</div>
+                    </div>
+                </md-content>
+            </md-tab>
+
+            <md-tab label="发起活动" ng-if="data.cbFounder">
+                <md-content class="md-padding">
+                    <div flex-xs flex-gt-xs="50" flex="40" layout="column">
+                        <md-card ng-repeat="answer in founderActivity.answers">
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-subhead">{{answer.title}}</span>
+                                </md-card-title-text>
+                                <span ng-if="answer.status==5" style="color: red;font-size:14px;float:right;"><b>未提交审核</b></span>
+                                <span style="color: red;font-size:14px;float:right;" ng-if="answer.status==3"><b>未通过审核</b></span>
+                                <span style="color: red;font-size:14px;float:right;" ng-if="answer.status==8"><b>待审核活动</b></span>
+                                <span style="font-size:14px;float:right;" ng-if="answer.status==12">发起人草稿</span>
+                                <span style="font-size:14px;float:right;" ng-if="answer.status==10">草稿</span>
+                                <span style="font-size:14px;float:right;" ng-if="answer.status==20">启用</span>
+                                <span style="font-size:14px;float:right;" ng-if="answer.status==15">预发布</span>
+                                <span style="font-size:14px;float:right;" ng-if="answer.status==30">关闭</span>
+                                <span style="font-size:14px;float:right;" ng-if="answer.status==40">取消</span>
+                            </md-card-title>
+
+                            <md-card-title-media>
+                                <div class="md-media-sm card-media">
+                                    <span class="md-subhead">{{ answer.start_time * 1000 | date: "MM月dd日 HH:mm:ss" }}</span>
+                                </div>
+                            </md-card-title-media>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button>
+                                    <a href="/#/activity/{{answer.id}}" target="_blank">编辑</a>
+                                </md-button>
+                                <md-button>
+                                    <a href="/#/answer/{{answer.id}}" target="_blank">筛选</a>
+                                </md-button>
+                            </md-card-actions>
+                        </md-card>                        
+                        <div ng-if="founderActivity.answers == null || founderActivity.answers.length == 0">没有发起活动记录</div>
+                    </div>
+                </md-content>
+            </md-tab>
+
+        </md-tabs>
+    </div>
+</div>

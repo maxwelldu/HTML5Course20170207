@@ -1,0 +1,60 @@
+<div class="container" layout="column" flex id="content">
+    <form name="entityForm" ng-submit="save()" novalidate>
+        <md-input-container>
+            <label>分类名称</label>
+            <input type="text" ng-model="entity.name" required ng-minlength="2" ng-maxlength="30">
+        </md-input-container>
+        <md-input-container>
+            <label>分类排序</label>
+            <input type="number" ng-model="entity.display_order" />
+        </md-input-container>
+        <md-input-container>
+            <label>分享标题</label>
+            <input type="text" ng-model="entity.share_title" />
+        </md-input-container>
+        <md-input-container>
+            <label>分享描述</label>
+            <input type="text" ng-model="entity.share_desc" />
+        </md-input-container>
+        <md-input-container>
+            <label>分享链接</label>
+            <input type="text" ng-model="entity.share_link" />
+        </md-input-container>
+        <div>
+            <img width="100" class="media-object avatarSize" ng-src="{{entity.share_img}}">
+                <div class="md-raised" ng-file-select="onHeaderSelect($files)" data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload">
+                    <md-button class="md-raised md-info" style="width: 6rem;">设置分享图片</md-button>
+                </div>
+        </div>
+        <div>
+          <img width="100" class="media-object avatarSize" ng-src="{{entity.img}}">
+          <div ng-file-select="onCodeSelect($files)" data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload">
+              <md-button class="md-raised md-info" style="width: 6rem;">频道显示的图片</md-button>
+          </div>
+        </div>
+        <div>
+          <img width="100" class="media-object avatarSize" ng-src="{{entity.type_img}}">
+          <div ng-file-select="onTypeSelect($files)" data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload">
+              <md-button class="md-raised md-info" style="width: 6rem;">设置分类图片</md-button>
+          </div>
+        </div>
+        <div>
+          <img width="100" class="media-object avatarSize" ng-src="{{entity.icon_img}}">
+          <div ng-file-select="onIconSelect($files)" data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload">
+              <md-button class="md-raised md-info" style="width: 6rem;">设置icon图片</md-button>
+          </div>
+        </div>
+        <md-radio-group ng-model="entity.status" >
+        当前状态
+          <md-radio-button ng-repeat="mode in availableDirections" ng-value="mode">
+            <span ng-if="mode == 10"> 显示</span>
+            <span ng-if="mode == 20"> 隐藏</span>
+            <span ng-if="mode == 0"> 删除</span>
+          </md-radio-button>
+        </md-radio-group>
+        <div layout="row">
+            <md-button class="md-raised md-primary" ng-disabled="entityForm.$invalid">保存</md-button>
+            <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,69 @@
+<!-- 登录后统计信息页面 -->
+<style type="text/css">
+    table th {
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+        text-align: center;
+        background-color: #b1a9a9;
+    }
+    .first-line {
+        background-color: #ccc;
+    }
+</style>
+<div layout="column" flex id="content" class="container" style="font-size:18px;">
+  <ul class="nav nav-pills" role="tablist">
+      <li role="presentation"><a href="#/dashboard">数据总览</a></li>
+      <li role="presentation"><a href="#/data/view">周数据</a></li>
+      <li role="presentation" class="active"><a href="#/data/activity">活动质量数据</a></li>
+  </ul>
+  <br/>
+  <div>
+    <accordion-group is-open="isBasicOpen">
+    <form class="form-inline pull-right" name="demo.newSortForm" novalidate>
+      <div class="form-group">
+        <label for="pageBinding">选择周</label>
+        <select class="form-control" ng-model="selectedWeek" ng-options="col for col in allWeek" name="newSort">
+      </select>
+    </div>
+    <button class="btn btn-default" ng-click="applySelectedSort()" ng-disabled="demo.newSortForm.$pristine">确定</button>
+    </form>
+    </accordion-group>
+  </div>
+  <div class="panel panel-default">
+    <div style="text-align: center;font-size: 1.2rem;">2017年 {{nowWeek}}周</div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-4">有效评分比例 {{valid_activity}}/{{activity_count}}</div>
+      <div class="col-md-4">不合格活动比例 {{fail_activity}}/{{activity_count}}</div>
+    </div>    
+    <md-content class="md-padding">
+    <button class="btn btn-primary pull-right" ng-click="changeDts('')">显示全部</button>
+    <span ng-repeat='item in dtsList'>
+      <button class="btn btn-default pull-right" ng-click="changeDts(item)">{{item}}</button>
+    </span>
+    </md-content>
+    <md-content class="md-padding">
+      <table ng-table="DataActivityParams"  style="text-align: right;font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+        <tr ng-repeat="DataActivity in $data | filter:dtsFilter">
+          <td data-title="'活动ID'" sortable="'id'">{{DataActivity.id}}</td>
+          <td data-title="'发起人'" sortable="'created_by'">{{DataActivity.created_by}}</td>
+          <td data-title="'活动名称'" >{{DataActivity.title}}</td>
+          <td data-title="'对接'" sortable="'updated_by'">{{DataActivity.updated_by}}</td>
+          <td data-title="'评分有效'" sortable="'is_valid_feedback'">
+            <span ng-if="DataActivity.is_valid_feedback >0">是</span>
+            <span ng-if="DataActivity.is_valid_feedback == 0">否</span>
+          </td>
+          <td data-title="'活动评分'" sortable="'avg_score_activity'">{{DataActivity.avg_score_activity}}</td>
+          <td data-title="'发起人评分'" sortable="'avg_score_created'">{{DataActivity.avg_score_created}}</td>
+          <td data-title="'反馈标签'" sortable="'is_feedback_tag'" >
+            <span ng-if="DataActivity.is_feedback_tag >0">有</span>
+            <span ng-if="DataActivity.is_feedback_tag == 0">无</span>
+          </td>
+          <td data-title="'管理'">
+            <a href="#/answer/{{DataActivity.id}}" target="_blank">反馈</a>
+          </td>
+        </tr>
+      </table>
+    </md-content>
+  </div>
+</div>

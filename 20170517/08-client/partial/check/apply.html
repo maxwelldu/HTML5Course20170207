@@ -1,0 +1,90 @@
+<style type="text/css" media="screen">
+	.apply-text {
+		float: right;
+		position: relative;
+	}
+</style>
+<div class="container" layout="column" flex id="content">
+<div class="">
+    <md-input-container ng-if="data.status == 0" layout="row" >
+        <md-button class="md-raised md-primary" ng-click="changeApplyStatus(data.id,1)">审核通过</md-button>
+        <md-button class="md-raised md-warn" ng-click="open(data)">不通过</md-button>
+    </md-input-container>
+</div>
+<div>
+	<div>
+		1.你的姓名:
+		<span class="apply-text">{{data.user.real_name}}</span>
+	</div><hr><br/>
+	<div>
+		2.年龄:
+		<span class="apply-text">{{ (today | date:'yyyy') - data.profile.birth_year}}岁</span>
+	</div><hr><br/>
+	<div>
+		3.性别:
+		<span class="apply-text" ng-show="data.profile.sex==1">男</span><span ng-show="data.profile.sex==2">女</span>
+	</div><hr><br/>
+	<div>
+		4.职业:
+		<span class="apply-text">{{data.profile.occupation}}</span>
+	</div><hr><br/>
+	<div>
+		5.微信昵称:
+		<span class="apply-text">{{data.user.username}}</span>
+	</div><hr><br/>
+	<div>
+		6.微信id:
+		<span class="apply-text">{{data.user.wechat_id}}</span>
+	</div><hr><br/>
+	<div>
+		7.手机:
+		<span class="apply-text">{{data.user.mobile}}</span>
+	</div><hr><br/>
+	<div>
+		8.邮箱:
+		<span class="apply-text">{{data.user.email}}</span>
+	</div><hr><br/>
+	<div>
+		9.你想举办活动的城市:
+		<span class="apply-text">{{data.want_city}}</span>
+		<span ng-show="data.other_city!=null">{{data.other_city}}</span>
+	</div><hr><br/>
+	<div>
+		10.以下哪种描述更符合你的情况:
+		<span class="apply-text">{{data.activity_type}}</span>
+	</div><hr><br/>
+	<div>
+		11.简单描述下你的活动:
+		<span class="apply-text">{{data.activity_review}}</span>
+	</div><hr><br/>
+	<div>
+		12.之前有在Someet平台发布过活动吗:
+		<span class="apply-text" ng-show="data.have_activity==1">这是第一次发</span>
+		<span class="apply-text" ng-show="data.have_activity==2">发布过的哦</span>
+	</div><hr><br/>
+	<div ng-if="data.activity_title!=null">
+		13.告诉我们你发布过哪些活动吧～:
+		<span class="apply-text">{{data.activity_title}}</span><hr>
+	</div>
+	</div>
+</div>
+<script type="text/ng-template" id="question.html">
+    <div class="modal-content">
+        <form ng-submit="rejectApply(id,2,refuse_reason)">
+            <div class="modal-body">
+                <!-- 当没新建问题时 -->
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">请输入审核不通过原因</label><br/><br/>
+                    <input name="refuse_reason" type="text" class="form-control" id="recipient-name" ng-model="refuse_reason">
+                    <div ng-messages="refuse_reason.$error">
+                        <div ng-message="required" style="font-size: 0.6rem;color:red;">必填项目</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                <input class="btn btn-primary" type="submit" ng-click="ok()" ng-disabled="entityForm.$invalid" value="保存"></input>
+            </div>
+        </form>
+    </div>
+</script>

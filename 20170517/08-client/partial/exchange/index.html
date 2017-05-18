@@ -1,0 +1,38 @@
+<div class="container">
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#/exchange">激活码列表</a></li>
+    <li role="presentation"><a href="#/exchange/create">创建激活码</a></li>
+  </ul>
+  <div ng-cloak>
+      <md-content class="md-padding">
+          <form class="form-horizontal" name="actForm">
+              <div class="form-group">
+                <label class="col-xs-6">🔍可以搜索： id 激活码</label>
+                <div class="controls col-xs-6">
+                  <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="exchangeTableParams.filter().search">
+                </div>
+              </div>
+          </form>
+          <table ng-table="exchangeTableParams" style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+              <tr ng-repeat="exchange in $data">
+                  <td data-title="'id'" >{{exchange.id}}</td>
+                  <td data-title="'激活码'" >{{exchange.cdkey}}</td>
+                  <td data-title="'生成时间'" >{{exchange.created_at}}</td>
+                  <td data-title="'会员等级'" >{{exchange.level}}</td>
+                  <td data-title="'兑换码种类'" >{{exchange.type}}</td>
+                  <td data-title="'时间限制'" >{{exchange.expire_time}}</td>
+                  <td data-title="'兑换上限'" >{{exchange.exchange_limit}}</td>
+                  <td data-title="'会员折扣'" >{{exchange.discount}}</td>
+                  <td data-title="'渠道'" >{{exchange.channel}}</td>
+                  <td data-title="'用户详细信息'" ><a href="#/exchange/userinfo/{{exchange.id}}" target="_blank">查看详情</a></td>
+                  <td data-title="'兑换码状态'" >{{exchange.status}}</td>
+                  <td data-title="'操作'">
+                    <a class="btn btn-default btn-sm" href="#/charge/order-view/{{activityOrder.id}}" target="_blank">停用</a>
+                    <a class="btn btn-default btn-sm" href="#/charge/order-view/{{activityOrder.id}}" target="_blank">生成二维码</a>
+                    <a class="btn btn-default btn-sm" href="#/charge/order-view/{{activityOrder.id}}" target="_blank">生成链接</a>
+                  </td>
+              </tr>
+          </table>
+      </md-content>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="expanderModule">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="js/angular.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="ExpanderSimple.css">
+  </head>
+  <body>
+    <div ng-controller="SomeController">
+      <expander class="expander">
+        {{text}}
+      </expander>
+    </div>
+    <div ng-controller="SCtrl">
+      <expander class="expander">
+        {{text}}
+      </expander>
+    </div>
+  </body>
+  <script src="js/ExpanderSimple.js" charset="utf-8"></script>
+</html>

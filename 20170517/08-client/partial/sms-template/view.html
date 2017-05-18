@@ -1,0 +1,19 @@
+<!-- 暂未使用 短信模板 -->
+<div layout="column" flex id="content">
+  <md-input-container>
+    <label>模板名称</label>
+    <input type="text" ng-model="entity.name" >
+  </md-input-container>
+  <md-input-container>
+    <label>模板</label>
+    <input type="text" ng-model="entity.template" />
+  </md-input-container>
+  <md-input-container>
+    <label>模板排序</label>
+    <input type="number" ng-model="entity.status" />
+  </md-input-container>
+  <div layout="row">
+    <md-button class="md-raised md-primary" ng-click="save()">保存</md-button>
+    <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+  </div>
+</div>

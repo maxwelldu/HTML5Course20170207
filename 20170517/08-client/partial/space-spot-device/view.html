@@ -1,0 +1,29 @@
+<!-- 场地设备 -->
+<div layout="column" flex id="content">
+  <form name="entityForm" ng-submit="save()" novalidate>
+    <md-input-container>
+      <label>设备名称</label>
+      <input type="text" ng-model="entity.name" required ng-minlength="2" ng-maxlength="10">
+    </md-input-container>
+    <md-input-container>
+      <label>设备Icon</label>
+      <input type="text" ng-model="entity.icon" required ng-minlength="2" ng-maxlength="10">
+    </md-input-container>
+    <md-input-container>
+      <label>设备排序</label>
+      <input type="number" ng-model="entity.display_order" />
+    </md-input-container>
+    <md-radio-group ng-model="entity.status" >
+      当前状态
+      <md-radio-button ng-repeat="mode in availableDirections" ng-value="mode">
+        <span ng-if="mode == 10"> 显示</span>
+        <span ng-if="mode == 0"> 删除</span>
+      </md-radio-button>
+    </md-radio-group>
+
+    <div layout="row">
+      <md-button class="md-raised md-primary" ng-disabled="entityForm.$invalid">保存</md-button>
+      <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+    </div>
+  </form>
+</div>

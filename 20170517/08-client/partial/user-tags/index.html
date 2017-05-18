@@ -1,0 +1,112 @@
+<script type="text/javascript">
+    $(".changeFrom").click(function(){
+        $(".changeFrom").css({"background-color":"#fff"});
+        $(this).css({"background-color":"#aaa"});
+    })
+    $(".add-tag").click(function(){
+        $("#table").hide();
+        $(".add-tag").hide();
+    })
+    $("#cancel").click(function(){
+        $(".modal-content").hide();
+    })
+</script>
+<style type="text/css">
+    .changeFrom{
+        display: inline-block;
+        text-align: center;
+        height: 2rem;
+        padding-left: 0.5rem;
+        line-height: 2rem;
+        padding-right: 0.5rem;
+    }
+    .type-button {
+        height: 2rem;
+        line-height: 1rem;
+        font-weight: bolder;
+        text-align: center;
+        color: black;
+        display: inline-block;
+    }
+    .add-tag {
+        width: 5rem;
+        height: 2rem;
+        line-height: 2rem;
+        background-color: #ccc;
+        text-align: center;
+        margin-top: 1rem;
+        margin-left: 1rem;
+        font-weight: bolder;
+    }
+</style>
+<div class="container">
+    <ul class="nav nav-pills" role="tablist" style="background-color: #ccc;">
+        <li ng-class="{active:isActive(entity.id)}" class="type-button" ng-repeat="entity in activityTypeList | orderBy: display_order ">
+            <a href="#/user-tags/type/{{entity.id}}" ng-click="changeType(entity.id)" class="changeType" style="color:black;">
+                {{entity.title}}&nbsp;{{entity.todayUserTag}}/{{entity.tag_num}}
+            </a>
+        </li>
+    </ul>
+    <div style="margin-top: 1rem;">
+        <div ng-click="changeFrom('someet')" class="changeFrom">
+            官方{{tagNum.someet}}
+        </div>
+        <div ng-click="changeFrom('user')" class="changeFrom" style="margin-left: 2rem">
+            自定义{{tagNum.todayUser}}/{{tagNum.user}}
+        </div>
+    </div>
+    <button class="btn" ng-click="open(entity)" style="margin-top: 1rem;">添加标签</button>
+    <div ng-cloak id="table">
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="actForm">
+                <div class="form-group">
+                    <label class="col-xs-6">🔍可以搜索：id 标签名称</label>
+                <div class="controls col-xs-6">
+                  <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="tagTableParams.filter().search">
+                </div>
+              </div>
+          </form>
+          <table ng-table="tagTableParams" style="font-size: 0.7rem;text-align: center;" class="table table-condensed table-bordered table-striped" >
+              <tr ng-repeat="tag in $data">
+                  <td data-title="'序号'" >{{tag.id}}</td>
+                  <td data-title="'标签名称'" >{{tag.title}}</td>
+                  <td data-title="'来源'" >
+                      <span ng-if="tag.from=='someet' && tag.status == 1">官方</span>
+                      <span ng-if="tag.from=='someet' && tag.status == 2">从自定义移入(官方)</span>
+                      <span ng-if="tag.from=='user' && tag.status == 1">自定义</span>
+                      <span ng-if="tag.from=='user' && tag.status == 2">从官方移入(自定义)</span>
+                  </td>
+                  <td data-title="'已选择人数'" >{{tag.selecNum}}</td>
+                  <td data-title="'操作'">
+                    <a ng-if="tag.from=='someet'" class="btn btn-success btn-sm" ng-click="changeStatus(tag.id,'user')" target="_blank">移入自定义</a>
+                    <a ng-if="tag.from=='user'" class="btn btn-warning btn-sm" ng-click="changeStatus(tag.id,'someet')" target="_blank">移入官方</a>
+                    <a class="btn btn-danger btn-sm" ng-click="delete(tag.id)" target="_blank">删除</a>
+                  </td>
+              </tr>
+          </table>
+      </md-content>
+  </div>
+</div>
+<!-- <div id="add">
+    
+</div> -->
+<script type="text/ng-template" id="addTags.html">
+    <div class="modal-content">
+        <form ng-submit="tagsSave(title)">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">标签名称</label>
+                    <input type="text" class="form-control" id="recipient-name" type="text" required ng-model="title">
+                    <div ng-messages="title.$error">
+                        <div ng-message="required">必填项目</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" ng-click="cancel()" id="cancel">取消</button>
+                <input class="btn btn-primary" type="submit" ng-click="ok()" ng-disabled="entityForm.$invalid" value="保存"></input>
+            </div>
+        </form>
+    </div>
+</script>
+

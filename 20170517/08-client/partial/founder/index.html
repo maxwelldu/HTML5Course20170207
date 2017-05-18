@@ -1,0 +1,133 @@
+<!-- 活动列表页面 -->
+<div class="container">
+    <button type="button" class="btn btn-success btn-lg" ng-click="createPage()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新建活动
+    </button>
+    <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="title" placeholder="标题">
+        </div>
+        <button type="submit" class="btn btn-default" ng-click='getActivity()'>
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜索
+        </button>
+    </form>
+</div>
+<!-- 活动分类tab end -->
+<!-- 活动列表 -->
+<md-content md-scroll-y="" flex="" layout-padding="" class="layout-padding ng-scope flex container">
+    <div class="activityList" id="activityList">
+        <ul class="activityListProperty">
+            <li ng-if=" list == '' ">
+                <div class="alert alert-danger" role="alert">没有搜到活动</div>
+            </li>
+            <li ng-if="list" ng-repeat="entity in list | filter:query">
+                <!--
+                针对过往的活动显示一个灰色的背景,如果活动的结束时间小于当周一之前 orderBy: 'display_order' 
+                ng-class="{'panel-default': entity.status==10, 'panel-danger': entity.status==20, 'panel-info': entity.status==30, 'panel-warning': entity.status==40, 'panel-danger':entity.status==15}" 
+
+                ng-class="{true: 'panel-default', false: 'panel-danger'}[entity.status==10]"
+                -->
+                <div ng-class="{
+                'panel-default' : entity.status == 5, 
+                'panel-info': entity.status == 8 || entity.status == 10 || entity.status == 15,
+                'panel-success' : entity.status == 20 || entity.status ==12, 
+                'panel-danger' : entity.status == 30 || entity.status == 3, 
+                'panel-warning' :entity.status == 40
+                }" class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <!-- 活动标题 -->
+                            {{entity.id}}#
+                            <span ng-if="entity.status==5" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[草稿]</span>
+                            <span ng-if="entity.status==8" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[已提交审核]</span>
+                            <span ng-if="entity.status==12" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[已通过审核]</span>
+                            <span ng-if="entity.status==3" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[审核未通过]</span>
+                            <span ng-if="entity.status==10" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[已提交审核]</span>
+                            <span ng-if="entity.status==15" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[已提交审核]</span>
+                            <span ng-if="entity.status==20" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[发布成功]</span>
+                            <span ng-if="entity.status==30" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[关闭活动]</span>
+                            <span ng-if="entity.status==40" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[取消活动]</span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <!-- 活动相关功能 -->
+                        <a class="btn btn-info" target="_blank" href="http://pan.baidu.com/share/qrcode?w=200&h=200&url=https://m.someet.cc/activity/{{entity.id}}">生成活动二维码</a>
+                        <button ng-if="entity.question" class="btn" ng-click="open(entity)">修改表单</button>
+                        <button ng-if="!entity.question" class="btn btn-primary" ng-click="open(entity)">设置表单</button>
+                        <a ng-if="entity.status==5 || entity.status==3" class="btn btn-success" href="#/founder/{{entity.id}}" target="_blank">编辑</a>
+                        <button class="btn btn-default" ng-click="copy(entity)">复制活动</button>
+                        <button ng-if="entity.status==5 || entity.status==3" class="btn btn-success btn-float-right" ng-click="updateStatus(entity.id,8,entity)" type="button">提交审核</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script type="text/ng-template" id="question.html">
+        <div class="modal-content">
+            <form name="entityForm" ng-submit="questionSave()">
+            <div class="modal-header" >
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+                <h4 class="modal-title" id="exampleModalLabel">设置问题</h4>
+            </div>
+
+                <div class="modal-body">
+                    <!-- 更新问题时 -->
+                    <span style="color:rgb(251,103,61);font-size:0.7rem;">
+                        <p style="font-size: 1rem;color:red"><b>如何在活动中筛选出更符合你预期的参与者呢？</b></p><br/><b>合理设置筛选问题可以帮助您挑选出适合活动的参与者，并且能够侧面了解参与者参加活动的目的和需求。我们认为，同一场活动中的参与者是否契合，对活动主题的了解水平是否相近，会很大程度上影响活动体验。发起人可以设置2-3个问题让报名者回答，根据回答来最终决定活动参与者。<br/><br/>我们为您准备了2个问题，您可以根据自己的需要进行更改</b>
+                    </span><br/>
+                    <div class="form-group" ng-repeat="(k, questionItem) in entity.questionItemList">
+                        <label for="recipient-name" class="control-label">问题{{k+1}}</label>
+                        <input type="text" class="form-control" ng-model="questionItem.label" required>
+                    </div>
+
+                    <!-- 当没新建问题时 -->
+                    <div class="form-group" ng-if="!entity.id">
+                        <label for="recipient-name" class="control-label">问题一:</label>
+                        <input name="q1" type="text" class="form-control" id="recipient-name" required minlength="5" ng-model="questionItem.q1" placeholder="你对本次活动有什么期待?你为什么想参加这次活动?">
+                        <div ng-messages="entityForm.q1.$error">
+                            <div ng-message="required">必填项目</div>
+                            <div ng-message="minlength">问题文字不能少于5个字符</div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="!entity.id">
+                        <label for="recipient-name" class="control-label">问题二:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="q2" type="text" required minlength="5" ng-model="questionItem.q2" placeholder="与活动主题本身相关的问题(可参考下部范例)">
+                        <div ng-messages="entityForm.q2.$error">
+                            <div ng-message="required">必填项目</div>
+                            <div ng-message="minlength">问题文字不能少于5个字符</div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="!entity.id">
+                        <label for="recipient-name" class="control-label">问题三:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="q3" type="text" required minlength="5" ng-model="questionItem.q3">
+                        <div ng-messages="entityForm.q3.$error">
+                            <div ng-message="required">必填项目</div>
+                            <div ng-message="minlength">问题文字不能少于5个字符</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                    <input class="btn btn-primary" type="submit" ng-click="ok()" ng-disabled="entityForm.$invalid" value="保存"></input>
+                </div>
+            </form>
+        </div>
+    </script>
+    <div ng-show="modelPagination" class="someet-pagination user-pagination">
+        <uib-pagination 
+        total-items="modelPagination.totalItems" 
+        ng-model="modelPagination.currentPage"
+        ng-change="modelPagination.pageChange()"
+        items-per-page="modelPagination.itemsPerPage"
+        max-size="modelPagination.maxSize"
+        class="pagination-sm"
+        boundary-links="false"
+        previous-text="上一页"
+        next-text="下一页"
+        first-text="第一页"
+        last-text="最后一页"
+        rotate="false">
+        </uib-pagination>
+    </div>
+</md-content>
+<!-- 活动列表 end-->

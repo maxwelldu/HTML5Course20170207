@@ -1,0 +1,39 @@
+<div class="container" id="content">
+    <form name="entityForm" ng-submit="update()">
+        <div>
+            <md-input-container layout="row">
+                <md-button class="md-raised md-primary" ng-disabled="entityForm.$invalid">保存</md-button>
+                <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+            </md-input-container>
+        </div>
+        <div layout="column" layout-padding ng-cloak>
+            <br/>
+            <md-content class="autoScroll">
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label>标题</label>
+                    <input ng-model="share.title" type="text">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label>描述</label>
+                    <input ng-model="share.desc" type="text">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label>分享链接</label>
+                    <input ng-model="share.link" type="text">
+                </md-input-container>
+                <md-checkbox ng-model="share.status" aria-label="Checkbox 2" ng-true-value="'1'" ng-false-value="'0'" class="md-warn md-align-top-left" flex>
+                    是否启用
+                    <span ng-if="share.status == 1"> 已启用</span>
+                    <span ng-if="share.status == 0"> 未启用</span>
+                </md-checkbox>
+                <img width="100" class="media-object avatarSize" ng-src="{{share.imgurl}}"></a>
+                <div class="md-raised" ng-file-select="onHeaderSelect($files)" data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload">
+                    <md-button class="md-raised md-info">设置头像</md-button>
+                </div>
+            </md-content>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+<div class="container">
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#/wish">愿望列表</a></li>
+    <li role="presentation"><a href="#/wish/create">创建愿望</a></li>
+  </ul>
+  <div ng-cloak>
+      <md-content class="md-padding">
+          <form class="form-horizontal" name="actForm">
+              <div class="form-group">
+                <label class="col-xs-6">🔍可以搜索：id 标题</label>
+                <div class="controls col-xs-6">
+                  <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="wishTableParams.filter().search">
+                </div>
+              </div>
+          </form>
+          <table ng-table="wishTableParams" style="font-size: 0.7rem;text-align: center;" class="table table-condensed table-bordered table-striped" >
+              <tr ng-repeat="wish in $data">
+                  <td data-title="'id'" >{{wish.id}}</td>
+                  <td data-title="'愿望id'" >{{wish.title}}</td>
+                  <td data-title="'生成时间'" >{{wish.created_at}}</td>
+                  <td data-title="'地点'" >{{wish.spot.name}}</td>
+                  <td data-title="'查看'">
+                    <a class="btn btn-default btn-sm" href="#/wish/{{wish.id}}" target="_blank">编辑</a>
+                  </td>
+                  <td data-title="'操作'">
+                    <a ng-if="wish.status==10" class="btn btn-success btn-sm" ng-click="changeStatus(wish.id,20)" target="_blank">领走</a>
+                    <a  ng-if="wish.status==20" class="btn btn-warning btn-sm" ng-click="changeStatus(wish.id,10)" target="_blank">放回</a>
+                  </td>
+              </tr>
+          </table>
+      </md-content>
+  </div>
+</div>

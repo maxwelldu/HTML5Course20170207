@@ -1,0 +1,346 @@
+ <!-- 筛选用户页面 -->
+<div class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <span ng-if="list[0].activity.is_full==1" style="color:red;font-size:22px;"><img src="/static/image/full.png" alt=""></span>
+            <div class="col-md-12  panel-default">
+
+                <div class="panel-body" style="font-size:18px">
+                    活动标题：{{list[0].activity.title}}&nbsp;&nbsp;
+                    <br> 发起人：{{list[0].activity.user.name}}&nbsp;&nbsp;
+                    <br> 活动时间：{{list[0].activity.start_time * 1000 | date: "MM月dd日 HH:mm"}} - {{list[0].activity.end_time * 1000 | date:"MM月dd日 HH:mm"}}&nbsp;&nbsp;
+                    <br> 活动地址：{{list[0].activity.address}}&nbsp;&nbsp;
+                    <br> 平均评分：{{avg_score}}分
+                    <br> 发起人评分：{{ list[0].activity.created_records}}分&nbsp;&nbsp;
+                    <br> 迟到人数比率：{{ list[0].late_ratio }}&nbsp;&nbsp;
+                    <br> 请假人数比率：{{ list[0].leave_ratio }}&nbsp;&nbsp;
+                    <br> 爽约人数比率：{{ list[0].arrive_no_ratio }}&nbsp;&nbsp;
+                    <br> 报名总人数：{{ list.length }}&nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <h3>发起人 - 当前活动标题 （活动时间）</h3> -->
+    <div layout="row" flex id="content">
+        <!-- 用户列表 -->
+        <div class="col-md-6">
+            <div ng-cloak>
+                <md-content>
+                    <md-tabs md-dynamic-height md-border-bottom>
+                        <md-tab label="待筛选{{answerFilter.length}}">
+                            <md-content class="md-padding">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="entity in list | filter: {status: 10, apply_status:0} as answerFilter" ng-click="view(entity)">
+                                        <div class="media">
+                                            <a class="pull-left" href="">
+                                                <img width="50" height="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.user.profile.headimgurl}}" alt="头像">
+                                            </a>
+                                            <span>
+                                        <strong>{{entity.user.profile.name}}（{{entity.user.username}}）</strong>
+                                        </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="通过{{answerPass.length}}">
+                            <md-content class="md-padding">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="entity in list | filter: {status:20, leave_status:0} as answerPass" ng-click="view(entity)">
+                                        <div class="media">
+                                            <a class="pull-left" href="">
+                                                <img width="50" height="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.user.profile.headimgurl}}" alt="头像" />
+                                            </a>
+                                            <span>
+                                            <strong>{{entity.user.profile.name}}（{{entity.user.username}}）</strong>
+                                        </span>
+                                            <md-button class="md-raised md-warn" ng-if="entity.leave_status == 1" class="btn-float-right">请假</md-button>
+                                            <md-button class="md-raised md-warn" ng-if="entity.arrive_status == 1" class="btn-float-right">迟到</md-button>
+                                            <md-button class="md-raised md-warn" ng-if="entity.arrive_status == 0" class="btn-float-right">爽约</md-button>
+                                            <md-button class="md-raised md-warn" ng-if="entity.arrive_status == 2" class="btn-float-right">准时到达</md-button>
+                                            <md-button ng-if="entity.user.feedback.finish == 1" class="md-raised md-warn">已反馈</md-button>
+                                            <md-button ng-if="entity.user.feedback.finish != 1" class="md-raised md-warn">未反馈</md-button><br/>
+                                            <div ng-if="entity.pay_status==10" style="text-align: right;margin-top:-0.5rem;position: relative;bottom: 1rem;font-size:15px;">
+                                                未支付
+                                            </div>
+                                            <div ng-if="entity.pay_status==15" style="text-align: right;margin-top:-0.5rem;position: relative;bottom: 1rem;font-size:15px;">
+                                                支付超时
+                                            </div>
+                                            <div ng-if="entity.pay_status==18" style="text-align: right;margin-top:-0.5rem;position: relative;bottom: 1rem;font-size:15px;">
+                                                支付失败
+                                            </div>
+                                            <div ng-if="entity.pay_status==20" style="text-align: right;margin-top:-0.5rem;position: relative;bottom: 1rem;font-size:15px;">
+                                                支付成功
+                                            </div>
+                                            <div ng-if="entity.pay_status==25" style="text-align: right;margin-top:-0.5rem;position: relative;bottom: 1rem;font-size:15px;color:red;">
+                                                其他渠道支付
+                                            </div>
+                                            <div ng-if="entity.user.feedback" style="text-align: left;margin-top:-0.5rem;position: relative;font-size:15px;">
+                                                <span ng-if="entity.user.feedback.finish == 1">活动评分:{{entity.user.feedback.activity_records}}</span>
+                                            </div>
+                                            <span ng-if="entity.is_send_noti==1" style="font-size:12px;" class="md-warn"><b>已发送push</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span ng-if="entity.is_send_msg==1"  style="font-size:12px;" class="md-warn"><b>已发送短信</b></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="请假{{answerLeave.length}}">
+                            <md-content class="md-padding">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="entity in list | filter: {status:20, leave_status:1} as answerLeave" ng-click="view(entity)">
+                                        <div class="media">
+                                            <a class="pull-left" href="">
+                                                <img width="50" height="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.user.profile.headimgurl}}" alt="头像" />
+                                            </a>
+                                            <span>
+                                            <strong>{{entity.user.profile.name}}（{{entity.user.username}}）</strong>
+                                            </span>
+                                        <div ng-if="entity.pay_status==10" style="text-align: right;margin-top:-0.5rem;position: relative;bottom: 1rem;font-size:15px;">
+                                                未支付
+                                            </div>
+                                            <div ng-if="entity.pay_status==15" style="text-align: right;margin-top:-0.5rem;position: relative;bottom: 1rem;font-size:15px;">
+                                                支付超时
+                                            </div>
+                                            <div ng-if="entity.pay_status==18" style="text-align: right;margin-top:-0.5rem;position: relative;bottom: 1rem;font-size:15px;">
+                                                支付失败
+                                            </div>
+                                            <div ng-if="entity.pay_status==20" style="text-align: right;margin-top:-0.5rem;position: relative;bottom: 1rem;font-size:15px;">
+                                                支付成功
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="取消报名{{answerCancel.length}}">
+                            <md-content class="md-padding">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="entity in list | filter: {status:10, apply_status:1} as answerCancel" ng-click="view(entity)">
+                                        <div class="media">
+                                            <a class="pull-left" href="">
+                                                <img width="50" height="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.user.profile.headimgurl}}" alt="头像" />
+                                            </a>
+                                            <span>
+                                        <strong>{{entity.user.profile.name}}（{{entity.user.username}}）</strong>
+                                    </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="未通过{{answerReject.length}}">
+                            <md-content class="md-padding">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="entity in list | filter: {status:30} as answerReject" ng-click="view(entity)">
+                                        <div class="media">
+                                            <a class="pull-left" href="">
+                                                <img width="50" height="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.user.profile.headimgurl}}" alt="头像">
+                                            </a>
+                                            <span>
+                                        <strong>{{entity.user.profile.name}}（{{entity.user.username}}）</strong>
+                                    </span>
+                                            <span class="btn-float-right" style="color:#E33;">未通过</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+                </md-content>
+            </div>
+        </div>
+        <!-- 用户列表 end -->
+        <!-- 用户资料详情 -->
+        <div class="col-md-6" ng-show="entity.user" style="padding:0;border:solid 10px rgba(10,10,10,0.5); margin-top:-275px;overflow: auto; height: 80%;position: fixed;left: 55%;width: 28rem;">
+            <div class="media">
+                <div style="padding:20px;">
+                    <div class="pull-left">
+                        <img width="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.user.profile.headimgurl}}" alt="...">
+                    </div>
+                    <div style="margin-left:80px;top:0;">
+                        <div style="width:100%;display:inline-block;">
+                            <span>
+                                <font size="+2">
+                                    <strong>{{entity.user.profile.name}}（{{entity.user.username}}）</strong>
+                                </font>
+                            </span>
+                            <span style="color:#777;">
+                                {{entity.user.profile.sex==1 ? '男' : entity.user.profile.sex==2 ? '女' : '性别不明'}}
+                            </span>
+                            <span ng-show="entity.user.profile.birth_year" style="color:#777;">
+                                {{ (today | date:'yyyy') - entity.user.profile.birth_year }}岁
+                            </span>
+                            <span style="color:#777;" ng-show="!entity.user.profile.birth_year">年纪不知</span>
+                            <div class="pull-right">
+                                <button class="btn" ng-click="updatePayStatus(entity.id,25)">其他渠道支付</button>
+                                <button class="btn" ng-click="wait(entity)">待筛选</button>
+                                <button class="btn btn-success" ng-click="pass(entity)">通过</button>
+                                <button class="btn btn-danger" ng-click="reject(entity)">不通过</button>
+                                <button class="btn btn-default" ng-click="apply(entity, 1)">取消报名</button>
+                                <button class="btn btn-default" ng-click="apply(entity, 0)">不取消报名</button>
+                                <button class="btn btn-default" ng-click="leave(entity, 1)">请假</button>
+                                <button class="btn btn-default" ng-click="leave(entity, 0)">取消请假</button>
+                                <button class="btn btn-default" ng-click="arrive(entity, 0)">未到</button>
+                                <button class="btn btn-default" ng-click="arrive(entity, 1)">迟到</button>
+                                <button class="btn btn-default" ng-click="arrive(entity, 2)">准时</button>
+                            </div>
+                            <div class="pull-right" style="position: relative;top: 0.5rem;">
+                                到达:
+                                <span ng-if="entity.arrive_status==10" style="color:#33E;">未设置</span>
+                                <span ng-if="entity.arrive_status==0" style="color:#33E;">爽约</span>
+                                <span ng-if="entity.arrive_status==1" style="color:#33E;">迟到</span>
+                                <span ng-if="entity.arrive_status==2" style="color:#33E;">准时</span>
+                                当前：
+                                <span ng-if="entity.status==10" style="color:#33E;">待筛选</span>
+                                <span ng-if="entity.status==20" style="color:#3E3;">已通过</span>
+                                <span ng-if="entity.status==30" style="color:#E33;">未通过</span>
+                                <span ng-if="entity.is_send==1" style="color:#333;">
+                                    <p>已于 {{entity.send_at|date}} 发送通知</p>
+                                </span>
+                            </div>
+                        </div>
+                    <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <md-button ng-disabled="dbtn" class="md-raised md-warn" ng-click='sendMessage(entity,dbtn)' style="margin-top: -1rem;">发送通知</md-button>
+                </div>
+                <div class="col-md-8">
+                    {{feedbackResult}}
+                </div>
+            </div>
+            <div id="info_show" style="margin-left: 0.5rem;">
+                用户信息展开↓
+            </div>
+            <div class="row" style="display: none;" id="info">
+                <div class="col-md-7">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">注册时间： {{ entity.user.created_at * 1000 | date: "yyyy年MM月dd日 HH:mm:ss"}}</li>
+                        <li class="list-group-item list-group-item-info">报名时间：{{ entity.created_at * 1000 | date: "yyyy年MM月dd日 HH:mm:ss"}}</li>
+                        <li class="list-group-item list-group-item-danger">
+                            <div ng-show="entity.user.profile.from>0">
+                                来自：
+                                <span ng-if="entity.user.profile.from==1">朋友圈看到，就手抖点进来了</span>
+                                <span ng-if="entity.user.profile.from==2">朋友专门给我安利过</span>
+                                <span ng-if="entity.user.profile.from==3">有所耳闻，自己一路找过来的</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-info">报名次数：{{entity.user.join_count}} 通过次数：{{entity.user.attend_count}}</li>
+                        <li class="list-group-item list-group-item-info">反馈次数：{{entity.feedback_count}} 迟到次数:{{entity.arrive_late}}</li>
+                    </ul>
+                </div>
+                <div class="col-md-5">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">
+                            <div ng-show="entity.user.mobile">
+                                手机号： {{entity.user.mobile}}
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-info">
+                            <div ng-show="entity.user.wechat_id">
+                                微信id： {{entity.user.wechat_id}}
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-warning">
+                            <div ng-show="entity.user.profile.occupation">
+                                职业：{{entity.user.profile.occupation}}
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-info">爽约次数:{{entity.arrive_no}} 被拒绝的次数:{{entity.user.reject_count}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="question-open" style="margin-left: 0.5rem;">问题收起↑</div>
+            <div style="margin:10px;" class="col-md-12 question" ng-repeat="answer in answerItemList">
+                <div style="margin:5px;color:#999;">问题{{$index+1}}:</div>
+                <div style="margin:5px;padding:5px;border-radius:10px;border:1px solid rgba(10,10,10,0.1)">{{answer.question_value}}</div>
+            </div>
+            <br />
+            <div id="feedback-open" style="margin-left: 0.5rem;" ng-show="entity.feedback">反馈收起↑</div>
+            <div ng-show="entity.feedback" style="margin:0.5rem;">
+                <div style="margin:10px;margin:5px;color:#999;">用户评价：</div>
+                <div style="margin:5px;padding:5px;border-radius:10px;border:1px solid rgba(10,10,10,0.1)"> {{entity.feedback.content}}</div>
+            </div>
+            <div class="col-md-12 feedback" ng-show="entity.feedback">
+                <div class="row" style="margin-bottom:15px;">
+                    <img onclick="img_click(this)" style="'margin-bottom:15px;" class="col-md-12" src="{{entity.feedback.image}}" alt="" width="100%">
+                    <br>
+                </div>
+                <div class="row" style="margin-bottom:15px;">
+                    <span style="margin-left: 0.5rem;">活动评分:{{entity.feedback.activity_records}}</span>
+                    <div style="margin:3px;margin-top: -4px;" class="col-md-12" ng-repeat="blist in flist">
+                        <div style="margin:2px;color:#999; font-size:0.65rem">
+                            {{blist.title}}
+                        </div>
+
+                        <div ng-repeat="dlist in blist.child_detail">
+                            <div style="margin-left:0.6rem;color:red;font-size:0.45rem;">
+                                |--{{dlist.title}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" style="margin-bottom:15px;">
+                    <span style="margin: 0.5rem;">发起人评分:{{entity.feedback.created_records}}</span>
+                </div>
+                <div class="'row" style="margin-bottom:15px;" ng-if="entity.feedback.good_user != 0 && entity.feedback.good_user != -1">
+                    <div>评选的加分用户
+                    <span style="font-size:0.7rem"><img style="border-radius: 50px;margin:3px;" width="50" height="50" src="{{entity.feedback.good_user_img}}" alt="">{{entity.feedback.good_user}}</span>
+                    </div>
+                </div>
+                <div class="'row" ng-if="entity.feedback.bad_user != 0 && entity.feedback.bad_user != -1">
+                    <div>评选的减分用户
+                    <span style="font-size:0.7rem"><img style="border-radius: 50px;margin:3px;" width="50" height="50" src="{{entity.feedback.bad_user_img}}" alt="">{{entity.feedback.bad_user}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+    $("#info_show").click(function(){
+        var info = document.getElementById("info");
+        if(info.style.display  == 'none') {
+            info.style.display  = 'block';
+            $("#info_show").html('用户信息收起↑');
+        } else {
+            info.style.display  = 'none';
+            $("#info_show").html('用户信息展开↓');
+        }
+    })
+    $("#question-open").click(function(){
+        var display =$('.question').css('display');
+        if(display == 'none') {
+            $(".question").show();
+            console.log(111);
+            $("#question-open").html('问题收起↑');
+        } else {
+            $(".question").hide();
+            $("#question-open").html('问题展开↓');
+        }
+    })
+    $("#feedback-open").click(function(){
+        var display =$('.feedback').css('display');
+        if(display == 'none') {
+            $(".feedback").show();
+            console.log(111);
+            $("#feedback-open").html('反馈收起↑');
+        } else {
+            $(".feedback").hide();
+            $("#feedback-open").html('反馈展开↓');
+        }
+    })
+    function img_click(obj){
+        console.log(obj.src)
+        var src = obj.src;
+
+    }
+</script>

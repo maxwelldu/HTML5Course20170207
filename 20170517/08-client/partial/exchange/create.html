@@ -1,0 +1,73 @@
+<div class="container" layout="column" flex id="content">
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" ><a href="#/exchange">激活码列表</a></li>
+    <li role="presentation" class="active"><a href="#/exchange/create">创建激活码</a></li>
+  </ul>
+  <!-- <div ng-include="'/partial/exchange/nav.html'"></div> -->
+    <form name="entityForm" ng-submit="save()" novalidate>
+      <div class="row">
+        <div class="col-md-4">
+
+        <md-input-container>
+          <label>会员等级</label>
+          <md-select ng-model="entity.level">
+            <md-option ng-repeat="vip in vipinfo.data" ng-value="vip.level">
+              {{vip.price}}元
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container>
+          <label>兑换码种类</label>
+          <md-select ng-model="entity.type">
+            <md-option ng-repeat="types in type.data" ng-value="types.type">
+              {{types.typename}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container>
+            <label>时间限制</label>
+            <div class="dropdown">
+                <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                    <div class="input-append">
+                        <input type="text" class="input-large" ng-model="expire_time_str">
+                        <span class="add-on">
+                            <i class="icon-calendar"></i>
+                        </span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-on-set-time="onStartTimeSet(newDate, oldDate)" ng-model="expire_time_str"></datetimepicker>
+                </ul>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>兑换上限</label>
+            <input type="number" ng-model="entity.exchange_limit" required ng-minlength="1" ng-maxlength="1000">
+        </md-input-container>
+
+        <md-input-container>
+            <label>折扣</label>
+            <input type="number" ng-model="entity.discount" required ng-minlength="1" ng-maxlength="1">
+        </md-input-container>
+
+        <md-input-container>
+            <label>渠道</label>
+            <input type="text" ng-model="entity.channel" required ng-minlength="2" ng-maxlength="30">
+        </md-input-container>
+
+        <md-input-container>
+            <label>生成数量</label>
+            <input type="number" ng-model="entity.num" required ng-minlength="1" ng-maxlength="100">
+        </md-input-container>
+      </div>
+
+      </div>
+        <div layout="row">
+            <md-button class="md-raised md-primary" ng-disabled="entityForm.$invalid || isDisabled">保存</md-button>
+            <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,104 @@
+<div class="container">
+    <!-- <h3>发起人 - 当前活动标题 （活动时间）</h3> -->
+    <div layout="row" flex id="content">
+        <!-- 用户列表 -->
+        <div class="col-md-6">
+            <div ng-cloak>
+                <md-content>
+                    <md-tabs md-dynamic-height md-border-bottom>
+                        <md-tab label="待筛选{{waitCount}}">
+                            <md-content class="md-padding">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="entity in list | filter: {status: 10}" ng-click="view(entity)">
+                                        <div class="media">
+                                            <a class="pull-left" href="">
+                                                <img width="50" height="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.profile.headimgurl}}" alt="头像">
+                                            </a>
+	                                        <span>
+	                                        	<strong>{{entity.profile.name}}（{{entity.user.username}}）</strong>
+	                                        </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="已通过{{passCount}}">
+                            <md-content class="md-padding">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="entity in list | filter: 20" ng-click="view(entity)">
+                                        <div class="media">
+                                            <a class="pull-left" href="">
+                                                <img width="50" height="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.profile.headimgurl}}" alt="头像" />
+                                            </a>
+                                            <span>
+                                            <strong>{{entity.profile.name}}（{{entity.user.username}}）</strong>
+                                        </span>
+                                       </div>
+                                    </li>
+                                </ul>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="未通过{{rejectCount}}">
+                            <md-content class="md-padding">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="entity in list | filter: {status:15} as answerReject" ng-click="view(entity)">
+                                        <div class="media">
+                                            <a class="pull-left" href="">
+                                                <img width="50" height="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.profile.headimgurl}}" alt="头像">
+                                            </a>
+                                            <span>
+                                        		<strong>{{entity.profile.name}}（{{entity.user.username}}）</strong>
+                                    		</span>
+                                            <span class="btn-float-right" style="color:#E33;">未通过</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+                </md-content>
+            </div>
+        </div>
+        <!-- 用户列表 end -->
+        <!-- 用户资料详情 -->
+        <div class="col-md-6" ng-show="entity.user" style="padding:0;border:solid 10px rgba(10,10,10,0.5); overflow: auto; height: 80%;">
+            <div class="media">
+                <div style="padding:20px;">
+                    <div class="pull-left">
+                        <img width="50" style="border-radius: 25px" class="media-object avatarSize" ng-src="{{entity.profile.headimgurl}}" alt="...">
+                    </div>
+                    <div style="margin-left:80px;top:0;">
+                        <div style="width:100%;display:inline-block;">
+                            <span>
+                                <font size="+2">
+                                    <strong>{{entity.profile.name}}（{{entity.username}}）</strong>
+                                </font>
+                            </span>
+                            <div class="pull-right">
+                                <button class="btn" style="background-color: green;color:white" ng-click="updateStatus(entity.id,20)">筛选通过</button>
+                                <button class="btn" ng-click="updateStatus(entity.id,15)">不通过</button>
+                            </div>
+                        </div>
+                    <div>
+                        <span style="color:#777;">
+                            {{entity.profile.sex==1 ? '男' : entity.profile.sex==2 ? '女' : '性别不明'}}
+                        </span>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div style="margin-left: 1rem;">
+            		<div>序号：{{entity.id}}</div>
+                	<div>用户昵称：{{entity.username}}</div>
+                	<div>手机号：{{entity.mobile}}</div>
+                	<div>微信号：{{entity.wechat}}</div>
+                	<div>愿望内容：{{entity.wish_content}}</div>
+                	<div>愿望筹码：{{entity.wish_jetton}}</div>
+                	<div>个人介绍：{{entity.introduction}}</div>	
+            	</div>
+            </div>
+            <br />
+        </div>
+    </div>
+</div>

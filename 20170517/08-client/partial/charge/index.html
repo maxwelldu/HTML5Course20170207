@@ -1,0 +1,58 @@
+<div class="container">
+<div ng-cloak>
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="用户报名订单">
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="actForm">
+                <div class="form-group">
+                  <label class="col-xs-6">🔍可以搜索：活动标题 活动id 订单号</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="activityOrderTableParams.filter().search">
+                  </div>
+                </div>
+            </form>
+            <table ng-table="activityOrderTableParams" style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="activityOrder in $data">
+                    <td data-title="'订单号'" >{{activityOrder.order_no}}</td>
+                    <td data-title="'用户ID'" >{{activityOrder.user_id}}</td>
+                    <td data-title="'用户昵称'" >{{activityOrder.username}}</td>
+                    <td data-title="'支付金额'" >{{activityOrder.price}}</td>
+                    <td data-title="'支付时间'" >{{activityOrder.pay_time}}</td>
+                    <td data-title="'订单状态'" >{{activityOrder.status}}</td>
+                    <td data-title="'操作'"><a href="#/charge/order-view/{{activityOrder.id}}" target="_blank">查看详情</a></td>
+                </tr>
+            </table>
+        </md-content>
+      </md-tab>
+
+      <md-tab label="vip订单">
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="nameForm">
+                <div class="form-group">
+                  <label class="col-xs-6">🔍可以搜索：用户昵称 用户id 订单号 手机号</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="vipTableParams.filter().search">
+                  </div>
+                </div>
+              </form>
+
+          <table ng-table="vipTableParams"  style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="vip in $data">
+                    <td data-title="'订单号'" >{{vip.order_no}}</td>
+                    <td data-title="'用户ID'" >{{vip.user_id}}</td>
+                    <td data-title="'用户昵称'" >{{vip.username}}</td>
+                    <td data-title="'支付金额'" >{{vip.price}}</td>
+                    <td data-title="'支付时间'" >{{vip.pay_time}}</td>
+                    <td data-title="'订单状态'" >{{vip.status}}</td>
+                    <td data-title="'操作'"><a href="#/charge/vip/{{vip.id}}" target="_blank">查看详情</a></td>
+                </tr>
+            </table>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
+
+
+</div>

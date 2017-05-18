@@ -1,0 +1,21 @@
+<div class="container" layout="column" flex id="content">
+  <md-button class="activity-dialog-btn md-fab" ng-click="createPage()" aria-label="add city">
+    <i class="fa fa-plus"></i>
+  </md-button>
+  <md-list>
+    <md-list-item>
+      <p> 城市编号 </p>
+      <p> 城市 </p>
+      <p> 操作 </p>
+    </md-list-item>
+    <md-list-item ng-repeat="entity in list | orderBy: 'display_order'">
+      <p> {{entity.city_id}} </p>
+      <p> {{entity.city}} </p>
+      <p layout="row">
+        <md-button class="md-raised" ng-click="update(entity)">修改</md-button>
+        <md-button ng-if="entity.status == 1"> 显示</md-button>
+        <md-button ng-if="entity.status == 0"> 隐藏</md-button>
+      </p>
+    </md-list-item>
+  </md-list>
+</div>

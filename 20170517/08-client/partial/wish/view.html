@@ -1,0 +1,39 @@
+<div class="container" layout="column" flex id="content">
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" ><a href="#/wish">愿望列表</a></li>
+    <li role="presentation" class="active"><a href="#/wish/index">创建愿望</a></li>
+  </ul><br><br>
+  <!-- <div ng-include="'/partial/exchange/nav.html'"></div> -->
+    <form name="entityForm" ng-submit="save()" novalidate>
+      <div class="row">
+        <div class="col-md-10">
+        <div layout="row">
+            <label>地点:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <md-autocomplete md-selected-item="selectedSpaceSpot" ng-model="spot_id" placeholder="请选择地点" md-search-text="spacename" md-items="space_spot in getSpace(spacename)" md-search-text-change="getSection(selectedSpaceSpot)" md-item-text="space_spot.name" md-min-length="0" md-menu-class="autocomplete-custom-template">
+                <md-item-template>
+                    <span md-highlight-text="space_spot">{{space_spot.name}}</span>
+                </md-item-template>
+                <md-not-found>No matches found.</md-not-found>
+            </md-autocomplete>
+        </div><br/><br/>
+        <md-input-container>
+            <label>愿望id</label>
+            <input type="text" ng-model="entity.title"  ng-maxlength="1000">
+        </md-input-container>
+        <md-input-container>
+            <label>用户简介</label>
+            <input type="text" ng-model="entity.user_desc" ng-maxlength="1000">
+        </md-input-container>
+
+        <br/>
+        <md-input-container>
+            <label>愿望详情</label>
+            <text-angular ng-model="entity.content"></text-angular>
+        </md-input-container><br/><br/>
+      </div>
+        <div layout="row">
+            <md-button class="md-raised md-primary">保存</md-button>
+            <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+        </div>
+    </form>
+</div>

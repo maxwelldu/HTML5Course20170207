@@ -1,0 +1,69 @@
+<div layout="column" flex id="content" class="container" style="font-size:18px;">
+    <div class="list-group">
+        <div class="list-group-item">
+            <div class="row">
+                <div class="col-md-4">
+                    UGA 问答
+                    <span ng-if="is_official == 0">民间问题</span>
+                    <span ng-if="is_official == 1">民间公开库</span>
+                    <span ng-if="is_official == 10">官方问题</span>
+                </div>
+                <div class="col-md-8 text-right">
+                    <button ng-if="is_official == 10" type="button" class="btn btn-info" ng-click="createQuestion()">新建问题</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-8 text-right">
+                    <div class="btn-group" role="group" aria-label="...">
+                    <button ng-if="is_official == 0 || is_official == 1" type="button" class="btn btn-default btn-xs" ng-click="viewPublic(1)">只看公众库</button>
+                        <button type="button" class="btn btn-default btn-xs" ng-click="order('created_at')">按时间排序</button>
+                        <button type="button" class="btn btn-default btn-xs" ng-click="order('praise_num')">按赞排序</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-repeat="entity in list">
+            <a href="#/uga-answer-list/{{entity.id}}" class="list-group-item">
+                <div class="row">
+                    <del ng-if="entity.status == 0">
+                        <del class="col-md-8">
+                            #{{entity.id}} &nbsp; {{entity.content}}
+                        </del>
+                        <del class="col-md-1">
+                            回答：{{entity.answer_num}}
+                        </del>
+                        <del class="col-md-1">
+                            点赞：{{entity.praise_num}}
+                        </del>
+                        <del class="col-md-2">
+                            <button class="btn-success" ng-click="resume(entity)">恢复</button>
+                        </del>
+                    </del>
+                    <div ng-if="entity.status == 1">
+                        <div class="col-md-8">
+                            #{{entity.id}} &nbsp; {{entity.content}}
+                        </div>
+                        <div class="col-md-1">
+                            回答：{{entity.answer_num}}
+                        </div>
+                        <div class="col-md-1">
+                            点赞：{{entity.praise_num}}
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn-success" ng-click="delete(entity)">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div ng-show="modelPagination" class="someet-pagination user-pagination">
+            <pagination total-items="modelPagination.totalItems" ng-model="modelPagination.currentPage" ng-change="modelPagination.pageChange()" items-per-page="modelPagination.itemsPerPage" max-size="modelPagination.maxSize" class="pagination-sm" boundary-links="false" rotate="false">
+                <a href="javascript:void(0)" ng-click="modelPagination.currentPage=1;changePage(1)">首页</a>
+                <a href="javascript:void(0);" ng-click="prev()">上一页</a>
+                <a href="javascript:void(0);" ng-click="changePage(page)" ng-repeat="page in pages">{{ page }}</a>
+                <a href="javascript:void(0);" ng-click="next()">下一页</a>
+                <a href="javascript:void(0)" ng-click="modelPagination.currentPage=modelPagination.totalItems;changePage(modelPagination.totalItems)">末页</a>
+            </pagination>
+        </div>
+    </div>
+</div>

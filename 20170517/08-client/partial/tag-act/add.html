@@ -1,0 +1,43 @@
+<div class="container" layout="column" flex id="content">
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation"><a href="#/tag-act">二级分类列表</a></li>
+    <li role="presentation"  class="active"><a href="#/tag-act/add">创建二级分类</a></li>
+</ul>
+<form name="entityForm" ng-submit="save()" novalidate>
+      <div class="row">
+        <div class="col-md-10">
+       <div class="row">
+            <div class="col-md-6 margin-top-10">
+                <label>选择标签</label>
+                <md-input-container>
+                    <md-select name="group" required ng-model="entity.type_id" placeholder="选择分类">
+                        <md-option ng-value="opt.id" ng-repeat="opt in type_list">{{ opt.name }}</md-option>
+                    </md-select>
+                    <div ng-messages="entityForm.group.$error">
+                        <div ng-message="required">必填项目</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div ng-file-select="onPosterSelect($files)"  width="5rem"  data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload">
+                <md-button class="md-raised md-info">二级分类图片</md-button>{{ selectPoster.progress.p }}%
+                <img class="activity-photo" style="width:5rem" src="{{poster}}">
+            </div>
+        </div>
+        <md-input-container>
+            <label>分类名称</label>
+            <input type="text" ng-model="entity.name"  ng-maxlength="1000">
+        </md-input-container>
+        <md-input-container>
+            <label>分类排序</label>
+            <input type="text" ng-model="entity.order"  ng-maxlength="1000">
+        </md-input-container>
+        <md-input-container>
+            <label>英文名</label>
+            <input type="text" ng-model="entity.english_name"  ng-maxlength="1000">
+        </md-input-container>
+        <div layout="row">
+            <md-button class="md-raised md-primary">保存</md-button>
+            <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+        </div>
+    </form>
+</div>

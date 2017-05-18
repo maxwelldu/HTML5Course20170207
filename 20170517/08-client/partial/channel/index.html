@@ -1,0 +1,14 @@
+<div layout="column" class="container" flex id="content">
+      <div class="row md-padding">
+          <a class="btn btn-info btn-lg" href="/#/channel/wechatReply">微信按序号回复Json</a>
+          <a class="btn btn-info btn-lg" href="/#/channel/special{{cityid}}">专题Json</a>
+          <a class="btn btn-info btn-lg" href="/#/channel/banner{{cityid}}">首页BannerJson</a>
+      </div>
+
+      <div class="row md-padding">
+              <textarea cols="100" rows="20" ng-model="data">{{data}}</textarea>
+      </div>
+      <div class="row md-padding">
+        <button class="btn btn-success" ng-click="createChannel(data)">提交</button>
+      </div>
+</div>

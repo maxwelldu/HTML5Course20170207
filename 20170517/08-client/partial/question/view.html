@@ -1,0 +1,49 @@
+<!-- 编辑问题表单 -->
+<div layout="column" flex id="content">
+  <form name="entityForm" ng-submit="save()">
+    <!-- <input type="hidden" ng-model="activity_id" />
+    <input type="hidden" ng-model="entity.id" />
+    -->
+    <!--md-input-container>
+    <label>活动报名补充说明(出现在报名页面)</label>
+    <textarea name="desc" required ng-model="entity.desc"></textarea>
+    <div ng-messages="entityForm.desc.$error">
+      <div ng-message="required">必填项目</div>
+    </div>
+  </md-input-container-->
+  <!-- <span ng-repeat="(k, questionItem) in entity.questionItemList">
+  <input type="hidden" ng-model="questionItem.id"></span>
+-->
+    <md-input-container ng-repeat="(k, questionItem) in entity.questionItemList">
+      <label>问题{{k+1}}</label>
+      <input type="text" ng-model="questionItem.label"></md-input-container>
+    <md-input-container ng-if="!entity.id">
+      <label>问题1</label>
+      <input name="q1" type="text" required minlength="5" ng-model="questionItem.q1">
+      <div ng-messages="entityForm.q1.$error">
+        <div ng-message="required">必填项目</div>
+        <div ng-message="minlength">问题文字不能少于5个字符</div>
+      </div>
+    </md-input-container>
+    <md-input-container ng-if="!entity.id">
+      <label>问题2</label>
+      <input name="q2" type="text" required minlength="5" ng-model="questionItem.q2">
+      <div ng-messages="entityForm.q2.$error">
+        <div ng-message="required">必填项目</div>
+        <div ng-message="minlength">问题文字不能少于5个字符</div>
+      </div>
+    </md-input-container>
+    <md-input-container ng-if="!entity.id">
+      <label>问题3</label>
+      <input name="q3" type="text" required minlength="5" ng-model="questionItem.q3">
+      <div ng-messages="entityForm.q3.$error">
+        <div ng-message="required">必填项目</div>
+        <div ng-message="minlength">问题文字不能少于5个字符</div>
+      </div>
+    </md-input-container>
+    <md-input-container layout="row">
+      <md-button class="md-raised md-primary" ng-disabled="entityForm.$invalid">保存</md-button>
+      <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+    </md-input-container>
+  </form>
+</div>

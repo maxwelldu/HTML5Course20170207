@@ -1,0 +1,33 @@
+<!-- 转账页面 -->
+<div class="container" id="content">
+    <form name="entityForm" ng-submit="save(entity)">
+        <div layout="row">
+            <label>转账人:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <md-autocomplete md-selected-item="entity.user" placeholder="请选择转账人"  md-search-text="username" md-items="user in getUsers(username)" md-item-text="user.username" md-min-length="0" md-menu-class="autocomplete-custom-template">
+                <md-item-template>
+                    <span md-highlight-text="username">{{user.username}}</span>
+                    <img ng-if="user" width="50" style="border-radius:25px" ng-src="{{user.profile.headimgurl}}" />
+                </md-item-template>
+                <md-not-found>No matches found.</md-not-found>
+            </md-autocomplete>
+            
+        </div><br/>
+        <div layout="row">
+            <md-input-container>
+            <label>转账金额 单位：元</label>
+
+                <input type="number" name="amount" ng-model="entity.amount" value="{{entity.amount}}" />
+            </md-input-container>
+        </div>
+        <div flex="50">
+            <label>转账说明</label>
+            <md-input-container>
+                <input type="text" name="description" ng-model="entity.description" value="{{entity.description}}" max="200" />
+            </md-input-container>
+        </div>
+        <md-input-container  layout="row" class="btn-float-left">
+            <md-button class="md-raised md-warn" ng-disabled="entityForm.$invalid">转账</md-button>
+        </md-input-container>
+    </form>
+</div>
+

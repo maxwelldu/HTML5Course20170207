@@ -1,0 +1,123 @@
+<!-- 登录后统计信息页面 -->
+<div layout="column" flex id="content" class="container" style="font-size:18px;">
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#/playground/test-tube">数据总览</a></li>
+    <li role="presentation"><a href="#/data/view">周数据</a></li>
+    <li role="presentation"><a href="#/data/activity">活动质量数据</a></li>
+</ul><br/>
+    <div class="panel panel-default dashboardIndex">
+
+        <div class="panel-body">
+            <h2>统计数据</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">授权人数</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countUser}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">今日新增授权人数</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countNewToday}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">已完善资料人数</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countUserInfo}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">今日完善资料人数</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countnewNewTodayUserInfo}}</li>
+                </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">发起人数量</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countFounder}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">PMA数量</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countPma}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">已完善资料人数:男/女</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countUserInfoBoy}}/{{entity.countUserInfoGirl}}</li>
+                </ul>
+            </div>
+          </div>
+        <div class="panel-body">
+            <h2>活动数据</h2>
+        </div>
+        <div class="row">
+                    <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">本周活动数量</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countWeekActivity}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">当前活动报名总名额</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countAllJoin}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">已报名数量</li>
+                    <li class="list-group-item list-group-item-info">{{entity.countAlreadyJoin}}</li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                    <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">迟到人数比率</li>
+                    <li class="list-group-item list-group-item-info">{{entity.late_ratio}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">请假人数比率</li>
+                    <li class="list-group-item list-group-item-info">{{entity.leave_ratio}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">爽约人数比率</li>
+                    <li class="list-group-item list-group-item-info">{{entity.arrive_no_ratio}}</li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success" ng-repeat="activityList in entity.countJoinDesc">
+                        {{activityList.title}} ({{activityList.countJoin}} / {{activityList.peoples}}) {{activityList.field1}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-danger" ng-repeat="activityList in entity.countJoinAsc">
+                        {{activityList.title}} ({{activityList.countJoin}} / {{activityList.peoples}}){{activityList.field1}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

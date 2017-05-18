@@ -1,0 +1,26 @@
+<div class="container">
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#/tag-act">二级分类列表</a></li>
+        <li role="presentation"><a href="#/tag-act/add">创建二级分类</a></li>
+    </ul>
+    <div ng-cloak>
+      <md-content class="md-padding">
+            <table ng-table="tagTableParams" style="font-size: 0.7rem;text-align: center;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="tag in $data">
+                    <td data-title="'id'" >{{tag.id}}</td>
+                    <td data-title="'一级分类'" >{{tag.type.name}}</td>
+                    <td data-title="'分类名称'">{{tag.name}}</td>
+                    <td data-title="'英文名'">{{tag.english_name}}</td>
+                    <td data-title="'分类图片'" style="width:2rem;">
+                    <div style="width: 4rem">
+                        <img style="width:100%" src="{{tag.image}}">
+                    </div>
+                    </td>
+                    <td data-title="'操作'">
+                        <a  class="btn btn-success btn-sm" href="#/tag-act/{{tag.id}}" target="_blank">编辑</a>
+                    </td>
+                </tr>
+            </table>
+        </md-content>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<!-- 活动订单详情页面 -->
+<div layout="column" layout-align-md id="content" class="container">
+    <div class="row">
+            <div class="col-md-12  panel-default">
+                <div class="panel-body" style="font-size:14px">
+                    订单号：{{data.activity_order.order_no}}<br/>
+                    用户昵称：{{data.activity_order.username}}<br/>
+                    活动名称：{{data.activity_order.activity_title}}<br/>
+                    支付类型：微信<br/>
+                    支付金额：{{data.activity_order.pay_price}}<br/><br/>
+                    支付时间：{{data.activity_order.pay_time}}<br/>
+                    支付到账时间：{{data.activity_order.paid_time}}<br/>
+                    <!-- <div ng-if="data.answer.leave_status==0">请假时间：</div>
+                    <div ng-if="data.answer.leave_status==0">请假退款金额：</div>
+                    <div ng-if="data.answer.leave_status==0">请假退款到账时间：</div> -->
+                    <!-- 用户已经参加活动 -->
+                    <div ng-if="data.activity_order.answer.arrive_status==2 || data.activity_order.answer.arrive_status==1">
+                        活动开始时间：{{data.activity_order.activity.start_time}}<br/>
+                        活动结束时间：{{data.activity_order.activity.end_time}}<br/>
+                    </div>
+                    <!-- 用户请假 -->
+                    <div ng-if="data.activity.answer.leave_status==1">
+                        请假时间：{{data.activity_order.answer.leave_time}}
+                        请假退款金额：{{data}}<br/>
+                        请假退款时间：{{}}<br/>
+                        请假退款到账时间：{{}}<br/>
+                    </div>
+                    退款金额：{{ data.refund.price}}元<br/>
+                    退款时间：{{ data.refund.created_at}}<br/>
+                    退款原因：{{data.refund.description}}<br/>
+                </div>
+                <div layout='row'>
+      <!--                   <md-input-container flex="40">
+                            <label>驳回理由</label>
+                            <input type="text" ng-model="yellowCardList.handle_reply" />
+                        </md-input-container> -->
+                        <md-input-container flex="40">
+                            <label>退款理由</label>
+                            <input type="text" ng-model="description" />
+                        </md-input-container>
+
+                        <md-input-container flex="40">
+                            <label>退款金额</label>
+                            <input type="text" ng-model="data.activity_order.price" />
+                        </md-input-container>
+                    </div>
+                    <md-card-actions layout="row" layout-align="right">
+                        <md-button  class="md-raised md-warn" ng-click="rejectRefund(yellowCardList.handle_reply)">驳回</md-button>
+                        <!-- <md-button  class="md-raised md-warn" ng-click="refund(data.activity_order)">全额退款</md-button> -->
+                        <md-button  class="md-raised md-warn" ng-click="refund(data.activity_order)">定额退款</md-button>
+                    </md-card-actions>
+                </div>
+            </div>
+    </div>
+</div>
