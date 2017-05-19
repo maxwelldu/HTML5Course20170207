@@ -2,6 +2,7 @@
  * Created by liuyujing on 2017/4/7.
  * 具体 执行  sql语句的方法 （直接操作数据库）
  */
+ var md5 = require('md5');
 
 //引入数据库操作的类
 var DBManger = require("./DBManager");
@@ -22,10 +23,14 @@ var DBManagerTool = {};
 
 //------------用户相关-------------
 //添加用户 -> 注册的api中 调用 添加用户
+/**
+* userInfo : {username:"",password:"",phone:""}
+*/
 DBManagerTool.addUser = function (userInfo) {
     //具体是什么操作  sql语句决定
     //sql -> 添加用户
-    var sql = "INSERT INTO `user`(`username`, `password`, `phone`) VALUES ('"+userInfo.username+"','"+userInfo.password+"','"+userInfo.phone+"')";
+    var sql = "INSERT INTO `user` (`username`, `password`, `phone`, `uuid`) VALUES ('"+userInfo.username+"','"+md5(userInfo.password)+"','"+userInfo.phone+"','"+userInfo.uuid+"')";
+    console.log(sql);
     //可以通过  dbManager对象  直接调用opretation操作数据库
     return dbManager.opretation(sql);
 };
@@ -86,6 +91,7 @@ DBManagerTool.deleteRecoder = function (id) {
 * */
 DBManagerTool.restoreRecoder = function (id) {
     var sql = "UPDATE `recoder` SET  `is_remove`=0 WHERE `recoder_id`="+id;
+    console.log(sql);
     return dbManager.opretation(sql);
 };
 /*

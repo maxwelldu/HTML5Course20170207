@@ -2,6 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
+var md5 = require('md5');
 
 var DBManagerTools = require("../tools/DBManagerTool");
 
@@ -39,6 +40,7 @@ router.get("/verifyCode",function (req,res) {
     });
   }
 
+  console.log(req.query.phone);
   //配置 短信验证的内容
   //详情请看：https://www.npmjs.com/package/alidayu-node
   var info = {
@@ -83,6 +85,11 @@ router.get("/verifyCode",function (req,res) {
 });
 
 //注册的接口
+/**
+* username  string 必填
+  password  string
+  phone  string
+*/
 router.post("/register",function (req,res) {
 
   // 判断是否传入了 用户名和手机
@@ -131,7 +138,7 @@ router.post("/login",function (req,res) {
       code:3008,
       message:"密码错误"
     };
-    res.send(req.body.password==result[0].password?success:error);
+    res.send(md5(req.body.password)==result[0].password?success:error);
   }).catch(function (error) {
     console.log("error",error);
     res.send({
