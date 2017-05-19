@@ -69,13 +69,13 @@ DBManagerTool.searchAllUsers = function (info) {
 //------------录入相关-------------
 DBManagerTool.addRecoder = function (info) {
     // console.log(info);
-    info.userID = parseInt(info.userID);
+    info.user_id = parseInt(info.user_id);
     var isPublic = info['public[isPublic]'] || 0;
     var statusNum = info['status[statusNum]'] || 0;
     var lat = info['location[point][lat]'] || 0;
     var lng = info['location[point][lng]'] || 0;
-  // +info.userID+","+isPublic+",'"+info.title+"','"+info.des+"','"+info.alertTime+"',"+statusNum+","+lat+","+lng+",'"+info['location[address]']+"
-    var sql = "INSERT INTO `recoder`(`user_id`, `is_public`, `title`, `des`, `alert_time`, `status`, `lat`, `lng`, `address`) VALUES ("+info.userID+","+isPublic+",'"+info.title+"','"+info.des+"','"+info.alertTime+"',"+statusNum+","+lat+","+lng+",'"+info['location[address]']+"');";
+  // +info.user_id+","+isPublic+",'"+info.title+"','"+info.des+"','"+info.alertTime+"',"+statusNum+","+lat+","+lng+",'"+info['location[address]']+"
+    var sql = "INSERT INTO `recoder`(`user_id`, `is_public`, `title`, `des`, `alert_time`, `status`, `lat`, `lng`, `address`) VALUES ("+info.user_id+","+isPublic+",'"+info.title+"','"+info.des+"','"+info.alertTime+"',"+statusNum+","+lat+","+lng+",'"+info['location[address]']+"');";
     return dbManager.opretation(sql);
 };
 
@@ -97,10 +97,10 @@ DBManagerTool.restoreRecoder = function (id) {
 /*
 * searchRecoder:查询《记录》
 * isRemove 查询是否删除的记录 0未删除 1删除（查询显示在垃圾桶中的记录）
-* userID 用户ID 区分是哪一个用户
+* user_id 用户_id 区分是哪一个用户
 * */
-DBManagerTool.searchRecoder = function (isRemove,userID) {
-    var sql = "SELECT * FROM `recoder` WHERE is_remove="+isRemove+" and user_id="+userID;
+DBManagerTool.searchRecoder = function (isRemove,user_id) {
+    var sql = "SELECT * FROM `recoder` WHERE is_remove="+isRemove+" and user_id="+user_id;
     return dbManager.opretation(sql);
 };
 DBManagerTool.updateRecoder = function (info) {
@@ -109,15 +109,15 @@ DBManagerTool.updateRecoder = function (info) {
 };
 /*
 * clearRecoder 从数据库 清空单条数据的方法
-* recoderID 记录的id
+* recoder_id 记录的id
 * */
-DBManagerTool.clearRecoder = function (recoderID) {
-    var sql = "DELETE FROM `recoder` WHERE recoder_id="+recoderID;
+DBManagerTool.clearRecoder = function (recoder_id) {
+    var sql = "DELETE FROM `recoder` WHERE recoder_id="+recoder_id;
     return dbManager.opretation(sql);
 };
 //清除垃圾箱内所有的数据
-DBManagerTool.clearAllOfTrash = function (userID) {
-    var sql = "DELETE FROM `recoder` WHERE is_remove=1 AND user_id="+userID;
+DBManagerTool.clearAllOfTrash = function (user_id) {
+    var sql = "DELETE FROM `recoder` WHERE is_remove=1 AND user_id="+user_id;
     return dbManager.opretation(sql);
 };
 module.exports = DBManagerTool;
