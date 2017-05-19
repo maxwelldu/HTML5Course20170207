@@ -19,13 +19,11 @@ angular.module("starter.controllers",[])
         at:date
       };
       //schedule 添加本地推送
-      $cordovaLocalNotification.schedule(notInfo);
-
-      $rootScope.$on('$cordovaLocalNotification:trigger',
-        function (event, notification, state) {
-          console.log("通知已被触发",notification);
-        });
-
+      // $cordovaLocalNotification.schedule(notInfo);
+      // $rootScope.$on('$cordovaLocalNotification:trigger',
+      //   function (event, notification, state) {
+      //     console.log("通知已被触发",notification);
+      //   });
     });
 
 
@@ -130,7 +128,7 @@ angular.module("starter.controllers",[])
         template:"正在删除中..."
       });
 
-      HTTPManager.get(HOST+DELETE_RECODER,{recoderID:info.recoder_id}).then(function (result) {
+      HTTPManager.get(HOST+DELETE_RECODER,{recoder_id:info.recoder_id}).then(function (result) {
 
         if (result.data.code==2000){
           $ionicLoading.hide();
@@ -256,9 +254,7 @@ angular.module("starter.controllers",[])
    * 3 是否公开
    * */
     $scope.addEvent = function (type,info) {
-
     console.log(type);
-
     switch (type){
       case 0:
         this.writeInfo.alertTime = writeService.alertTime();
@@ -305,22 +301,16 @@ angular.module("starter.controllers",[])
 
     //保存到云端
     function saveForOnine(info) {
-
-      if (!window.localStorage.getItem(IS_LOGIN)){
-
+      if (!localStorage.getItem(IS_LOGIN)){
         alertView.showMessageForDelay("请登录后保存",2000);
-
         return;
       }
 
       //录入的数据中 没有用户ID  需要把登录时候的ID添加到这个对象中
-
-      $scope.writeInfo.userID = parseInt(window.localStorage.getItem(USER_ID));
+      $scope.writeInfo.user_id = parseInt(localStorage.getItem(USER_ID));
 
       HTTPManager.post(HOST+ADD_RECODER,$scope.writeInfo).then(function (result) {
-
         result.data.code==2000?$ionicHistory.goBack():alertView.showMessageForDelay(result.data.message,2000);
-
       }).catch(function (error) {
         alertView.showMessageForDelay(error.data.message,2000);
       });
@@ -329,29 +319,9 @@ angular.module("starter.controllers",[])
       saveForOffline(info);
     }
 
+    //保存备忘录
     $scope.toSave = function (info) {
-
-      if (this.writeInfo.title.length>0&&this.writeInfo.des.length>0){
-
-        $ionicActionSheet.show({
-          buttons: [
-            { text: '保存到本地',type:"energized"},
-            { text: '保存到云端'},
-          ],
-          titleText: '保存记录',
-          cancelText: '取消',
-          buttonClicked: function(index) {
-              console.log(index);
-
-              index?saveForOnine(info):saveForOffline(info);
-
-            $ionicHistory.goBack();
-            return true;
-          }
-        });
-
-
-      }else {
+      if (!this.writeInfo.title.length>0 || !this.writeInfo.des.length>0){
       //  未录入标题或者内容
         $ionicPopup.alert({
           title: '温馨提示',
@@ -363,21 +333,33 @@ angular.module("starter.controllers",[])
         });
       }
 
-    //  保存到本地 或者 云端
-    //  使用alertSheet
-
+      //  保存到本地 或者 云端
+      //  使用alertSheet
+      $ionicActionSheet.show({
+        buttons: [
+          { text: '保存到本地',type:"energized"},
+          { text: '保存到云端'},
+        ],
+        titleText: '保存记录',
+        cancelText: '取消',
+        buttonClicked: function(index) {
+          console.log(index);
+          index?saveForOnine(info):saveForOffline(info);
+          $ionicHistory.goBack();
+          return true;
+        }
+      });
     }
 
 })
 
 .controller("settingController",function ($scope,HTTPManager,$rootScope) {
-
   // $scope.gotoRegister = function () {
   //   HTTPManager.post(HOST+REGISTER,{name:"xiaoming"});
   // };
 
   //读取用户的登录状态
-  $rootScope.isLogin = window.localStorage.getItem(IS_LOGIN);
+  $rootScope.isLogin = localStorage.getItem(IS_LOGIN);
 
   //如果登录了 显示用户名
   if($rootScope.isLogin){
@@ -387,29 +369,25 @@ angular.module("starter.controllers",[])
 })
 
   .controller("loginController",function ($scope,alertView,HTTPManager,$ionicHistory,$rootScope) {
-
     $scope.userInfo = {};
 
     var reg = /^1[3-8]\d{9}$/;
-
     function login() {
-
       $scope.userInfo.password = md5(sha1($scope.userInfo.password+"secretary"));
 
       HTTPManager.post(HOST+LOGIN,$scope.userInfo).then(function (result) {
         console.log("登录",result);
         if (result.data.code==2000){
 
-        //  保存登录状态
-        //  保存用户名 到本地
-          window.localStorage.setItem(IS_LOGIN,1);
-
-          window.localStorage.setItem(USER_NAME,result.data.data.username);
-          window.localStorage.setItem(USER_ID,result.data.data.user_id);
+          //  保存登录状态
+          //  保存用户名 到本地
+          localStorage.setItem(IS_LOGIN,1);
+          localStorage.setItem(USER_NAME,result.data.data.username);
+          localStorage.setItem(USER_ID,result.data.data.user_id);
 
           //更新登录状态
-          $rootScope.isLogin = window.localStorage.getItem(IS_LOGIN);
-          $rootScope.username = window.localStorage.getItem(USER_NAME);
+          $rootScope.isLogin = localStorage.getItem(IS_LOGIN);
+          $rootScope.username =localStorage.getItem(USER_NAME);
 
           $ionicHistory.goBack();
         }else {
@@ -421,17 +399,18 @@ angular.module("starter.controllers",[])
       });
     }
     $scope.toLogin = function () {
-
       reg.test($scope.userInfo.phone)?login():alertView.showMessageForDelay("请输入正确的手机号",2000);
-
     };
 
   })
 
-  .controller("registerController",function ($scope,$interval,HTTPManager,$ionicLoading,$timeout,alertView,$ionicHistory) {
+  .controller("registerController",function ($scope,$interval,HTTPManager,$ionicLoading,$timeout,alertView,$ionicHistory,$cordovaDevice) {
+    // document.addEventListener("deviceready", function () {
+    //    $scope.uuid = $cordovaDevice.getUUID();
+    //    console.log($scope.uuid);
+    // }, false);
 
     $scope.registerInfo = {};
-
     $scope.codeStatus = "获取验证码";
 
     //是否禁用 获取验证码按钮
@@ -439,31 +418,27 @@ angular.module("starter.controllers",[])
 
     $scope.isFinish = false;
 
+    //获取手机验证码
     $scope.getVerfilyCode = function () {
-
       var reg = /^1[3-8]\d{9}$/;
       if (!reg.test($scope.registerInfo.phone)){
-
         alertView.showMessageForDelay("您输入的不是手机号码",2000);
-
         return;
       }
 
       HTTPManager.get(HOST+GET_VERIFY_CODE,{phone:$scope.registerInfo.phone}).then(function (result) {
-          console.log(result);
+        console.log(result);
         alertView.showMessageForDelay(result.data.message,2000);
-          $scope.code = result.data.verifyCode;
+        $scope.code = result.data.verifyCode;
       }).catch(function (error) {
         alertView.showMessageForDelay(error.data.message,2000);
-          console.log(error);
+        console.log(error);
       });
 
       $scope.codeStatusIsDisable = true;
-
       var time = 60;
       var timer = $interval(function () {
         $scope.codeStatus = time-- +"秒后重试";
-
         if (time==0){
           $interval.cancel(timer);
           $scope.codeStatus = "获取验证码";
@@ -473,6 +448,9 @@ angular.module("starter.controllers",[])
 
     };
 
+    /**
+    用户注册功能
+    */
     $scope.toRegister = function (info) {
 
       if ($scope.code == info.verifyCode){
@@ -480,6 +458,7 @@ angular.module("starter.controllers",[])
         console.log(md5(sha1(info.password+"secretary")));
 
         info.password = md5(sha1(info.password+"secretary"));
+        info.uuid = $scope.uuid;
         HTTPManager.post(HOST+REGISTER,info).then(function (result) {
 
           if (result.data.code == 2000){
@@ -515,7 +494,7 @@ angular.module("starter.controllers",[])
         text:"必须",
         type:"button-energized",
         onTap:function () {
-          HTTPManager.get(HOST+CLEAR_ALL_RECODER,{userID:window.localStorage.getItem(USER_ID)}).then(function (result) {
+          HTTPManager.get(HOST+CLEAR_ALL_RECODER,{user_id:localStorage.getItem(USER_ID)}).then(function (result) {
             if (result.data.code == 2000){
               //如果 还原单条数据成功
               //需要把 垃圾箱数组中 这条数据删除
@@ -545,7 +524,7 @@ angular.module("starter.controllers",[])
         type:"button-energized",
         onTap:function restoreItem() {
             console.log(info);
-          HTTPManager.get(HOST+RESTORE_RECODER,{recoderID:info.recoder_id}).then(function (result) {
+          HTTPManager.get(HOST+RESTORE_RECODER,{recoder_id:info.recoder_id}).then(function (result) {
               if (result.data.code == 2000){
                 //如果 还原单条数据成功
                 //需要把 垃圾箱数组中 这条数据删除
@@ -567,7 +546,7 @@ angular.module("starter.controllers",[])
 //  清空某条记录的函数
   $scope.deleteItem = function (info) {
 
-    HTTPManager.get(HOST+CLEAR_RECODER,{recoderID:info.recoder_id}).then(function (result) {
+    HTTPManager.get(HOST+CLEAR_RECODER,{recoder_id:info.recoder_id}).then(function (result) {
 
       if (result.data.code==2000){
         $scope.reomvedRecoders.splice($scope.reomvedRecoders.indexOf(info),1);
@@ -661,7 +640,7 @@ angular.module("starter.controllers",[])
             onTap: function() {
                 console.log(this.scope.message);
               var sendMessage = {
-                userID:window.localStorage.getItem(USER_ID),
+                user_id:window.localStorage.getItem(USER_ID),
                 friendID:friendInfo.user_id,
                 message:this.scope.message
               };

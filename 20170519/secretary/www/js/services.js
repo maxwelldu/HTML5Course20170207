@@ -54,20 +54,15 @@ angular.module("starter.services",[])
   })
 
   .service("writeService",function () {
-
   //提醒时间
   function alertTime() {
-
     var date  =new Date();
-
     return date.getTime();
   }
 
 //  紧急状态
 //  0 1 2
   function status(s) {
-
-
     //s = 0  num: 1
     //s = 1  num:2
     //s = 2  num:0
@@ -337,11 +332,3 @@ angular.module("starter.services",[])
 // }).catch(function (error) {
 //   console.log(error);
 // });
-
-
-
-
-
-
-
-
