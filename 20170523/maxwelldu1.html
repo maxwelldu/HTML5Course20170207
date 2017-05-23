@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{margin:0; padding:0}
+      li{list-style:none}
+      #ul{overflow:hidden;margin:20px auto; border-top:1px solid #000;border-left:1px solid #000}
+      #ul li{float:left;border-right:1px solid #000;border-bottom:1px solid #000}
+      #ul li.s1{background:red}/*开始节点*/
+      #ul li.s2{background:green}/*结束节点*/
+      #ul li.s3{background:blue}/*障碍物节点*/
+      #input{width:100px;position:absolute;left:50%;margin-left:-50px}
+    </style>
+  </head>
+  <body>
+    <ul id="ul"> </ul>
+    <input type="button" value="开始寻路" id="input">
+    <script type="text/javascript">
+      var oUL = document.getElementById('ul');//地图外框
+      var aLi = oUL.getElementsByTagName('li');//地图上所有的点
+      var oInput = document.getElementById('input');//开始按钮
+      var beginLi = document.getElementsByClassName('s1');//开始节点
+      var endLi = document.getElementsByClassName('s2');//结束节点
+      var map = [//地图
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+      ];
+      var cols = Math.sqrt(map.length); //列数
+      var sizeGird = 20;//一格的宽度，不包括边框
+      var openArr = [];//可能要走的路线
+      var closeArr = [];//关闭的路线，比如障碍物，或走过的路线
+
+      //创建地图
+      var createMap = function(){
+        oUL.style.width = cols * (sizeGird + 1) + 1 + 'px';//设置地图边框的宽度
+        //根据地图生成所有的li元素，并设置对应的样式，添加到DOM上
+        for (var i = 0; i < map.length; i++) {
+          var oLi = document.createElement('li');//创建LI
+          oLi.style.width = sizeGird + 'px';//设置宽
+          oLi.style.height = sizeGird + 'px';//设置高
+          //根据节点的类型，设置不同的样式
+          switch(map[i]){
+            case 1:
+              oLi.className = 's1';
+              openArr.push(oLi);
+              break;
+            case 2:
+              oLi.className = 's2';
+              break;
+            case 3:
+              oLi.className = 's3';
+              closeArr.push(oLi);
+              break;
+          }
+          //添加到UL当中
+          oUL.appendChild(oLi);
+        }
+      };
+      //起始点到当前节点的估价
+      var g = function(nodeLi) {
+        var a = beginLi[0].offsetLeft - nodeLi.offsetLeft;//计算X轴的距离
+        var b = beginLi[0].offsetTop - nodeLi.offsetTop;//计算Y轴的距离
+        return Math.sqrt( a*a + b*b);//算出斜边的距离
+      }
+      //当前节点到目标节点的估价
+      var h = function(nodeLi) {
+        var a = endLi[0].offsetLeft - nodeLi.offsetLeft;
+        var b = endLi[0].offsetTop - nodeLi.offsetTop;
+        return Math.sqrt( a*a + b*b );
+      }
+      //节点的估价
+      var f = function(nodeLi) {
+        return g(nodeLi) + h(nodeLi);//起始点到当前节点的代价+当前节点到目标节点的代价
+      }
+      //找到当前节点周围的8个点
+      var findAroundLi = function(nowLi){
+        var result = [];
+        var filter = function(li){//返回当前可用的节点，过滤障碍物和已经走过的点
+          for (var i = 0; i < closeArr.length; i++) {//遍历关闭队列
+            if (closeArr[i] == li) {
+              return false;
+            }
+          }
+          for (var i = 0; i < openArr.length; i++) {//遍历开启队列
+            if(openArr[i] == li) {
+              return false;
+            }
+          }
+          return true;
+        }
+        for (var i = 0; i < aLi.length; i++) {//遍历所有的Li
+          if (filter(aLi[i])){
+            result.push(aLi[i]);
+          }
+        };
+        for (var i = 0; i < result.length; i++) {//遍历周围的点，计算估价，挂载父节点
+          if (
+            (Math.abs(nowLi.offsetLeft - result[i].offsetLeft) <= (sizeGird + 1))
+            &&
+            (Math.abs(nowLi.offsetTop - result[i].offsetTop) <= (sizeGird + 1))
+          ) {
+            result[i].num = f(result[i]);
+            result[i].parent = nowLi;
+            openArr.push( result[i] );
+          }
+        }
+      };
+      //将某个节点添加到关闭队列中
+      var closeFn = function(nowLi) { closeArr.push( nowLi ) };
+      //寻路方法
+      var openFn = function(){
+        var nowLi = openArr.shift();//取出当前的
+        if (nowLi == endLi[0]) {//当nowLi == 最后一个出现的时候就停止
+          return;
+        }
+
+        closeFn(nowLi);
+        findAroundLi(nowLi);//找到周围的Li元素
+        openArr.sort(function(li1,li2){
+          return li1.num - li2.num;
+        });
+        console.log(openArr);
+        openFn();//递归寻路
+      };
+      var init = function(){
+        createMap();
+        oInput.onclick = function(){ openFn() }
+      }
+      init();
+    </script>
+  </body>
+</html>
