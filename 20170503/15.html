@@ -5,6 +5,7 @@
     <input v-model="something">
     {{ something }}
 
+    <input v-bind:value="something">
     <input v-bind:value="something" v-on:input="something = $event.target.value">
     
   </div>

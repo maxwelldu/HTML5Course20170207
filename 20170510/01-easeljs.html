@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="./EaselJS-master/lib/easeljs-0.8.2.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <canvas id="gameView" width="400" height="400"></canvas>
+    <script type="text/javascript">
+      //创建出来一个舞台
+      var stage = new createjs.Stage('gameView');
+      //创建一个文本对象
+      var text = new createjs.Text("Hello easeljs", "36px Arial", "#777");
+      stage.addChild(text);
+      stage.update();
+    </script>
+  </body>
+</html>

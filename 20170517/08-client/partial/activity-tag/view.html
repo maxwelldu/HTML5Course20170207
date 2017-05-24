@@ -1,0 +1,16 @@
+<!-- 暂未使用 活动标签 -->
+<div layout="column" flex id="content">
+  <md-input-container>
+    <label>标签名称</label>
+    <input type="text" ng-model="entity.name" >
+  </md-input-container>
+  <md-input-container>
+    <label>标签排序</label>
+    <input type="number" ng-model="entity.status" />
+  </md-input-container>
+  <div layout="row">
+    <md-button class="md-raised md-primary" ng-click="save()">保存</md-button>
+    <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+  </div>
+</div>
+

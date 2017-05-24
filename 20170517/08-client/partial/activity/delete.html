@@ -1,0 +1,76 @@
+<!--活动列表页面 -->
+<div class="container">
+    <button type="button" class="btn btn-success btn-lg" ng-click="createPage()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新建活动
+    </button>
+   <!--  <button type="button" class="btn btn-info btn-lg" ng-click="weekActivity()">本周活动</button>
+    <button type="button" class="btn btn-info btn-lg" ng-click="historyActivity()">历史活动</button>
+    <button type="button" class="btn btn-info btn-lg" ng-click="preventActivity()">预发布活动</button>
+    <button type="button" class="btn btn-info btn-lg btn-danger" ng-click="prevenIssuetActivity()">一键发布预发布活动</button> -->
+</div>
+<!-- 活动分类tab -->
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li ng-class="{active:isActive('0')}">
+            <a href="#/activity/list/0">全部</a>
+        </li>        
+        <li ng-class="{active:isActive(entity.id)}" ng-repeat="entity in activityTypeList | orderBy: display_order ">
+            <a href="#/activity/list/{{entity.id}}">{{entity.name}}</a>
+        </li>
+        <li>
+            <a ng-if="!showAddForm" ng-click="onTypeAddClicked()">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </a>
+            <div ng-if="showAddForm">
+                <input type="text" ng-model="addForm.newType" />
+                <button class="btn-success" ng-click="commitTypeName(addForm.newType)">确认添加</button>
+                <button class="btn-default" ng-click="cancelAddType()">取消</button>
+            </div>
+        </li>
+        <li ng-class="{active:isActive('delete')}">
+            <a href="#/activity/recovery/delete">回收站</a>
+        </li>
+    </ul>
+</div>
+<!-- 活动分类tab end -->
+<!-- 活动列表 -->
+<md-content md-scroll-y="" flex="" layout-padding="" class="layout-padding ng-scope flex container">
+    <div class="activityList" id="activityList">
+        <ul class="activityListProperty">
+            <li ng-if=" list == '' ">
+                <div class="alert alert-danger" role="alert">没有搜到活动</div>
+            </li>
+            <li ng-if="list" ng-repeat="entity in list | filter:query">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+              <!-- 活动标题 -->
+              {{entity.id}}#
+              <span>{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[已删除]</span>
+            </h3>
+                    </div>
+                    <div class="panel-body">
+                        <!-- 切换活动分组 -->
+                        <div class="btn-group">
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="type in activityTypeList | orderBy: 'display_order' ">
+                                    <a ng-click="onTypeChangeClick(entity,type.id)">{{type.name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="updateStatus(entity.id,10)">
+                                还原
+                            </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div ng-show="modelPagination" class="someet-pagination user-pagination">
+        <uib-pagination total-items="modelPagination.totalItems" ng-model="modelPagination.currentPage" ng-change="pageChange()" items-per-page="modelPagination.itemsPerPage" max-size="modelPagination.maxSize" class="pagination-sm" boundary-links="false" previous-text="上一页" next-text="下一页" first-text="第一页"
+        last-text="最后一页" rotate="false">
+        </uib-pagination>
+    </div>
+</md-content>
+<!-- 活动列表 end

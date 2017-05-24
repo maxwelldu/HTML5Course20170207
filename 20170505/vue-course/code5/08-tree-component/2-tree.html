@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    
+    .tree-menu {
+        width: 360px;
+        height: 100%;
+        padding: 0px 12px;
+        border-right: 1px solid #e6e9f0;
+    }
+    
+    .tree-menu-comm span {
+        display: block;
+        font-size: 12px;
+        position: relative;
+    }
+    
+    .tree-contro .ico {
+        background-position: 3px -92px;
+    }
+    
+    .tree-title .ico {
+        position: absolute;
+        left: -13px;
+        top: 0;
+        width: 15px;
+        height: 26px;
+        background: url(./folder-tree.png) no-repeat 4px -43px;
+        opacity: 0.8;
+    }
+    
+    .tree-menu-comm span strong {
+        display: block;
+        width: 82%;
+        position: relative;
+        line-height: 22px;
+        padding: 2px 0;
+        padding-left: 5px;
+        color: #161719;
+        font-weight: normal;
+    }
+    
+    .tree-nav {
+        background: #e7f2fe;
+        border: 1px solid #bfdaf4;
+        padding-left: 14px;
+        margin-left: 0px;
+    }
+    
+    .tree-title {
+        border: 1px solid #fff;
+        margin-top: 1px;
+    }
+    /*无箭头*/
+    
+    .tree-contro-none .ico {
+        background-position: -999px -99px;
+    }
+    /*箭头朝下*/
+    
+    .tree-contro .ico {
+        background-position: 3px -92px;
+    }
+    </style>
+    <script src="../vue.js"></script>
+    <script>
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div class="tree-menu-comm tree-menu">
+            <ul>
+                <li>
+                    <div class="tree-title" style="padding-left: 16px;"><span><strong>目录</strong> <i class="ico"></i></span></div>
+                    <ul>
+                        <li>
+                            <div class="tree-title" style="padding-left: 32px;"><span><strong>我的音乐</strong> <i class="ico"></i></span></div>
+                            <ul>
+                                <li>
+                                    <div class="tree-title" style="padding-left: 48px;"><span><strong>周杰伦</strong> <i class="ico"></i></span></div>
+                                    <ul>
+                                        <li>
+                                            <div class="tree-title tree-contro-none" style="padding-left: 64px;"><span><strong>发如雪</strong> <i class="ico"></i></span></div>
+                                            
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="tree-title" style="padding-left: 48px;"><span><strong>王杰</strong> <i class="ico"></i></span></div>
+                                    <ul>
+                                        <li>
+                                            <div class="tree-title tree-contro-none" style="padding-left: 64px;"><span><strong>一场游戏一场梦</strong> <i class="ico"></i></span></div>
+                                            
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="tree-title tree-contro-none" style="padding-left: 32px;"><span><strong>我的照片</strong> <i class="ico"></i></span></div>
+                            
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div> -->
+        
+        <m-tree :data="treeList"></m-tree>
+
+    </div>
+    <script>
+    /*
+    				传入的数据结构：
+    					[
+    					{
+    						title:XXX,
+    						children:[
+    							{
+    								title:XXXX,
+    								chidren:[]
+    							}
+    						]
+    					}]
+
+    				设置的props：
+    					data 数据结构 默认为 []
+
+    				定制模板:
+    					不可定制
+
+    				监控状态变化：
+    					事件名on-select-change 点击树节点触发
+    			*/
+
+
+    Vue.component('m-tree-list',{
+        computed:{
+            count(){
+               var c = this.increment;
+               return ++c; 
+            },
+            stylePadding(){
+                return {
+                    'padding-left':this.count * 16 + 'px'
+                }
+            }
+        },
+        props:{
+            data:{
+                type:Array,
+                default:[]
+            },
+            increment:{
+                type:Number,
+                default:0
+            }
+        },
+        template:`
+            <ul>
+                <li v-for="item of data">
+                    <div class="tree-title" :style="[stylePadding]">
+                        <span><strong>{{item.title}}</strong> <i class="ico"></i></span>
+                    </div>
+                    <!--如果循环的item有children属性，那么生成下一级-->
+                    <m-tree-list 
+                        :increment="count"
+                        v-if='item.chidren' 
+                        :data="item.chidren"
+                    ></m-tree-list>
+                </li>
+            </ul>
+        `
+    })
+
+    Vue.component('m-tree',{
+        props:{
+            data:{
+                type:Array,
+                default:[]
+            }
+        },
+        template:`
+        <div class="tree-menu-comm tree-menu">
+            <m-tree-list :data="data"></m-tree-list>    
+        </div>
+        `
+    })
+
+
+    var data = [{
+        title: "目录",
+        chidren: [{
+            title: "我的音乐",
+            chidren: [{
+                title: "周杰伦",
+                chidren: [{
+                    title: "发如雪"
+                }]
+            }, {
+                title: "王杰",
+                chidren: [{
+                    title: "一场游戏一场梦"
+                }]
+            }]
+        }, {
+            title: "我的照片"
+        }]
+    }];
+
+    new Vue({
+        el:"#app",
+        data:{
+            treeList:data
+        }
+    })
+
+    </script>
+</body>
+
+</html>

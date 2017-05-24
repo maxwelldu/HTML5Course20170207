@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+
+</head>
+<body>
+    <!--模板-->
+    <div id="demo">
+        <span>vue demo</span>
+    </div>
+    <script type="x-template" id="temp">
+        <div>
+            <div v-html="html"></div>
+            hello,{{abc}},
+            <span>ucai</span>
+        </div>
+    </script>
+    <script>
+        //数据
+        let obj = {
+            html:"<h2>hello,vue</h2>",
+            abc:1
+        };
+
+        var vm = new Vue({
+            el:"#demo",
+            data:obj,
+            template:"#temp"
+        });
+
+    </script>
+</body>
+
+
+</html>

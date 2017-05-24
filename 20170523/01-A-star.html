@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{margin:0; padding:0}
+      li{list-style:none}
+      #ul{overflow: hidden; margin:20px auto;
+        border-top:1px solid #000; border-left:1px solid #000;}
+      #ul li{float:left; border-right:1px solid #000;
+      border-bottom:1px solid #000}
+      #ul li.s1{background:red}/*开始点*/
+      #ul li.s2{background:green}/*结束点*/
+      #ul li.s3{background:blue;}/*障碍物*/
+      #input{width:100px; position:absolute; left:50%; margin-left:-50px}
+    </style>
+  </head>
+  <body>
+    <ul id="ul"></ul>
+    <input type="button" value="开始寻路" id="input">
+    <script type="text/javascript">
+      var oUL = document.getElementById('ul');//map container
+      var aLi = oUL.getElementsByTagName('li'); //point
+      var oInput = document.getElementById('input');
+      var beginLi = document.getElementsByClassName('s1');//start node
+      var endLi = document.getElementsByClassName('s2');//end node
+      var map = [//地图
+        1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,3,3,3, 3,3,3,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,3,0,0, 0,0,3,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,3,0,0, 0,0,3,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 3,3,3,0,0, 0,0,3,3,3, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0,
+        0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,2
+      ];
+      var cols = Math.sqrt(map.length); //column count
+      var sizeGird = 20;//width, no border
+      //create map
+      var createMap = function(){
+        oUL.style.width = cols * (sizeGird + 1) + 1 + "px";
+        for (var i = 0; i < map.length; i++) {
+          var oLi = document.createElement('li');
+          oLi.style.width = sizeGird + 'px';
+          oLi.style.height = sizeGird + 'px';
+          switch(map[i]) {
+            case 1:
+              oLi.className = 's1';
+              break;
+            case 2:
+              oLi.className = 's2';
+              break;
+            case 3:
+              oLi.className = 's3';
+              break;
+          }
+          oUL.appendChild(oLi);
+        }
+      };
+      //start .. nowLi
+      var g = function(nodeLi){
+        // a * a + b * b = c * c
+        var a = nodeLi.offsetLeft - beginLi[0].offsetLeft; //x
+        var b = nodeLi.offsetTop - beginLi[0].offsetTop; //y
+        return Math.sqrt(a*a + b*b);
+      };
+      //nowLi .. end
+      var h = function(nodeLi) {
+        var a = endLi[0].offsetLeft - nodeLi.offsetLeft; //x
+        var b = endLi[0].offsetTop - nodeLi.offsetTop; //y
+        return Math.sqrt(a*a + b*b);
+      }
+      //
+      var f = function(nodeLi) {
+        return g(nodeLi) + h(nodeLi);
+      }
+      //init
+      var init = function(){
+        createMap();
+      }
+      init();
+    </script>
+  </body>
+</html>

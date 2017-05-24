@@ -1,0 +1,84 @@
+<div class="container" layout="column" flex id="content">
+    <md-input-container layout="row">
+        <md-button class="md-raised md-primary" ng-if="entity.status == 8 || entity.status == 3" ng-click="changeStatus(entity.id,20)">审核通过</md-button>
+        <md-button class="md-raised md-warn" ng-if="entity.status == 8 || entity.status == 3" ng-click="open(entity)">不通过</md-button>
+    </md-input-container>
+    <form name="entityForm" ng-submit="save()" novalidate>
+        <div layout="row">
+            <md-input-container>
+                <label>分类</label>
+                <input type="text" ng-model="entity.groupType.title" ng-disabled="true"></md-input-container>
+            <md-input-container flex="">
+                <label>标题</label>
+                <input type="text" ng-model="entity.title" required ng-minlength="2" ng-maxlength="30"></md-input-container>
+        </div>
+        <div layout="row" >
+            <md-input-container>
+                <div style="width: 30%;">
+                    <label>时间</label>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                            <div class="input-append">
+                                <input type="text" class="input-large" ng-model="start_time_str">
+                                <span class="add-on">
+                                    <i class="icon-calendar"></i>
+                                </span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-on-set-time="onStartTimeSet(newDate, oldDate)" ng-model="start_time_str"></datetimepicker>
+                        </ul>
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="">
+                <label>地点</label>
+                <input type="text" ng-model="entity.address" />        
+            </md-input-container>
+            <md-input-container>
+                <label>预计人数(非必填)</label>
+                <input type="text" ng-model="entity.peoples" />        
+            </md-input-container>
+            <md-input-container>
+                <label>预计费用(非必填)</label>
+                <input type="text" ng-model="entity.cost" />        
+            </md-input-container>
+        </div>
+        <label>组局人介绍</label>
+        <md-input-container>
+            <textarea ng-model="entity.groupUser.introduce"></textarea>
+        </md-input-container>
+        <label>筛选问题</label>
+        <md-input-container>
+            <textarea ng-model="entity.question"></textarea>
+        </md-input-container>
+        <label>组局内容</label>
+        <md-input-container>
+            <text-angular ng-model="entity.content"></text-angular>
+        </md-input-container>
+        <img  class="media-object avatarSize" ng-src="{{entity.image}}">
+        <!-- <div ng-file-select="onIconSelect($files)" data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload">
+          <md-button class="md-raised md-info" style="width: 6rem;">设置icon图片</md-button>
+        </div> -->
+    </form>
+</div>
+<script type="text/ng-template" id="question.html">
+    <div class="modal-content">
+        <form ng-submit="groupCheck(id,3,reject_reason)">
+            <div class="modal-body">
+                <!-- 当没新建问题时 -->
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">请输入审核不通过原因</label><br/><br/>
+                    <input name="reject_reason" type="text" class="form-control" id="recipient-name" ng-model="reject_reason">
+                    <div ng-messages="reject_reason.$error">
+                        <div ng-message="required" style="font-size: 0.6rem;color:red;">必填项目</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                <input class="btn btn-primary"  type="submit" ng-click="ok()" ng-disabled="entityForm.$invalid" value="保存"></input>
+            </div>
+        </form>
+    </div>
+</script>

@@ -1,0 +1,28 @@
+<form data-ng-submit="insert()">
+    <div class="modal-header" style="height: 45px;">
+        <div class="col-md-10">
+            <h4 class="modal-title">
+                <span class="glyphicon glyphicon-picture"></span>
+                上传图片
+            </h4>
+        </div>
+        <div class="col-md-2 right">
+            <a class="close" href data-ng-click="$dismiss()">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </div>
+    </div>
+    <div class="modal-body">
+        <img style="width: 100%;" data-ng-src="{{image}}">
+        <progressbar data-ng-show="progress > 0 && progress < 100" class="progress-striped active" value="progress"></progressbar>
+    </div>
+    <div class="modal-footer center clearfix">
+        <button data-ng-click="$dismiss()" type="button" class="btn btn-default pull-left">取消</button>
+        <button type="submit" data-ng-disabled="image == null || image == '' || image == 'http://img.someet.cc/Fv_suQDkp349i43wKmrLTckezYPf'" class="btn btn-primary pull-right">确认</button>
+         <button class="btn btn-primary pull-right" ng-file-select="onCodeSelect($files)" data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload pull-right">
+             <span class="glyphicon glyphicon-picture mR5"></span>
+             选择图片
+         </button>
+
+    </div>
+</form>

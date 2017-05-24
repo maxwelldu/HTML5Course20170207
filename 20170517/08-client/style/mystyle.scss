@@ -1,0 +1,625 @@
+@charset "UTF-8";
+html {
+    font-size: 20px;
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+body {
+    margin: 0;
+    font-family: "Helvetica Neue",Helvetica,sans-serif;
+    font-size: .85rem;
+    line-height: 1.5;
+    /* background: #eee; */
+    overflow-x: hidden;
+}
+// color
+.history{
+    background-color: rgba(0,0,0,0.12);
+}
+.release{
+    background-color: #4FC3F7;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.list-block ul:before {
+    height: 0;
+}
+.list-group-item{
+    text-align:center;
+}
+.list-block .item-inner:after {
+    background-color: black;
+}
+
+.list-so {
+    background-color: black;
+    padding: 0.4em 1em 0.4em 1em;
+}
+
+.list-so-item {
+    background-color: white;
+    border-radius: 1.5em;
+}
+
+.so-padding-left {
+    padding-left: 1em;
+}
+
+
+/*完善资料页面 end*/
+
+
+/*活动列表卡片*/
+
+.activity-block {
+    position: relative;
+    /*
+          padding: 0;
+          margin-bottom: 10px;
+          line-height: 0;
+          -webkit-box-shadow: 0px 5px 5px #888;
+          -moz-box-shadow: 0px 5px 5px #888;
+          box-shadow: 0px 5px 5px #888;*/
+}
+
+.activity-block .mask {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    background: #000;
+    filter: alpha(opacity=10);
+    -moz-opacity: 0.1;
+    -khtml-opacity: 0.1;
+    opacity: 0.1;
+}
+
+.activity-host img {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 2px solid #FFF;
+}
+
+.activity-host label {
+    position: absolute;
+    font: normal 12px/18px Arial Black, Arial, Helvetica, sans-serif;
+    text-align: right;
+    text-shadow: #333 0 1px 0;
+    color: #fff;
+    top: 73px;
+    right: 16px;
+    width: 200px;
+    height: 44px;
+}
+
+.activity-host .divider {
+    position: absolute;
+    top: 67px;
+    right: 16px;
+    width: 44px;
+    height: 1px;
+    background: #eee;
+    overflow: hidden;
+}
+
+.activity-photo {
+    width: 100%;
+    display: inline-block;
+}
+
+.activity-info {
+    position: relative;
+    height: 0;
+    top: -130px;
+    width: 100%;
+    left: 25px;
+    font: bold 1em Arial Black, Arial, Helvetica, sans-serif;
+    color: #fff;
+    text-shadow: #333 0 1px 0;
+}
+
+.activity-title {
+    position: absolute;
+    bottom: -95px;
+    /*-95 = -130 + 35*/
+    padding-right: 1em;
+    left: 85px;
+}
+
+.activity-title .main-title {
+    font-size: 1.1em;
+    line-height: 1.15em;
+}
+
+.activity-title label {
+    font-size: 0.9em;
+    line-height: 0.95em;
+}
+
+.activity-title .divider {
+    width: 174px;
+    height: 1px;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    background: #eee;
+    overflow: hidden;
+}
+
+.activity-title .location {
+    font: normal 1em Arial Black, Arial, Helvetica, sans-serif;
+    font-size: 0.6em;
+    line-height: 0.65em;
+}
+
+.activity-title .location img {
+    width: 1em;
+    height: 1em;
+}
+
+.calendar {
+    position: absolute;
+    margin: 0 10px 10px 0;
+    float: left;
+    /*height: 0;*/
+    overflow: hidden;
+    width: 75px;
+    background: transparent;
+    font: normal 36px/60px Arial Black, Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #FFF;
+    text-shadow: #333 0 1px 0;
+    border: 3px solid #FFF;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #333;
+    -webkit-box-shadow: 0 1px 1px #333;
+    box-shadow: 0 1px 1px #333;
+}
+
+.calendar label {
+    display: block;
+    font: bold 14px/30px Arial, Helvetica, sans-serif;
+    color: #fff;
+    margin-top: -15px;
+    text-shadow: #333 0 1px 0;
+    background: transparent;
+}
+
+.calendar em {
+    display: block;
+    font: bold 10px/30px Arial, Helvetica, sans-serif;
+    color: #000;
+    text-shadow: #333 0 0 0;
+    background: #FFF;
+    line-height: 20px;
+}
+
+
+/*活动列表卡片end*/
+
+
+/*活动详情页面*/
+
+/*.detail-page {
+    background-color: #fff;
+    color: #333;
+}
+
+.detail-page .divider {
+    display: block;
+    margin-right: 24%;
+    width: 76%;
+    height: 1px;
+    float: left;
+    background-color: #d6d6d6;
+    overflow: hidden;
+}
+
+.detail-title {
+    font: normal 1.1rem Helvetica, Arial Black, Arial, sans-serif;
+    text-align: center;
+    line-height: 1.15rem;
+}
+.detail-subhead {
+    font: normal 0.7rem Helvetica, Arial Black, Arial, sans-serif;
+    text-align: center;
+    line-height: 1.05rem;
+    margin: 0.2rem;
+}
+
+
+.detail-title div {
+    font-size: 1.1em;
+    line-height: 1.15em;
+}
+
+.detail-title label {
+    font-size: 1em;
+    line-height: 1.05em;
+}
+
+.detail-info {
+    margin-top: 2em;
+    margin-right: 2em;
+    margin-left: 2em;
+    margin-bottom: 0em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+.detail-label {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 0.8em;
+    line-height: 1.05em;
+    font-weight: bold;
+    color: #262626;
+}
+
+.detail-label img {
+    width: 1.6em;
+    height: 1.6em;
+    margin-right: 0.2em;
+}
+
+.detail-host {
+    position: relative;
+    margin: 1em;
+}
+
+.description {
+    padding-left: 80px;
+    color: #aaa;
+    font-size: 0.6em;
+}
+
+.detail-host label {
+    padding-left: 1em;
+    text-align: left;
+    font: bold 1em Arial Black, Arial, Helvetica, sans-serif;
+    color: #111;
+    text-shadow: #555 0px 0px 1px;
+}
+
+.detail-host .hoster {
+    width: 100%;
+    height: 75px;
+    font-size: 0.8em;
+}
+
+.detail-host .hoster img {
+    float: left;
+    margin: 8px 8px 8px 28px;
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    -moz-border-radius: 32px;
+    border: 4px solid #FFF;
+    -webkit-box-shadow: 0px 0px 1px #333;
+    -moz-box-shadow: 0px 0px 1px #333;
+    box-shadow: 0px 0px 1px #333;
+}
+
+.detail-host .hoster .name {
+    margin-left: 10px;
+    line-height: 75px;
+    height: 75px;
+    text-align: left;
+    font-size: 1em;
+    color: #262626;
+}*/
+
+
+/*活动详情页end*/
+
+
+
+
+/*活动描述*/
+
+.viewPicDescription {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.viewPicDescription div{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid red;
+    display: inline-block;
+    /*vertical-align:90%;*/
+/*    width: 5px;
+    height: 5px;
+    background-image: url('/image/svg/arrow-icon.svg');*/
+}
+.viewPicDescription span {
+    margin: 0;
+    padding: 0;
+    font-size: 0.7rem;
+    margin-left: 0.7rem;
+}
+
+.detail-describe {
+    display: block;
+    margin: 2em;
+    display: block;
+    font-size: 1rem;
+    margin: 1rem;
+    color: #111;
+}
+
+.detail-type {
+    text-align: center;
+    line-height: 1rem;
+    height: 1rem;
+    width: 4rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.2rem;
+    background-color: #f6303e;
+    font-size: 0.7rem;
+    color: #ffffff;
+    text-shadow: #555 0px 0px 1px;
+    margin: 1rem auto;
+}
+
+.detail-full {
+    /*float: left;*/
+    text-align: center;
+    line-height: 1rem;
+    /*padding: 0.2rem;*/
+    height: 1rem;
+    width: 4rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    background-color: #fff;
+    border: 1px solid #f6303e;
+    font-size: 0.7rem;
+    color: #f6303e;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    /*text-shadow: #555 0px 0px 1px;*/
+}
+
+.detail-title {
+    font: normal 1.1em Helvetica, Arial Black, Arial, sans-serif;
+    text-align: center;
+    line-height: 1.15rem;
+}
+
+.detail-subhead {
+    font: normal 0.7rem Helvetica, Arial Black, Arial, sans-serif;
+    text-align: center;
+    line-height: 1.05rem;
+    margin: 0.2rem;
+}
+
+.detail-info {
+    background-color: #333;
+    color: #eee;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1em;
+}
+
+.detail-info .description {
+    margin-left: 1.4rem;
+}
+
+.detail-info label {
+    padding-left: 0.9rem;
+    margin: 0 0 0.2rem 0;
+    font: normal 0.8rem Helvetica, Arial Black, Arial, sans-serif;
+    color: #e11;
+    display: block;
+}
+
+.detail-label {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 0.6rem;
+    line-height: 0.8rem;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.detail-label img {
+    width: 1.6em;
+    height: 1.6em;
+    margin-right: 0.2em;
+}
+
+.detail-host {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-host .description {
+    color: #aaa;
+    font-size: 0.6rem;
+    line-height: 0.8rem;
+    margin-left: 2rem;
+    margin-right: 1rem;
+}
+
+.detail-host label {
+    padding: 0.4rem 15% 0.4rem 15%;
+    text-align: left;
+    font: normal 0.8rem Helvetica, Arial Black, Arial, sans-serif;
+    color: #EEE;
+    background: #333;
+}
+
+.detail-host .hoster img {
+    width: 55%;
+    margin-left: 15%;
+}
+
+.detail-host .hoster span {
+    margin-left: 2rem;
+    font-size: 3rem;
+}
+
+.detail-host .hoster .name {
+    margin: 1rem 1rem 1rem 0;
+    padding-left: 35%;
+    font-size: 1.8em;
+    color: #262626;
+}
+
+.detail-text {
+    word-wrap: break-word;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    font-size: 0.7rem;
+    line-height: 1rem;
+    text-align: center;
+}
+
+.detail-flow {
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 0.15rem solid #e33;
+    background: #333;
+    line-height: 0.8rem;
+    font-size: 0.6rem;
+}
+
+.detail-flow ul {
+    padding: 0;
+    margin: 0;
+}
+
+.detail-flow li {
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+    padding-left: 0.5rem;
+    list-style: none;
+}
+
+.quotation {
+    margin-top: 1rem;
+    font-size: 3rem;
+    line-height: 0;
+}
+
+.detail-activity p {
+    line-height: 0.8rem;
+    font-size:0.6rem;
+}
+
+.detail-activity img {
+    width: 100%;
+    /*padding-left: -1rem;*/
+    /*padding-right: -1rem;*/
+    display: inline-block;
+    background-size: contain;
+}
+
+.detail-activity-content {
+    font-size: 0.7rem;
+    margin: 0.4rem 1rem;
+    /*width: 76%;*/
+    /*margin: auto;*/
+    line-height: 0.8rem;
+}
+
+.detail-hr {
+    height: 1px;
+    width: 76%;
+    background-color: #d6d6d6;
+    margin-left: 0;
+    box-shadow: 0 0 0 0;
+    /*border:0.5px solid #d6d6d6;*/
+}
+
+.detail-rqcode {
+    width: 100%;
+    height: 6rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.detail-danger {
+    margin: 10% 0;
+    float: left;
+    width: 20%;
+    display: block;
+}
+
+.detail-rqcode-text {
+    margin: 10% 0;
+    font-size: 0.6rem;
+    float: left;
+    width: 40%;
+}
+
+.detail-danger-content {
+    display: inline-block;
+    font-size: 1.4rem;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    background-color: #f6303e;
+    text-align: center;
+    line-height: 2rem;
+}
+
+.imgrqcode {
+    float: left;
+    width: 35%
+}
+
+.promptDanger {
+    width: 50%;
+}
+
+.imgrqcode {
+    /*width: */
+}
+
+.detail-page .divider {
+    display: block;
+    width: 76%;
+    height: 1px;
+    background-color: #d6d6d6;
+    overflow: hidden;
+    margin:1rem auto;
+}
+/*活动详情页end*/
+
+/*二维码提示  */
+
+.rqcode {
+    border: 0.1rem solid #ededed;
+    background-color: #ffffff;
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+    /*margin: 10% auto;*/
+    /*vertical-align: middle;*/
+}
+
+.rqcode img {
+    width: 4rem;
+    height: 4rem;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+}

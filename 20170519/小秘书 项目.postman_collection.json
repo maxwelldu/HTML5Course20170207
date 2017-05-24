@@ -1,0 +1,362 @@
+{
+	"id": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+	"name": "小秘书 项目",
+	"description": "",
+	"order": [
+		"ee3f7d6c-e6df-060a-a2f0-25a74917ce06",
+		"9d42dac0-1372-54bf-24f9-886e85bae14a",
+		"cd698fb8-8dd9-eefc-a297-f00e074e7651",
+		"f703bede-7b9d-8b16-6067-c889fcee61f0",
+		"42548466-af08-c827-96c0-b0953ad1e5d0",
+		"af9c7c59-e0ab-0d87-2f98-a619e620f453",
+		"0c8dcd6f-5856-05fd-b4ac-e663b05b5447",
+		"89402104-1055-7b37-deb3-84995af6d652",
+		"35860d30-fcce-5d4c-d503-e78befe679ea",
+		"7a0a2b14-9791-efa7-3d26-44a167c2b8e4",
+		"5f7efad7-3233-081e-c5d3-298c33764d38"
+	],
+	"folders": [],
+	"timestamp": 1495163418582,
+	"owner": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "0c8dcd6f-5856-05fd-b4ac-e663b05b5447",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/recoder/searchRecoder?user_id=2",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "alertTime",
+					"value": "1495165540",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495166315063,
+			"name": "搜索备忘录接口",
+			"description": "",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"responses": []
+		},
+		{
+			"id": "35860d30-fcce-5d4c-d503-e78befe679ea",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/recoder/restoreRecoder?recoderID=1",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "alertTime",
+					"value": "1495165540",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495166242112,
+			"name": "恢复备忘录接口",
+			"description": "",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"responses": []
+		},
+		{
+			"id": "42548466-af08-c827-96c0-b0953ad1e5d0",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/recoder/addRecoder",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "userID",
+					"value": "2",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "public[isPublic]",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "status[statusNum]",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "location[point][lat]",
+					"value": "116",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "location[point][lng]",
+					"value": "39",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "title",
+					"value": "今天中午要吃好的",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "des",
+					"value": "没钱还想吃好的",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "location[address]",
+					"value": "石景山",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "alertTime",
+					"value": "1495165540",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495165628853,
+			"name": "用户添加备忘录接口",
+			"description": "",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"responses": []
+		},
+		{
+			"id": "5f7efad7-3233-081e-c5d3-298c33764d38",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/recoder/clearAllOfTrash?userID=2",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "alertTime",
+					"value": "1495165540",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495166809934,
+			"name": "清空备忘录回收站接口",
+			"description": "",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"responses": []
+		},
+		{
+			"id": "7a0a2b14-9791-efa7-3d26-44a167c2b8e4",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/recoder/clearRecoder?recoderID=1",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "alertTime",
+					"value": "1495165540",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495166403196,
+			"name": "删除一条备忘录接口",
+			"description": "",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"responses": []
+		},
+		{
+			"id": "89402104-1055-7b37-deb3-84995af6d652",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/recoder/searchRemovedRecoder?user_id=2",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"data": [
+				{
+					"key": "alertTime",
+					"value": "1495165540",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "搜索回收站的备忘录接口",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1495166085719,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "9d42dac0-1372-54bf-24f9-886e85bae14a",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/users/register",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "username",
+					"value": "maxwelldudu",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "maxwell",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "phone",
+					"value": "18518368051",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "uuid",
+					"value": "12344321",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495164470427,
+			"name": "用户注册接口",
+			"description": "",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"responses": []
+		},
+		{
+			"id": "af9c7c59-e0ab-0d87-2f98-a619e620f453",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/recoder/deleteRecoder?recoderID=1",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "alertTime",
+					"value": "1495165540",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495165865481,
+			"name": "将备忘录添加到回收站接口",
+			"description": "",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"responses": []
+		},
+		{
+			"id": "cd698fb8-8dd9-eefc-a297-f00e074e7651",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/users/login",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "username",
+					"value": "maxwelldudu",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "maxwell",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495164655130,
+			"name": "用户登录接口",
+			"description": "",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"responses": []
+		},
+		{
+			"id": "ee3f7d6c-e6df-060a-a2f0-25a74917ce06",
+			"headers": "",
+			"url": "localhost:3000/users/verifyCode?phone=13835548451",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"data": null,
+			"dataMode": "params",
+			"name": "用户验证码接口",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1495163418582,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "f703bede-7b9d-8b16-6067-c889fcee61f0",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "localhost:3000/users/searchAllUsers?info=max",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495165067870,
+			"name": "用户搜索接口",
+			"description": "",
+			"collectionId": "87500a6e-9d08-ae8d-34f0-d246b9ec9742",
+			"responses": []
+		}
+	]
+}

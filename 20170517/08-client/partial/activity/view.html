@@ -1,0 +1,481 @@
+<!-- 编辑活动内容页面 -->
+<div class="container" id="content">
+    <md-input-container ng-if="entity.status == 8" layout="row" class="btn-float-right">
+        <md-button  class="md-raised md-primary" ng-click="updateStatus(entity.id,12)">审核通过</md-button>
+        <md-button class="md-raised md-warn" ng-click="updateStatus(entity.id,3)">不通过</md-button>
+    </md-input-container>
+    <form name="entityForm" ng-submit="save()">
+        <div>
+            <span ng-if="entity.is_full==1 && entity.status==20" style="color:red;font-size:22px;"><img src="/static/image/full.png" alt=""></span>
+            <span ng-if="entity.status==10" >活动状态：[草稿]</span>
+            <span ng-if="entity.status==5 " style="color:red;font-size:22px;">活动状态：[发起人未提交审核的活动]</span>
+            <span ng-if="entity.status==3" style="color:red;font-size:22px;">活动状态：[发起人未通过审核的活动]</span>
+            <span ng-if="entity.status==8">活动状态：[待审核活动]</span>
+            <span ng-if="entity.status==12" >活动状态：[发起人草稿]</span>
+            <span ng-if="entity.status==20" >活动状态：[启用]</span>
+            <span ng-if="entity.status==15" >活动状态：[预发布]</span>
+            <span ng-if="entity.status==30" >活动状态：[关闭]</span>
+            <span ng-if="entity.status==40" >活动状态：[取消]</span>
+            <md-input-container ng-if="entity.status !=8" layout="row" class="btn-float-right">
+                <md-button ng-if="entity.is_release == 1 && entity.this_week !== 1" class="md-raised md-primary" ng-disabled="true">保存</md-button>
+
+                <md-button ng-if="entity.is_release !== 1 || entity.this_week == 1" class="md-raised md-primary" ng-disabled="entityForm.$invalid">保存</md-button>
+                <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+            </md-input-container>
+        </div>
+        <div class="row">
+            <input type="hidden" class="input-large" ng-model="entity.start_time">
+            <input type="hidden" class="input-large" ng-model="entity.end_time">
+            <!-- 预览 -->
+            <div class="col-md-5" style="top:5em;padding:0;border:solid 10px rgba(10,10,10,0.5)">
+                <input type="hidden" ng-model="entity.id" />
+                <div class="detail-page">
+                    <img width="100%" ng-src="{{poster}}">
+                
+                    <!-- 标题 开始-->
+                    <div class="detail-describe">
+                        <div class="detail-title">
+                            {{entity.title}}
+                        </div>
+                        <div class="detail-subhead">
+                            {{entity.desc}}
+                        </div>
+                        <div class="detail-type">
+                            {{entity.type.name}}
+                        </div>
+                    </div>
+                    <!-- 标题 结束 -->
+
+                    <!-- 分隔条 -->
+                    <div class="divider center"></div>
+
+                    <div class="detail-activity">
+                        <p style="text-align: center;"><b>
+                        这是Someet活动发起人，{{entity.user.username}}发起的 #{{entity.header_title}}# 活动</b>
+                        </p>
+                        <p style="text-align: center;"><b>“我期待遇见{{entity.header_people}}的小伙伴！”</b></p>
+                        <br/>                        
+                        <p style="text-align: center;">▼▼▼</p>            
+                    </div>
+                    <!-- 活动详情 -->
+                    <div class="detail-activity" ng-bind-html="entity.details"></div>
+
+                    <!-- 发起人 -->
+                    <div class="detail-host">
+                        <label>发起人</label>
+                        <div class="hoster">
+                            <div class="name"> <strong>{{entity.user.username}}</strong></div>
+                            <div>
+                                <span>“</span>
+                                <img ng-src="{{entity.user.profile.headimgurl}}" />
+                            </div>
+                        </div>
+                        <div class="description">
+                            {{entity.user.profile.bio}}
+                        </div>
+                    </div>
+                    <!-- 联合发起人-->
+                    <div ng-if="founder" class="detail-host" ng-repeat="(key, value) in founder">
+                        <label>联合发起人</label>
+                        <div class="hoster">
+                            <div class="name"> <strong>{{value.username}}</strong></div>
+                            <div>
+                                <span>“</span>
+                                <img ng-src="{{value.profile.headimgurl}}" />
+                            </div>
+                        </div>
+                        <div class="description">
+                            {{value.profile.bio}}
+                        </div>
+                    </div>
+                    <div class="detail-info">
+                        <label>活动细节</label>
+
+                        <!-- 时间 -->
+                        <div class="detail-label">
+                            <span> <i class="icon"><img src="/static/svg/Calendar.svg"></i>{{dateRangeStart}} - {{dateRangeEnd}}</span>
+                        </div>
+
+                        <!-- 地点 -->
+                        <div class="detail-label">
+                            <span> <i class="icon"><img src="/static/svg/Location.svg"></i> {{selectedSpaceSpot.area}}</span>
+                        </div>
+
+                        <!-- 人数限制 -->
+                        <div class="detail-label">
+                            <i class="icon"><img src="/static/svg/Participant.svg"></i>
+                            <span ng-if="entity.ideal_number != 0">活动人数{{entity.ideal_number}}人左右</span>
+                            <span ng-if="entity.ideal_number == 0">{{entity.field1}}</span>
+                        </div>
+
+                        <!-- 收费情况 -->
+                        <div class="detail-label">
+                            <i class="icon"><img src="/static/svg/Funds.svg"></i><span ng-show="entity.cost>0">{{entity.cost}}元/人</span>
+                            <div ng-show="entity.cost>0" class="description">{{entity.cost_list}}</div>
+                            <span ng-show="entity.cost==0">免费</span>
+                        </div>
+
+                        <!-- 活动流程 -->
+                        <div class="detail-label">
+                            <span><i class="icon"><img ng-src="/static/svg/Flow.svg"></i>活动流程</span>
+                        </div>
+
+                        <div ng-bind-html="entity.review" class="detail-flow"></div>
+
+                        <!-- tips -->
+                        <div class="detail-label" style="margin-top:0.6rem;">
+                            <span> <i class="icon"><img ng-src="/static/svg/Tips.svg"></i> Tips<div ng-bind-html="entity.field2"  class="detail-flow"></div></span>
+                        </div>
+
+                        <!-- 微信二维码 -->
+                        <div class="detail-rqcode">
+                            <div class="imgrqcode">
+                                <div class="rqcode"> <img ng-src="{{group_code}}"></div>
+                            </div>
+                            <div class="detail-danger">
+                                <span class="detail-danger-content">!</span>
+                            </div>
+                            <div class="detail-rqcode-text">
+                                报名通过后，你可以通过扫描二维码进入微信群，沟通活动事项。通过活动报名后，任何原因未能参与活动即算爽约。
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 发起人 -->
+                    <div class="detail-host" style="display:none">
+                        <label>关于发起人</label>
+                        <div class="hoster">
+                            <img ng-src="{{entity.user.profile.headimgurl}}" />
+                            <div class="name"> <strong>{{entity.user.username}}</strong>
+                            </div>
+                        </div>
+                        <div class="description">{{entity.user.profile.bio}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 预览 end -->
+            <div class="col-md-7">
+                <input type="hidden" ng-model="entity.id" />
+                <div layout="row">
+                    <div flex="">
+                        <label>DTS</label>
+                        <md-autocomplete md-selected-item="dts" placeholder="请选择DTS" md-search-text="dtsname" md-items="dts in getDts(dtsname)" md-item-text="dts.username" md-min-length="0" md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="dts">{{dts.username}}</span>
+                                <img ng-if="dts" width="50" style="border-radius:25px" ng-src="{{dts.profile.headimgurl}}" />
+                            </md-item-template>
+                            <md-not-found>No matches found.</md-not-found>
+                        </md-autocomplete>
+
+                        <label>发起人</label>
+                        <md-autocomplete md-selected-item="user" placeholder="请选择发起人" md-selected-item-change="changeCreate(user)" md-search-text="username" md-items="user in getUsers(username)" md-item-text="user.username" md-min-length="0" md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="username">{{user.username}}</span>
+                                <img ng-if="user" width="50" style="border-radius:25px" ng-src="{{user.profile.headimgurl}}" />
+                            </md-item-template>
+                            <md-not-found>No matches found.</md-not-found>
+                        </md-autocomplete>
+                    </div>
+                    <div flex="">
+                        <label>PMA</label>
+                        <md-autocomplete md-selected-item="pma" placeholder="请选择PMA" md-search-text="principalname" md-items="pma in getPrincipals(principalname)" md-item-text="pma.username" md-min-length="0" md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="principalname">{{pma.username}}</span>
+                                <img width="50" style="border-radius:25px" ng-src="{{pma.profile.headimgurl}}" />
+                            </md-item-template>
+                            <md-not-found>No matches found.</md-not-found>
+                        </md-autocomplete>
+                    </div>
+                    <div flex="">
+                        <label>PMA类型</label>
+                        <md-input-container>
+                            <md-select name="group" ng-model="entity.pma_type" placeholder="选择分类">
+                                <md-option ng-value="opt.pma_type" ng-repeat="opt in pma_type_count">
+                                    {{opt.name}}
+                                </md-option>
+                            </md-select>
+                            <div ng-messages="entityForm.group.$error">
+                                <div ng-message="required">必填项目</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout="row">
+                </div>
+                <div layout="column">
+                    <div class="row">
+                        <div class="panel-heading">联合发起人</div>
+                        <div class="panel panel-default col-md-6" ng-repeat="(key, value) in founder">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <img with="50" height="50" ng-src="{{value.profile.headimgurl}}" />发起人:{{value.username}}
+                                    <button class="btn btn-warning" ng-click="deteFounder(key)">删除</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>请选择联合发起人</label>
+                        <md-autocomplete md-selected-item="co_founder" placeholder="请选择联合发起人" md-search-text="co_founder_name" md-items="co_founder in getUsers(co_founder_name)" md-item-text="co_founder.username" md-min-length="0" md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="co_founder_name">{{co_founder.username}}</span>
+                                <img ng-if="user" width="50" style="border-radius:25px" ng-src="{{co_founder.profile.headimgurl}}" />
+                            </md-item-template>
+                            <md-not-found>No matches found.</md-not-found>
+                        </md-autocomplete>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <label>添加联合发起人请<span style="color:red">点击添加按钮</span></label>
+                        </div>
+                        <div class="btn btn-info" ng-click="addFounder(co_founder)">添加</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 margin-top-10">
+                        <label>请选择一级分类</label>
+                            <md-input-container>
+                            <md-select name="type" ng-model="type.id" placeholder="选择分类" 
+                                md-on-close="changeTag(type.id)">
+                                <md-option ng-value="item.id" ng-repeat="item in type_list | filter:typeFilter">{{ item.name }}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div class="col-md-6 margin-top-10">
+                        <label>请选择二级分类</label>
+                        <md-input-container>
+                            <md-select name="actTag" ng-model="tag_id" placeholder="选择分类">
+                                <md-option ng-value="tag.id" ng-repeat="tag in groupTags">{{ tag.name }}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </div>
+    
+                <div layout="row">
+                    <div flex="">
+                        <button ng-file-select="uploadPoster($files,entity.id)" data-multiple="false" title="上传标题图片" onclick="this.value = null" class="btn btn-danger">标题图片</button>
+                    </div>
+                    <div flex="">
+                        <button ng-file-select="uploadQrcode($files,entity.id)" data-multiple="false" title="上传群二维码先裁剪" onclick="this.value = null" class="btn btn-danger">活动群二维码</button>
+                    </div>
+                </div><br/>
+                <!-- 活动系列 -->
+                <md-autocomplete
+                    md-no-cache="true"
+                    md-selected-item="selectedActivity"
+                    placeholder="请选择活动系列" 
+                    md-search-text="title"
+                    md-items="activity in getTitles(title)" 
+                    md-selected-item-change="changGroups(selectedActivity)" 
+                    md-item-text="activity.title" 
+                    md-min-length="0" 
+                    md-menu-class="autocomplete-custom-template"
+                >
+                    <md-item-template>
+                        <span md-highlight-text="activity">{{activity.title}}-------{{activity.start_time}} - {{activity.end_time}}</span>
+                    </md-item-template>
+                    <md-not-found>No matches found.</md-not-found>
+                </md-autocomplete>
+                <br/>
+                <label>活动所属组</label>
+                <md-input-container md-menu-class="autocomplete-custom-template">
+                    <md-select ng-model="activityId" aria-label="activity id">
+                        <md-option ng-value="activity.id" ng-repeat="activity in groupActivities">{{activity.title}}-------{{activity.start_time}} - {{activity.end_time}}</md-option>
+                    </md-select>
+                </md-input-container>
+
+                <div layout="row">
+                    <md-input-container flex="">
+                        <label>标题</label>
+                        <input name="title" type="text" md-maxlength="30" required minlength="5" ng-model="entity.title">
+                        <div ng-messages="entityForm.title.$error">
+                            <div ng-message="required">必填项目</div>
+                            <div ng-message="minlength">标题文字不能少于5个字符</div>
+                            <div ng-message="md-maxlength">标题文字不能超过30个字符</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex="40">
+                        <label>副标题</label>
+                        <input placeholder="副标题" name="viceTitle" type="text" md-maxlength="30" ng-model="entity.desc" />
+                        <div ng-messages="entityForm.viceTitle.$error">
+                            <div ng-message="md-maxlength">副标题文字不能超过30个字符</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <md-input-container flex="100">
+                    <label>文案</label>
+                    <textarea ng-model="entity.content"></textarea>
+                </md-input-container>
+                <div layout="row">
+                    <div flex="30">
+                        <md-input-container>
+                            <label>报名名额(最多1000人)</label>
+                            <input type="number" name="people" ng-model="entity.peoples" value="{{entity.peoples}}" max="1000" />
+                            <div ng-messages="entityForm.people.$error">
+                                <div ng-message="max">人数超过限制</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div flex="30">
+                        <md-input-container>
+                            <label>理想人数(最多1000人)</label>
+                            <input type="number" name="ideal_number" ng-model="entity.ideal_number" value="{{entity.ideal_number}}" max="1000" />
+                            <div ng-messages="entityForm.ideal_number.$error">
+                                <div ng-message="max">人数超过限制</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div flex="40">
+                        <md-input-container>
+                            <label>活动人数上限(最多1000人)</label>
+                            <input type="number" name="ideal_number_limit" ng-model="entity.ideal_number_limit" value="{{entity.ideal_number_limit}}" max="1000" />
+                            <div ng-messages="entityForm.ideal_number_limit.$error">
+                                <div ng-message="max">人数超过限制</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row" class="dropdown form-group dropdown-start-parent">
+                    <label>开始时间</label>
+                    <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                        <div class="input-append">
+                            <input type="text" class="input-large" ng-model="dateRangeStart">
+                             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed', minuteStep: 15 }"
+                data-on-set-time="startDateOnSetTime()"
+                data-before-render="startDateBeforeRender($dates)" ng-model="dateRangeStart"></datetimepicker>
+                    </ul>
+                </div>
+                <div layout="row" class="dropdown form-group dropdown-start-parent">
+                <label>结束时间</label>
+                    <a class="dropdown-toggle my-toggle-select" id="endLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                        <div class="input-append">
+                            <input type="text" class="input-large" ng-model="dateRangeEnd">
+                             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="endLabel">
+                        <datetimepicker data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' , minuteStep: 15 }"
+                data-on-set-time="endDateOnSetTime()"
+                data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)" ng-model="dateRangeEnd"></datetimepicker>
+                    </ul>
+                </div>
+
+                <div layout="row">
+                    <md-input-container>
+                        <label>地区(商圈)</label>
+                        <input type="text" name="area" ng-model="entity.area" md-maxlength="6" ng-disabled="false" />
+                        <div ng-messages="entityForm.area.$error">
+                            <div ng-message="md-maxlength">地区文字不能超过6个字符</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex="">
+                        <label>详细地址</label>
+                        <textarea name="address" ng-model="entity.address" md-maxlength="60" ng-disabled="false"></textarea>
+                        <div ng-messages="entityForm.address.$error">
+                            <div ng-message="md-maxlength">详细地址文字不能超过60个字符</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <div flex="30">
+                        <label>场地</label>
+                        <md-autocomplete md-selected-item="selectedSpaceSpot" placeholder="请选择场地" md-search-text="spacename" md-items="space_spot in getSpace(spacename)" md-search-text-change="getSection(selectedSpaceSpot)" md-item-text="space_spot.name" md-min-length="0" md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="space_spot">{{space_spot.name}}</span>
+                            </md-item-template>
+                            <md-not-found>No matches found.</md-not-found>
+                        </md-autocomplete>
+                    </div>
+                    <div flex="20">
+                        <label>空间</label>
+                        <md-input-container>
+                            <md-select ng-model="selectedSection" multiple aria-label="selected section">
+                                <md-option ng-value="section.id" ng-repeat="section in selectedSpaceSpot.sections">{{section.name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div flex="50">
+                        <label>场地是否内部安排</label>
+                        <md-input-container>
+                            <input type="text" name="address_assign" ng-model="entity.address_assign" value="{{entity.address_assign}}" max="200" aria-label="address assign"/>
+                        </md-input-container>
+                    </div>
+                </div>
+                <md-input-container>
+                    <label>收费金额(0为免费)</label>
+                    <input type="number" name="fee" ng-model="entity.cost" value="{{entity.cost}}" min="0" />
+                    <div ng-messages="entityForm.fee.$error">
+                        <div ng-message="min">金额不能为负数</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>收费明细</label>
+                    <textarea ng-model="entity.cost_list"></textarea>
+                </md-input-container>
+                <md-input-container>
+                <div ng-if="entity.id!=null">
+                    <span >
+                        <md-switch  style="display:inline-block;margin:2px;" ng-model="entity.allow_vip" aria-label="Switch 2" ng-true-value="'1'" ng-false-value="'0'" class="md-warn" ng-change="updateAllowVip(entity.id,entity.allow_vip)">
+                        <span ng-if="entity.allow_vip == 1">全平台开放</span>
+                        <span ng-if="entity.allow_vip == 0">非全平台开放</span>
+                        </md-switch>
+                    </span>
+                </div>
+                </md-input-container>
+                <md-input-container >
+                <div>
+                    <h2>活动详情开头文字</h2>
+                </div>
+                <div style="text-align: center;">
+                    这是Someet活动发起人，
+                    <span ng-if="entity.user.username==undefined" class="name">{{user.username}}</span>
+                    <span ng-if="entity.user.username" class="name">{{entity.user.username}}</span>
+                    发起的 #
+                    <textarea style="display:inline;" type="text" max="130" name="header_title" ng-model="entity.header_title" ng-value="{{entity.header_title}}" max="130" aria-label="header title"/>
+                    # 活动
+                </div>
+                </md-input-container>
+                <md-input-container>
+                <div style="text-align: center;">
+                    “我期待遇见
+                    <textarea style="display:inline;" name="header_people" ng-model="entity.header_people" ng-value="{{entity.header_people}}" max="120" aria-label="header people"/>                
+                    的小伙伴！”
+                    <br/>                
+                    <br/>                
+                    ▼▼▼
+                    <br/>                
+                </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>活动详情</label>
+                    <text-angular ng-model="entity.details"></text-angular>
+                </md-input-container>
+                <md-input-container>
+                    <label>活动流程</label>
+                    <text-angular ng-model="entity.review" placeholder="活动流程"></text-angular>
+                </md-input-container>
+                <md-input-container>
+                    <label>Tips</label>
+                    <text-angular ng-model="entity.field2" placeholder="Tips">1、活动不允许空降，如果有同行的小伙伴请把活动分享给TA让TA自行报名哟；<p>2、活动若无法照常参加，请进入Someet服务平台中的个人界面自行请假，否则将视为爽约（距活动开始时间24小时以上请假将获一张黄牌，24小时内请假两张黄牌，临时爽约三张黄牌）；</p>
+                    <p>3、</p></text-angular>
+                </md-input-container>
+                <md-input-container ng-if="entity.status != 8" layout="row" class="btn-float-right">
+                    <md-button ng-if="entity.is_release == 1 && entity.this_week !== 1" class="md-raised md-primary" ng-disabled="true">保存</md-button>
+                    <md-button  ng-if="entity.is_release !== 1 || entity.this_week == 1" class="md-raised md-primary" ng-disabled="entityForm.$invalid">保存</md-button>
+                    <md-button  class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+                </md-input-container>
+            </div>
+        </div>
+    </form>
+    <md-input-container ng-if="entity.status == 8" layout="row" class="btn-float-right">
+        <md-button  class="md-raised md-primary" ng-click="updateStatus(entity.id,12)">审核通过</md-button>
+        <md-button class="md-raised md-warn" ng-click="updateStatus(entity.id,3)">不通过</md-button>
+    </md-input-container>
+</div>
+

@@ -1,0 +1,141 @@
+<!-- 组局列表页面 -->
+<div class="container">
+<span ng-if="status!='dts'">
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#/group-up/index">组局</a></li>
+    <li role="presentation"><a href="#/group-up/check">组局审核</a></li>
+    <li role="presentation"><a href="#/group-type/index">组局分类</a></li>
+</ul>
+</span>
+<form class="form-inline" name="demo.newSortForm" novalidate>
+    <div  style="width: 50%;float: left;height: 2rem;line-height: 2rem;margin-left: 1.5rem;">
+        <div class="form-group">
+            <label for="pageBinding">选择第几周</label>
+            <select class="form-control" ng-model="selectedWeek" ng-options="col for col in allWeek" name="newSort">
+            </select>
+        </div>
+        <button class="btn btn-default" ng-click="applySelectedSort()" ng-disabled="demo.newSortForm.$pristine">确定</button>
+        <button class="btn btn-default" ng-click="deleteWeek()">清除</button>
+    </div>
+</form>
+<form class="navbar-form navbar-right" role="search">
+    <div class="form-group">
+        <input type="text" class="form-control" ng-model="search" placeholder="标题、组局人昵称">
+    </div>
+    <button type="submit" class="btn btn-default" ng-click='getGroup()'>
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜索
+    </button>
+</form>
+<br/>
+<div class="container" style="margin-top: 1.5rem;">
+    <ul class="nav nav-tabs">
+        <li ng-class="{active:isActive('0')}">
+            <a href="#/group-up/index">全部</a>
+        </li>
+        <li ng-class="{active:isActive(entity.id)}" ng-repeat="entity in activityTypeList">
+            <a href="#/group-up/index?type={{entity.id}}">{{entity.title}}&nbsp;
+            <span style="color:red;font-size:16px;margin-top:1px;">{{entity.type_number}}</span></a>
+        </li>
+    </ul>
+</div>
+<!-- 组局列表 -->
+<md-content class="layout-padding ng-scope flex container">
+    <div class="activityList" id="activityList">
+        <ul class="activityListProperty">
+            <li ng-if=" list == '' ">
+                <div class="alert alert-danger" role="alert">没有搜到组局</div>
+            </li>
+            <li ng-if="list" ng-repeat="entity in list | filter:query">
+                <div  ng-class="{
+                    'panel-default': entity.status == 3,
+                    'panel-success': entity.status == 20,
+                    'panel-info': entity.status == 30,
+                    'panel-warning': entity.status == 40 ,
+                    'panel-danger': entity.status == 8}" class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+              <!-- 组局标题 -->
+              {{entity.id}}#
+              <span ng-if="entity.status==3" >{{entity.user.username}}：{{entity.title}} [未通过审核]</span>
+              <span ng-if="entity.status==8" >{{entity.user.username}}：{{entity.title}} [待审核]</span>
+              <!-- <span ng-if="entity.status==10" >{{entity.user.username}}：{{entity.title}} [草稿]</span> -->
+              <span ng-if="entity.status==20" >{{entity.user.username}}：{{entity.title}} [发布]</span>
+              <span ng-if="entity.status==30" >{{entity.user.username}}：{{entity.title}} [已关闭]</span>
+              <span ng-if="entity.status==40" >{{entity.user.username}}：{{entity.title}} [已取消]</span>
+              <!-- <span ng-if="entity.this_week==0" style="display: inline-block;float:right;" >【历史组局】</span> -->
+              <span ng-if="entity.is_full==1 && entity.status==20" style="color:red;font-size:22px;float:right;"><img src="/static/image/full.png" alt=""></span>
+            </h3> 
+                    </div>
+                    <div class="panel-body">
+                        <button ng-if="!entity.question" class="btn" ng-click="open(entity)">设置表单</button>
+                        <button ng-if="entity.question" class="btn" ng-click="open(entity)">修改表单</button>
+                        <div class="btn-group" ng-if="entity.status > 8">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                操作
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-if="entity.status > 8">
+                                    <a ng-click="updateStatus(entity.id, 8)">待审核</a>
+                                </li>
+                                <li ng-if="entity.status >= 15">
+                                    <a ng-click="updateStatus(entity.id, 30)">关闭报名</a>
+                                </li>
+                                <li>
+                                    <a ng-show="entity.status >= 20" ng-click="updateStatus(entity.id,40)">取消组局</a>
+                                </li>
+                                <li>
+                                    <a ng-show="entity.status >= 10 && entity.status != 20" ng-click="updateStatus(entity.id,20)">发布组局</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="btn-group btn-float-right" ng-show="entity.status >= 20">
+                            <a href="#/group-answer/{{entity.id}}" target="_blank" ng-class="{true: 'btn-info', false: 'btn-default'}[entity.question.status==10]" class="btn  btn-float-right" type="button">
+                                <span>管理</span>（{{entity.answer_count}}/{{entity.peoples}}）
+                                <span class="badge">{{entity.feedback_count}}</span>
+                            </a>
+                        </span>
+                        <a ng-if="entity.status > 8" class="btn btn-info" href="#/group-up/check/{{entity.id}}" target="_blank">查看</a>
+                        <a ng-if="entity.status < 10" class="btn btn-success btn-float-right" href="#/group-up/check/{{entity.id}}" target="_blank">审核</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div ng-show="modelPagination" class="someet-pagination user-pagination">
+        <uib-pagination total-items="modelPagination.totalItems" ng-model="modelPagination.currentPage" ng-change="pageChange()" items-per-page="10" max-size="modelPagination.maxSize" class="pagination-sm" boundary-links="false" previous-text="上一页" next-text="下一页" first-text="第一页" last-text="最后一页" rotate="false">
+        </uib-pagination>
+    </div>
+</md-content>
+</div>
+<!-- 组局列表 end -->
+<script type="text/ng-template" id="question.html">
+    <div class="modal-content">
+        <form name="entityForm" ng-submit="groupQuestionSave()">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+                <h4 class="modal-title" id="exampleModalLabel">{{activity.id}}#{{activity.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <!-- 更新问题时 -->
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">问题{{entity.group}}</label>
+                    <input type="text" class="form-control" ng-model="entity.question"" required>
+                </div>
+                <!-- 当没新建问题时 -->
+                <div class="form-group" ng-if="!entity.id">
+                    <label for="recipient-name" class="control-label">问题</label>
+                    <input name="question" type="text" class="form-control" id="recipient-name" required minlength="5" ng-model="entity.question">
+                    <div ng-messages="entityForm.q1.$error">
+                        <div ng-message="required">必填项目</div>
+                        <div ng-message="minlength">问题文字不能少于5个字符</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                <input class="btn btn-primary" type="submit" ng-click="ok()" ng-disabled="entityForm.$invalid" value="保存"></input>
+            </div>
+        </form>
+    </div>
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html> <head> <meta charset="utf-8"> <title></title>
+  <style media="screen">
+    .tx{width:50px;height:50px;margin-bottom:10px;margin-left:80px}
+  </style>
+</head>
+  <body ng-app="app">
+    <div ng-controller="UserCtrl">
+      <form name="f" ng-submit="register()">
+        <fieldset>
+          <legend>基本信息</legend>
+          <img ng-src="{{user.icon}}" ng-class="{'tx':user.showicon}" alt="">
+          <div>
+            <input type="text" placeholder="用户名" required ng-model="user.uname">
+            <input type="password" ng-model="user.pwd" placeholder="密码">
+            职位：<select>
+              <option value="">--请选择--</option>
+              <option value="1" ng-selected="user.zw == 1">前端工程师</option>
+              <option value="2" ng-selected="user.zw == 2">PHP工程师</option>
+            </select>
+            性别：
+            <input type="radio" name="sex" ng-checked="user.sex == 1">&nbsp;男&nbsp;
+            <input type="radio" name="sex" ng-checked="user.sex == 2">&nbsp;女&nbsp;
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>爱好</legend>
+          <div>
+            <input type="checkbox" name="hobby" ng-checked="isChecked(1)">&nbsp;滑雪&nbsp;
+            <input type="checkbox" name="hobby" ng-checked="isChecked(2)">&nbsp;潜水&nbsp;
+            <input type="checkbox" name="hobby" ng-checked="isChecked(3)">&nbsp;游泳&nbsp;
+            <input type="checkbox" name="hobby" ng-checked="isChecked(4)">&nbsp;冲浪&nbsp;
+          </div>
+        </fieldset>
+        <button type="submit" ng-disabled="f.$invalid">提交</button>
+      </form>
+    </div>
+    <script src="./js/angular.min.js" charset="utf-8"></script>
+    <script src="./js/myCtrl.js" charset="utf-8"></script>
+  </body>
+</html>

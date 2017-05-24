@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<style>
+		ul,li{list-style:none;}
+		ul li input{display:none; }
+		ul li input.toggle{display:block;}
+		.editing {border:1px solid red; }
+		.editing label, .editing a{display:none; }
+		.editing input{display:block; }
+	</style>
+</head>
+<body>
+	<div id="app">
+		您还有{{ noFinishTaskSize }}个任务没完成
+		<br />
+		<input type="text" v-model="todo" @keyup.enter="addToDo">
+		<ul>
+			<li :class="{editing:item === editTodo}" v-for="item in list">
+				<input class="toggle" type="checkbox" v-model="item.isChecked" />
+				<label @dblclick="editTodoHandle(item)">{{item.title}}</label>
+				<a href="#" @click="deleteToDo(item)">删除</a>
+				<input type="text" v-model="item.title" @keyup.enter="doEditTodo" @keyup.esc="cancelTodo(item)"
+				@blur="doEditTodo"
+				v-focus="editTodo === item">
+			</li>
+		</ul>
+	</div>	
+	<script>
+		var list = [
+			{title:"学习1", isChecked:false},
+			{title:"学习2", isChecked:false},
+			{title:"学习3", isChecked:false},
+			{title:"学习4", isChecked:false}
+		];
+		var app = new Vue({
+			el: "#app",
+			data: {
+				list,//任务列表
+				todo:'',//新添加的任务内容
+				editTodo:'',//记录正在编辑的数据
+				beforeTitle:''//记录正在编辑的任务的title
+			},
+			computed:{
+				noFinishTaskSize: function(){
+					return this.list.filter(function(item){
+						return !item.isChecked;
+					}).length;
+				}
+			},
+			methods: {
+				addToDo:function(){
+					var td = {title:this.todo, isChecked:false};
+					this.list.push(td);
+					this.todo = '';
+				},
+				deleteToDo: function(todo){
+					var index = this.list.indexOf(todo);
+					this.list.splice(index,1);
+				},
+				editTodoHandle:function(todo){
+					this.editTodo = todo;
+					this.beforeTitle = todo.title;
+				},
+				doEditTodo:function(){
+					this.editTodo = '';
+				},
+				cancelTodo:function(todo){
+					todo.title = this.beforeTitle;
+					this.editTodo = '';
+					this.beforeTitle = '';
+				}
+			},
+			directives:{
+				'focus':{
+					update(el,bindling) {
+						console.log(el,bindling);
+						if (bindling.value) {
+							el.focus();
+						}
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>

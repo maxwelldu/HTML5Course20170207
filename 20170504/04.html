@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    .black{
+      background-color: black;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <my-awesome-list :childitems="items">
+  <!-- 作用域插槽也可以是具名的 -->
+  <template scope="p">
+    <li :class="p.className">{{ p.text }}</li>
+  </template>
+  </my-awesome-list>
+</div>
+  <script>
+    Vue.component('my-awesome-list', {
+      template: '<ul>\
+        <slot \
+          v-for="item in childitems"\
+          :text="item.text"\
+          className="black"\
+          >\
+          <!-- 这里写入备用内容 -->\
+          这里是备用内容\
+        </slot>\
+      </ul>',
+      props: ["childitems"]
+    });
+    var app = new Vue({
+      el: "#app",
+      data: function(){
+        return {
+          items: [
+            {"text":"max1"},
+            {"text":"max2"},
+            {"text":"max3"},
+            {"text":"max4"},
+          ]
+        }
+      }
+    })
+  </script>
+</body>
+</html>

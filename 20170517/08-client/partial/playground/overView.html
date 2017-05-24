@@ -1,0 +1,137 @@
+<style type="text/css">
+	table tr th{
+		width: 7rem;
+		text-align: center;
+	}
+	table{
+		text-align: center;
+	}
+	.play-title{
+		background-color: #B3B3B3;
+	}
+</style>
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation"><a href="#/playground/index">活动</a></li>
+    <li role="presentation"><a href="#/playground/test-tube">试管</a></li>
+    <li role="presentation"  class="active"><a href="#/playground/over-view">总览</a></li>
+</ul>
+<br/>
+<table border="1">
+  <tr class="play-title">
+    <th>城市</th>
+    <th>类型</th>
+    <th>报名人数</th>
+    <th>通过人数</th>
+    <th>投放试管数</th>
+    <th>取走试管数</th>
+    <th>下架试管数</th>
+  </tr>
+  <tr>
+    <td rowspan="4" class="play-title">北京</td>
+    <td>愿望试管</td>
+    <td>{{data.testTube[2][1]['all']}}</td>
+    <td>{{data.testTube[2][1]['pass']}}</td>
+    <td>{{data.testTube[2][1]['update']}}</td>
+    <td>{{data.testTube[2][1]['take']}}</td>
+    <td>{{data.testTube[2][1]['delete']}}</td>
+  </tr>
+  <tr>
+    <td>组队试管</td>
+    <td>{{data.testTube[2][3]['all']}}</td>
+    <td>{{data.testTube[2][3]['pass']}}</td>
+    <td>{{data.testTube[2][3]['update']}}</td>
+    <td>{{data.testTube[2][3]['take']}}</td>
+    <td>{{data.testTube[2][3]['delete']}}</td>
+  </tr>
+  <tr>
+    <td>树洞试管</td>
+    <td>{{data.testTube[2][4]['all']}}</td>
+    <td>{{data.testTube[2][4]['pass']}}</td>
+    <td>{{data.testTube[2][4]['update']}}</td>
+    <td>{{data.testTube[2][4]['take']}}</td>
+    <td>{{data.testTube[2][4]['delete']}}</td>
+  </tr>
+  <tr>
+    <td>一日情侣</td>
+    <td>{{data.testTube[2][5]['all']}}</td>
+    <td>{{data.testTube[2][5]['pass']}}</td>
+    <td>{{data.testTube[2][5]['update']}}</td>
+    <td>{{data.testTube[2][5]['take']}}</td>
+    <td>{{data.testTube[2][5]['delete']}}</td>
+  </tr>
+  <tr>
+    <td rowspan="4" class="play-title">上海</td>
+    <td>愿望试管</td>
+    <td>{{data.testTube[3][1]['all']}}</td>
+    <td>{{data.testTube[3][1]['pass']}}</td>
+    <td>{{data.testTube[3][1]['update']}}</td>
+    <td>{{data.testTube[3][1]['take']}}</td>
+    <td>{{data.testTube[3][1]['delete']}}</td>
+  </tr>
+  <tr>
+    <td>组队试管</td>
+    <td>{{data.testTube[3][3]['all']}}</td>
+    <td>{{data.testTube[3][3]['pass']}}</td>
+    <td>{{data.testTube[3][3]['update']}}</td>
+    <td>{{data.testTube[3][3]['take']}}</td>
+    <td>{{data.testTube[3][3]['delete']}}</td>
+  </tr>
+  <tr>
+    <td>树洞试管</td>
+    <td>{{data.testTube[3][4]['all']}}</td>
+    <td>{{data.testTube[3][4]['pass']}}</td>
+    <td>{{data.testTube[3][4]['update']}}</td>
+    <td>{{data.testTube[3][4]['take']}}</td>
+    <td>{{data.testTube[3][4]['delete']}}</td>
+  </tr>
+  <tr>
+    <td>一日情侣</td>
+    <td>{{data.testTube[3][5]['all']}}</td>
+    <td>{{data.testTube[3][5]['pass']}}</td>
+    <td>{{data.testTube[3][5]['update']}}</td>
+    <td>{{data.testTube[3][5]['take']}}</td>
+    <td>{{data.testTube[3][5]['delete']}}</td>
+  </tr>
+  <tr>
+    <td rowspan="4" class="play-title">广州</td>
+    <td>愿望试管</td>
+    <td>{{data.testTube[4][1]['all']}}</td>
+    <td>{{data.testTube[4][1]['pass']}}</td>
+    <td>{{data.testTube[4][1]['update']}}</td>
+    <td>{{data.testTube[4][1]['take']}}</td>
+    <td>{{data.testTube[4][1]['delete']}}</td>
+  </tr>
+  <tr>
+    <td>树洞试管</td>
+    <td>{{data.testTube[4][3]['all']}}</td>
+    <td>{{data.testTube[4][3]['pass']}}</td>
+    <td>{{data.testTube[4][3]['update']}}</td>
+    <td>{{data.testTube[4][3]['take']}}</td>
+    <td>{{data.testTube[4][3]['delete']}}</td>
+  </tr>
+  <tr>
+    <td>一日情侣</td>
+    <td>{{data.testTube[4][4]['all']}}</td>
+    <td>{{data.testTube[4][4]['pass']}}</td>
+    <td>{{data.testTube[4][4]['update']}}</td>
+    <td>{{data.testTube[4][4]['take']}}</td>
+    <td>{{data.testTube[4][4]['delete']}}</td>
+  </tr>
+  <tr>
+    <td>组队试管</td>
+    <td>{{data.testTube[4][5]['all']}}</td>
+    <td>{{data.testTube[4][5]['pass']}}</td>
+    <td>{{data.testTube[4][5]['update']}}</td>
+    <td>{{data.testTube[4][5]['take']}}</td>
+    <td>{{data.testTube[4][5]['delete']}}</td>
+  </tr>
+  <tr>
+    <td class="play-title">总计</td>
+    <td></td>
+    <td>{{data.all}}</td>
+    <td>{{data.city_all['pass']}}</td>
+    <td>{{data.city_all['update']}}</td>
+    <td>{{data.city_all['take']}}</td>
+    <td>{{data.city_all['delete']}}</td>
+  </tr>
+</table>

@@ -1,0 +1,218 @@
+<!-- 活动列表页面 -->
+<div class="container">
+
+<span ng-if="status!='dts'">
+    <button type="button" class="btn btn-success btn-lg" ng-click="createPage()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新建活动
+    </button>
+    <button type="button" class="btn btn-info btn-lg" ng-click="weekActivity()">本周活动</button>
+    <button type="button" class="btn btn-info btn-lg" ng-click="historyActivity()">历史活动</button>
+    <button type="button" class="btn btn-info btn-lg" ng-click="preventActivity(15)">预发布活动</button>
+    <button type="button" class="btn btn-info btn-lg btn-danger" ng-click="prevenIssuetActivity()">一键发布预发布活动</button>
+</span>
+
+    <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="标题">
+        </div>
+        <button type="submit" class="btn btn-default" ng-click='getActivity()'>
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜索
+        </button>
+    </form>
+</div>
+<!-- 活动分类tab -->
+<div class="container" ng-if="status!='dts'">
+    <ul class="nav nav-tabs">
+        <li ng-class="{active:isActive('0')}">
+            <a href="#/activity/list/0">全部</a>
+        </li>
+        <li ng-class="{active:isActive(entity.id)}" ng-repeat="entity in activityTypeList |filter:typeFilter | orderBy: display_order ">
+            <a href="#/activity/list/{{entity.id}}">{{entity.name}}&nbsp;<span style="color:red;font-size:16px;margin-top:1px;">{{entity.type_number}}</span></a>
+        </li>
+        <li>
+            <a ng-if="!showAddForm" ng-click="onTypeAddClicked()">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </a>
+            <div ng-if="showAddForm">
+                <input type="text" ng-model="addForm.newType" />
+                <button class="btn-success" ng-click="commitTypeName(addForm.newType)">确认添加</button>
+                <button class="btn-default" ng-click="cancelAddType()">取消</button>
+            </div>
+        </li>
+        <li ng-class="{active:isActive('delete')}">
+            <a href="#/activity/recovery/delete">回收站</a>
+        </li>
+    </ul>
+</div>
+<!-- 活动分类tab end -->
+<!-- 活动列表 -->
+<md-content md-scroll-y="" flex="" layout-padding="" class="layout-padding ng-scope flex container">
+    <div class="activityList" id="activityList">
+        <ul class="activityListProperty">
+            <li ng-if=" list == '' ">
+                <div class="alert alert-danger" role="alert">没有搜到活动</div>
+            </li>
+
+
+            <!-- 'panel-default': entity.status == 10 || entity.status ==12,
+            'panel-success': entity.status == 20,
+            'panel-info': entity.status == 30,
+            'panel-warning': entity.status == 40,
+            'panel-danger': entity.status == 15 -->
+
+            <li ng-if="list" ng-repeat="entity in list | filter:query">
+                <div  ng-class="{
+                    'panel-default': entity.status == 10 || entity.status ==12,
+                    'panel-success': entity.status == 20,
+                    'panel-info': entity.status == 30,
+                    'panel-warning': entity.status == 40 || entity.this_week ==0,
+                    'panel-danger': entity.status == 15
+            }" class="panel">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+             <!-- 按照序号排序 -->
+              <input type="text" ng-model="entity.display_order" value="{{entity.display_order}}" style="width:60px;" />
+              <button class="btn btn-primary" ng-click="adjust_order(entity)" type="button">调整</button>
+              <!-- 置顶按钮 -->
+              <button type="button" class="btn btn-danger " ng-if="entity.is_top==1" ng-click="top(entity, 0)" data-toggle="button" >
+                <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true">取消置顶</span>
+              </button>
+              <button type="button" class="btn btn-default " ng-if="entity.is_top==0" ng-click="top(entity, 1)" data-toggle="button" >
+                <span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true">置顶</span>
+              </button>
+
+              <!-- 活动标题 -->
+              {{entity.id}}#
+              <span ng-if="entity.status==10" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[草稿]</span>
+              <span ng-if="entity.status==12" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[发起人草稿]</span>
+              <span ng-if="entity.status==20" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[启用]</span>
+              <span ng-if="entity.status==15" >[预发布]{{entity.user.username}}：{{entity.title}} - {{entity.desc}}</span>
+              <span ng-if="entity.status==30" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[关闭]</span>
+              <span ng-if="entity.status==40" >{{entity.user.username}}：{{entity.title}} - {{entity.desc}}[取消]</span>
+              <span ng-if="entity.this_week==0" style="display: inline-block;float:right;" >【历史活动】</span>
+              <span ng-if="entity.is_full==1 && entity.status==20" style="color:red;font-size:22px;float:right;"><img src="/static/image/full.png" alt=""></span>
+
+            </h3> 
+                    </div>
+                    <div class="panel-body">
+                        <!-- 切换活动分组 -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                {{entity.type.city}}:{{entity.type.name}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="type in allActivityTypeList | filter:typeFilter">
+                                    <a ng-click="onTypeChangeClick(entity,type.city_id, type.city, type.id)">{{type.city}}:{{type.name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-info" class="btn" ng-click="copyActivityUrl(entity)">活动链接</button>
+                        <a class="btn btn-info" target="_blank" href="http://pan.baidu.com/share/qrcode?w=200&h=200&url=https://m.someet.cc/activity/{{entity.id}}">扫码查看活动</a>
+                        <button ng-if="!entity.question" class="btn btn-danger" ng-click="open(entity)">设置表单</button>
+                        <button ng-if="entity.question" class="btn" ng-click="open(entity)">修改表单</button>
+                        <!-- <button class="btn" ng-click="groupQrcode(entity)">设置群二维码</button> -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                操作
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-if="entity.status != 10">
+                                    <a ng-click="updateStatus(entity.id, 10)">草稿</a>
+                                </li>
+                                <li ng-if="entity.status != 15">
+                                    <a ng-click="updateStatus(entity.id, 15)">预发布</a>
+                                </li>
+                                <li>
+                                    <a ng-show="entity.status > 20" ng-click="updateStatus(entity.id,20)">启用活动</a>
+                                </li>
+                                <li>
+                                    <a ng-show="entity.status >= 20" ng-click="updateStatus(entity.id,30)">关闭活动</a>
+                                </li>
+                                <li>
+                                    <a ng-show="entity.status >= 20" ng-click="updateStatus(entity.id,40)">取消活动</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a ng-click="delete(entity)">删除活动</a>
+                                </li>
+                                <li>
+                                    <a ng-click="copy(entity)">复制活动</a>
+                                </li>
+                                <li>
+                                    <a href="#/activity/log/{{entity.id}}" target="_blank">操作日志</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="btn-group btn-float-right" ng-show="entity.status >= 20">
+                            <a href="#/answer/{{entity.id}}" target="_blank" ng-class="{true: 'btn-info', false: 'btn-default'}[entity.question.status==10]" ng-if="entity.question" class="btn  btn-float-right" type="button">
+                            <span>管理</span>（{{entity.answer_count}}/{{entity.peoples}}）
+                        <span class="badge">{{entity.feedback_count}}</span>
+                        </a>
+                        </span>
+
+                        <button ng-if="entity.group_code == ''"  ng-file-select="uploadQrcode($files,entity.id)" data-multiple="false" title="上传群二维码先裁剪" onclick="this.value = null" class="btn btn-danger">上传群二维码</button>
+
+                        <a ng-if="!(entity.this_week == 0 && entity.status == 20)" class="btn btn-success" href="#/activity/{{entity.id}}" target="_blank">编辑</a>
+                        <button ng-if="entity.status==15 && entity.is_push==0" class="btn btn-danger" ng-click="preventPush(entity)" type="button">预发布通知</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<b>PMA：{{entity.pma.username}}</b>
+                        <button ng-if="entity.status==10 || entity.status==15 || entity.status==12" class="btn btn-primary btn-float-right" ng-click="release(entity)" type="button">发布</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div ng-show="modelPagination" class="someet-pagination user-pagination">
+        <uib-pagination total-items="modelPagination.totalItems" ng-model="modelPagination.currentPage" ng-change="pageChange()" items-per-page="modelPagination.itemsPerPage" max-size="modelPagination.maxSize" class="pagination-sm" boundary-links="false" previous-text="上一页" next-text="下一页" first-text="第一页" last-text="最后一页" rotate="false">
+        </uib-pagination>
+    </div>
+</md-content>
+<!-- 活动列表 end -->
+<script type="text/ng-template" id="question.html">
+    <div class="modal-content">
+        <form name="entityForm" ng-submit="questionSave()">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+                <h4 class="modal-title" id="exampleModalLabel">{{activity.id}}#{{activity.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <!-- 更新问题时 -->
+                <div class="form-group" ng-repeat="(k, questionItem) in entity.questionItemList">
+                    <label for="recipient-name" class="control-label">问题{{k+1}}</label>
+                    <input type="text" class="form-control" ng-model="questionItem.label" required>
+                </div>
+                <!-- 当没新建问题时 -->
+                <div class="form-group" ng-if="!entity.id">
+                    <label for="recipient-name" class="control-label">问题一:</label>
+                    <input name="q1" type="text" class="form-control" id="recipient-name" required minlength="5" ng-model="questionItem.q1">
+                    <div ng-messages="entityForm.q1.$error">
+                        <div ng-message="required">必填项目</div>
+                        <div ng-message="minlength">问题文字不能少于5个字符</div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="!entity.id">
+                    <label for="recipient-name" class="control-label">问题二:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="q2" type="text" required minlength="5" ng-model="questionItem.q2">
+                    <div ng-messages="entityForm.q2.$error">
+                        <div ng-message="required">必填项目</div>
+                        <div ng-message="minlength">问题文字不能少于5个字符</div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="!entity.id">
+                    <label for="recipient-name" class="control-label">问题三:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="q3" type="text" required minlength="5" ng-model="questionItem.q3">
+                    <div ng-messages="entityForm.q3.$error">
+                        <div ng-message="required">必填项目</div>
+                        <div ng-message="minlength">问题文字不能少于5个字符</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                <input class="btn btn-primary" type="submit" ng-click="ok()" ng-disabled="entityForm.$invalid" value="保存"></input>
+            </div>
+        </form>
+    </div>
+</script>

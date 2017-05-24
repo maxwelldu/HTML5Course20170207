@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./EaselJS-0.8.2/lib/easeljs-0.8.2.min.js"></script>
+    <script src="./TweenJS-0.6.2/lib/tweenjs-0.6.2.min.js"></script>
+</head>
+<body>
+    <canvas id="gameView" width="400" height="400" style="background:antiquewhite"></canvas>
+    <script>
+        var stage = new createjs.Stage('gameView');
+        stage.x = 100;
+        stage.y = 100;
+        var circle = new createjs.Shape();
+        circle.graphics.beginFill("#FF0000").drawCircle(0,0,50);
+        stage.addChild(circle);
+
+        //加动画
+        createjs.Tween.get(circle,{loop:true})
+            .wait(1000)
+            .to({scaleX:0.2, scaleY:0.2})
+            .wait(1000)
+            .to({scaleX:1,scaleY:1}, 1000, createjs.Ease.bounceInOut);
+        createjs.Ticker.setFPS(20);
+        createjs.Ticker.addEventListener('tick', stage);
+    </script>
+</body>
+</html>

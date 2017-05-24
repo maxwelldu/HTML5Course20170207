@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="col-md-12">
+<div ng-cloak>
+  <md-content>
+    开始时间 {{OnMonday}}  <br> 结束时间 {{LastMonday}}
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="结算列表" >
+        总金额 ：{{sumPrice}}
+        <md-button class="md-raised md-primary"  ng-click="tfList()" >刷新数据</md-button> 请勿多次点击，加载数据比较慢！
+        <md-content class="md-padding">
+        <table ng-table="transferFounderList" style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+            <tr ng-repeat="transferFounder in $data">
+                <td data-title="'用户ID'" >{{transferFounder.user_id}}</td>
+                <td data-title="'用户昵称'" >{{transferFounder.username}}</td>
+                <td data-title="'用户真实姓名'" >{{transferFounder.real_name}}</td>
+                <td data-title="'活动id'" >{{transferFounder.activity_id}}</td>
+                <td data-title="'转账金额'" >{{transferFounder.price}}</td>
+                <td data-title="'描述'" >{{transferFounder.description}}</td>
+                <td data-title="'描述'" >{{transferFounder.note}}</td>
+            </tr>
+        </table>
+        </md-content>
+      </md-tab>
+      <md-tab label="费用合并">
+        <!-- 总金额 ：{{sumPrice}} -->
+        <md-button class="md-raised md-primary" ng-click="transferFounderTable()" >刷新数据</md-button>
+        <md-button class="md-raised md-warn" ng-click="createTransferQueue()" >审核无误</md-button>
+        <md-content class="md-padding">
+            <table ng-table="transferFounderTableParams"  style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="transferFounder in $data">
+                    <td data-title="'用户ID'" >{{transferFounder.user_id}}</td>
+                    <td data-title="'用户昵称'" >{{transferFounder.username}}</td>
+                    <td data-title="'用户真实姓名'" >{{transferFounder.real_name}}</td>
+                    <td data-title="'活动id'" >{{transferFounder.activity_id}}</td>
+                    <td data-title="'转账金额'" >{{transferFounder.price}}</td>
+                    <td data-title="'描述'" >{{transferFounder.description}}</td>
+                    <td data-title="'描述'" >{{transferFounder.note}}</td>
+                </tr>
+            </table>
+        </md-content>
+        <div class="col-md-6">
+        </div>
+      </md-tab>
+      <md-tab label="待打款">
+        总金额 ：{{queueListPrice}}
+        <md-button class="md-raised md-primary" ng-click="queueListTable()" >刷新数据</md-button>
+        <md-button class="md-raised md-warn" ng-click="joinQueue()" >确认转账</md-button>
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="nameForm">
+                <div class="form-group">
+                  <label class="col-xs-6">🔍可以搜索：用户昵称 用户id</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="queueListTableParams.filter().search">
+                  </div>
+                </div>
+              </form>
+          <table ng-table="queueListTableParams"  style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="transferFounder in $data">
+                    <td data-title="'ID'" >{{transferFounder.id}}</td>
+                    <td data-title="'用户ID'" >{{transferFounder.user_id}}</td>
+                    <td data-title="'用户昵称'" >{{transferFounder.username}}</td>
+                    <td data-title="'用户真实姓名'" >{{transferFounder.real_name}}</td>
+                    <td data-title="'活动id'" >{{transferFounder.activity_id}}</td>
+                    <td data-title="'转账金额'" >{{transferFounder.price}}</td>
+                    <td data-title="'描述'" >{{transferFounder.description}}</td>
+                    <td data-title="'验证结果'" >{{transferFounder.note}}</td>
+                </tr>
+            </table>
+        </md-content>
+        <div class="col-md-6">
+          <!-- <button type="button" class="btn default"  ng-click="joinQueue()">确认转账</button> -->
+          <br>
+          ps:
+          转账给一个人需要十秒
+          如果30个人则需要5分钟
+        </div>
+      </md-tab>
+
+      <md-tab label="转账结果">
+        总金额 ：{{queueListPrice}} <br>
+        总共 ：{{count}} <br>
+        已转 ：{{successTfCount}} <br>
+        未转 ：{{notTfCount}} <br>
+        失败 ：{{failTfCount}} <br>
+        完成百分比 ：{{tfPercent}} %<br>
+        <md-button class="md-raised md-primary" ng-click="tfResult()" >刷新数据</md-button>
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="nameForm">
+                <div class="form-group">
+                  <label class="col-xs-6">🔍可以搜索：用户昵称 用户id</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="tfResultList.filter().search">
+                  </div>
+                </div>
+              </form>
+          <table ng-table="tfResultList"  style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="tfResultData in $data">
+                    <td data-title="'ID'" >{{tfResultData.id}}</td>
+                    <td data-title="'用户ID'" >{{tfResultData.user_id}}</td>
+                    <td data-title="'用户真实姓名'" >{{tfResultData.username}}</td>
+                    <td data-title="'活动id'" >{{tfResultData.activity_id}}</td>
+                    <td data-title="'转账金额'" >{{tfResultData.amount}}</td>
+                    <td data-title="'转账时间'" >{{tfResultData.created_at}}</td>
+                    <td data-title="'描述'" >{{tfResultData.description}}</td>
+                    <td data-title="'原因'" >{{tfResultData.failure_msg}}</td>
+                </tr>
+            </table>
+        </md-content>
+      </md-tab>
+
+    </md-tabs>
+  </md-content>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,25 @@
+<div class="container" layout="column" flex id="content">
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation"><a href="#/group-up/index">组局</a></li>
+    <li role="presentation"><a href="#/group-up/check">组局审核</a></li>
+    <li role="presentation" class="active"><a href="#/group-type/index">组局分类</a></li>
+</ul>
+  <md-button class="activity-dialog-btn md-fab" ng-click="createPage()" aria-label="add activity type">
+    <i class="fa fa-plus"></i>
+  </md-button>
+  <div ng-cloak>
+      <md-content class="md-padding">
+          <form class="form-horizontal" name="actForm">
+          </form>
+          <table ng-table="groupTypeParams" style="font-size: 0.7rem;text-align: center;" class="table table-condensed table-bordered table-striped" >
+              <tr ng-repeat="item in $data">
+                  <td data-title="'组局分类ID'" >{{item.id}}</td>
+                  <td data-title="'分类标题'" >{{item.title}}</td>
+                  <td data-title="'操作'">
+                    <a class="btn btn-success btn-sm" href="#/group-type/view/{{item.id}}" target="_blank">编辑</a>
+                  </td>
+              </tr>
+          </table>
+      </md-content>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body ng-app="app">
+    <div ng-controller="FCtrl">
+      <input type="text" ng-model="data.msg">
+      <h1>{{data.msg}}</h1>
+    </div>
+    <div ng-controller="SCtrl">
+      <input type="text" ng-model="data.msg">
+      <h1>{{data.msg}}</h1>
+    </div>
+    <script src="./js/angular.min.js" charset="utf-8"></script>
+    <script src="./js/myCtrl.js" charset="utf-8"></script>
+  </body>
+</html>

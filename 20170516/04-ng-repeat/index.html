@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html> <head> <meta charset="utf-8"> <title></title>
+  <style media="screen">
+  .bg{background-color:skyblue}
+  .c{color:red}
+  </style>
+</head>
+  <body ng-app="app">
+    <div ng-controller="UserCtrl">
+      <ul>
+        <li ng-if="!$last" ng-class="{'bg':$first, 'c':$index%2==0}" ng-repeat="addr in list">
+          <h4 >{{$index + addr.address + $first}} {{$last}}</h4>
+        </li>
+      </ul>
+    </div>
+    <script src="./js/angular.min.js" charset="utf-8"></script>
+    <script src="./js/myCtrl.js" charset="utf-8"></script>
+  </body>
+</html>

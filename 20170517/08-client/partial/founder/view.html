@@ -1,0 +1,464 @@
+<!-- 编辑活动内容页面 -->
+<script type="text/javascript">
+var address = document.getElementById("address");
+var haveAddress = document.getElementById("have-address");
+var needAddress = document.getElementById("need-address");
+// var address_assign = document.getElementById("address_assign");
+var rfounder = document.getElementById("rfounder");
+var address_assign = $("#address_assign").val();
+$(".address-radio").click(function() {
+    console.log(address_assign);
+    if ($("#address").prop('checked')) {
+        haveAddress.style.display = "block";
+        needAddress.style.display = "none";
+    } else {
+        haveAddress.style.display = "none";
+        needAddress.style.display = "block";
+    }
+})
+$("#have-rfounder").click(function() {
+    if ($("#have-rfounder").prop('checked')) {
+        rfounder.style.display = "block";
+    }
+})
+$("input").bind('focus',noti);
+
+function noti() {
+    $('.prompt').hide();
+    var cname = $(this).attr('id');
+    $("div[date-name='" + cname + "']").fadeIn()
+
+}
+
+</script>
+<div class="container" id="content">
+
+    <div class="founder-button">
+        <md-input-container ng-if="entity.status == 8 && entity.isManager == 1" layout="row" class="btn-float-right">
+            <md-button class="md-raised md-primary" ng-click="changeStatus(entity.id,12)">审核通过</md-button>
+            <md-button class="md-raised md-warn" ng-click="open(entity)">不通过</md-button>
+        </md-input-container>
+    </div>
+
+    <form name="entityForm" ng-submit="save()">
+        </md-input-container>
+        <div class="founder-button">
+            <md-input-container ng-if="entity.status !=8" layout="row" class="btn-float-right">
+                <md-button class="md-raised md-primary">保存</md-button>
+                <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+            </md-input-container>
+        </div>
+        <input type="hidden" ng-model="entity.id" />
+        <div ng-file-select="uploadPoster($files)" data-multiple="false" class="title-img" title="select file" onclick="this.value = null">
+
+            <div ng-if="poster ==null">
+                <img style="width:100%;" src="http://7xn8h3.com1.z0.glb.clouddn.com/Fh8n2ij-_xq4D7HUPyHIFfy629F7" alt="">
+            </div>
+            <img ng-if="poster" style="width:100%;height:100%;" class="activity-photo" ng-src="{{poster}}">
+                <div class="title-text-img prompt">
+                    <span class="title-text-title">应该添加什么样的活动标题图片?</span><br/>
+                    <span style="color:rgb(251,103,61);">
+                        <p>图片能够帮助用户更直观地了解活动内容，标题图片清晰美观是吸引报名第一利器哦~</p>
+                        <p>强烈建议上传800*455的横版图片</p>
+                    </span>
+                </div>
+        </div>
+        <br>
+        <br>
+        <div class="founder-moddile">
+            当前城市：<span ng-if="entity.city_id==2">北京</span><span ng-if="entity.city_id==3">上海</span><span ng-if="entity.city_id==4">广州</span>
+            <md-input-container  layout="row" >
+                <md-button ng-disabled="entity.city_id==2" class="md-warn" ng-click="onSetCity(2)">北京</md-button>
+                <md-button ng-disabled="entity.city_id==3" class="md-warn" ng-click="onSetCity(3)">上海</md-button>
+                <md-button ng-disabled="entity.city_id==4" class="md-warn" ng-click="onSetCity(4)">广州</md-button>
+            </md-input-container>
+            <md-input-container flex="" style="text-align: center;">
+                <label>这里是活动的标题（也就是名称）</label>
+                <input class='title' id="title" name="title" type="text" md-maxlength="30" required minlength="3" ng-model="entity.title">
+                <div ng-messages="entityForm.title.$error">
+                    <div ng-message="required">必填项目</div>
+                    <div ng-message="minlength">标题文字限制为3-30个字符</div>
+                    <div ng-message="md-maxlength">标题文字不能超过30个字符</div>
+                </div>
+                <div class="title-text prompt" date-name='title'>
+                    <span class="title-text-title">怎样给活动取一个好的活动名称?</span><br/>
+                    <br/><span style="color:rgb(251,103,61);">
+                        <p>一个炫酷直观且不浮夸的标题显得更吸引人呢~</p><br/>
+                        <p>以下是填写范例：</p><br/><p> 户川一封：五环内外的两个世界，探秘北五环club里的神奇故事 - #帝都夜游指南#</p> <p>阿汪：衣锦夜行之坐街夜谈聊聊红灯区女郎</p>德川亮：时间流逝感工作坊，关于个人时间管理的探讨和实践
+                    </span>
+                </div>
+            </md-input-container>            
+            <md-input-container flex="40" style="text-align: center;width:18rem;margin-left:8rem;">
+                <label>请在这里填写活动的副标题</label>
+                <input name="viceTitle" type="text" md-maxlength="30" ng-model="entity.desc" />
+            </md-input-container>
+
+            <md-input-container >
+            <div>
+                <h2>活动详情开头文字</h2>
+            </div>
+            <div style="text-align: center;">
+                这是Someet活动发起人，
+                <span ng-if="entity.user.username==undefined" class="name">{{user.username}}</span>
+                <span ng-if="entity.user.username" class="name">{{entity.user.username}}</span>
+                发起的 #
+                <textarea style="display:inline;" type="text" max="130" name="header_title" ng-model="entity.header_title" ng-value="{{entity.header_title}}" max="130" />
+                # 活动
+            </div>
+            </md-input-container>
+            <md-input-container flex="40" >
+            <div style="text-align: center;">
+                “我期待遇见
+                <textarea style="display:inline;" name="header_people" ng-model="entity.header_people" ng-value="{{entity.header_people}}" max="120" />            
+                的小伙伴！”
+                <br/><br/>▼▼▼<br/>
+            </div>
+            </md-input-container>
+
+            <md-input-container>
+            <div>
+                <h2>活动详情</h2>
+            </div>
+            <div class="activity-detail-text prompt t_text">
+                <p class="title-text-title">怎样描述活动详情?</p>
+                <br/>
+                <span style="color:rgb(251,103,61);">
+                    <p>优秀的活动介绍有助于用户更好的了解的你的活动，我们鼓励此处有一定的具体描述。</p><br/>
+                    <p>范例:</p><br/>
+                    <p>在活动中，你会亲自参与到一件木艺勺子的刻、挖、抛光、打磨、上油、蜡等制作环节最终得到一件自己亲自设计和制作的精致木工勺子。不过你得到的可不仅仅是一个勺子，几个小时的打磨，get到新技能的同时，你收获的将会是一个更好的自己。</p><br/>
+                    <p class="title-text-title">怎样添加活动图片?</p><br/>
+                    活动图片是用户在参加活动之前，对活动体验做预期判断的重要依据。<br/>活动图片可以是过往活动现场的照片，合影，作品或者与活动主题相关的图片。<br/>添加活动图片方法：<br/>方法一，请直接将您找到的活动图片拖入左侧的文本框中（可以将浏览器窗口稍微缩小便于操作）；<br/>方法二，点击工具栏中【上传图片】按钮，选择您所需要的图片，确认上传即可。</p>
+                </span>
+            </div>
+                <text-angular aria-label="Details" name="details" required minlength="1" ng-model="entity.details" ng-click="text_click(0)">
+                </text-angular>
+                <div ng-messages="entityForm.details.$error">
+                    <div ng-message="required">必填项目</div>
+                </div>
+            </md-input-container>
+            <!-- 发起人 -->
+            <div class="detail-host">
+                <label>发起人</label>
+                <div class="hoster">
+                    <div ng-if="entity.user.username==undefined" class="name"> <strong>{{user.username}}</strong></div>
+                    <div ng-if="entity.user.username" class="name"><strong>{{entity.user.username}}</strong></div>
+                    <div>
+                        <span>“</span>
+                        <img ng-src="{{entity.user.profile.headimgurl}}" />
+                    </div>
+                </div>
+                <div class="des-bio">
+                    {{entity.user.profile.bio}}
+                </div>
+                <br/>
+                <div class="rfounder">
+                    我的本次活动有联合发起人或者嘉宾？
+                    <md-radio-group ng-click="text_click(1)" ng-model="rfounder.is_rfounder">
+                        <md-radio-button  value="1">是&nbsp;&nbsp;&nbsp;&nbsp;</md-radio-button>
+                        <md-radio-button  class="need_address" value="0">否</md-radio-button>
+                    </md-radio-group>
+                    <div class="rfounder-text prompt t_text">
+                        <span style="color:rgb(251,103,61);">
+                            <p class="title-text-title">什么是联合发起人?</p><br>
+                            <p>联合发起人是与活动的主要发起人共同组织落地活动，并在前期承担具体的工作，有一定的贡献。</p><br>
+                            <p class="title-text-title">什么是嘉宾？</p><br>
+                            <p>活动嘉宾不是活动的组织或开展者，而是您在活动中邀请的 “助攻者”，他的出现将使活动内容更加充实。</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-info">
+                <label>活动细节</label>
+                <!-- 时间 -->
+                <div class="detail-label" id="time">
+                    <i class="icon"><img src="/static/svg/Location.svg"></i>
+                    <div layout="row">
+                        <md-input-container aria-label="TimeInput">
+                            <span class="founder-start-time">开始时间：</span>
+                            <div class="dropdown" style="color:black;">
+                                <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                                    <div class="input-append">
+                                        <input aria-label="TimeInput" type="text" id="time_input" class="time-str" style="color:white;border:2px solid;color:white;BORDER-TOP-WIDTH: 0px;BORDER-LEFT-WIDTH: 0px;BORDER-RIGHT-WIDTH: 0px;BORDER-COLLAPSE: collapse;position: absolute;bottom: 0.8rem;left: 5rem;" ng-model="dateRangeStart">
+                                        <!-- <div ng-messages="entityForm.details.$error">
+                    <div ng-message="required">必填项目</div>
+                </div> -->
+                                        <span class="add-on">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed', minuteStep: 15 }"
+                data-on-set-time="startDateOnSetTime()"
+                data-before-render="startDateBeforeRender($dates)" ng-model="dateRangeStart"></datetimepicker>
+                                </ul>
+                            </div>
+                            <div class="time-text prompt" date-name='time_input'>
+                                <span style="color:rgb(251,103,61);">
+                                    <p class="title-text-title">怎样选择活动时间?</p><p><br/>依据经验，大部分活动集中在周末的下午和晚上，如果你的活动适合工作日时间或者周末上午，我们也同样欢迎。</p><br>
+                                    <p class="title-text-title">怎样控制活动的时长?</p><br/><p>我们建议一场活动的合理时长为2-3小时，需要您对活动内容进行合理的规划，有效的时间控制和紧凑的流程能够保证活动的顺利进行。</p>
+                                </span>
+                            </div>
+                        </md-input-container>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <md-input-container>
+                        <span class="founder-finish-time">结束时间：</span>
+                            <div class="dropdown" style="color:black;">
+                                <a class="dropdown-toggle my-toggle-select" id="endLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                                    <div class="input-append">
+                                        <input class="time-str" type="text" style="color:white;border:2px solid;color:white;BORDER-TOP-WIDTH: 0px;BORDER-LEFT-WIDTH: 0px;BORDER-RIGHT-WIDTH: 0px;BORDER-COLLAPSE: collapse;position: absolute;left: 15rem;bottom: 1.6rem;" ng-model="dateRangeEnd">
+                                        <span class="add-on">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="endLabel">
+                                    <datetimepicker data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' , minuteStep: 15 }"
+                data-on-set-time="endDateOnSetTime()"
+                data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)" ng-model="dateRangeEnd"></datetimepicker>
+                                </ul>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div class="address-need">
+                        <md-radio-group ng-model="data.group1" ng-click="text_click(2)">
+                            <md-radio-button value="1" ng-click="cleanNeed()">有自己的活动场地&nbsp;&nbsp;&nbsp;&nbsp;</md-radio-button>
+                            <md-radio-button ng-click="cleanAddress()" class="need_address" value="0" >需要平台提供活动场地</md-radio-button>
+                        </md-radio-group>
+                        <div class="address-text prompt t_text" date-name='address'>
+                            <span style="color:rgb(251,103,61);">
+                                <p class="title-text-title">怎样选择合适的活动场地?</p><br>
+                                <p>活动场地的挑选需符合活动特点，交通便利，易于找到。例如，是否要求场地的封闭性，对面积大小的要求等。</p><br>
+                                <p class="title-text-title">如果自己没有活动场地怎么办?</p><br>
+                                <p>请您勾选左侧“需要平台提供活动场地的选项”，我们会为有场地需求的活动提供合适的空间，保证活动的顺利进行。同时请您填写对活动场地的要求，并告知活动中可能存在的设备需求，如：投影仪、厨房等</p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 地点 -->
+                <div class="detail-label address-js" ng-if="data.group1==1" id="have-address">
+                    <span> <i class="icon founder-icon"><img src="/static/svg/Location.svg"></i></span>
+                    <md-input-container class="address" flex="">
+                        <label style="width:15rem;color:white;">请在这里填写您的活动场地地址</label>
+                        <input id='address' required minlength="1" style="color:white;border:2px solid;color:white;BORDER-TOP-WIDTH: 0px;BORDER-LEFT-WIDTH: 0px;BORDER-RIGHT-WIDTH: 0px;BORDER-COLLAPSE: collapse;" name="address" ng-model="entity.address" md-maxlength="60" ng-disabled="false">
+                        <div ng-messages="entityForm.address.$error">
+                            <div ng-message="required">必填项目</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div class="detail-label" ng-if="data.group1==0" id="need-address">
+                    <span> <i class="icon founder-icon"><img src="/static/svg/Location.svg"></i></span>
+                    <md-input-container class="address" flex="">
+                        <label style="width:15rem;color:white;">请在这里填写您对活动场地的要求</label>
+                        <input required minlength="1" id='address_assign' type='text' style="color:white;border:2px solid;color:white;BORDER-TOP-WIDTH: 0px;BORDER-LEFT-WIDTH: 0px;BORDER-RIGHT-WIDTH: 0px;BORDER-COLLAPSE: collapse;" name="address_assign" ng-model="entity.address_assign" max="200">
+                        <div ng-messages="entityForm.address_assign.$error">
+                            <div ng-message="required">必填项目</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div class="detail-label">
+                    <span> <i class="member-icon"><img src="/static/svg/Location.svg"></i></span>
+                    <md-input-container class="member" flex="">
+                        <label style="width:15rem;color:white;">请在这里填写活动期望的人数{{entity.ideal_number}}</label>
+                        <input id="member-input" class="member-input" required style="color:white;border:2px solid;color:white;BORDER-TOP-WIDTH: 0px;BORDER-LEFT-WIDTH: 0px;BORDER-RIGHT-WIDTH: 0px;BORDER-COLLAPSE: collapse;"  type="number" name="ideal_number" ng-model="entity.ideal_number" ng-value="{{entity.ideal_number}}" max="200" min="0">
+                        <div ng-messages="entityForm.ideal_number.$error">
+                            <div ng-message="max">人数超过限制</div>
+                        </div>
+                        <div ng-messages="entityForm.ideal_number.$error">
+                            <div ng-message="min">人数不能为负数</div>
+                        </div>
+                        <div class="member-text prompt" date-name="member-input">
+                            <span style="color:rgb(251,103,61);">
+                                <p class="title-text-title">怎样控制活动人数，使活动体验更好?</p><br/>
+                                <p>事实证明，一个经验再丰富的主持人也很难hold住超过10人的活动现场。我们鼓励10人左右的小型活动，保证每个人体验均等的同时，也促进参与者之间产生深度互动</p>
+                            </span>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div class="detail-label">
+                    <span> <i class="cost-img"><img src="/static/svg/Location.svg"></i></span>
+                    <md-input-container class="cost">
+                        <label style="width:15rem;color:white;">收费金额(0为免费)</label>
+                        <input id='fee' required minlength="1" style="color:white;border:2px solid;color:white;BORDER-TOP-WIDTH: 0px;BORDER-LEFT-WIDTH: 0px;BORDER-RIGHT-WIDTH: 0px;BORDER-COLLAPSE: collapse;" type="number" name="fee" ng-model="entity.cost" ng-value="{{entity.cost}}" min="0" />
+                        <div ng-messages="entityForm.fee.$error">
+                            <div ng-message="min">金额不能为负数</div>
+                        </div>
+                        <div ng-messages="entityForm.fee.$error">
+                            <div ng-message="required">必填项目</div>
+                        </div>
+                        <div class="cost-text prompt" date-name='fee'>
+                            <span style="color:rgb(251,103,61);">
+                                <p class="title-text-title"><b>一场活动应该收取多少费用合适?</b></p><br/>
+                                <p>首先Someet平台的原则是不鼓励商业性强或有过多盈利空间的活动。</p>
+                                <p>如果活动不收费填“免费”即可；</p>
+                                <p>若收费，建议您将活动费用控制在成本之内，我们认可每个发起人为活动贡献的价值，但我们也相信钱的多少不应该是决定用户是否参加活动的核心，平台的问答筛选系统可以更好的让 “合适的小伙伴聚在一起”。</p><br>
+                                <p class="title-text-title">怎样向用户描述我们的活动成本?</p><br>
+                                <p>如果活动费用为80元/人，您可以这样描述：80元/人，15元用于场地费低消，10元用于购买饮品成本，55元用于制作甜点的原料成本（包含淀粉，发酵粉，奶油，水果等等）</p>
+                            </span>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div class="detail-label">
+                    <span> <i class="pay-detail-icon"><img src="/static/svg/Location.svg"></i></span>
+                    <md-input-container class="pay-detail">
+                        <label style="width:15rem;color:white;">收费明细</label>
+                        <textarea style="color:white;border:2px solid;color:white;BORDER-TOP-WIDTH: 0px;BORDER-LEFT-WIDTH: 0px;BORDER-RIGHT-WIDTH: 0px;BORDER-COLLAPSE: collapse;" ng-model="entity.cost_list"></textarea>
+                    </md-input-container>
+                </div>
+                <div class="detail-label">
+                    <span style="font-size:1rem;"><i class="icon"><img ng-src="/static/svg/Flow.svg"></i>活动流程</span>
+                    <md-input-container>
+                    <div class="review-text prompt t_text">
+                        <span style="color:rgb(251,103,61);">
+                                <p class="title-text-title">一场活动应该怎样设计?</p><br/>
+                                <p>活动形式新颖、有趣、仪式感强，可以吸引到更多高质量用户。</p>
+                                <p>如何设计一场活动的流程呢？在活动进行中，保证流程紧凑、不冷场，参与者之间能有较深的交流和互动，让所有人都能在活动中有所收获。</p><br/>
+                                <p>以下是填写范例：</p><br/>
+                                <p>活动:当我们谈论“外表”时，我们在谈论什么</p>
+                                <p>1、集合之后，先来自我介绍或其他破冰环节（此环节为平台默认环节）；</p>
+                                <p>2、大家品尝某款酒后开始分享感受 / 大家一起从X出发，先前往XX / 我会先给大家分享一些这个领域的常识和注意事项</p>
+                                <p>3、...</p>
+                                <p>4、...</p>
+                                <p>5、活动愉快结束，各自勾搭，各回各家</p><br>
+                                <p class="title-text-title">活动开始前为什么要设置破冰环节?我该怎么做?</p><br/>
+                                <p>破冰是为了能够让活动参与者在活动刚开始前能够迅速消除陌生感，相互熟悉，从而有利于活动的整体体验。</p>
+                            </span>
+                        </div>
+                        <text-angular aria-label="ActivityFlow" name="review" style="font-size: 0.8rem;font-weight:normal;" required minlength="1" ng-click="text_click(3)" ng-model="entity.review">
+                           <p>1、</p>
+                           <p>2、</p>
+                           <p>3、</p>
+                           <p>4、</p>
+                           <p>...</p>
+                        </text-angular>
+                        <div ng-messages="entityForm.review.$error">
+                            <div ng-message="required">必填项目</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div class="detail-label">
+                    <span style="font-size:1rem;"> <i class="icon"><img src="/static/svg/Location.svg"></i><b>Tips</b></span>
+                </div>
+                    <p>1、Someet已上线「会员制」功能，拥有会员身份的小伙伴才可以享有活动报名资格。想要报名活动的小伙伴，可以在点击「报名活动」后，进行会员套餐的购买哟！</p><br/>
+                    <p>2、活动不允许空降，如果有同行的小伙伴请把活动分享给TA让TA自行报名哟；</p><br/>
+                    <p>3、活动若无法照常参加，请进入Someet服务平台（ID：SomeetInc）中的个人界面自行请假，否则将视为爽约（活动开始时间24小时以上请假将获一张黄牌，24小时内请假两张黄牌，临时爽约3张黄牌）；</p><br/>
+                    <p>4、用户报名收费活动并通过筛选后，于24小时内交费后可以看到活动群二维码，否则将被自动记录为请假，无法参加活动；由于活动名额是宝贵并且有限的，参与者的请假一定程度上会影响发起人以及其他小伙伴的活动体验，以及发起人的成本开支，甚至导致活动的无法进行，所以Someet官方设置以下机制：活动开始前提前一天请假，得到1张黄牌，仅退还您支付活动费用中的50%；活动开始前不足一天内请假得到2张黄牌，很遗憾，我们不退还您任何费用。</p><br/>
+                    <div class="tips-three" style='width:20px;'>
+                            <md-checkbox aria-label="Cbox" id='cbox' ng-model="ctrl.isDisabled" ng-click="updateStatus('cbox')"></md-checkbox>
+                           <!-- <input type="checkbox" id='cbox' name=""> -->
+
+                    </div><br/>
+                    <div class="tips-four">
+                                活动总人数限制约
+                                <input ng-click="text_click(4)"  ng-disabled="{{is_num}}" type="number" class="number-input" type="number" name="number" ng-model="entity.number" ng-value="{{entity.number}}" max="200" />人左右，Someet平台限制
+                                <input ng-click="text_click(4)" ng-disabled="{{is_num}}" class="number-input" type="number" name="self_number" ng-model="entity.self_number" ng-value="{{entity.self_number}}" max="200" />人左右，其他渠道限
+                                <input ng-click="text_click(4)" ng-disabled="{{is_num}}" class="number-input" type="number" name="other_number" ng-model="entity.other_number" ng-value="{{entity.other_number}}" max="200" />人左右;
+                            </div>
+                    <md-input-container>
+                      <div class="tips-text prompt t_text">
+                        <span style="color:rgb(251,103,61);">
+                            <p class="title-text-title">您还需要告诉用户什么?</p><br>
+                            <p>如果您的活动还在别的渠道发布，请您勾选第5项，并填写通过其他渠道报名的人数。</p><br/>
+                            <p>如果您的活动需要 户额外携带物品或者活动中需要特别注意什么事项，您可在左侧文本框内填写。</p><br>
+                            <p>以下是填写范例:</p><br>
+                            <p>例1、建议着休闲运动装，运动鞋，山里早晚温差大，备添加衣物，防晒霜，帽子。</p>
+                            <p>例2、准备方便爬山的鞋子，登山杖。 本次活动爬山约50分钟。</p>
+                            <p>例3、活动本身免费，但每人请带一份零食哦（3人分享量）。</p>
+                            <p>例4、请参加活动小伙伴们尽可能穿宽松的衣服。</p>
+                        </span>
+                    </div>
+                    <text-angular aria-label="Tips" ng-click="text_click(4)" ng-model="entity.field2"></text-angular>
+                </md-input-container>
+                <br>
+                <br>
+                <md-button class="founder-submit" ng-if="entity.status==5 || entity.status==3">保存</md-button>
+                <br>
+                <br>
+                <md-button class="founder-submit" ng-if="entity.status==5 || entity.status==3" ng-click="setQuestion(entity)">设置筛选问题</md-button>
+            </div>
+        </div>
+</div>
+<input type="hidden" class="input-large" ng-model="entity.start_time">
+<input type="hidden" class="input-large" ng-model="entity.end_time">
+<!-- 预览 -->
+<br/>
+<div class="">
+    <input type="hidden" ng-model="entity.id" />
+</div>
+</form>
+</div>
+<script type="text/ng-template" id="notpass.html">
+    <div class="modal-content">
+        <form ng-submit="reject(entity.activity_id,3,refuse_reason)">
+            <div class="modal-body">
+                <!-- 当没新建问题时 -->
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">请输入审核不通过原因</label><br/><br/>
+                    <input name="refuse_reason" type="text" class="form-control" id="recipient-name" ng-model="refuse_reason">
+                    <div ng-messages="refuse_reason.$error">
+                        <div ng-message="required" style="font-size: 0.6rem;color:red;">必填项目</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                <input class="btn btn-primary"  type="submit" ng-click="ok()" ng-disabled="entityForm.$invalid" value="保存"></input>
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/ng-template" id="question.html">
+        <div class="modal-content">
+            <form name="entityForm" ng-submit="questionSave()">
+            <div class="modal-header" >
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+                <h4 class="modal-title" id="exampleModalLabel">设置问题</h4>
+            </div>
+
+                <div class="modal-body">
+                    <!-- 更新问题时 -->
+                    <span style="color:rgb(251,103,61);font-size:0.7rem;">
+                        <p style="font-size: 1rem;color:red"><b>如何在活动中筛选出更符合你预期的参与者呢？</b></p><br/><b>合理设置筛选问题可以帮助您挑选出适合活动的参与者，并且能够侧面了解参与者参加活动的目的和需求。我们认为，同一场活动中的参与者是否契合，对活动主题的了解水平是否相近，会很大程度上影响活动体验。发起人可以设置2-3个问题让报名者回答，根据回答来最终决定活动参与者。<br/><br/>我们为您准备了2个问题，您可以根据自己的需要进行更改</b>
+                    </span><br/>
+                    <div class="form-group" ng-repeat="(k, questionItem) in entity.questionItemList">
+                        <label for="recipient-name" class="control-label">问题{{k+1}}</label>
+                        <input type="text" class="form-control" ng-model="questionItem.label" required>
+                    </div>
+
+                    <!-- 当没新建问题时 -->
+                    <div class="form-group" ng-if="!entity.id">
+                        <label for="recipient-name" class="control-label">问题一:</label>
+                        <input name="q1" type="text" class="form-control" id="recipient-name" required minlength="5" ng-model="questionItem.q1" placeholder="你对本次活动有什么期待?你为什么想参加这次活动?">
+                        <div ng-messages="entityForm.q1.$error">
+                            <div ng-message="required">必填项目</div>
+                            <div ng-message="minlength">问题文字不能少于5个字符</div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="!entity.id">
+                        <label for="recipient-name" class="control-label">问题二:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="q2" type="text" required minlength="5" ng-model="questionItem.q2" placeholder="与活动主题本身相关的问题(可参考下部范例)">
+                        <div ng-messages="entityForm.q2.$error">
+                            <div ng-message="required">必填项目</div>
+                            <div ng-message="minlength">问题文字不能少于5个字符</div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="!entity.id">
+                        <label for="recipient-name" class="control-label">问题三:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="q3" type="text" required minlength="5" ng-model="questionItem.q3">
+                        <div ng-messages="entityForm.q3.$error">
+                            <div ng-message="required">必填项目</div>
+                            <div ng-message="minlength">问题文字不能少于5个字符</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                    <input class="btn btn-primary" type="submit" ng-click="ok()" ng-disabled="entityForm.$invalid" value="保存"></input>
+                </div>
+
+            </form>
+
+        </div>
+
+    </script>

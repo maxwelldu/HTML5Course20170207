@@ -1,0 +1,22 @@
+<div layout="column" flex id="content">
+  <div class="container">
+    <table class="table">
+      <caption>活动的操作日志</caption>
+      <thead>
+      <tr>
+        <th>操作者</th>
+        <th>操作时间</th>
+        <th>操作内容</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="entity in list">
+        <td width="15%">{{entity.admin_name}}</td>
+        <td width="25%">{{entity.addtime*1000|date:'yyyy年M月d日 H点m分s秒'}}</td>
+        <td width="55%">{{entity.result}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

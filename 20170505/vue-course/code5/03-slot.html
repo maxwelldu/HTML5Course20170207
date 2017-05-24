@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>自定义组件</h2>
+			<custom>
+				<!-- 当写在自定义标签之间的内容 要混合子组件中的模板 -->
+				<div>我是html结构</div>
+			</custom>
+		</div>
+		<script>
+			//定制模板 div
+			Vue.component("custom",{
+				template:`
+					<div>
+						<slot>
+							<p>这是第1个提醒</p>
+							<p>这是第2个提醒</p>
+							<p>这是第3个提醒</p>
+						</slot>
+					</div>
+				`
+			})
+
+			new Vue({
+				el:"#app"
+			});
+		</script>
+	</body>
+</html>

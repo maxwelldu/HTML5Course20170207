@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div class="page-top">
+        <div class="page-content">
+            <h2>任务计划列表</h2>
+        </div>
+    </div>
+    <div class="main">
+        <h3 class="big-title">添加任务：</h3>
+        <input 
+            placeholder="例如：吃饭睡觉打豆豆；    提示：+回车即可添加任务" 
+            class="task-input" 
+            type="text"
+            v-model="todo"
+            v-on:keyup.13="addTodo"
+        />
+        <ul class="task-count" v-show="list.length">
+            <li>{{noCheckeLength}}个任务未完成</li>
+            <li class="action">
+                <a  href="#all" :class="{active:visibility === 'all'}">所有任务</a>
+                <a href="#unfinished" :class="{active:visibility === 'unfinished'}">未完成的任务</a>
+                <a href="#finished" :class="{active:visibility === 'finished'}">完成的任务</a>
+            </li>
+        </ul>
+        <h3 class="big-title">任务列表：</h3>
+        <div class="tasks">
+
+            <span class="no-task-tip" v-show="!list.length">还没有添加任何任务</span>
+            <ul class="todo-list">
+                <li class="todo" :class="{completed: item.isChecked,editing: item === edtorTodos}" v-for="item in filteredList" >
+                    <div class="view">
+                        <input class="toggle" type="checkbox" v-model="item.isChecked" />
+                        <label @dblclick="edtorTodo(item)">{{ item.title }}</label>
+                        <button class="destroy" @click="deleteTodo(item)"></button>
+                    </div>
+                    <input 
+                        v-foucs="edtorTodos === item" 
+                        class="edit" 
+                        type="text" 
+                        v-model = "item.title"
+                        @blur="edtorTodoed(item)"
+                        @keyup.13="edtorTodoed(item)"
+                        @keyup.esc="cancelTodo(item)"
+                    />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>

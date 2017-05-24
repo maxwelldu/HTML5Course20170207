@@ -1,0 +1,92 @@
+<style type="text/css" media="screen">
+    .panel-success {
+        background-color: red;
+    }
+</style>
+<div class="container">
+<div ng-cloak>
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="大班表单审核">
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="actForm">
+                <div class="form-group">
+                  <!-- <label class="col-xs-6">🔍可以搜索：活动标题 活动id 订单号</label> -->
+                  <div class="controls col-xs-6">
+                   <!--  <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="checkTableParams.filter().search">
+                  </div> -->
+                </div>
+            </form>
+            <table ng-table="checkTableParams" style="font-size: 0.7rem;text-align:center;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="check in $data">
+                    <td data-title="'活动ID'" >{{check.id}}</td>
+                    <td data-title="'用户名'" >{{check.user.username}}</td>
+                    <td data-title="'活动标题'" >{{check.title}}</td>
+                    <td data-title="'副标题'" >{{check.desc}}</td>
+                    <td data-title="'审核'"><a href="#/founder/{{check.id}}" target="_blank">查看详情</a></td>
+                </tr>
+            </table>
+        </md-content>
+      </md-tab>
+
+      <md-tab label="小班表单审核">
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="nameForm">
+                <div class="form-group">
+                  <div class="col-xs-6"></div>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="🔍 搜索用户昵称/ID" ng-model="applyTableParams.filter().search">
+                  </div>
+                </div>
+              </form>
+              <br/>
+          <table ng-table="applyTableParams" style="font-size: 0.7rem;text-align: center;" class="table table-condensed table-bordered table-striped">
+                <tr ng-repeat="apply in $data">
+                    <td data-title="'表单ID'" >{{apply.id}}</td>
+                    <td data-title="'用户ID'" >{{apply.user_id}}</td>
+                    <td data-title="'用户名'" >{{apply.username}}</td>
+                    <td data-title="'申请时间'" >{{apply.created_at}}</td>
+                    <td data-title="'职业'" >{{apply.profile.occupation}}</td>
+                    <td data-title="'审核状态'">{{apply.status}}</td>
+                    <td data-title="'对接小海豹'"><button class="btn-xs btn-success btn-float-right" ng-click="setdts(apply)" type="button">选{{dtsName}}</button>
+                      <ul ng-switch="apply.assign_dts">
+                              <li ng-switch-when="1">XiuXiu</li>
+                              <li ng-switch-when="2">MiuMiu</li>
+                              <li ng-switch-when="3">PiuPiu</li>
+                              <li ng-switch-when="4">DiuDiu</li>
+                              <li ng-switch-when="5">PuPu</li>
+                              <li ng-switch-when="6">JoJo</li>
+                              <li ng-switch-when="7">HaHa</li>
+                              <li ng-switch-default="">🈚</li>
+                          </ul>
+                      </td>
+                    <td data-title="'操作'"><a href="#/check/apply/{{apply.id}}" target="_blank">查看详情</a></td>
+                </tr>
+            </table>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
+</div>
+<script type="text/ng-template" id="selectdts.html">
+        <form ng-submit="changeApplyDts(checkData.id,state)">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">请点卯 小海豹</label><br/><br/>
+                    <label><input type="radio" ng-value=1 ng-model="state" name="selectState"> XiuXiu </label>
+                    <label><input type="radio" ng-value=2 ng-model="state" name="selectState"> MiuMiu </label>
+                    <label><input type="radio" ng-value=3 ng-model="state" name="selectState"> PiuPiu </label>
+                    <label><input type="radio" ng-value=4 ng-model="state" name="selectState"> DiuDiu </label>
+                    <label><input type="radio" ng-value=5 ng-model="state" name="selectState"> PuPu </label>
+                    <label><input type="radio" ng-value=6 ng-model="state" name="selectState"> JoJo </label>
+                    <label><input type="radio" ng-value=7 ng-model="state" name="selectState"> HaHa </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                <input class="btn btn-primary" type="submit" ng-click="ok()" value="确定"></input>
+            </div>
+        </form>
+    <!-- </div> -->
+</script>

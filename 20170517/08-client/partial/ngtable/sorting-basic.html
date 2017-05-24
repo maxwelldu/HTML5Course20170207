@@ -1,0 +1,129 @@
+<div ng-app="myApp" class="container-fluid">
+  <script type="text/ng-template" id="columnsSorter.html">
+    <ul class="list-group">
+      <li class="list-group-item form-inline" ng-repeat="col in dctrl.columns">
+        <label class="checkbox-inline">
+          <input type="checkbox" ng-checked="dctrl.params.isSortBy(col.field)" ng-disabled="!col.sortable" ng-click="dctrl.applySort(dctrl.columns, dctrl.params, col)" /> {{col.title}}
+        </label>
+        <div class=pull-right>
+          <label class="radio-inline">
+            <input type="radio" value="asc" ng-disabled="!col.sortable" ng-model="dctrl.currentSorting[col.field]"> Asc
+          </label>
+          <label class="radio-inline">
+            <input type="radio" value="desc" ng-disabled="!col.sortable" ng-model="dctrl.currentSorting[col.field]"> Desc
+          </label>
+        </div>
+      </li>
+    </ul>
+  </script>
+  <div class="row">
+    <h2 class="page-header">Change sort order programmatically</h2>
+    <div class="col-md-12">
+      <div class="bs-callout bs-callout-info">
+        <h4>Overview</h4>
+        <p>The current column sort order can be changed programatically using the <code>NgTableParams</code> API</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6" ng-controller="demoNgTableController as demo">
+      <h3>ngTable directive
+        <button class="btn btn-primary btn-sm pull-right"
+                ng-disabled="!demo.tableParams.orderBy().length"
+                ng-click="demo.tableParams.sorting({})">
+          <span class="glyphicon glyphicon-remove"></span>
+          Clear sorting
+        </button>
+      </h3>
+      <accordion close-others="true" ng-init="isBasicOpen = true;">
+        <accordion-group is-open="isBasicOpen">
+          <accordion-heading>
+            Basic example <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isBasicOpen, 'glyphicon-chevron-right': !isBasicOpen}"></i>
+          </accordion-heading>
+          <form class="form-inline" name="demo.newSortForm" novalidate>
+            <div class="form-group">
+              <label for="pageBinding">Select sort:</label>
+              <select class="form-control" ng-model="demo.newSort" ng-options="col.field as col.field for col in demo.cols" name="newSort">
+                <option stype="display: none" value="" />
+              </select>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="demo.isSortDesc" name="isSortDesc"> Desc
+              </label>
+            </div>
+            <button class="btn btn-default" ng-click="demo.applySelectedSort()" ng-disabled="demo.newSortForm.$pristine">Apply</button>
+          </form>
+        </accordion-group>
+        <accordion-group is-open="isAdvancedOpen">
+          <accordion-heading>
+            Advanced example <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isAdvancedOpen, 'glyphicon-chevron-right': !isAdvancedOpen}"></i>
+          </accordion-heading>
+          <demo-columns-sorter params="demo.tableParams" columns="demo.cols"></demo-columns-sorter>
+        </accordion-group>
+      </accordion>
+      <table ng-table="demo.tableParams" class="table table-condensed table-bordered table-striped">
+        <colgroup>
+          <col width="33%" />
+          <col width="33%" />
+          <col width="33%" />
+        </colgroup>
+        <tr ng-repeat="row in $data">
+          <td data-title="'Name'" sortable="demo.sortables.name.sortable">{{row.name}}</td>
+          <td data-title="'Age'" sortable="demo.sortables.age.sortable">{{row.age}}</td>
+          <td data-title="'Money'" sortable="demo.sortables.money.sortable">{{row.money}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-md-6" ng-controller="demoNgTableDynamicController as demo">
+      <h3>ngTableDynamic directive
+        <button class="btn btn-primary btn-sm pull-right"
+                ng-disabled="!demo.tableParams.orderBy().length"
+                ng-click="demo.tableParams.sorting({})">
+                <span class="glyphicon glyphicon-remove"></span>
+          Clear sorting
+        </button>
+      </h3>
+      <accordion close-others="true" ng-init="isBasicOpen = true;">
+        <accordion-group is-open="isBasicOpen">
+          <accordion-heading>
+            Basic example <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isBasicOpen, 'glyphicon-chevron-right': !isBasicOpen}"></i>
+          </accordion-heading>
+          <form class="form-inline" name="demo.newSortForm" novalidate>
+            <div class="form-group">
+              <label for="pageBinding">Select sort:</label>
+              <select class="form-control" ng-model="demo.newSort" ng-options="col.field as col.field for col in demo.cols" name="newSort">
+                <option stype="display: none" value="" />
+              </select>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="demo.isSortDesc" name="isSortDesc"> Desc
+              </label>
+            </div>
+            <button class="btn btn-default" ng-click="demo.applySelectedSort()" ng-disabled="demo.newSortForm.$pristine">Apply</button>
+          </form>
+        </accordion-group>
+        <accordion-group is-open="isAdvancedOpen">
+          <accordion-heading>
+            Advanced example <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isAdvancedOpen, 'glyphicon-chevron-right': !isAdvancedOpen}"></i>
+          </accordion-heading>
+          <demo-columns-sorter params="demo.tableParams" columns="demo.cols"></demo-columns-sorter>
+        </accordion-group>
+      </accordion>
+      <table ng-table-dynamic="demo.tableParams with demo.cols" class="table table-condensed table-bordered table-striped">
+        <colgroup>
+          <col width="33%" />
+          <col width="33%" />
+          <col width="33%" />
+        </colgroup>
+        <tr ng-repeat="row in $data">
+          <td ng-repeat="col in $columns">{{row[col.field]}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
+</div>

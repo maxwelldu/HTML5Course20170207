@@ -1,0 +1,37 @@
+<div class="container" layout="column" flex id="content">
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation"><a href="#/group-up/index">组局</a></li>
+    <li role="presentation" class="active"><a href="#/group-up/check">组局审核</a></li>
+    <li role="presentation"><a href="#/group-type/index">组局分类</a></li>
+</ul>
+<div ng-cloak>
+
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="actForm">
+                <div class="form-group">
+                  <label class="col-xs-6">🔍可以搜索：组局标题 组局ID 订单号</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="wishTableParams.filter().search">
+                  </div>
+                </div>
+            </form>
+            <table ng-table="wishTableParams" style="font-size: 0.7rem;text-align: center;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="item in $data">
+                    <td data-title="'组局ID'" >{{item.id}}</td>
+                    <td data-title="'用户ID'" >{{item.user.id}}</td>
+                    <td data-title="'用户名'" >{{item.user.username}}</td>
+                    <td data-title="'提交时间'" >{{item.created_at}}</td>
+                    <td data-title="'组局标题'" >{{item.title}}</td>
+                    <td data-title="'审核状态'" >
+                        <span ng-if="item.status == 8">
+                            待审核
+                        </span>
+                    </td>
+                    <td data-title="'操作'">
+                        <a ng-if='item.status=="8"' class="btn btn-success btn-sm" href="#/group-up/check/{{item.id}}">查看详情</a>
+                    </td>
+                </tr>
+            </table>
+        </md-content>
+</div>
+</div>

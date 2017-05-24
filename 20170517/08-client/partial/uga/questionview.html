@@ -1,0 +1,11 @@
+<div layout="column" flex id="content">
+  <form name="entityForm" ng-submit="save()" novalidate>
+    <md-input-container>
+      <label>问题内容</label>
+      <input type="text" ng-model="entity.content" required>
+    </md-input-container>
+    <div layout="row">
+      <md-button class="md-raised md-primary" ng-disabled="entityForm.$invalid">保存</md-button>
+    </div>
+  </form>
+</div>

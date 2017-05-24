@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./SoundJS-master/lib/soundjs-0.6.2.min.js"></script>
+</head>
+<body>
+<div>
+    <h1 id="status">startUp</h1>
+</div>
+<script>
+    var displayStatus = document.getElementById("status");
+    var src = "song.ogg";
+    createjs.Sound.alternateExtensions = ["ogg"];
+    createjs.Sound.addEventListener("fileload", playSound);
+    createjs.Sound.registerSound(src);
+
+    displayStatus.innerHTML = "Waiting for load to complete";
+
+    function playSound(event){
+        soundInstance = createjs.Sound.play(event.src);
+        displayStatus.innerHTML = "Playing source:" + event.src;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "learn-yarn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "angularjs": "^0.0.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "vue": "^2.3.3"
+  }
+}

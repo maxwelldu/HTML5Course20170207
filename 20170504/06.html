@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    div{
+      width:200px;
+      height:200px;
+      border:1px solid gold;
+    }
+    .home{background: red; }
+    .posts{background:skyblue;}
+    .archive{background:lightgreen;}
+  </style>
+</head>
+<body>
+<div id="app">
+  <a href="#" @click="jump('home')">首页</a> |
+  <a href="#" @click="jump('posts')">文章</a> |
+  <a href="#" @click="jump('archive')">归档</a> 
+  <keep-alive>
+  <component :is="currentView">
+  <!-- 组件在 vm.currentview 变化时改变！ -->
+  </component>
+  </keep-alive>
+</div>
+  <script>
+    var home = {
+      template: '<div class="home">this is home page</div>'
+    };
+    var posts = {
+      template: '<div class="posts">this is posts page</div>'
+    };
+    var archive = {
+      template: '<div class="archive">this is a archive page</div>'
+    }
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        currentView: 'home'
+      },
+      methods: {
+        jump: function(view) {
+          this.currentView = view
+        }
+      },
+      components: {
+        home: home,
+        posts: posts,
+        archive: archive
+      }
+    })
+  </script>
+</body>
+</html>

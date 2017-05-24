@@ -1,0 +1,31 @@
+<div class="container">
+  <!-- <div ng-include="'/partial/exchange/nav.html'"></div> -->
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" ><a href="#/exchange">激活码列表</a></li>
+    <li role="presentation"><a href="#/exchange/create">创建激活码</a></li>
+    <li role="presentation" class="active"> 用户详细信息</li>
+  </ul>
+
+<div ng-cloak>
+    <md-content class="md-padding">
+        <form class="form-horizontal" name="actForm">
+            <div class="form-group">
+              <label class="col-xs-6">🔍可以搜索： 序号 用户id 用户名字 兑换码</label>
+              <div class="controls col-xs-6">
+                <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="exchangeuserTableParams.filter().search">
+              </div>
+            </div>
+        </form>
+        <table ng-table="exchangeuserTableParams" style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+            <tr ng-repeat="exchangeuser in $data">
+                <td data-title="'序号'" >{{exchangeuser.id}}</td>
+                <td data-title="'用户id'" >{{exchangeuser.user_id}}</td>
+                <td data-title="'用户名'" >{{exchangeuser.username}}</td>
+                <td data-title="'兑换码'" >{{exchangeuser.cdkey}}</td>
+                <td data-title="'兑换时间'" >{{exchangeuser.creatd_at}}</td>
+                <td data-title="'兑换状态'" >{{exchangeuser.status}}</td>
+            </tr>
+        </table>
+    </md-content>
+</div>
+</div>

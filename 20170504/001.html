@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html> <head> <meta charset="utf-8"> <title></title> <script type="text/javascript" src="vue.js"> </script> </head>
+  <body>
+  <div id="counter-event-example">
+    <my-component v-on:click.native="doTheThing">
+ {{world}}   <!--  访问不了子组件里面的world -->
+    </my-component>
+  </div>
+  <script type="text/javascript">
+    Vue.component('my-component', {
+      template: "<span>span</span>",
+      data:{world:'hi'}
+    })
+    new Vue({
+      el: '#counter-event-example',
+      data:{message:'hello'},
+      methods: {
+        doTheThing: function(){
+          console.log("do the thing");
+        }
+      }
+    })
+  </script>
+  </body>
+</html>

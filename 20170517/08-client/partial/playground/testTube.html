@@ -1,0 +1,112 @@
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation"><a href="#/playground/index">活动</a></li>
+    <li role="presentation" class="active"><a href="#/playground/test-tube">试管</a></li>
+    <li role="presentation"><a href="#/playground/over-view">总览</a></li>
+</ul>
+<div ng-cloak>
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="愿望试管">
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="actForm">
+                <div class="form-group">
+                  <label class="col-xs-6">🔍可以搜索：活动标题 活动id 订单号</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="wishTableParams.filter().search">
+                  </div>
+                </div>
+            </form>
+            <table ng-table="wishTableParams" style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="wish in $data">
+                    <td data-title="'ID'" >{{wish.id}}</td>
+                    <td data-title="'状态'" >{{wish.status}}</td>
+                    <td data-title="'操作'">
+                        <a ng-if='wish.status=="已投放"' class="btn btn-success btn-sm" ng-click="updateStatus(wish.id,40)" target="_blank">取走</a>
+                        <a ng-if='wish.status=="已投放"' class="btn btn-success btn-sm" ng-click="updateStatus(wish.id,50)" target="_blank">下架</a>
+                        <a  ng-if='wish.status=="已领取"' class="btn btn-warning btn-sm" ng-click="updateStatus(wish.id,20)" target="_blank">放回</a>
+                    </td>
+                </tr>
+            </table>
+        </md-content>
+    </md-tab>
+
+    </md-tab>
+
+    <md-tab label="话题试管">
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="actForm">
+                <div class="form-group">
+                  <label class="col-xs-6">🔍可以搜索：活动标题 活动id 订单号</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="tellTableParams.filter().search">
+                  </div>
+                </div>
+            </form>
+            <table ng-table="tellTableParams" style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="tell in $data">
+                    <td data-title="'ID'" >{{tell.id}}</td>
+                    <td data-title="'状态'" >{{tell.status}}</td>
+                    <td data-title="'操作'">
+                        <a ng-if='tell.status=="已投放"' class="btn btn-success btn-sm" ng-click="updateStatus(tell.id,40)" target="_blank">取走</a>
+                        <a ng-if='tell.status=="已投放"' class="btn btn-success btn-sm" ng-click="updateStatus(tell.id,50)" target="_blank">下架</a>
+                        <a  ng-if='tell.status=="已领取"' class="btn btn-warning btn-sm" ng-click="updateStatus(tell.id,20)" target="_blank">放回</a>
+                    </td>
+                </tr>
+            </table>
+        </md-content>
+    </md-tab>
+
+     <md-tab label="组队试管">
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="actForm">
+                <div class="form-group">
+                  <label class="col-xs-6">🔍可以搜索：活动标题 活动id 订单号</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="teamTableParams.filter().search">
+                  </div>
+                </div>
+            </form>
+            <table ng-table="teamTableParams" style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="team in $data">
+                    <td data-title="'ID'" >{{team.id}}</td>
+                    <td data-title="'状态'" >{{team.status}}</td>
+                    <td data-title="'操作'">
+                        <a ng-if='team.status=="已投放"' class="btn btn-success btn-sm" ng-click="updateStatus(team.id,40)" target="_blank">取走</a>
+                        <a ng-if='team.status=="已投放"' class="btn btn-success btn-sm" ng-click="updateStatus(team.id,50)" target="_blank">下架</a>
+                        <a  ng-if='team.status=="已领取"' class="btn btn-warning btn-sm" ng-click="updateStatus(team.id,20)" target="_blank">放回</a>
+                    </td>
+                </tr>
+            </table>
+        </md-content>
+    </md-tab>
+
+    <md-tab label="一日情侣试管">
+        <md-content class="md-padding">
+            <form class="form-horizontal" name="actForm">
+                <div class="form-group">
+                  <label class="col-xs-6">🔍可以搜索：活动标题 活动id 订单号</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="请搜索内容🔍" ng-model="oneTableParams.filter().search">
+                  </div>
+                </div>
+            </form>
+            <table ng-table="oneTableParams" style="font-size: 0.7rem;" class="table table-condensed table-bordered table-striped" >
+                <tr ng-repeat="one in $data">
+                    <td data-title="'ID'" >{{one.id}}</td>
+                    <td data-title="'状态'" >{{one.status}}</td>
+                    <td data-title="'操作'">
+                        <a ng-if='one.status=="已投放"' class="btn btn-success btn-sm" ng-click="updateStatus(one.id,40)" target="_blank">取走</a>
+                        <a ng-if='one.status=="已投放"' class="btn btn-success btn-sm" ng-click="updateStatus(one.id,50)" target="_blank">下架</a>
+                        <a  ng-if='one.status=="已领取"' class="btn btn-warning btn-sm" ng-click="updateStatus(one.id,20)" target="_blank">放回</a>
+                    </td>
+                </tr>
+            </table>
+        </md-content>
+    </md-tab>
+
+        </md-tab>
+
+    </md-tabs>
+  </md-content>
+</div>
+</div>

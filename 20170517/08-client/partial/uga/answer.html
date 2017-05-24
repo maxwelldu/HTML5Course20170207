@@ -1,0 +1,73 @@
+<div layout="column" flex id="content" class="container" style="font-size:18px;">
+    <div class="page-header" layout-align='right'>
+        <div class="row">
+            <div class="col-md-4">
+                <h1>UGA问答 民间问题 </h1>
+            </div>
+            <div class="col-md-8 text-right">
+                <div class="btn-group text-right" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" ng-click="putOpen(list.question,1)">放入公开库</button>
+                    <button type="button" class="btn btn-default" ng-click="putOpen(list.question,2)">移除公开库</button>
+                    <button type="button" class="btn btn-default" ng-click="questionDelete(list.question,1)">还原</button>
+                    <button type="button" class="btn btn-default" ng-click="questionDelete(list.question,0)">删除</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-8 text-right">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button ng-if="is_official == 0 || is_official == 1" type="button" class="btn btn-default btn-xs" ng-click="viewPublic(1)">只看公众库</button>
+                    <button type="button" class="btn btn-default btn-xs" ng-click="order('created_at')">按时间排序</button>
+                    <button type="button" class="btn btn-default btn-xs" ng-click="order('praise')">按赞排序</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-group">
+        <div class="list-group-item active">
+            <div class="row">
+                <div class="col-md-8">
+                    <del ng-if="list.question.status == 0"> #{{list.question.id}} {{list.question.content}} </del>
+                    <div ng-if="list.question.status == 1"> #{{list.question.id}} {{list.question.content}} </div>
+                </div>
+                <div class="col-md-2">
+                    回答{{list.question.answer_num}}
+                </div>
+                <div class="col-md-2">
+                    点赞{{list.question.praise_num}}
+                </div>
+            </div>
+        </div>
+        <div ng-repeat="entity in list.answerLists">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img width="60" height="60" ng-src="{{entity.user.profile.headimgurl}}" alt=""> {{entity.user.username}}
+                    </div>
+                    <div class="col-md-6">
+                        <del ng-if="entity.status == 0"> {{entity.content}} </del>
+                        <span ng-if="entity.status == 1">  {{entity.content}} </span>
+                    </div>
+                    <div class="col-md-1">
+                        {{entity.praise}}
+                    </div>
+                    <div class="col-md-2">
+                        <div class="btn-group text-right" role="group" aria-label="...">
+                            <button type="button" ng-if="entity.status == 0" class="btn btn-default" ng-click="delete(entity,1)">还原</button>
+                            <button type="button" ng-if="entity.status == 1"  class="btn btn-default" ng-click="delete(entity,0)">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="modelPagination" class="someet-pagination user-pagination">
+            <pagination total-items="modelPagination.totalItems" ng-model="modelPagination.currentPage" ng-change="modelPagination.pageChange()" items-per-page="modelPagination.itemsPerPage" max-size="modelPagination.maxSize" class="pagination-sm" boundary-links="false" rotate="false">
+                <a href="javascript:void(0)" ng-click="modelPagination.currentPage=1;changePage(1)">首页</a>
+                <a href="javascript:void(0);" ng-click="prev()">上一页</a>
+                <a href="javascript:void(0);" ng-click="changePage(page)" ng-repeat="page in pages">{{ page }}</a>
+                <a href="javascript:void(0);" ng-click="next()">下一页</a>
+                <a href="javascript:void(0)" ng-click="modelPagination.currentPage=modelPagination.totalItems;changePage(modelPagination.totalItems)">末页</a>
+            </pagination>
+        </div>
+    </div>
+</div>

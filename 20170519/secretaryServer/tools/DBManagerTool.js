@@ -1,0 +1,123 @@
+/**
+ * Created by liuyujing on 2017/4/7.
+ * 具体 执行  sql语句的方法 （直接操作数据库）
+ */
+ var md5 = require('md5');
+
+//引入数据库操作的类
+var DBManger = require("./DBManager");
+
+//配置数据库的信息
+var dbConfig = {
+    host:"localhost",
+    user:"root",
+    password:"",
+    port: "3306",
+    database:"mysecretary"
+};
+
+//创建数据库操作的对象  并连接 数据库
+var dbManager = new DBManger(dbConfig);
+
+var DBManagerTool = {};
+
+//------------用户相关-------------
+//添加用户 -> 注册的api中 调用 添加用户
+/**
+* userInfo : {username:"",password:"",phone:""}
+*/
+DBManagerTool.addUser = function (userInfo) {
+    //具体是什么操作  sql语句决定
+    //sql -> 添加用户
+    var sql = "INSERT INTO `user` (`username`, `password`, `phone`, `uuid`) VALUES ('"+userInfo.username+"','"+md5(userInfo.password)+"','"+userInfo.phone+"','"+userInfo.uuid+"')";
+    console.log(sql);
+    //可以通过  dbManager对象  直接调用opretation操作数据库
+    return dbManager.opretation(sql);
+};
+
+/*
+* searchUser 查询用户
+* message 查询的内容 {phone:"111",username:"111"}
+* 可以只传一个参数
+* */
+DBManagerTool.searchUser = function (message) {
+    var phone = message.phone || "";
+    var name = message.username || "";
+    var sql = "SELECT * FROM `user` WHERE `phone` = '"+phone+"' OR `username`='"+name+"'";
+    return dbManager.opretation(sql);
+};
+/*
+* 搜索用户
+* info
+* phone username
+* */
+DBManagerTool.searchAllUsers = function (info) {
+    //phone LIKE 1 OR username LIKE '234'
+    // var params = [];
+    //
+    // for (key in info){
+    //     params.push(key+" LIKE "+info[key]);
+    // }
+
+    //LIKE
+    //"SELECT * FROM `user` WHERE user_id NOT 8 AND username LIKE "+info
+    var sql = "SELECT * FROM `user` WHERE username LIKE '%"+info+"%'";
+    console.log(sql);
+    return dbManager.opretation(sql);
+};
+
+//------------录入相关-------------
+DBManagerTool.addRecoder = function (info) {
+    // console.log(info);
+    info.user_id = parseInt(info.user_id);
+    var isPublic = info['public[isPublic]'] || 0;
+    var statusNum = info['status[statusNum]'] || 0;
+    var lat = info['location[point][lat]'] || 0;
+    var lng = info['location[point][lng]'] || 0;
+  // +info.user_id+","+isPublic+",'"+info.title+"','"+info.des+"','"+info.alertTime+"',"+statusNum+","+lat+","+lng+",'"+info['location[address]']+"
+    var sql = "INSERT INTO `recoder`(`user_id`, `is_public`, `title`, `des`, `alert_time`, `status`, `lat`, `lng`, `address`) VALUES ("+info.user_id+","+isPublic+",'"+info.title+"','"+info.des+"','"+info.alertTime+"',"+statusNum+","+lat+","+lng+",'"+info['location[address]']+"');";
+    return dbManager.opretation(sql);
+};
+
+//删除是保存到 垃圾箱 不是从数据库删除
+//清空垃圾箱从数据库删除
+DBManagerTool.deleteRecoder = function (id) {
+    var sql = "UPDATE `recoder` SET  `is_remove`=1 WHERE `recoder_id`="+id;
+    return dbManager.opretation(sql);
+};
+/*
+* restoreRecoder 还原单条数据的 数据库操作方法
+* id 记录 的 id(recoder_id)
+* */
+DBManagerTool.restoreRecoder = function (id) {
+    var sql = "UPDATE `recoder` SET  `is_remove`=0 WHERE `recoder_id`="+id;
+    console.log(sql);
+    return dbManager.opretation(sql);
+};
+/*
+* searchRecoder:查询《记录》
+* isRemove 查询是否删除的记录 0未删除 1删除（查询显示在垃圾桶中的记录）
+* user_id 用户_id 区分是哪一个用户
+* */
+DBManagerTool.searchRecoder = function (isRemove,user_id) {
+    var sql = "SELECT * FROM `recoder` WHERE is_remove="+isRemove+" and user_id="+user_id;
+    return dbManager.opretation(sql);
+};
+DBManagerTool.updateRecoder = function (info) {
+    var sql = "";
+    return dbManager.opretation(sql);
+};
+/*
+* clearRecoder 从数据库 清空单条数据的方法
+* recoder_id 记录的id
+* */
+DBManagerTool.clearRecoder = function (recoder_id) {
+    var sql = "DELETE FROM `recoder` WHERE recoder_id="+recoder_id;
+    return dbManager.opretation(sql);
+};
+//清除垃圾箱内所有的数据
+DBManagerTool.clearAllOfTrash = function (user_id) {
+    var sql = "DELETE FROM `recoder` WHERE is_remove=1 AND user_id="+user_id;
+    return dbManager.opretation(sql);
+};
+module.exports = DBManagerTool;

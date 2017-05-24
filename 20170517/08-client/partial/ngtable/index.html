@@ -1,0 +1,133 @@
+<div  class="container-fluid" ng-controller="NgTableCtrl as demo">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="page-header">Change filter values programmatically</h2>
+      <div class="bs-callout bs-callout-info">
+        <h4>Overview</h4>
+        <p>The current filter valued supplied to the <code>getData</code> function can be changed programatically using the <code>NgTableParams</code> API</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <accordion close-others="true" ng-init="isGlobalFilterOpen = true;">
+        <accordion-group is-open="isGlobalFilterOpen">
+          <accordion-heading>
+            Global filter <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isGlobalFilterOpen, 'glyphicon-chevron-right': !isGlobalFilterOpen}"></i>
+          </accordion-heading>
+          <form name="demo.searchForm" novalidate ng-submit="demo.applyGlobalSearch()">
+            <div class="input-group">
+              <span class="input-group-addon">Except for...
+                <input type="checkbox" name="inverted" ng-model="demo.isInvertedSearch" />
+              </span>
+              <input type="text" class="form-control" placeholder="Search term" name="searchTerm" ng-model="demo.globalSearchTerm" required />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit" ng-disabled="demo.searchForm.$invalid">
+                  <span class="glyphicon glyphicon-search"></span>
+              </button>
+              </span>
+            </div>
+          </form>
+
+        </accordion-group>
+        <accordion-group is-open="isColFiltersOpen">
+          <accordion-heading>
+            Specific column filters <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isColFiltersOpen, 'glyphicon-chevron-right': !isColFiltersOpen}"></i>
+          </accordion-heading>
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <form class="form-horizontal" name="demo.nameForm">
+                <div class="form-group">
+                  <label class="col-xs-6">Name (data dound)</label>
+                  <div class="controls col-xs-6">
+                    <input type="text" class="form-control" placeholder="Name filter" ng-model="demo.tableParams.filter().order_no">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-6">Name (JS)</label>
+                  <div class="controls col-xs-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Name filter" ng-model="demo.newName" name="newName">
+                      <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" 
+                          ng-click="demo.changeFilter('name', demo.newName); demo.newName=null;  demo.nameForm.newName.$setPristine();" 
+                          ng-disabled="demo.nameForm.newName.$pristine">
+                    <span class="glyphicon glyphicon-play"></span>
+                      </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <form class="form-horizontal" name="demo.countryForm">
+                <div class="form-group">
+                  <label class="col-xs-6">Country (data dound)</label>
+                  <div class="controls col-xs-6">
+                    <select class="form-control" ng-model="demo.tableParams.filter().country" ng-options="c.id as c.title for c in demo.countries">
+                      <option style="display:none" value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-6">Country (JS)</label>
+                  <div class="controls col-xs-6">
+                    <div class="input-group">
+                      <select class="form-control" ng-model="demo.newCountry" ng-options="c.id as c.title for c in demo.countries" name="newCountry">
+                        <option style="display:none" value=""></option>
+                      </select>
+                      <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" 
+                          ng-click="demo.changeFilter('country', demo.newCountry); demo.newCountry='';  demo.countryForm.newCountry.$setPristine();" 
+                          ng-disabled="demo.countryForm.newCountry.$pristine">
+                    <span class="glyphicon glyphicon-play"></span>
+                      </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <form class="form-horizontal" name="demo.ageForm">
+                <div class="form-group">
+                  <label class="col-xs-6">Age (data dound)</label>
+                  <div class="controls col-xs-6">
+                    <input type="number" class="form-control" placeholder="Age filter" ng-model="demo.tableParams.filter().age">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-xs-6">Age (JS)</label>
+                  <div class="controls col-xs-6">
+                    <div class="input-group">
+                      <input type="number" class="form-control" placeholder="Age filter" ng-model="demo.newAge" name="newAge">
+                      <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" 
+                          ng-click="demo.changeFilter('age', demo.newAge); demo.newAge=null; demo.ageForm.newAge.$setPristine();" 
+                          ng-disabled="demo.ageForm.newAge.$pristine">
+                    <span class="glyphicon glyphicon-play"></span>
+                      </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary pull-right" ng-disabled="!demo.tableParams.hasFilter()" ng-click="demo.tableParams.filter({})">Clear filters</button>
+      <table ng-table="demo.tableParams" class="table table-condensed table-bordered table-striped">
+        <tr ng-repeat="row in $data track by row.id">
+          <td data-title="'Name'" filter="{ name: 'text' }">{{row.username}} (age: {{row.order_no}})</td>
+          <td data-title="'Country'" filter="{ country: 'select' }" filter-data="demo.countries">{{row.price}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

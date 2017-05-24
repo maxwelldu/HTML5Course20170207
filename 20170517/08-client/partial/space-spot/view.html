@@ -1,0 +1,275 @@
+
+<!-- 编辑活动内容页面 -->
+<div class="container" id="content">
+
+  <form name="entityForm" ng-submit="save()">
+    <div>
+      <md-input-container layout="row" class="btn-float-right">
+        <md-button class="md-raised md-primary" ng-disabled="entityForm.$invalid">保存</md-button>
+        <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <div class="col-md-7">
+        <input type="hidden" ng-model="entity.id" />
+        <md-input-container>
+          <md-select name="group" required ng-model="entity.type_id" placeholder="选择分类">
+            <md-option ng-value="opt.id" ng-repeat="opt in typeList">{{ opt.name }}</md-option>
+          </md-select>
+          <div ng-messages="entityForm.group.$error">
+            <div ng-message="required">必填项目</div>
+          </div>
+        </md-input-container>
+        <div layout="row">
+          <md-input-container flex="">
+            <label>场地名称</label>
+            <input name="name" type="text" md-maxlength="30" required minlength="1" ng-model="entity.name">
+            <div ng-messages="entityForm.name.$error">
+              <div ng-message="required">必填项目</div>
+              <div ng-message="minlength">场地名称不能少于1个字符</div>
+              <div ng-message="md-maxlength">场地名称不能超过30个字符</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        区间
+        <div layout="row" ng-value="section.id" ng-repeat="section in entity.sections">
+          {{section.name}}
+        </div>
+
+        <md-input-container flex="100">
+          <label>到达路线</label>
+          <textarea ng-model="entity.router"></textarea>
+        </md-input-container>
+        <div layout="row">
+          <div ng-file-select="onPicSelect($files)" data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload">
+            <md-button class="md-raised md-info">地图图片</md-button>
+          </div>
+          <p>
+            {{ selectPic.progress.p }}%
+          </p>
+          <img class="activity-photo" ng-src="{{map_pic}}">
+
+          <div ng-file-select="onImageSelect($files)" data-multiple="false" title="select file" onclick="this.value = null" class="btn btn-upload">
+            <md-button class="md-raised md-info">图片</md-button>
+          </div>
+          <p>
+            {{ selectImage.progress.p }}%
+          </p>
+          <img class="activity-photo" ng-src="{{image}}">
+        </div>
+        <div layout="row">
+          <md-input-container>
+            <label>地区(商圈)</label>
+            <textarea name="area" ng-model="entity.area" id="area" md-maxlength="6"></textarea>
+
+            <div ng-messages="entityForm.area.$error">
+              <div ng-message="md-maxlength">地区文字不能超过6个字符</div>
+            </div>
+          </md-input-container>
+          <md-input-container flex="">
+            <label>详细地址</label>
+            <textarea name="address" ng-model="entity.address" id="tipinput" md-maxlength="60"></textarea>
+            <div ng-messages="entityForm.address.$error">
+              <div ng-message="md-maxlength">详细地址文字不能超过60个字符</div>
+            </div>
+
+          </md-input-container>
+
+          <div id="container" style="left:100%;height: 50%;"></div>
+            <input type="hidden" name="longitude" ng-model="entity.longitude" id='lng'>
+            <input type="hidden" name="latitude" ng-model="entity.latitude" id='lat'>
+        </div>
+
+
+        <md-input-container>
+          <label>开放时间</label>
+          <input type="text" name="open_time" ng-model="entity.open_time" value="{{entity.open_time}}" min="0" />
+          <div ng-messages="entityForm.open_time.$error">
+            <div ng-message="min">什么时候可用</div>
+          </div>
+        </md-input-container>
+        <md-input-container flex="100">
+          <label>联系方式</label>
+          <textarea ng-model="entity.contact"></textarea>
+        </md-input-container>
+        <md-input-container>
+          <label>最低消费</label>
+          <textarea ng-model="entity.base_fee"></textarea>
+        </md-input-container>
+        <md-input-container>
+          <label>场地详情</label>
+          <text-angular ng-model="entity.detail"></text-angular>
+        </md-input-container>
+        <md-input-container layout="row" class="btn-float-right">
+          <md-button class="md-raised md-primary" ng-disabled="entityForm.$invalid">保存</md-button>
+          <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+        </md-input-container>
+      </div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+   var map = new AMap.Map("container", {
+       resizeEnable: true,
+       zoom:13
+   });
+   var markers=[];
+   //为地图注册click事件获取鼠标点击出的经纬度坐标
+   var clickEventListener = map.on('click', function(e) {
+       var t=document.getElementById('tipinput');
+       if(!t.value){
+         // var lnglat=[data.lnglat.lng, data.lnglat.lat]
+         marker = new AMap.Marker({
+             map:map,
+             position: [e.lnglat.getLng(),e.lnglat.getLat()]
+          });
+           map.remove(markers)
+          // map.remove(marker);
+          marker.setMap(null)
+          map.setZoomAndCenter(18, [e.lnglat.getLng(),e.lnglat.getLat()]);
+          marker.setMap(map);
+         geocoder(e.lnglat.getLng(),e.lnglat.getLat())
+       }else{
+         marker.setMap(null)
+         addMarker(18,e.lnglat.getLng(),e.lnglat.getLat());
+       }
+
+
+   });
+   var auto = new AMap.Autocomplete({
+       input: "tipinput"
+   });
+   AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+   function select(e) {
+       if (e.poi && e.poi.location) {
+           addMarker(18,e.poi.location.lng, e.poi.location.lat);
+       }
+   }
+   var lng=document.getElementById('lng').value;
+   var lat=document.getElementById('lat').value;
+   if(lng && lat){
+     addMarker(18,lng,lat)
+   }else{
+     //定位
+     map.plugin('AMap.Geolocation', function() {
+     geolocation = new AMap.Geolocation({
+        enableHighAccuracy: true,//是否使用高精度定位，默认:true
+        timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+        buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+        zoomToAccuracy: false,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+
+     });
+
+     geolocation.getCurrentPosition();
+     AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+     AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+     });
+
+   }
+
+function geocoder(lng,lat,tf) {
+ var geocoder = new AMap.Geocoder({
+     city: "010", //城市，默认：“全国”
+     radius: 1000 //范围，默认：500
+ });
+ //地理编码,返回地理编码结果
+ geocoder.getAddress([lng,lat], function(status, result) {
+     if (status === 'complete' && result.info === 'OK') {
+         var address = result.regeocode.formattedAddress; //返回地址描述
+         if ( angular.isDefined(result.regeocode.addressComponent.businessAreas[0]) && result.regeocode.addressComponent.businessAreas[0].hasOwnProperty('name') ) {
+           var newarea =result.regeocode.addressComponent.businessAreas[0].name
+           document.getElementById("area").value =newarea           
+         }else{
+           document.getElementById("area").value =''
+         }
+         map.setZoomAndCenter(18, [lng, lat]);
+         document.getElementById("tipinput").value = address;
+         document.getElementById('lng').value=lng;
+         document.getElementById('lat').value=lat;
+
+     }
+ });
+   }
+//解析定位结果
+function onComplete(data) {
+  var lng=document.getElementById('lng').value;
+  var lat=document.getElementById('lat').value;
+  var address = document.getElementById("area").value
+  if(address && !lng){
+    geocoder.getLocation(address, function(status, result) {
+         if (status === 'complete' && result.info === 'OK') {
+
+             var geocode = data.geocodes;
+             lng = geocode[i].location.getLng()
+             lat =geocode[i].location.getLat()
+         }else{
+           console.log('error')
+         }
+     });
+  }
+  if(lng || lat){
+   addMarker(18,lng,lat)
+  }else{
+   addMarker(14,data.position.getLng(),data.position.getLat())
+  }
+}
+//解析定位错误信息
+function onError(data) {
+  document.getElementById('tipinput').innerHTML = '定位失败';
+}
+function addMarker(zm,lng,lat){
+if(!zm) zm = 14;
+marker = new AMap.Marker({
+   draggable: true,
+   cursor: 'move',
+   raiseOnDrag: true,
+   icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+   position: [lng, lat]
+  });
+
+  map.remove(marker);
+  marker.setMap(null)
+  markers.push(marker)
+  map.setZoomAndCenter(zm, [lng, lat]);
+  AMap.event.addListener(marker,'dragend',onDragend);
+  marker.setMap(map);
+  document.getElementById('lng').value=lng;
+  document.getElementById('lat').value=lat;
+  var lnglatXY = [lng, lat]; //已知点坐标
+  var geocoder = new AMap.Geocoder({
+      radius: 1000,
+      extensions: "all"
+  });
+  geocoder.getAddress(lnglatXY, function(status, result) {
+      if (status === 'complete' && result.info === 'OK') {
+        var address = result.regeocode.formattedAddress; //返回地址描述
+        var area =document.getElementById("area").value;
+        if ( angular.isDefined(result.regeocode.addressComponent.businessAreas[0]) && result.regeocode.addressComponent.businessAreas[0].hasOwnProperty('name') ) {
+           var newarea =result.regeocode.addressComponent.businessAreas[0].name
+           document.getElementById("area").value =newarea           
+         }else{
+           document.getElementById("area").value =''
+         }
+      }
+  });
+}
+
+function onDragend(data){
+var t=document.getElementById('tipinput');
+map.setZoomAndCenter(18, [data.lnglat.lng, data.lnglat.lat]);
+if(!t.value){
+ geocoder(data.lnglat.lng, data.lnglat.lat,true)
+}
+
+document.getElementById('lng').value=data.lnglat.lng;
+document.getElementById('lat').value=data.lnglat.lat;
+}
+
+function recordMyposition(){
+var lng=document.getElementById('lng').value
+var lat=document.getElementById('lat').value
+addMarker(18,lng,lat);
+}
+
+</script>

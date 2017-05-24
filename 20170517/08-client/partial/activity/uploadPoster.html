@@ -1,0 +1,33 @@
+<form style="background-color: #EEE;">
+    <div class="modal-header" style="height: 45px;">
+        <div class="col-md-10">
+            <h4 class="modal-title">
+                <span class="glyphicon glyphicon-picture"></span>
+                裁剪活动海报
+            </h4>
+        </div>
+        <div class="col-md-2 right">
+            <a class="close" href data-ng-click="$dismiss()">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </div>
+    </div>
+    <div class="modal-body">
+        <ui-cropper style="width: 100%;height: 400px;" image="myImage" result-image="myCroppedImage" area-type="rectangle" aspect-ratio="1.75824176" result-image-size="{w:800,h:455}"></ui-cropper>
+        <div>裁剪后：</div>
+        <div style="width: 100%;text-align: center;">
+            <img style="width: 400px;" ng-src="{{myCroppedImage}}" />        
+        </div>
+    </div>
+    <div class="modal-footer center clearfix">
+        <button data-ng-click="$dismiss()" type="button" class="btn btn-default pull-left">取消</button>
+         <button class="btn btn-primary pull-left" ng-file-select="onSelect($files)" data-multiple="false" title="select file" onclick="this.value = null">
+             <span class="glyphicon glyphicon-picture mR5"></span>
+             重选图片
+         </button>
+        <button class="btn btn-primary pull-right" type="button" ng-click="uploadFile()">
+             确认
+         </button>
+    </div>
+    
+</form>

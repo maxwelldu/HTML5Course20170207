@@ -1,0 +1,84 @@
+<!-- 场地列表页面 -->
+<div class="container">
+    <button type="button" class="btn btn-success btn-lg" ng-click="createPage()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新建场地
+    </button>
+    <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="name" placeholder="名称">
+        </div>
+        <button type="submit" class="btn btn-default" ng-click='getSpace()'>
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜索
+        </button>
+    </form>
+</div>
+<!-- 场地分类tab -->
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li ng-class="{active:isActive('0')}">
+            <a href="#/space-spot/list/0">全部</a>
+        </li>
+        <li ng-class="{active:isActive(entity.id)}" ng-repeat="entity in typeList | orderBy: display_order ">
+            <a href="#/space-spot/list/{{entity.id}}">{{entity.name}}</a>
+        </li>
+        <li>
+            <a ng-if="!showAddForm" ng-click="onTypeAddClicked()">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </a>
+            <div ng-if="showAddForm">
+                <input type="text" ng-model="addForm.newType" />
+                <button class="btn-success" ng-click="commitTypeName(addForm.newType)">确认添加</button>
+                <button class="btn-default" ng-click="cancelAddType()">取消</button>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- 场地分类tab end -->
+<!-- 场地列表 -->
+<md-content md-scroll-y="" flex="" layout-padding="" class="layout-padding ng-scope flex container">
+    <div class="activityList" id="activityList">
+        <ul class="activityListProperty">
+            <li ng-if=" list == '' ">
+                <div class="alert alert-danger" role="alert">没有搜到场地</div>
+            </li>
+            <li ng-if="list" ng-repeat="entity in list | filter:query">
+                <!--针对过往的场地显示一个灰色的背景,如果场地的结束时间小于当周一之前 orderBy: 'display_order' -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+            <!-- 切换场地分组 -->
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                {{entity.type.name}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="type in typeList | orderBy: 'display_order' ">
+                  <a ng-click="onTypeChangeClick(entity,type.id)">{{type.name}}</a>
+                </li>
+              </ul>
+            </div>
+              <!-- 场地标题 -->
+              {{entity.id}}#
+              <span>{{entity.name}} ({{entity.area}})</span>
+            <div class="btn-float-right">
+            <!-- 场地相关功能 -->
+            <a class="btn btn-success" href="#/space-spot/{{entity.id}}" target="_blank">编辑</a>
+            <a class="btn btn-info" href="#/space-section/list/{{entity.id}}" target="_blank">空间</a>
+            <a class="btn btn-warning" ng-click="delete(entity)">删除</a>
+            </div>
+
+
+            </h3>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div ng-show="modelPagination" class="someet-pagination user-pagination">
+        <uib-pagination total-items="modelPagination.totalItems" ng-model="modelPagination.currentPage" ng-change="pageChange()" items-per-page="modelPagination.itemsPerPage" max-size="modelPagination.maxSize" class="pagination-sm" boundary-links="false" previous-text="上一页" next-text="下一页" first-text="第一页"
+        last-text="最后一页" rotate="false">
+        </uib-pagination>
+    </div>
+</md-content>
+<!-- 场地列表 end

@@ -1,0 +1,33 @@
+<!-- 编辑专题 -->
+<div layout="column" flex id="content">
+  <input type="hidden" ng-model="entity.id" />
+  <md-input-container>
+    <label>标题</label>
+    <input type="text" ng-model="entity.title" />
+  </md-input-container>
+
+  <md-input-container>
+    <label>描述</label>
+    <input type="text" ng-model="entity.desc" />
+  </md-input-container>
+
+  <md-input-container>
+    <label>排序</label>
+    <input type="number" ng-model="entity.display_order" />
+  </md-input-container>
+
+  <div layout="row">
+    <div ng-file-select="onFileSelect($files)" data-multiple="false" title="select file" onclick="this.value = null"
+             class="btn btn-upload">点击此处选择海报</div>
+    <p>
+      {{ selectFile.progress.p }}%
+      <button ng-click="abort()">x</button>
+    </p>
+    <img style="max-width:100px; max-height:100px" ng-src="{{poster}}" />
+  </div>
+
+  <md-input-container layout="row">
+    <md-button class="md-raised md-primary" ng-click="save()">保存</md-button>
+    <md-button class="md-raised md-warn" ng-click="cancel()">取消</md-button>
+  </md-input-container>
+</div>

@@ -1,0 +1,108 @@
+<!-- 登录后统计信息页面 -->
+<style type="text/css">
+    table th {
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+        text-align: center;
+        background-color: #b1a9a9;
+    }
+    .first-line {
+        background-color: #ccc;
+    }
+</style>
+<div layout="column" flex id="content" class="container" style="font-size:18px;">
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation"><a href="#/dashboard">数据总览</a></li>
+    <li role="presentation" class="active"><a href="#/data/view">周数据</a></li>
+    <li role="presentation"><a href="#/data/activity">活动质量数据</a></li>
+</ul>
+<br/>
+    <div class="panel panel-default dashboardIndex">
+        <div class="panel-body">
+            <h2>统计数据</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">本周关注</li>
+                    <li class="list-group-item list-group-item-info">{{data.newUser}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">历史平均周关注</li>
+                    <li class="list-group-item list-group-item-info">{{data.history.user}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">本周会员</li>
+                    <li class="list-group-item list-group-item-info">{{data.weekVipCount}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">历史平均周会员</li>
+                    <li class="list-group-item list-group-item-info">{{data.history['week_vip']}}</li>
+                </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">本周关注用户报名</li>
+                    <li class="list-group-item list-group-item-info">{{data.newUserAnswer}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">本周关注用户购买会员</li>
+                    <li class="list-group-item list-group-item-info">{{data.weekNewVip}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">本周会员费用</li>
+                    <li class="list-group-item list-group-item-info">{{data.vipMoney}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">历史平均周会员费用</li>
+                    <li class="list-group-item list-group-item-info">{{data.history['vip_money']}}</li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center;font-size: 1.2rem;">2017年第{{data.weekNow}}周</div>
+        <div>
+            <table border="1" style="text-align: center;font-size:0.8rem;margin: auto;">
+                <tr>
+                    <th>城市</th>
+                    <th>活动数</th>
+                    <th>取消</th>
+                    <th>无人报名</th>
+                    <th>满足率(全部)</th>
+                    <th>满足率(正常活动)</th>
+                    <th>理想人数</th>
+                    <th>报名人数</th>
+                    <th>新活动</th>
+                    <th>新发起人</th>
+                    <th>从用户转化</th>
+                </tr>
+                <tr ng-repeat="item in data.info" style="{{item.style}}">
+                  <td class="first-line">{{item.tag}}</td>
+                  <td>{{item.count}}</td>
+                  <td>{{item.cancel}}</td>
+                  <td>{{item.noAnswer}}</td>
+                  <td>{{item.allRatio}}</td>
+                  <td>{{item.ratio}}</td>
+                  <td>{{item.idealNumber}}</td>
+                  <td>{{item.applies}}</td>
+                  <td>{{item.newActivity}}</td>
+                  <td>{{item.newFounder}}</td>
+                  <td>{{item.fromUser}}</td>
+                </tr>
+            </table>
+            </div>
+    </div>
+</div>

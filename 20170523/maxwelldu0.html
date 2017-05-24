@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{margin:0; padding:0}
+      li{list-style:none}
+      #ul{overflow:hidden;margin:20px auto; border-top:1px solid #000;border-left:1px solid #000}
+      #ul li{float:left;border-right:1px solid #000;border-bottom:1px solid #000}
+      #ul li.s1{background:red}/*开始节点*/
+      #ul li.s2{background:green}/*结束节点*/
+      #ul li.s3{background:blue}/*障碍物节点*/
+      #input{width:100px;position:absolute;left:50%;margin-left:-50px}
+    </style>
+  </head>
+  <body>
+    <ul id="ul"> </ul>
+    <input type="button" value="开始寻路" id="input">
+    <script type="text/javascript">
+      var oUL = document.getElementById('ul');//地图外框
+      var aLi = oUL.getElementsByTagName('li');//地图上所有的点
+      var oInput = document.getElementById('input');//开始按钮
+      var map = [//地图
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,1,0,3,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+      ];
+      var cols = Math.sqrt(map.length); //列数
+      var sizeGird = 20;//一格的宽度，不包括边框
+
+      //创建地图
+      var createMap = function(){
+        oUL.style.width = cols * (sizeGird + 1) + 1 + 'px';//设置地图边框的宽度
+        //根据地图生成所有的li元素，并设置对应的样式，添加到DOM上
+        for (var i = 0; i < map.length; i++) {
+          var oLi = document.createElement('li');//创建LI
+          oLi.style.width = sizeGird + 'px';//设置宽
+          oLi.style.height = sizeGird + 'px';//设置高
+          //根据节点的类型，设置不同的样式
+          switch(map[i]){
+            case 1:
+              oLi.className = 's1';
+              break;
+            case 2:
+              oLi.className = 's2';
+              break;
+            case 3:
+              oLi.className = 's3';
+              break;
+          }
+          //添加到UL当中
+          oUL.appendChild(oLi);
+        }
+      };
+      var init = function(){
+        createMap();
+      }
+      init();
+    </script>
+  </body>
+</html>

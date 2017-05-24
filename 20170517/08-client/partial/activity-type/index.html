@@ -1,0 +1,25 @@
+<div class="container" layout="column" flex id="content">
+  <md-button class="activity-dialog-btn md-fab" ng-click="createPage()" aria-label="add activity type">
+    <i class="fa fa-plus"></i>
+  </md-button>
+  <md-list>
+    <md-list-item>
+      <p flex="10"> ID </p>
+      <p> 分类 </p>
+      <p> 排序 </p>
+      <p> 操作 </p>
+    </md-list-item>
+    <md-list-item ng-repeat="entity in list | orderBy: 'display_order'">
+      <p flex="10"> {{entity.id}} </p>
+      <p> {{entity.name}} </p>
+      <p> {{entity.display_order}} </p>
+      <p layout="row">
+        <md-button class="md-raised" ng-click="update(entity)">修改</md-button>
+        <!-- <md-button class="md-raised md-warn" ng-click="delete(entity)">删除</md-button> -->
+            <md-button ng-if="entity.status == 10"> 显示</md-button>
+            <md-button ng-if="entity.status == 20"> 隐藏</md-button>
+            <md-button ng-if="entity.status == 0"> 删除</md-button>
+      </p>
+    </md-list-item>
+  </md-list>
+</div>

@@ -1,0 +1,24 @@
+<!-- 暂未使用 短信模板 -->
+<div layout="column" flex id="content">
+  <md-button class="activity-dialog-btn md-fab" ng-click="createPage()" aria-label="add sms template">
+    <i class="fa fa-plus"></i>
+  </md-button>
+  <md-list style="width: 400px;">
+    <md-list-item>
+      <p flex="10"> ID </p>
+      <p> 类型 </p>
+      <p> 排序 </p>
+      <p> 操作 </p>
+    </md-list-item>
+    <md-list-item ng-repeat="entity in list | orderBy: 'status'">
+      <p flex="10"> {{entity.id}} </p>
+      <p> {{entity.name}} </p>
+      <p> {{entity.template}} </p>
+      <p> {{entity.status}} </p>
+      <p layout="row">
+        <md-button class="md-raised" ng-click="update(entity)">修改</md-button>
+        <md-button class="md-raised md-warn" ng-click="delete(entity)">删除</md-button>
+      </p>
+    </md-list-item>
+  </md-list>
+</div>

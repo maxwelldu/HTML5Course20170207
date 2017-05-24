@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html> <head> <meta charset="utf-8">
+    <title></title> <style media="screen">
+      .alert{background-color: yellow;color:red}
+    </style> </head> <body ng-app="app">
+    <div ng-controller="MyCtrl">
+      <input type="text" ng-model="user.name" ng-focus="resetMsg()">
+      <input type="password" ng-model="user.password" ng-focus="resetMsg()">
+      <button type="button" name="button" ng-click="login()">登录</button>
+      <div ng-show="errmsg.length>0" class="alert">
+        {{errmsg}}
+      </div>
+    </div>
+  </body>
+  <script src="./js/angular.min.js" charset="utf-8"></script>
+  <script src="./js/myCtrl.js" charset="utf-8"></script>
+</html>
