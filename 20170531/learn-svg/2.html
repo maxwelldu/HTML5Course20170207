@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .svg{
+        width:100px;
+        height:100px;
+        background-image: url("svg-icon/3.svg");
+        background-size: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="1.svg"> //src可以写1.php, 这种通常用来做验证码图片
+    <img src='data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg"> <circle cx="100" cy="100" r="40" stroke="green" stroke-width="10" fill="red"></circle> </svg>' >
+    <div class="svg"> </div>
+    <iframe frameborder="0" scrolling="no" src="svg-icon/10.svg"></iframe>
+    <div class="">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="40" stroke="green"
+          stroke-width="10" fill="red"></circle>
+      </svg>
+    </div>
+  </body>
+</html>

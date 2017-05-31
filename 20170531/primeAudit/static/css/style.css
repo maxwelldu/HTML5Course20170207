@@ -1,0 +1,7 @@
+/*
+.el-dialog__body{padding: 20px 0px 10px 0px!important;}
+.el-select-dropdown__item{color: #48576a!important;background-color:#ffffff !important;}
+.el-select-dropdown__item.selected.hover {background-color: #ffffff !important;}
+.el-dialog{border-radius: 8px !important;}
+*/
+.el-dialog__wrapper{background-color: rgba(0, 0, 0, 0.5) !important;};
